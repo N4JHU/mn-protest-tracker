@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minnesota Protest & Road Closure Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        #header {
+            background: #1a1a2e;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        #header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        #controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .control-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        label {
+            font-size: 14px;
+        }
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        select {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        #map {
+            flex: 1;
+            width: 100%;
+        }
+        #status {
+            padding: 8px 20px;
+            background: #16213e;
+            color: #aaa;
+            font-size: 12px;
+            text-align: center;
+        }
+        .legend {
+            background: white;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            font-size: 12px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>🗺️ Minnesota Protest & Road Closure Tracker</h1>
+        <div id="controls">
+            <div class="control-group">
+                <input type="checkbox" id="showProtests" checked>
+                <label for="showProtests">Protests</label>
+            </div>
+            <div class="control-group">
+                <input type="checkbox" id="showClosures" checked>
+                <label for="showClosures">Road Closures</label>
+            </div>
+            <div class="control-group">
+                <label for="timeRange">Time Range:</label>
+                <select id="timeRange">
+                    <option value="current">Current & Upcoming</option>
+                    <option value="7">Last 7 Days</option>
+                    <option value="30">Last 30 Days</option>
+                    <option value="90">Last 90 Days</option>
+                    <option value="180">Last 6 Months</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="map"></div>
+    <div id="status">Last updated: <span id="lastUpdate">Loading...</span> | Total events: <span id="eventCount">0</span></div>
+
+    <script>
+        let map;
+        let trafficLayer;
+        let markers = [];
+        let events = [];
+        const REFRESH_INTERVAL = 60000; // 60 seconds
+
+        async function initMap() {
+            // Center on Minnesota
+            const minnesota = { lat: 46.3, lng: -94.0 };
+            
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 7,
+                center: minnesota,
+                mapTypeControl: true,
+                streetViewControl: true,
+                fullscreenControl: true,
+            });
+
+            // Add traffic layer
+            trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(map);
+
+            // Add legend
+            const legend = document.createElement('div');
+            legend.className = 'legend';
+            legend.innerHTML = `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #e74c3c;"></div>
+                    <span>Protest</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f39c12;"></div>
+                    <span>Road Closure</span>
+                </div>
+            `;
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+
+            // Load events
+            await loadEvents();
+            
+            // Set up filters
+            document.getElementById('showProtests').addEventListener('change', filterEvents);
+            document.getElementById('showClosures').addEventListener('change', filterEvents);
+            document.getElementById('timeRange').addEventListener('change', filterEvents);
+
+            // Auto-refresh
+            setInterval(loadEvents, REFRESH_INTERVAL);
+        }
+
+        async function loadEvents() {
+            try {
+                const response = await fetch('events.json?' + new Date().getTime());
+                const data = await response.json();
+                events = data.events || [];
+                
+                document.getElementById('lastUpdate').textContent = new Date(data.last_updated).toLocaleString();
+                
+                filterEvents();
+            } catch (error) {
+                console.error('Error loading events:', error);
+                document.getElementById('lastUpdate').textContent = 'Error loading data';
+            }
+        }
+
+        function filterEvents() {
+            // Clear existing markers
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
+
+            const showProtests = document.getElementById('showProtests').checked;
+            const showClosures = document.getElementById('showClosures').checked;
+            const timeRange = document.getElementById('timeRange').value;
+
+            const now = new Date();
+            const filtered = events.filter(event => {
+                // Type filter
+                if (event.type === 'protest' && !showProtests) return false;
+                if (event.type === 'road_closure' && !showClosures) return false;
+
+                // Time filter
+                const eventEnd = new Date(event.end_time);
+                const eventStart = new Date(event.start_time);
+                
+                if (timeRange === 'current') {
+                    // Show current and future events
+                    return eventEnd >= now;
+                } else {
+                    const daysAgo = parseInt(timeRange);
+                    const cutoff = new Date(now.getTime() - (daysAgo * 24 * 60 * 60 * 1000));
+                    return eventStart >= cutoff;
+                }
+            });
+
+            // Update event count
+            document.getElementById('eventCount').textContent = filtered.length;
+
+            // Create markers
+            filtered.forEach(event => {
+                const marker = new google.maps.Marker({
+                    position: { lat: event.latitude, lng: event.longitude },
+                    map: map,
+                    title: event.title,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 10,
+                        fillColor: event.type === 'protest' ? '#e74c3c' : '#f39c12',
+                        fillOpacity: 0.8,
+                        strokeColor: '#fff',
+                        strokeWeight: 2
+                    }
+                });
+
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `
+                        <div style="max-width: 300px;">
+                            <h3 style="margin: 0 0 10px 0; color: #1a1a2e;">${event.title}</h3>
+                            <p style="margin: 5px 0;"><strong>Type:</strong> ${event.type === 'protest' ? 'Protest' : 'Road Closure'}</p>
+                            <p style="margin: 5px 0;"><strong>Start:</strong> ${new Date(event.start_time).toLocaleString()}</p>
+                            <p style="margin: 5px 0;"><strong>End:</strong> ${new Date(event.end_time).toLocaleString()}</p>
+                            ${event.description ? `<p style="margin: 10px 0 5px 0;">${event.description}</p>` : ''}
+                            ${event.source_url ? `<p style="margin: 5px 0;"><a href="${event.source_url}" target="_blank">Source</a></p>` : ''}
+                        </div>
+                    `
+                });
+
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+
+                markers.push(marker);
+            });
+        }
+
+        // Initialize map when API loads
+        window.initMap = initMap;
+    </script>
+
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTSoU9gaGSM2Z0aW63TIo4S9Qdo67IhKQ&callback=initMap">
+    </script>
+</body>
+</html>
