@@ -53,7 +53,343 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         const map = L.map('map').setView([44.92, -93.20], 11);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', { attribution: '© CARTO' }).addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', { attribution: '© CARTO' }).addTo(map);ctrl+a Backspace<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twin Cities Live Tactical Map - HUD v2</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { margin: 0; padding: 0; background-color: #0a0a0a; font-family: 'Courier New', Courier, monospace; overflow: hidden; color: #00ff00; }
+        #map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; filter: grayscale(100%) brightness(0.7) contrast(1.2) invert(0.05); }
+        .hud-panel {
+            position: absolute;
+            background: rgba(0, 20, 0, 0.85);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            padding: 12px;
+            border-radius: 0px;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            text-shadow: 0 0 5px #00ff00;
+        }
+        .top-left { top: 20px; left: 20px; border-left: 5px solid #00ff00; }
+        .top-right { top: 20px; right: 20px; width: 250px; text-align: right; }
+        .bottom-left { bottom: 20px; left: 20px; }
+        .bottom-right { bottom: 30px; right: 20px; width: 300px; }
+        h2 { margin: 0 0 8px 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #00ff00; }
+        .data-field { font-size: 0.85rem; margin: 4px 0; }
+        .label { color: #008800; font-weight: bold; }
+        
+        .pulse-marker { width: 12px; height: 12px; background: #ff0000; border-radius: 50%; border: 1px solid #fff; animation: pulse 1.5s infinite; }
+        .pulse-marker.blue { background: #0088ff; }
+        .pulse-marker.yellow { background: #ffff00; }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+
+        input[type="range"] { width: 100%; accent-color: #00ff00; background: #002200; cursor: crosshair; }
+        .btn { background: #004400; color: #00ff00; border: 1px solid #00ff00; padding: 5px 10px; cursor: pointer; font-family: inherit; font-size: 0.7rem; margin-top: 5px; }
+        .btn:hover { background: #00ff00; color: #000; }
+        
+        .leaflet-popup-content-wrapper { background: #001100; color: #00ff00; border: 1px solid #00ff00; border-radius: 0; }
+        .leaflet-popup-tip { background: #001100; border: 1px solid #00ff00; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <div class="hud-panel top-left">
+        <h2>METRO SURGE HUD</h2>
+        <div class="data-field"><span class="label">OP_ID:</span> MN-PRO-TRACK</div>
+        <div class="data-field"><span class="label">LOC:</span> TWIN_CITIES_GRID</div>
+        <div class="data-field"><span class="label">UPDATED:</span> <span id="last-updated">--:--:--</span></div>
+        <div class="data-field"><span class="label">COORDS:</span> <span id="user-coords">SEARCHING...</span></div>
+        <button class="btn" onclick="locateUser()">RE-ACQUIRE POSITION</button>
+    </div>
+
+    <div class="hud-panel bottom-right">
+        <h2>TEMPORAL SCAN</h2>
+        <label id="time-label">RANGE: LIVE (24H)</label>
+        <input type="range" id="time-slider" min="0" max="180" value="0" oninput="updateTimeFilter(this.value)">
+        <div style="display: flex; justify-content: space-between; font-size: 0.7rem;">
+            <span>ACTIVE</span>
+            <span>T-180D</span>
+        </div>
+        <p style="font-size: 0.6rem; color: #008800; margin-top: 10px;">SYSTEM STATUS: NOMINAL // REFRESH_RATE: 60S</p>
+    </div>
+
+    <div class="hud-panel bottom-left">
+        <h2>INTEL KEY</h2>
+        <div class="data-field"><span style="color:#ff0000">●</span> ACTIVE_PROTEST</div>
+        <div class="data-field"><span style="color:#ffff00">●</span> VIGIL/GATHERING</div>
+        <div class="data-field"><span style="color:#0088ff">●</span> GOVT_STAGING</div>
+        <div class="data-field"><span style="color:#ff8800; font-weight:bold;">===</span> ROAD_CLOSURE</div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map', { zoomControl: false }).setView([44.95, -93.15], 11);
+        
+        // Dark tactical tiles
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '© CARTO'
+        }).addTo(map);
+
+        const redIcon = L.divIcon({ className: 'pulse-marker', iconSize: [12, 12] });
+        const blueIcon = L.divIcon({ className: 'pulse-marker blue', iconSize: [12, 12] });
+        const yellowIcon = L.divIcon({ className: 'pulse-marker yellow', iconSize: [12, 12] });
+
+        let allEvents = [];
+        let allClosures = [];
+        const markersGroup = L.layerGroup().addTo(map);
+        const closuresGroup = L.layerGroup().addTo(map);
+        const userMarker = L.circleMarker([0,0], { radius: 8, color: '#00ff00', fillColor: '#00ff00', fillOpacity: 0.8 }).addTo(map);
+
+        async function loadData() {
+            try {
+                const res = await fetch('events.json');
+                const data = await res.json();
+                allEvents = data.events || [];
+                allClosures = data.closures || [];
+                
+                document.getElementById('last-updated').innerText = new Date().toLocaleTimeString();
+                updateTimeFilter(document.getElementById('time-slider').value);
+            } catch (e) {
+                console.error("Link Failure:", e);
+                document.getElementById('last-updated').innerText = "LINK_ERR";
+            }
+        }
+
+        function updateTimeFilter(daysBack) {
+            const label = document.getElementById('time-label');
+            const cutoffDate = new Date();
+            cutoffDate.setDate(cutoffDate.getDate() - daysBack);
+            
+            label.innerText = daysBack == 0 ? "RANGE: LIVE (24H)" : `RANGE: SINCE ${cutoffDate.toLocaleDateString()}`;
+            
+            markersGroup.clearLayers();
+            closuresGroup.clearLayers();
+            
+            const cutoffTime = daysBack == 0 ? Date.now() - 86400000 : cutoffDate.getTime();
+
+            // Render Events
+            allEvents.forEach(ev => {
+                const evTime = new Date(ev.start_time).getTime();
+                if (evTime >= cutoffTime) {
+                    let icon = redIcon;
+                    if (ev.type === 'staging' || ev.tags?.includes('police')) icon = blueIcon;
+                    if (ev.type === 'vigil') icon = yellowIcon;
+
+                    L.marker([ev.latitude, ev.longitude], { icon: icon })
+                        .bindPopup(`<strong>${ev.title}</strong><br><em>${new Date(ev.start_time).toLocaleString()}</em><br>${ev.description}`)
+                        .addTo(markersGroup);
+                }
+            });
+
+            // Render Closures
+            allClosures.forEach(cl => {
+                const clTime = new Date(cl.start_time).getTime();
+                if (clTime >= cutoffTime) {
+                    L.polyline(cl.path, { color: '#ff8800', weight: 5, opacity: 0.8, dashArray: '10, 10' })
+                        .bindPopup(`<strong>ROAD CLOSURE: ${cl.location}</strong><br>${cl.reason}`)ctrl+a Backspace<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twin Cities Live Tactical Map - HUD v2</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { margin: 0; padding: 0; background-color: #0a0a0a; font-family: 'Courier New', Courier, monospace; overflow: hidden; color: #00ff00; }
+        #map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; filter: grayscale(100%) brightness(0.7) contrast(1.2) invert(0.05); }
+        .hud-panel {
+            position: absolute;
+            background: rgba(0, 20, 0, 0.85);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            padding: 12px;
+            border-radius: 0px;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            text-shadow: 0 0 5px #00ff00;
+        }
+        .top-left { top: 20px; left: 20px; border-left: 5px solid #00ff00; }
+        .top-right { top: 20px; right: 20px; width: 250px; text-align: right; }
+        .bottom-left { bottom: 20px; left: 20px; }
+        .bottom-right { bottom: 30px; right: 20px; width: 300px; }
+        h2 { margin: 0 0 8px 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #00ff00; }
+        .data-field { font-size: 0.85rem; margin: 4px 0; }
+        .label { color: #008800; font-weight: bold; }
+        
+        .pulse-marker { width: 12px; height: 12px; background: #ff0000; border-radius: 50%; border: 1px solid #fff; animation: pulse 1.5s infinite; }
+        .pulse-marker.blue { background: #0088ff; }
+        .pulse-marker.yellow { background: #ffff00; }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+
+        input[type="range"] { width: 100%; accent-color: #00ff00; background: #002200; cursor: crosshair; }
+        .btn { background: #004400; color: #00ff00; border: 1px solid #00ff00; padding: 5px 10px; cursor: pointer; font-family: inherit; font-size: 0.7rem; margin-top: 5px; }
+        .btn:hover { background: #00ff00; color: #000; }
+        
+        .leaflet-popup-content-wrapper { background: #001100; color: #00ff00; border: 1px solid #00ff00; border-radius: 0; }
+        .leaflet-popup-tip { background: #001100; border: 1px solid #00ff00; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <div class="hud-panel top-left">
+        <h2>METRO SURGE HUD</h2>
+        <div class="data-field"><span class="label">OP_ID:</span> MN-PRO-TRACK</div>
+        <div class="data-field"><span class="label">LOC:</span> TWIN_CITIES_GRID</div>
+        <div class="data-field"><span class="label">UPDATED:</span> <span id="last-updated">--:--:--</span></div>
+        <div class="data-field"><span class="label">COORDS:</span> <span id="user-coords">SEARCHING...</span></div>
+        <button class="btn" onclick="locateUser()">RE-ACQUIRE POSITION</button>
+    </div>
+
+    <div class="hud-panel bottom-right">
+        <h2>TEMPORAL SCAN</h2>
+        <label id="time-label">RANGE: LIVE (24H)</label>
+        <input type="range" id="time-slider" min="0" max="180" value="0" oninput="updateTimeFilter(this.value)">
+        <div style="display: flex; justify-content: space-between; font-size: 0.7rem;">
+            <span>ACTIVE</span>
+            <span>T-180D</span>
+        </div>
+        <p style="font-size: 0.6rem; color: #008800; margin-top: 10px;">SYSTEM STATUS: NOMINAL // REFRESH_RATE: 60S</p>
+    </div>
+
+    <div class="hud-panel bottom-left">
+        <h2>INTEL KEY</h2>
+        <div class="data-field"><span style="color:#ff0000">●</span> ACTIVE_PROTEST</div>
+        <div class="data-field"><span style="color:#ffff00">●</span> VIGIL/GATHERING</div>
+        <div class="data-field"><span style="color:#0088ff">●</span> GOVT_STAGING</div>
+        <div class="data-field"><span style="color:#ff8800; font-weight:bold;">===</span> ROAD_CLOSURE</div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map', { zoomControl: false }).setView([44.95, -93.15], 11);
+        
+        // Dark tactical tiles
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '© CARTO'
+        }).addTo(map);
+
+        const redIcon = L.divIcon({ className: 'pulse-marker', iconSize: [12, 12] });
+        const blueIcon = L.divIcon({ className: 'pulse-marker blue', iconSize: [12, 12] });
+        const yellowIcon = L.divIcon({ className: 'pulse-marker yellow', iconSize: [12, 12] });
+
+        let allEvents = [];
+        let allClosures = [];
+        const markersGroup = L.layerGroup().addTo(map);
+        const closuresGroup = L.layerGroup().addTo(map);
+        const userMarker = L.circleMarker([0,0], { radius: 8, color: '#00ff00', fillColor: '#00ff00', fillOpacity: 0.8 }).addTo(map);
+
+        async function loadData() {
+            try {
+                const res = await fetch('events.json');
+                const data = await res.json();
+                allEvents = data.events || [];
+                allClosures = data.closures || [];
+                
+                document.getElementById('last-updated').innerText = new Date().toLocaleTimeString();
+                updateTimeFilter(document.getElementById('time-slider').value);
+            } catch (e) {
+                console.error("Link Failure:", e);
+                document.getElementById('last-updated').innerText = "LINK_ERR";
+            }
+        }
+
+        function updateTimeFilter(daysBack) {
+            const label = document.getElementById('time-label');
+            const cutoffDate = new Date();
+            cutoffDate.setDate(cutoffDate.getDate() - daysBack);
+            
+            label.innerText = daysBack == 0 ? "RANGE: LIVE (24H)" : `RANGE: SINCE ${cutoffDate.toLocaleDateString()}`;
+            
+            markersGroup.clearLayers();
+            closuresGroup.clearLayers();
+            
+            const cutoffTime = daysBack == 0 ? Date.now() - 86400000 : cutoffDate.getTime();
+
+            // Render Events
+            allEvents.forEach(ev => {
+                const evTime = new Date(ev.start_time).getTime();
+                if (evTime >= cutoffTime) {
+                    let icon = redIcon;
+                    if (ev.type === 'staging' || ev.tags?.includes('police')) icon = blueIcon;
+                    if (ev.type === 'vigil') icon = yellowIcon;
+
+                    L.marker([ev.latitude, ev.longitude], { icon: icon })
+                        .bindPopup(`<strong>${ev.title}</strong><br><em>${new Date(ev.start_time).toLocaleString()}</em><br>${ev.description}`)
+                        .addTo(markersGroup);
+                }
+            });
+
+            // Render Closures
+            allClosures.forEach(cl => {
+                const clTime = new Date(cl.start_time).getTime();
+                if (clTime >= cutoffTime) {
+                    L.polyline(cl.path, { color: '#ff8800', weight: 5, opacity: 0.8, dashArray: '10, 10' })
+                        .bindPopup(`<strong>ROAD CLOSURE: ${cl.location}</strong><br>${cl.reason}`)
+                        .addTo(closuresGroup);
+                }
+            });
+        }
+
+        function locateUser() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    const { latitude, longitude } = pos.coords;
+                    userMarker.setLatLng([latitude, longitude]);
+                    document.getElementById('user-coords').innerText = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+                    map.panTo([latitude, longitude]);
+                }, err => {
+                    document.getElementById('user-coords').innerText = "SIGNAL_LOST";
+                });
+            }
+        }
+
+        loadData();
+        locateUser();
+        setInterval(loadData, 60000);
+    </script>
+</body>
+</html>
+                        .addTo(closuresGroup);
+                }
+            });
+        }
+
+        function locateUser() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    const { latitude, longitude } = pos.coords;
+                    userMarker.setLatLng([latitude, longitude]);
+                    document.getElementById('user-coords').innerText = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+                    map.panTo([latitude, longitude]);
+                }, err => {
+                    document.getElementById('user-coords').innerText = "SIGNAL_LOST";
+                });
+            }
+        }
+
+        loadData();
+        locateUser();
+        setInterval(loadData, 60000);
+    </script>
+</body>
+</html>
 
         const redIcon = L.divIcon({ className: 'pulse-marker', iconSize: [20, 20] });
         const blueIcon = L.divIcon({ className: 'pulse-marker blue', iconSize: [20, 20] });
