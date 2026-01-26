@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twin Cities Live Protest Map - Jan 26, 2026</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { margin: 0; padding: 0; background-color: #1a1a1a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
+        #map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hud-panel { position: absolute; background: rgba(0, 0, 0, 0.85); border: 1px solid #444; color: #ddd; padding: 15px; border-radius: 8px; backdrop-filter: blur(10px); z-index: 1000; max-width: 300px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .top-left { top: 20px; left: 20px; }
+        .bottom-left { bottom: 20px; left: 20px; }
+        .top-right { top: 20px; right: 20px; width: 280px; }
+        h2 { margin: 0 0 8px 0; font-size: 1.1rem; color: #ff5555; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #555; padding-bottom: 5px; }
+        h3 { margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff; }
+        p { font-size: 0.8rem; margin: 0 0 10px 0; line-height: 1.4; color: #aaa; }
+        .status-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-bottom: 5px; }
+        .status-critical { background: #ff3333; color: white; }
+        .status-warning { background: #ff9900; color: black; }
+        .status-info { background: #3399ff; color: white; }
+        .pulse-marker { width: 20px; height: 20px; background: rgba(255, 50, 50, 0.8); border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 rgba(255, 50, 50, 0.4); animation: pulse 2s infinite; }
+        .pulse-marker.blue { background: rgba(50, 150, 255, 0.8); box-shadow: 0 0 0 rgba(50, 150, 255, 0.4); }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 50, 50, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(255, 50, 50, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 50, 50, 0); } }
+        .feed-item { border-bottom: 1px solid #333; padding-bottom: 8px; margin-bottom: 8px; }
+        .feed-time { color: #ff5555; font-size: 0.7rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="hud-panel top-left">
+        <h2>Operation Metro Surge</h2>
+        <div style="font-size: 0.8rem; color: #ccc;">
+            <strong>DATE:</strong> Jan 26, 2026<br>
+            <strong>LOCATION:</strong> Twin Cities, MN<br>
+            <strong>STATUS:</strong> Civil Unrest - Federal Deployment
+        </div>
+    </div>
+    <div class="hud-panel top-right">
+        <h2>Live Intel Feed</h2>
+        <div id="news-feed">
+            <div class="feed-item"><div class="feed-time">10:05 AM</div><p>Crowds growing at Whipple Bldg Fort Snelling. Federal agents deploying tear gas.</p></div>
+            <div class="feed-item"><div class="feed-time">09:45 AM</div><p>Standoff reported at Lake & Chicago memorial site. Police blocking intersection.</p></div>
+            <div class="feed-item"><div class="feed-time">09:15 AM</div><p>Governor Walz authorizes National Guard standby for St. Paul Capitol complex.</p></div>
+            <div class="feed-item"><div class="feed-time">08:30 AM</div><p>New reports of arrests near U.S. Bank Stadium transit station.</p></div>
+        </div>
+    </div>
+    <div class="hud-panel bottom-left">
+        <h2>Map Key</h2>
+        <div><span style="color:#ff3333">●</span> High Tension Zone</div>
+        <div><span style="color:#ff9900">●</span> Gathering / Vigil</div>
+        <div><span style="color:#3399ff">●</span> Police/Federal Staging</div>
+    </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([44.92, -93.20], 11);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors © CARTO' }).addTo(map);
+
+        const redIcon = L.divIcon({ className: 'pulse-marker', iconSize: [20, 20] });
+        const blueIcon = L.divIcon({ className: 'pulse-marker blue', iconSize: [20, 20] });
+
+        // Plot Locations
+        L.marker([44.8845, -93.2025], { icon: redIcon }).addTo(map)
+            .bindPopup('<strong>Bishop Henry Whipple Federal Bldg</strong><br><span class="status-badge status-critical">ACTIVE CONFLICT</span><br>Primary site of protests against federal agents. Reports of 11 arrests.')
+            .openPopup();
+        L.marker([44.9483, -93.2633], { icon: redIcon }).addTo(map)
+            .bindPopup('<strong>Lake St & Chicago Ave</strong><br><span class="status-badge status-warning">MEMORIAL VIGIL</span><br>Crowd gathering for Alex Pretti / Renee Good vigil. Peaceful but tense.');
+        L.marker([44.9543, -93.1022], { icon: blueIcon }).addTo(map)
+            .bindPopup('<strong>MN State Capitol</strong><br><span class="status-badge status-info">LEGISLATIVE ACTION</span><br>Protesters demanding state intervention against federal Metro Surge.');
+        L.marker([44.9750, -93.2590], { icon: redIcon }).addTo(map)
+            .bindPopup('<strong>The Commons @ U.S. Bank Stadium</strong><br><span class="status-badge status-warning">MARCH START POINT</span><br>Staging area for downtown march toward Target Center.');
+        L.marker([44.9790, -93.2760], { icon: blueIcon }).addTo(map)
+            .bindPopup('<strong>Target Center</strong><br><span class="status-badge status-info">RALLY END POINT</span><br>Destination for downtown march. Large police presence reported.');
+        L.marker([44.9400, -93.1670], { icon: blueIcon }).addTo(map)
+            .bindPopup('<strong>Cities Church</strong><br><span class="status-badge status-warning">PREVIOUS CLASH</span><br>Site of earlier service disruption. Continued monitoring.');
+
+        setInterval(() => location.reload(), 60000);
+    </script>
+</body>
+</html>
