@@ -1,4 +1,51 @@
-{
+{ctrl+a Backspace{
+  "last_updated": "2026-01-26T12:00:00-06:00",
+  "events": [
+    {
+      "id": "protest-mpls-001",
+      "type": "protest",
+      "title": "Anti-ICE Protest at Minneapolis Detention Facility",
+      "description": "Community protest against immigration enforcement policies",
+      "start_time": "2026-01-26T14:00:00-06:00",
+      "latitude": 44.9778,
+      "longitude": -93.2650,
+      "tags": ["ICE", "Minneapolis"]
+    },
+    {
+      "id": "protest-stpaul-001",
+      "type": "protest",
+      "title": "Climate March at State Capitol",
+      "description": "Rally for climate action and renewable energy policies",
+      "start_time": "2026-01-27T11:00:00-06:00",
+      "latitude": 44.9537,
+      "longitude": -93.1022,
+      "tags": ["Climate", "St Paul"]
+    },
+    {
+      "id": "hist-001",
+      "type": "vigil",
+      "title": "Historical Vigil - 3 Months Ago",
+      "description": "Community vigil held in memory of local activist.",
+      "start_time": "2025-10-26T18:00:00-06:00",
+      "latitude": 44.9483,
+      "longitude": -93.2325,
+      "tags": ["Archive", "Vigil"]
+    }
+  ],
+  "closures": [
+    {
+      "id": "closure-001",
+      "location": "I-35W Northbound at Lake St",
+      "reason": "Protest Activity on Highway",
+      "start_time": "2026-01-26T14:30:00-06:00",
+      "path": [
+        [44.9483, -93.2705],
+        [44.9525, -93.2705],
+        [44.9580, -93.2705]
+      ]
+    }
+  ]
+}
   "last_updated": "2026-01-25T23:00:00-06:00",
   "events": [
     {
