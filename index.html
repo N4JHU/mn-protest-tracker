@@ -198,6 +198,21 @@
                 if (clTime >= cutoffTime) {
                     L.polyline(cl.path, { color: '#ff8800', weight: 5, opacity: 0.8, dashArray: '10, 10' })
                         .bindPopup(`<strong>ROAD CLOSURE: ${cl.location}</strong><br>${cl.reason}`)ctrl+a Backspace<!DOCTYPE html>
+function addIntel(time, message) {
+const feed = document.getElementById('news-feed');
+const newItem = document.createElement('div');
+newItem.className = 'feed-item';
+newItem.innerHTML = `
+<div class="feed-time">${time}</div>
+<p>${message}</p>
+`;
+feed.prepend(newItem); // Adds new intel to the top
+}
+// Example: Simulating a real-time update 5 seconds in
+setTimeout(() => {
+addIntel("10:15 AM", "National Guard units spotted moving North on I-35W.");
+}, 5000);
+                    
 <html lang="en">
 <head>
     <meta charset="UTF-8">
