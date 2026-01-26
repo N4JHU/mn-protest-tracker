@@ -1,48 +1,39 @@
 {
-  "last_updated": "2026-01-26T12:00:00-06:00",
-  "events": [
+  "last_updated": "2026-01-26 23:47:04",
+  "features": [
     {
-      "id": "protest-mpls-001",
-      "type": "protest",
-      "title": "Anti-ICE Protest at Minneapolis Detention Facility",
-      "description": "Community protest against immigration enforcement policies",
-      "start_time": "2026-01-26T14:00:00-06:00",
-      "latitude": 44.9778,
-      "longitude": -93.2650,
-      "tags": ["ICE", "Minneapolis"]
+      "id": "RC-1",
+      "title": "I-94 East Closure",
+      "lat": 44.96,
+      "lng": -93.27,
+      "type": "road_closure",
+      "desc": "Closed due to maintenance"
     },
     {
-      "id": "protest-stpaul-001",
-      "type": "protest",
-      "title": "Climate March at State Capitol",
-      "description": "Rally for climate action and renewable energy policies",
-      "start_time": "2026-01-27T11:00:00-06:00",
-      "latitude": 44.9537,
-      "longitude": -93.1022,
-      "tags": ["Climate", "St Paul"]
+      "id": "RC-2",
+      "title": "Hennepin Ave Blocked",
+      "lat": 44.98,
+      "lng": -93.26,
+      "type": "road_closure",
+      "desc": "Police activity reported"
     },
     {
-      "id": "hist-001",
-      "type": "vigil",
-      "title": "Historical Vigil - 3 Months Ago",
-      "description": "Community vigil held in memory of local activist.",
-      "start_time": "2025-10-26T18:00:00-06:00",
-      "latitude": 44.9483,
-      "longitude": -93.2325,
-      "tags": ["Archive", "Vigil"]
-    }
-  ],
-  "closures": [
+      "id": "P-1",
+      "title": "Peaceful March",
+      "lat": 44.95,
+      "lng": -93.1,
+      "type": "protest",
+      "desc": "March headed towards Capitol",
+      "time": "Live Now"
+    },
     {
-      "id": "closure-001",
-      "location": "I-35W Northbound at Lake St",
-      "reason": "Protest Activity on Highway",
-      "start_time": "2026-01-26T14:30:00-06:00",
-      "path": [
-        [44.9483, -93.2705],
-        [44.9525, -93.2705],
-        [44.9580, -93.2705]
-      ]
+      "id": "P-2",
+      "title": "Past: City Hall Rally",
+      "lat": 44.97,
+      "lng": -93.26,
+      "type": "history",
+      "desc": "Occurred 2 days ago",
+      "time": "2023-10-25"
     }
   ]
 }
