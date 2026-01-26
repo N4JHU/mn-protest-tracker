@@ -339,3 +339,108 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minnesota Protest & Road Closure Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; height: 100vh; overflow: hidden; }
+        #header { background: #1a1a2e; color: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); z-index: 1000; position: relative; }
+        #header h1 { font-size: 1.5rem; margin-bottom: 10px; }
+        .controls { display: flex; flex-wrap: wrap; gap: 15px; align-items: center; }
+        label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        select, button { padding: 5px 12px; border-radius: 4px; border: 1px solid #444; background: #16213e; color: white; cursor: pointer; }
+        button { background: #0f3460; }
+        button:hover { background: #1a5490; }
+        #map { height: calc(100vh - 120px); width: 100%; }
+        #status-bar { background: #0f3460; color: white; padding: 8px 20px; font-size: 0.9rem; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>🗺️ Minnesota Protest & Road Closure Tracker</h1>
+        <div class="controls">
+            <label><input type="checkbox" id="show-protests" checked> Protests</label>
+            <label><input type="checkbox" id="show-closures" checked> Road Closures</label>
+            <label for="time-range">Time Range:</label>
+            <select id="time-range">
+                <option value="current">Current & Upcoming</option>
+                <option value="all">All (6 Month History)</option>
+            </select>
+            <button id="locate-btn">📍 Locate Me</button>
+        </div>
+    </div>
+    <div id="map"></div>
+    <div id="status-bar">
+        <span id="last-update">Last updated: Loading...</span>
+        <span id="event-count">Total events: 0</span>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+const map = L.map('map').setView([44.9537, -93.0900], 10);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap', maxZoom: 19 }).addTo(map);
+let userMarker, userLocation, allEvents = [], eventMarkers = [];
+function calculateDistance(lat1, lng1, lat2, lng2) {
+    const R = 3959;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng/2) * Math.sin(dLng/2);
+    return (R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))).toFixed(1);
+}
+async function loadEvents() {
+    try {
+        const response = await fetch('events.json');
+        allEvents = await response.json();
+        filterAndDisplayEvents();
+        document.getElementById('last-update').textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+    } catch (error) {
+        document.getElementById('last-update').textContent = 'Error loading data';
+    }
+}
+function filterAndDisplayEvents() {
+    eventMarkers.forEach(m => map.removeLayer(m));
+    eventMarkers = [];
+    const showProtests = document.getElementById('show-protests').checked;
+    const showClosures = document.getElementById('show-closures').checked;
+    const timeRange = document.getElementById('time-range').value;
+    const now = new Date(), sixMonthsAgo = new Date(now.getTime() - 180*24*60*60*1000);
+    let filtered = allEvents.filter(e => {
+        if (e.type === 'protest' && !showProtests) return false;
+        if (e.type === 'road_closure' && !showClosures) return false;
+        const eventDate = new Date(e.date);
+        return timeRange === 'current' ? eventDate >= now : eventDate >= sixMonthsAgo;
+    });
+    filtered.forEach(e => {
+        const icon = L.divIcon({ html: e.type === 'protest' ? '🪧' : '🚧', iconSize: [30, 30] });
+        const marker = L.marker([e.lat, e.lng], { icon }).addTo(map);
+        let popup = `<strong>${e.title}</strong><br><em>${e.type === 'protest' ? 'Protest' : 'Road Closure'}</em><br>📅 ${new Date(e.date).toLocaleString()}<br>📍 ${e.location}`;
+        if (e.description) popup += `<br><br>${e.description}`;
+        if (userLocation) popup += `<br><div style="color:#3498db;">📏 ${calculateDistance(userLocation.lat, userLocation.lng, e.lat, e.lng)} miles from you</div>`;
+        marker.bindPopup(popup);
+        eventMarkers.push(marker);
+    });
+    document.getElementById('event-count').textContent = `Total events: ${filtered.length}`;
+}
+document.getElementById('locate-btn').addEventListener('click', () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+            userLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+            if (userMarker) map.removeLayer(userMarker);
+            userMarker = L.marker([userLocation.lat, userLocation.lng], { icon: L.divIcon({ html: '📍', iconSize: [30, 30] }) }).addTo(map).bindPopup('<strong>Your Location</strong>').openPopup();
+            map.setView([userLocation.lat, userLocation.lng], 12);
+            filterAndDisplayEvents();
+        }, () => alert('Could not get location'));
+    }
+});
+document.getElementById('show-protests').addEventListener('change', filterAndDisplayEvents);
+document.getElementById('show-closures').addEventListener('change', filterAndDisplayEvents);
+document.getElementById('time-range').addEventListener('change', filterAndDisplayEvents);
+loadEvents();
+setInterval(loadEvents, 60000);
+    </script>
+</body>
+</html>
