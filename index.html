@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Minnesota Protest & Road Closure Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #info { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            background: white; 
+            padding: 10px; 
+            border-radius: 5px; 
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="info">
+        <h3>MN Protest Tracker</h3>
+        <div id="location-info">Getting location...</div>
+    </div>
+
+    <script>
+        // Initialize map centered on Minnesota
+        var map = L.map('map').setView([46.7296, -94.6859], 7);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        var userMarker = null;
+        var userLocation = null;
+
+        // Function to calculate distance between two points (Haversine formula)
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            var R = 6371; // Radius of Earth in km
+            var dLat = (lat2 - lat1) * Math.PI / 180;
+            var dLon = (lon2 - lon1) * Math.PI / 180;
+            var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon/2) * Math.sin(dLon/2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            var distance = R * c;
+            return distance.toFixed(2);
+        }
+
+        // Get user's location
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(function(position) {
+                userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                // Add or update user marker
+                if (userMarker) {
+                    userMarker.setLatLng(userLocation);
+                } else {
+                    userMarker = L.marker(userLocation, {
+                        icon: L.icon({
+                            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        })
+                    }).addTo(map).bindPopup('Your Location');
+                }
+
+                document.getElementById('location-info').innerHTML = 
+                    'Your Location: ' + userLocation.lat.toFixed(4) + ', ' + userLocation.lng.toFixed(4);
+            }, function(error) {
+                document.getElementById('location-info').innerHTML = 'Location unavailable';
+            });
+        }
+
+        // Function to load events and add markers
+        function loadEvents() {
+            fetch('events.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Clear existing markers except user marker
+                    map.eachLayer(function(layer) {
+                        if (layer instanceof L.Marker && layer !== userMarker) {
+                            map.removeLayer(layer);
+                        }
+                    });
+
+                    // Add protest markers
+                    data.events.forEach(function(event) {
+                        var distance = '';
+                        if (userLocation) {
+                            var dist = calculateDistance(
+                                userLocation.lat, userLocation.lng,
+                                event.lat, event.lng
+                            );
+                            distance = '<br><b>Distance:</b> ' + dist + ' km';
+                        }
+
+                        var markerColor = event.type === 'protest' ? 'red' : 'orange';
+                        var iconUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-' + markerColor + '.png';
+
+                        L.marker([event.lat, event.lng], {
+                            icon: L.icon({
+                                iconUrl: iconUrl,
+                                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                shadowSize: [41, 41]
+                            })
+                        }).addTo(map).bindPopup(
+                            '<b>' + event.name + '</b><br>' +
+                            '<b>Type:</b> ' + event.type + '<br>' +
+                            '<b>Date:</b> ' + event.date + '<br>' +
+                            '<b>Location:</b> ' + event.location +
+                            distance
+                        );
+                    });
+                })
+                .catch(error => console.error('Error loading events:', error));
+        }
+
+        // Initial load
+        loadEvents();
+
+        // Auto-refresh every 60 seconds
+        setInterval(loadEvents, 60000);
+    </script>
+</body>
+</html>
