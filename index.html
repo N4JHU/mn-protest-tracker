@@ -143,6 +143,9 @@
     </div>
 
     <div class="hud-panel top-right">
+                    <div style="font-size: 0.7rem; color: #888; margin-top: 8px;">
+                <strong>LAST UPDATE:</strong> <span id="last-update-time">--:--</span>
+            </div>
         <h2>Live Intel Feed</h2>
         <div id="news-feed">
             <div class="feed-item">
@@ -225,6 +228,44 @@
         // 1524 Summit Ave, St Paul (Approx based on search)
         L.marker([44.9400, -93.1670], { icon: blueIcon }).addTo(map)
             .bindPopup('<strong>Cities Church</strong><br><span class="status-badge status-warning">PREVIOUS CLASH</span><br>Site of earlier service disruption. Continued monitoring.');
+
+                // AUTO-UPDATE EVERY 60 SECONDS
+        let lastUpdateTime = Date.now();
+        
+        function updateIntelFeed() {
+            // Fetch latest data from events.json or API
+            fetch('events.json?t=' + Date.now())
+                .then(response => response.json())
+                .then(data => {
+                    // Update last update timestamp
+                    lastUpdateTime = Date.now();
+                    document.getElementById('last-update-time').textContent = 
+                        new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                    
+                    // Refresh intel feed if provided in data
+                    if (data.intel_feed) {
+                        const feedDiv = document.getElementById('news-feed');
+                        feedDiv.innerHTML = '';
+                        data.intel_feed.forEach(item => {
+                            feedDiv.innerHTML += `
+                                <div class="feed-item">
+                                    <div class="feed-time">${item.time}</div>
+                                    <p>${item.message}</p>
+                                </div>
+                            `;
+                        });
+                    }
+                    
+                    console.log('Map data updated at ' + new Date().toLocaleTimeString());
+                })
+                .catch(error => console.log('Update check:', error.message));
+        }
+        
+        // Update every 60 seconds
+        setInterval(updateIntelFeed, 60000);
+        
+        // Initial update after 5 seconds
+        setTimeout(updateIntelFeed, 5000);
     </script>
 </body>
 </html>
