@@ -157,9 +157,7 @@
 
     <script>
         // --- HELPER: TWIN CITIES TIME FORMATTER ---
-        // Forces all times to display as Minneapolis Time (CST/CDT)
         function formatMNTime(dateObj, includeDate = false) {
-            // 1. Get Date Part: ( *** Monday 01/26/26 )
             const dateOptions = { 
                 timeZone: 'America/Chicago', 
                 weekday: 'long', 
@@ -168,10 +166,8 @@
                 day: '2-digit' 
             };
             const rawDate = new Intl.DateTimeFormat('en-US', dateOptions).format(dateObj);
-            // Reformat "Monday, 01/26/26" to "Monday 01/26/26" (remove comma)
             const dateStr = `( *** ${rawDate.replace(',', '')} )`;
 
-            // 2. Get Time Part: 10:05 AM
             const timeOptions = { 
                 timeZone: 'America/Chicago', 
                 hour: '2-digit', 
@@ -195,7 +191,7 @@
                 clockEl.innerText = `${formatted.date} ${formatted.time}`;
             }, 1000);
         }
-        startClock(); // Start immediately
+        startClock();
 
         // --- GOOGLE MAPS ---
         function initMap() {
@@ -275,17 +271,36 @@
                         let pCount = 0;
                         let rCount = 0;
                         const now = new Date();
-                        const protestCutoff = new Date(now.getTime() - (48 * 60 * 60 * 1000));
+                        
+                        // NEW FILTER RULE:
+                        // "Within Last 24 Hours OR Scheduled for Future"
+                        // Calculation: Event Time >= (Now - 24 Hours)
+                        // If Event Time is in future, it is greater than (Now - 24h), so it shows automatically.
+                        const timeCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+                        
                         let validEvents = [];
 
                         data.features.forEach(event => {
                             let showEvent = false;
-                            if (event.type === 'road_closure') showEvent = true;
+                            
+                            // RULE 1: ROAD CLOSURES
+                            // We trust the scraper (it fetches 'active' roads). 
+                            // If you want strict 24h filtering for roads too, uncomment the 'else' block below.
+                            if (event.type === 'road_closure') {
+                                showEvent = true; 
+                            } 
+                            // RULE 2: INTEL / PROTESTS
+                            // Must be recent (last 24h) OR future
                             else if (event.type === 'protest') {
                                 if (event.timestamp) {
                                     const t = new Date(event.timestamp);
-                                    if (!isNaN(t) && t >= protestCutoff) showEvent = true;
-                                } else showEvent = true;
+                                    if (!isNaN(t) && t >= timeCutoff) {
+                                        showEvent = true;
+                                    }
+                                } else {
+                                    // If no timestamp, assume active
+                                    showEvent = true;
+                                }
                             }
 
                             if (showEvent) {
@@ -309,18 +324,17 @@
                 const container = document.getElementById('feed-container');
                 container.innerHTML = "";
 
-                // Sort Newest First
+                // Sort Newest First (Future events will appear at the very top)
                 events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-                const recentEvents = events.slice(0, 15); // Show top 15
+                const recentEvents = events.slice(0, 15);
 
                 recentEvents.forEach(e => {
-                    // Convert Event Time to MN Time
                     let dateDisplay = "LIVE";
                     let timeDisplay = "";
                     
                     if (e.timestamp) {
                         const t = new Date(e.timestamp);
-                        const mnTime = formatMNTime(t, true); // Get {date, time}
+                        const mnTime = formatMNTime(t, true);
                         dateDisplay = mnTime.date;
                         timeDisplay = mnTime.time;
                     }
