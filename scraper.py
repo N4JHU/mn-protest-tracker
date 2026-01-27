@@ -18,9 +18,11 @@ DB_RETENTION_DAYS = 15
 ARCGIS_METADATA_URL = "https://www.arcgis.com/sharing/rest/content/items/081587d29d944a89ad189b1633e509e4?f=json"
 
 # --- 2. INTELLIGENCE SOURCES ---
-# Targeted Google News Command
+
+# UPDATED: Google News Query includes ICE/Whipple/Immigration terms
 NEWS_QUERY = (
-    "(protest OR riot OR march OR police OR crash OR gunfire OR standoff) "
+    "(protest OR riot OR march OR police OR crash OR gunfire OR standoff OR "
+    "ICE OR immigration OR whipple OR agents OR deportation) " # <--- NEW TERMS ADDED
     "AND ("
     "site:startribune.com OR site:wcco.com OR site:kstp.com OR "
     "site:kare11.com OR site:mprnews.org OR site:bringmethenews.com OR "
@@ -31,7 +33,12 @@ NEWS_QUERY = (
 NEWS_RSS_URL = f"https://news.google.com/rss/search?q={requests.utils.quote(NEWS_QUERY)}&ceid=US:en&hl=en-US&gl=US"
 
 REDDIT_SUBS = ["Minneapolis", "TwinCities", "Minnesota", "AltMpls"]
-THREAT_KEYWORDS = ["riot", "tear gas", "standoff", "looting", "shots fired", "shuts down", "blocking"]
+
+# UPDATED: Keywords to flag Reddit posts as threats
+THREAT_KEYWORDS = [
+    "riot", "tear gas", "standoff", "looting", "shots fired", "shuts down", "blocking",
+    "ice agents", "immigration", "whipple", "federal building", "deportation", "breaking news"
+]
 VIGIL_KEYWORDS = ["vigil", "gathering", "march", "rally", "memorial", "protest"]
 
 LOCATIONS = {
@@ -46,13 +53,12 @@ LOCATIONS = {
     "94": (44.9650, -93.2750),
     "35w": (44.9740, -93.2540),
     "fort snelling": (44.8940, -93.1760),
-    "whipple": (44.8940, -93.1760),
+    "whipple": (44.8940, -93.1760), # TARGET: Whipple Fed Building
     "airport": (44.8848, -93.2223),
 }
 
 # --- HELPER: UTC TIMESTAMP ---
 def get_utc_now():
-    # Returns 2026-01-26T12:00:00+00:00 (Explicit UTC)
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 # --- MODULE 1: ROAD SCRAPER ---
@@ -203,28 +209,21 @@ def main():
     for event in new_events:
         event_db[event["id"]] = event
     
-    # Clean Old Data (Using Offset-Aware Comparison)
+    # Clean Old Data
     cutoff = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=DB_RETENTION_DAYS)
-    
     final_features = []
     for e in event_db.values():
         if e.get("timestamp"):
             try:
-                # Parse timestamp and ensure it has timezone info
                 t_obj = datetime.datetime.fromisoformat(e["timestamp"])
-                if t_obj.tzinfo is None:
-                    # If old data has no timezone, assume UTC
-                    t_obj = t_obj.replace(tzinfo=datetime.timezone.utc)
-                
-                if t_obj > cutoff:
-                    final_features.append(e)
-            except:
-                continue
+                if t_obj.tzinfo is None: t_obj = t_obj.replace(tzinfo=datetime.timezone.utc)
+                if t_obj > cutoff: final_features.append(e)
+            except: continue
 
     # Save
     with open(OUTPUT_FILE, "w") as f:
         json.dump({
-            "last_updated": get_utc_now(), # Global sync timestamp
+            "last_updated": get_utc_now(),
             "features": final_features
         }, f, indent=2)
     
