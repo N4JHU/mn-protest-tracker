@@ -98,8 +98,7 @@
 
         /* MODAL FORM */
         #report-modal {
-            display: none; /* Hidden by default */
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 260px; background: rgba(0, 0, 0, 0.95);
             border: 1px solid #d400ff; box-shadow: 0 0 20px rgba(212, 0, 255, 0.3);
             z-index: 2000; padding: 15px; border-radius: 4px;
@@ -170,7 +169,6 @@
 
     <div id="report-modal">
         <h2 style="color:#d400ff; border-color:#d400ff;">MAKE FIELD REPORT</h2>
-        
         <div class="form-group">
             <label class="form-label">INCIDENT TYPE</label>
             <select id="rpt-type" class="form-select">
@@ -180,17 +178,14 @@
                 <option value="Intel">Intel / Sighting</option>
             </select>
         </div>
-
         <div class="form-group">
             <label class="form-label">DESCRIPTION / SITREP</label>
             <input type="text" id="rpt-desc" class="form-input" placeholder="e.g. 3 Squad cars blocking intersection...">
         </div>
-
         <div class="form-group">
             <label class="form-label">LOCATION</label>
             <div style="font-size:0.6rem; color:#888; margin-bottom:3px;">*Will use center of map view</div>
         </div>
-
         <div class="form-actions">
             <button class="cancel-btn" onclick="closeReportModal()">CANCEL</button>
             <button class="submit-btn" onclick="submitReport()">SUBMIT REPORT</button>
@@ -208,9 +203,10 @@
     </div>
 
     <script>
-        // --- GLOBAL MAP VAR ---
+        // --- GLOBAL VARIABLES (Scope Safety Fix) ---
         let map; 
-        let userReports = []; // Store local reports here
+        let HTMLMarker = null; // Defined globally, initialized in initMap
+        let userReports = [];
 
         // --- TACTICAL FUNCTIONS ---
         function executeTwitterScan() {
@@ -221,59 +217,47 @@
         }
 
         // --- REPORTING LOGIC ---
-        function openReportModal() {
-            document.getElementById('report-modal').style.display = 'block';
-        }
-
-        function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
-        }
+        function openReportModal() { document.getElementById('report-modal').style.display = 'block'; }
+        function closeReportModal() { document.getElementById('report-modal').style.display = 'none'; }
 
         function submitReport() {
+            if (!HTMLMarker) { alert("Map system initializing... please wait."); return; }
             const type = document.getElementById('rpt-type').value;
             const desc = document.getElementById('rpt-desc').value;
             
             if(!desc) { alert("Please enter a description."); return; }
 
-            // Get Center of Map for the report
             const center = map.getCenter();
             
-            // Create Event Object
             const newReport = {
                 title: "USER REPORT: " + type.toUpperCase(),
                 desc: desc,
-                type: 'report', // Purple
+                type: 'report',
                 lat: center.lat(),
                 lng: center.lng(),
-                timestamp: new Date().toISOString() // Current UTC
+                timestamp: new Date().toISOString()
             };
 
-            // Add to Local List
             userReports.push(newReport);
             
-            // Render immediately
+            // Render using the global HTMLMarker class
             new HTMLMarker(center, 'report', newReport.title, newReport.desc, map);
             
-            // Update Feed
+            // Add to Feed
             addFeedItem(newReport);
-            
-            // Update Count
             document.getElementById('count-report').innerText = userReports.length;
 
-            // Close
             closeReportModal();
-            document.getElementById('rpt-desc').value = ""; // Clear
+            document.getElementById('rpt-desc').value = "";
         }
 
-        // --- TIME FORMATTER ---
+        // --- TIME FORMATTERS ---
         function formatMNTime(dateObj, includeDate = false) {
             const dateOptions = { timeZone: 'America/Chicago', weekday: 'long', year: '2-digit', month: '2-digit', day: '2-digit' };
             const rawDate = new Intl.DateTimeFormat('en-US', dateOptions).format(dateObj);
             const dateStr = `(${rawDate.replace(',', '')})`;
-
             const timeOptions = { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
             const timeStr = new Intl.DateTimeFormat('en-US', timeOptions).format(dateObj);
-
             if (includeDate) return { date: dateStr, time: timeStr };
             return timeStr;
         }
@@ -288,43 +272,7 @@
         }
         startClock();
 
-        // --- MARKER CLASS ---
-        class HTMLMarker extends google.maps.OverlayView {
-            constructor(position, type, title, desc, map) {
-                super();
-                this.position = position;
-                this.type = type;
-                this.title = title;
-                this.desc = desc;
-                this.div = null;
-                this.setMap(map);
-            }
-            onAdd() {
-                const div = document.createElement("div");
-                div.className = `pulse-marker type-${this.type} pulse`;
-                div.addEventListener("click", () => {
-                    const content = `<div class="popup-box"><div class="popup-title" style="color:${this.getColor()}">${this.title}</div><div class="popup-desc">${this.desc}</div></div>`;
-                    const infoWindow = new google.maps.InfoWindow({ content: content, position: this.position });
-                    infoWindow.open(this.getMap());
-                });
-                this.div = div;
-                const panes = this.getPanes();
-                panes.overlayMouseTarget.appendChild(div);
-            }
-            getColor() {
-                if(this.type === 'report') return '#d400ff';
-                if(this.type === 'protest') return '#ff5555';
-                if(this.type === 'road_closure') return '#ffaa00';
-                return '#00ccff';
-            }
-            draw() {
-                const overlayProjection = this.getProjection();
-                const position = overlayProjection.fromLatLngToDivPixel(this.position);
-                if (this.div) { this.div.style.left = position.x + "px"; this.div.style.top = position.y + "px"; }
-            }
-            onRemove() { if (this.div) { this.div.parentNode.removeChild(this.div); this.div = null; } }
-        }
-
+        // --- FEED HELPER ---
         function addFeedItem(e) {
             const container = document.getElementById('feed-container');
             let dateDisplay = "LIVE"; let timeDisplay = "";
@@ -333,8 +281,6 @@
                 const mnTime = formatMNTime(t, true);
                 dateDisplay = mnTime.date; timeDisplay = mnTime.time;
             }
-            
-            // Color Logic
             let color = '#ffaa00';
             if(e.type === 'protest') color = '#ff5555';
             if(e.type === 'report') color = '#d400ff';
@@ -342,12 +288,48 @@
             const div = document.createElement("div");
             div.className = "feed-item";
             div.innerHTML = `<div class="feed-header"><span class="feed-date">${dateDisplay}</span><span class="feed-time">${timeDisplay}</span></div><div class="feed-text"><strong style="color:${color}">${e.title}</strong><br>${e.desc.substring(0, 80)}${e.desc.length > 80 ? '...' : ''}</div>`;
-            
-            // Insert at Top
             container.insertBefore(div, container.firstChild);
         }
 
+        // --- GOOGLE MAPS INIT ---
         function initMap() {
+            // 1. DEFINE CLASS AND ASSIGN TO GLOBAL
+            HTMLMarker = class extends google.maps.OverlayView {
+                constructor(position, type, title, desc, map) {
+                    super();
+                    this.position = position;
+                    this.type = type;
+                    this.title = title;
+                    this.desc = desc;
+                    this.div = null;
+                    this.setMap(map);
+                }
+                onAdd() {
+                    const div = document.createElement("div");
+                    div.className = `pulse-marker type-${this.type} pulse`;
+                    div.addEventListener("click", () => {
+                        const content = `<div class="popup-box"><div class="popup-title" style="color:${this.getColor()}">${this.title}</div><div class="popup-desc">${this.desc}</div></div>`;
+                        const infoWindow = new google.maps.InfoWindow({ content: content, position: this.position });
+                        infoWindow.open(this.getMap());
+                    });
+                    this.div = div;
+                    const panes = this.getPanes();
+                    panes.overlayMouseTarget.appendChild(div);
+                }
+                getColor() {
+                    if(this.type === 'report') return '#d400ff';
+                    if(this.type === 'protest') return '#ff5555';
+                    if(this.type === 'road_closure') return '#ffaa00';
+                    return '#00ccff';
+                }
+                draw() {
+                    const overlayProjection = this.getProjection();
+                    const position = overlayProjection.fromLatLngToDivPixel(this.position);
+                    if (this.div) { this.div.style.left = position.x + "px"; this.div.style.top = position.y + "px"; }
+                }
+                onRemove() { if (this.div) { this.div.parentNode.removeChild(this.div); this.div = null; } }
+            };
+
             const darkStyle = [
                 { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
                 { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -405,7 +387,6 @@
                         const timeCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
                         let validEvents = [];
 
-                        // 1. Load Server Events
                         data.features.forEach(event => {
                             let showEvent = false;
                             if (event.type === 'road_closure') showEvent = true; 
@@ -425,7 +406,7 @@
                             }
                         });
 
-                        // 2. Re-Load User Local Reports
+                        // Re-add Local Reports
                         userReports.forEach(rep => {
                             validEvents.push(rep);
                             const pos = new google.maps.LatLng(rep.lat, rep.lng);
@@ -442,18 +423,9 @@
                 const container = document.getElementById('feed-container');
                 container.innerHTML = "";
                 events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-                
-                events.slice(0, 15).forEach(e => {
-                    addFeedItem(e); // Helper function reused
-                });
+                events.slice(0, 15).forEach(e => addFeedItem(e));
             }
 
-            // Helper to prevent duplicates in feed helper
-            const _originalAddFeed = addFeedItem;
-            // Overwrite feed generator to use the container clearing logic of updateFeed
-            // Actually, we just need updateFeed to do the work.
-            // addFeedItem is only for instant feedback on new reports.
-            
             updateMapData();
             setInterval(updateMapData, 60000); 
         }
