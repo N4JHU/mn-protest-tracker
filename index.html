@@ -15,41 +15,48 @@
             background: rgba(0, 0, 0, 0.85);
             border: 1px solid #444;
             color: #ddd;
-            padding: 15px;
+            padding: 10px; /* Reduced from 15px */
             border-radius: 4px;
             backdrop-filter: blur(5px);
             z-index: 1000;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
         }
         
-        /* POSITIONING */
-        .top-left { top: 20px; left: 20px; width: 300px; }
-        .top-right { top: 20px; right: 20px; width: 320px; max-height: 80vh; overflow-y: auto; }
+        /* POSITIONING & SIZING (Reduced by ~25%) */
+        .top-left { top: 20px; left: 20px; width: 220px; } /* Reduced width */
+        .top-right { top: 20px; right: 20px; width: 240px; max-height: 80vh; overflow-y: auto; } /* Reduced width */
         .bottom-left { bottom: 20px; left: 20px; }
         
-        /* TYPOGRAPHY */
+        /* TYPOGRAPHY (Scaled Down) */
         h2 { 
-            margin: 0 0 10px 0; 
-            font-size: 1.1rem; 
+            margin: 0 0 8px 0; 
+            font-size: 0.85rem; /* Reduced from 1.1rem */
             color: #ff5555; 
             text-transform: uppercase; 
-            letter-spacing: 1.5px; 
+            letter-spacing: 1.2px; 
             border-bottom: 1px solid #ff5555; 
-            padding-bottom: 5px; 
+            padding-bottom: 4px; 
         }
         
-        .info-row { font-size: 0.85rem; color: #ccc; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+        .info-row { 
+            font-size: 0.65rem; /* Reduced from 0.85rem */
+            color: #ccc; 
+            margin-bottom: 5px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
         .info-label { font-weight: bold; color: #888; }
         .info-val { color: #fff; font-weight: bold; }
         .info-val.red { color: #ff5555; }
         .info-val.orange { color: #ffaa00; }
 
-        /* --- TACTICAL TOGGLE SWITCH --- */
+        /* --- TACTICAL TOGGLE SWITCH (Scaled Down) --- */
         .switch {
             position: relative;
             display: inline-block;
-            width: 34px;
-            height: 18px;
+            width: 28px; /* Reduced */
+            height: 14px; /* Reduced */
         }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider {
@@ -64,32 +71,32 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: 10px; width: 10px;
-            left: 3px; bottom: 3px;
+            height: 8px; width: 8px; /* Reduced */
+            left: 2px; bottom: 2px;
             background-color: #888;
             transition: .4s;
             border-radius: 2px;
         }
         input:checked + .slider { background-color: #004400; border-color: #00ff00; }
-        input:checked + .slider:before { transform: translateX(16px); background-color: #00ff00; }
+        input:checked + .slider:before { transform: translateX(14px); background-color: #00ff00; }
 
-        /* LIVE FEED STYLING */
+        /* LIVE FEED STYLING (Scaled Down) */
         .feed-item { 
             border-bottom: 1px solid #333; 
-            padding-bottom: 10px; 
-            margin-bottom: 10px; 
+            padding-bottom: 8px; 
+            margin-bottom: 8px; 
         }
         .feed-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
-        .feed-date { color: #888; font-size: 0.7rem; font-family: monospace; }
-        .feed-time { color: #ff5555; font-size: 0.8rem; font-weight: bold; font-family: monospace; }
-        .feed-text { font-size: 0.85rem; line-height: 1.4; color: #bbb; }
+        .feed-date { color: #888; font-size: 0.55rem; font-family: monospace; } /* Reduced */
+        .feed-time { color: #ff5555; font-size: 0.65rem; font-weight: bold; font-family: monospace; } /* Reduced */
+        .feed-text { font-size: 0.65rem; line-height: 1.3; color: #bbb; } /* Reduced */
 
         /* SCROLLBAR */
-        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: #444; }
 
@@ -110,7 +117,6 @@
         .type-road { background: #ffaa00; }
         .type-road.pulse { animation: pulse-orange 2s infinite; }
 
-        /* NEW: USER LOCATION BLUE PULSE */
         .type-user { background: #00ccff; z-index: 9999 !important; }
         .type-user.pulse { animation: pulse-blue 2s infinite; }
 
@@ -149,7 +155,7 @@
     <div class="hud-panel top-left">
         <h2>Operation Metro Surge</h2>
         
-        <div class="info-row" style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
+        <div class="info-row" style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 8px;">
             <span class="info-val" id="clock-display" style="color: #fff; font-family: monospace;">LOADING...</span>
         </div>
 
@@ -162,7 +168,7 @@
             <span class="info-val red">LIVE MONITORING</span>
         </div>
         
-        <div class="info-row" style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #333;">
+        <div class="info-row" style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #333;">
             <span class="info-label" style="color:#00ccff">SHOW MY POS:</span>
             <label class="switch">
                 <input type="checkbox" id="user-loc-toggle">
@@ -170,7 +176,7 @@
             </label>
         </div>
 
-        <div class="info-row" style="margin-top:10px; border-top:1px solid #333; padding-top:5px;">
+        <div class="info-row" style="margin-top:8px; border-top:1px solid #333; padding-top:4px;">
             <span class="info-label">ACTIVE THREATS:</span>
             <span class="info-val red" id="count-protest">0</span>
         </div>
@@ -179,7 +185,7 @@
             <span class="info-val orange" id="count-road">0</span>
         </div>
         
-        <div style="font-size: 0.65rem; color: #555; margin-top: 10px; text-align: right;" id="last-updated">Waiting for Sync...</div>
+        <div style="font-size: 0.55rem; color: #555; margin-top: 8px; text-align: right;" id="last-updated">Waiting for Sync...</div>
     </div>
 
     <div class="hud-panel top-right">
@@ -310,36 +316,29 @@
             toggle.addEventListener('change', function() {
                 if (this.checked) {
                     if (navigator.geolocation) {
-                        // Watch position allows real-time movement updates
                         watchId = navigator.geolocation.watchPosition(
                             (position) => {
                                 const userPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                                
-                                // Create marker if it doesn't exist
                                 if (!userMarker) {
                                     userMarker = new HTMLMarker(userPos, 'user', 'MY LOCATION', 'Current Device Position', map);
-                                    map.panTo(userPos); // Center map on first fix
-                                    map.setZoom(13); // Zoom in closer
+                                    map.panTo(userPos); 
+                                    map.setZoom(13); 
                                 } else {
-                                    // Update position (HTMLMarker creates a new DIV, so simple "setPosition" isn't enough for OverlayView)
-                                    // For simplicity in this overlay class, we re-create it or just move the lat/lng property and redraw
-                                    // Re-creating is safer for this specific implementation
                                     userMarker.setMap(null);
                                     userMarker = new HTMLMarker(userPos, 'user', 'MY LOCATION', 'Current Device Position', map);
                                 }
                             },
                             (error) => {
                                 alert("Error getting location: " + error.message);
-                                this.checked = false; // Reset toggle if failed
+                                this.checked = false;
                             },
                             { enableHighAccuracy: true }
                         );
                     } else {
-                        alert("Geolocation is not supported by this browser.");
+                        alert("Geolocation is not supported.");
                         this.checked = false;
                     }
                 } else {
-                    // Turn off
                     if (watchId !== null) {
                         navigator.geolocation.clearWatch(watchId);
                         watchId = null;
@@ -350,7 +349,6 @@
                     }
                 }
             });
-
 
             // --- DATA FEED ENGINE ---
             let activeMarkers = [];
