@@ -2,7 +2,7 @@ name: Update Map Data
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
+    - cron: '*/5 * * * *' # CHANGED: Runs every 5 minutes (Max Speed)
   workflow_dispatch: # Allows manual trigger
 
 permissions:
