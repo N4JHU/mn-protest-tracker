@@ -15,14 +15,10 @@ OUTPUT_FILE = "events.json"
 DB_RETENTION_DAYS = 15
 
 # --- 1. ROAD DATA SOURCE (MnDOT/ArcGIS) ---
-# Proven working feed for official road closures
 ARCGIS_METADATA_URL = "https://www.arcgis.com/sharing/rest/content/items/081587d29d944a89ad189b1633e509e4?f=json"
 
 # --- 2. INTELLIGENCE SOURCES ---
-
-# A. TARGETED NEWS AGGREGATOR (Google News RSS Command)
-# We use a complex boolean query to filter for ONLY the trusted sources you listed.
-# "WHEN:12h" ensures we only get fresh intel.
+# Targeted Google News Command
 NEWS_QUERY = (
     "(protest OR riot OR march OR police OR crash OR gunfire OR standoff) "
     "AND ("
@@ -34,14 +30,10 @@ NEWS_QUERY = (
 )
 NEWS_RSS_URL = f"https://news.google.com/rss/search?q={requests.utils.quote(NEWS_QUERY)}&ceid=US:en&hl=en-US&gl=US"
 
-# B. REDDIT "BOOTS ON THE GROUND"
 REDDIT_SUBS = ["Minneapolis", "TwinCities", "Minnesota", "AltMpls"]
-
-# C. KEYWORD TRIGGERS (Classifies the threat level)
 THREAT_KEYWORDS = ["riot", "tear gas", "standoff", "looting", "shots fired", "shuts down", "blocking"]
 VIGIL_KEYWORDS = ["vigil", "gathering", "march", "rally", "memorial", "protest"]
 
-# D. LANDMARK MAPPING (Text-to-Geo)
 LOCATIONS = {
     "capitol": (44.9543, -93.1022),
     "gov": (44.9543, -93.1022),
@@ -58,17 +50,20 @@ LOCATIONS = {
     "airport": (44.8848, -93.2223),
 }
 
+# --- HELPER: UTC TIMESTAMP ---
+def get_utc_now():
+    # Returns 2026-01-26T12:00:00+00:00 (Explicit UTC)
+    return datetime.datetime.now(datetime.timezone.utc).isoformat()
+
 # --- MODULE 1: ROAD SCRAPER ---
 def get_live_road_closures():
     print("--- Connecting to ArcGIS Feature Server ---")
     events = []
     try:
-        # Get dynamic URL
         meta = requests.get(ARCGIS_METADATA_URL, timeout=10).json()
         service_url = meta.get("url")
         if not service_url: return []
 
-        # Query Database
         query_url = f"{service_url}/0/query"
         params = {"where": "1=1", "outFields": "*", "f": "json"}
         resp = requests.get(query_url, params=params, timeout=30)
@@ -80,11 +75,9 @@ def get_live_road_closures():
             lat, lng = geom.get("y"), geom.get("x")
             
             if lat and lng:
-                # Clean Title
                 raw_title = attrs.get("Headline") or attrs.get("EventType") or "Road Event"
                 title = "TRAFFIC: " + raw_title
                 
-                # Filter out test data
                 if "test" not in title.lower():
                     events.append({
                         "id": f"road-{attrs.get('EventID', random.randint(1000,9999))}",
@@ -93,7 +86,7 @@ def get_live_road_closures():
                         "lng": float(lng),
                         "type": "road_closure",
                         "desc": attrs.get("EventDescription", "See 511mn.org"),
-                        "timestamp": datetime.datetime.now().isoformat()
+                        "timestamp": get_utc_now()
                     })
         print(f"--- SUCCESS: Found {len(events)} road events.")
         return events
@@ -105,11 +98,9 @@ def get_live_road_closures():
 def get_intel_feed():
     print("--- Scanning Targeted Intelligence Sources ---")
     events = []
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-    }
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"}
 
-    # A. NEWS & OFFICIAL SOURCES (Via Google RSS Proxy)
+    # A. NEWS & OFFICIAL SOURCES
     try:
         print(f"Scanning News/Gov Feed...")
         resp = requests.get(NEWS_RSS_URL, headers=headers, timeout=15)
@@ -118,7 +109,6 @@ def get_intel_feed():
         for item in root.findall('.//item'):
             title = item.find('title').text
             link = item.find('link').text
-            # Identify Source from Title (e.g., "Protest... - Star Tribune")
             source_tag = "Unknown"
             if "Star Tribune" in title: source_tag = "Star Tribune"
             elif "WCCO" in title: source_tag = "WCCO (CBS)"
@@ -127,17 +117,12 @@ def get_intel_feed():
             elif "MPR" in title: source_tag = "MPR News"
             elif ".gov" in link: source_tag = "OFFICIAL GOV ALERT"
             
-            # Geolocate
-            lat, lng = (44.9778, -93.2650) # Default Mpls
-            detected_loc = "General Alert"
-            
+            lat, lng = (44.9778, -93.2650)
             for landmark, coords in LOCATIONS.items():
                 if landmark in title.lower():
                     lat, lng = coords
-                    detected_loc = landmark.title()
                     break
             
-            # Apply Jitter (Spread dots out)
             lat += random.uniform(-0.02, 0.02)
             lng += random.uniform(-0.02, 0.02)
 
@@ -148,7 +133,7 @@ def get_intel_feed():
                 "lng": lng,
                 "type": "protest",
                 "desc": f"<b>SOURCE: {source_tag}</b><br>{title}<br><br><a href='{link}' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
-                "timestamp": datetime.datetime.now().isoformat()
+                "timestamp": get_utc_now()
             })
     except Exception as e:
         print(f"!! News Feed Error: {e}")
@@ -158,7 +143,6 @@ def get_intel_feed():
         for sub in REDDIT_SUBS:
             print(f"Scanning r/{sub}...")
             url = f"https://www.reddit.com/r/{sub}/new.json?limit=15"
-            # Reddit needs a unique User-Agent
             resp = requests.get(url, headers={"User-Agent": "MN-Intel-Bot/2.0"}, timeout=10)
             
             if resp.status_code == 200:
@@ -167,21 +151,17 @@ def get_intel_feed():
                     data = post.get("data", {})
                     title = data.get("title", "")
                     
-                    # Filter for relevance
                     is_threat = any(k in title.lower() for k in THREAT_KEYWORDS)
                     is_vigil = any(k in title.lower() for k in VIGIL_KEYWORDS)
                     
                     if is_threat or is_vigil:
-                        # Geolocate
                         lat, lng = (44.9778, -93.2650)
                         for landmark, coords in LOCATIONS.items():
                             if landmark in title.lower():
                                 lat, lng = coords
                                 break
-                        
                         lat += random.uniform(-0.02, 0.02)
                         lng += random.uniform(-0.02, 0.02)
-                        
                         tag = "HIGH THREAT" if is_threat else "COMMUNITY"
                         
                         events.append({
@@ -191,7 +171,7 @@ def get_intel_feed():
                             "lng": lng,
                             "type": "protest",
                             "desc": f"<b>TAG: {tag}</b><br>u/{data.get('author')}: {title}<br><br><a href='https://reddit.com{data.get('permalink')}' target='_blank' style='color:#ff5555'>VIEW THREAD</a>",
-                            "timestamp": datetime.datetime.now().isoformat()
+                            "timestamp": get_utc_now()
                         })
             time.sleep(1)
     except Exception as e:
@@ -213,7 +193,7 @@ def main():
                 existing_events = data.get("features", [])
         except: existing_events = []
     
-    # Fetch New Data
+    # Fetch New
     new_events = []
     new_events.extend(get_live_road_closures())
     new_events.extend(get_intel_feed())
@@ -223,13 +203,30 @@ def main():
     for event in new_events:
         event_db[event["id"]] = event
     
-    # Cleanup (Retention Policy)
-    cutoff = datetime.datetime.now() - datetime.timedelta(days=DB_RETENTION_DAYS)
-    final_features = [e for e in event_db.values() if e.get("timestamp") and datetime.datetime.fromisoformat(e["timestamp"]) > cutoff]
+    # Clean Old Data (Using Offset-Aware Comparison)
+    cutoff = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=DB_RETENTION_DAYS)
+    
+    final_features = []
+    for e in event_db.values():
+        if e.get("timestamp"):
+            try:
+                # Parse timestamp and ensure it has timezone info
+                t_obj = datetime.datetime.fromisoformat(e["timestamp"])
+                if t_obj.tzinfo is None:
+                    # If old data has no timezone, assume UTC
+                    t_obj = t_obj.replace(tzinfo=datetime.timezone.utc)
+                
+                if t_obj > cutoff:
+                    final_features.append(e)
+            except:
+                continue
 
     # Save
     with open(OUTPUT_FILE, "w") as f:
-        json.dump({"last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "features": final_features}, f, indent=2)
+        json.dump({
+            "last_updated": get_utc_now(), # Global sync timestamp
+            "features": final_features
+        }, f, indent=2)
     
     print(f"--- DATABASE UPDATED: {len(final_features)} Total Events ---")
 
