@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-27 03:22:33",
+  "last_updated": "2026-01-27 03:27:07",
   "features": [
     {
       "id": "RC-1",
@@ -898,8 +898,8 @@
       "lat": 5733369.443395773,
       "lng": -10483659.319267442,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.248976"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074461"
     },
     {
       "id": "arc-2",
@@ -907,8 +907,8 @@
       "lat": 5733369.443395773,
       "lng": -10483659.319267442,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.248991"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074474"
     },
     {
       "id": "arc-3",
@@ -916,8 +916,8 @@
       "lat": 5599708.763245199,
       "lng": -10371032.937652254,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.248994"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074477"
     },
     {
       "id": "arc-4",
@@ -925,8 +925,8 @@
       "lat": 6064950.328013415,
       "lng": -10439030.110894019,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.248997"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074479"
     },
     {
       "id": "arc-5",
@@ -934,8 +934,8 @@
       "lat": 6064950.328013415,
       "lng": -10439030.110894019,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249001"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074482"
     },
     {
       "id": "arc-6",
@@ -943,8 +943,8 @@
       "lat": 5603572.541467002,
       "lng": -10353191.094945872,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249004"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074484"
     },
     {
       "id": "arc-7",
@@ -952,8 +952,8 @@
       "lat": 5603572.541467002,
       "lng": -10353191.094945872,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249006"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074486"
     },
     {
       "id": "arc-8",
@@ -961,8 +961,8 @@
       "lat": 5599811.317313336,
       "lng": -10374759.914204014,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249008"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074488"
     },
     {
       "id": "arc-9",
@@ -970,8 +970,8 @@
       "lat": 5771138.467409304,
       "lng": -10503492.556344625,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249010"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074490"
     },
     {
       "id": "arc-10",
@@ -979,8 +979,8 @@
       "lat": 5616974.335681363,
       "lng": -10393686.120070213,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249012"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074493"
     },
     {
       "id": "arc-11",
@@ -988,8 +988,8 @@
       "lat": 5693921.696627737,
       "lng": -10764475.425215423,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249014"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074495"
     },
     {
       "id": "arc-12",
@@ -997,8 +997,8 @@
       "lat": 5693921.696627737,
       "lng": -10764475.425215423,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249017"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074497"
     },
     {
       "id": "arc-13",
@@ -1006,8 +1006,8 @@
       "lat": 5599806.291665741,
       "lng": -10385862.586257262,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249019"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074499"
     },
     {
       "id": "arc-14",
@@ -1015,8 +1015,8 @@
       "lat": 5507244.645535676,
       "lng": -10733879.931087837,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249021"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074501"
     },
     {
       "id": "arc-15",
@@ -1024,8 +1024,8 @@
       "lat": 5507244.645535676,
       "lng": -10733879.931087837,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249023"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074503"
     },
     {
       "id": "arc-16",
@@ -1033,8 +1033,8 @@
       "lat": 5539497.220738644,
       "lng": -10455365.132973025,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249025"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074505"
     },
     {
       "id": "arc-17",
@@ -1042,8 +1042,8 @@
       "lat": 5622888.235520893,
       "lng": -10694007.515875503,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249027"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074507"
     },
     {
       "id": "arc-18",
@@ -1051,8 +1051,8 @@
       "lat": 5622888.235520893,
       "lng": -10694007.515875503,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249031"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074509"
     },
     {
       "id": "arc-19",
@@ -1060,8 +1060,8 @@
       "lat": 5587552.646248959,
       "lng": -10384944.311777707,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249033"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074511"
     },
     {
       "id": "arc-20",
@@ -1069,8 +1069,8 @@
       "lat": 6042447.091181446,
       "lng": -10777370.007111972,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249035"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074513"
     },
     {
       "id": "arc-21",
@@ -1078,8 +1078,8 @@
       "lat": 5613826.307020821,
       "lng": -10365639.063045356,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249037"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074515"
     },
     {
       "id": "arc-22",
@@ -1087,8 +1087,8 @@
       "lat": 5491680.634198138,
       "lng": -10464756.045216344,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249042"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074517"
     },
     {
       "id": "arc-23",
@@ -1096,8 +1096,8 @@
       "lat": 5600387.400680939,
       "lng": -10359360.97772309,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249044"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074519"
     },
     {
       "id": "arc-24",
@@ -1105,8 +1105,8 @@
       "lat": 5600387.400680939,
       "lng": -10359360.97772309,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249046"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074521"
     },
     {
       "id": "arc-25",
@@ -1114,8 +1114,8 @@
       "lat": 5491694.291442987,
       "lng": -10464580.828337835,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249048"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074524"
     },
     {
       "id": "arc-26",
@@ -1123,8 +1123,8 @@
       "lat": 5613826.307020821,
       "lng": -10365639.063045356,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249050"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074526"
     },
     {
       "id": "arc-27",
@@ -1132,8 +1132,8 @@
       "lat": 5613826.307020821,
       "lng": -10365639.063045356,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249052"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074528"
     },
     {
       "id": "arc-28",
@@ -1141,8 +1141,8 @@
       "lat": 5617411.307796124,
       "lng": -10396225.87425266,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249054"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074530"
     },
     {
       "id": "arc-29",
@@ -1150,8 +1150,8 @@
       "lat": 5617411.307796124,
       "lng": -10396225.87425266,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249056"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074532"
     },
     {
       "id": "arc-30",
@@ -1159,8 +1159,8 @@
       "lat": 5837332.357365473,
       "lng": -10552210.640934374,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249060"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074534"
     },
     {
       "id": "arc-31",
@@ -1168,8 +1168,8 @@
       "lat": 5837332.357365473,
       "lng": -10552210.640934374,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249064"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074536"
     },
     {
       "id": "arc-32",
@@ -1177,8 +1177,8 @@
       "lat": 5603437.89329662,
       "lng": -10359771.190046662,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249067"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074541"
     },
     {
       "id": "arc-33",
@@ -1186,8 +1186,8 @@
       "lat": 5603437.89329662,
       "lng": -10359771.190046662,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249069"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074543"
     },
     {
       "id": "arc-34",
@@ -1195,8 +1195,8 @@
       "lat": 5586190.75970408,
       "lng": -10384792.138033792,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249071"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074545"
     },
     {
       "id": "arc-35",
@@ -1204,8 +1204,8 @@
       "lat": 5640663.503422265,
       "lng": -10378955.434492521,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249073"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074547"
     },
     {
       "id": "arc-36",
@@ -1213,8 +1213,8 @@
       "lat": 5599818.07053169,
       "lng": -10385827.743256643,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249075"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074549"
     },
     {
       "id": "arc-37",
@@ -1222,8 +1222,8 @@
       "lat": 5599658.5074649565,
       "lng": -10386116.951293726,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249077"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074551"
     },
     {
       "id": "arc-38",
@@ -1231,8 +1231,8 @@
       "lat": 5641023.528833502,
       "lng": -10353064.413365347,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249079"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074553"
     },
     {
       "id": "arc-39",
@@ -1240,8 +1240,8 @@
       "lat": 5641023.528833502,
       "lng": -10353064.413365347,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249081"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074555"
     },
     {
       "id": "arc-40",
@@ -1249,8 +1249,8 @@
       "lat": 5975974.300512086,
       "lng": -10295724.522894168,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249083"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074557"
     },
     {
       "id": "arc-41",
@@ -1258,8 +1258,8 @@
       "lat": 5921710.3378015235,
       "lng": -10771808.262712957,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249086"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074559"
     },
     {
       "id": "arc-42",
@@ -1267,8 +1267,8 @@
       "lat": 6064950.328013415,
       "lng": -10439030.110894019,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249088"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074561"
     },
     {
       "id": "arc-43",
@@ -1276,8 +1276,8 @@
       "lat": 5607989.39086091,
       "lng": -10391727.676268687,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249090"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074563"
     },
     {
       "id": "arc-44",
@@ -1285,8 +1285,8 @@
       "lat": 5649157.283112298,
       "lng": -10378845.673474599,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249094"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074565"
     },
     {
       "id": "arc-45",
@@ -1294,8 +1294,8 @@
       "lat": 5478610.679442452,
       "lng": -10479117.150084602,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249096"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074569"
     },
     {
       "id": "arc-46",
@@ -1303,8 +1303,8 @@
       "lat": 5478610.679442452,
       "lng": -10479117.150084602,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249098"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074571"
     },
     {
       "id": "arc-47",
@@ -1312,8 +1312,8 @@
       "lat": 5585727.38232355,
       "lng": -10456181.21616003,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249100"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074573"
     },
     {
       "id": "arc-48",
@@ -1321,8 +1321,8 @@
       "lat": 5585727.38232355,
       "lng": -10456181.21616003,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249102"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074575"
     },
     {
       "id": "arc-49",
@@ -1330,8 +1330,8 @@
       "lat": 5649168.968707684,
       "lng": -10378845.562155109,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249104"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074577"
     },
     {
       "id": "arc-50",
@@ -1339,8 +1339,8 @@
       "lat": 5613743.570050077,
       "lng": -10364967.917835364,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249106"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074579"
     },
     {
       "id": "arc-51",
@@ -1348,8 +1348,8 @@
       "lat": 5613947.582544064,
       "lng": -10360265.893863747,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249108"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074581"
     },
     {
       "id": "arc-52",
@@ -1357,8 +1357,8 @@
       "lat": 5492032.314746332,
       "lng": -10464569.251110792,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249110"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074583"
     },
     {
       "id": "arc-53",
@@ -1366,8 +1366,8 @@
       "lat": 5491994.135180406,
       "lng": -10464474.072946163,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249113"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074585"
     },
     {
       "id": "arc-54",
@@ -1375,8 +1375,8 @@
       "lat": 5901253.08780343,
       "lng": -10252610.484109934,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249117"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074587"
     },
     {
       "id": "arc-55",
@@ -1384,8 +1384,8 @@
       "lat": 5901253.08780343,
       "lng": -10252610.484109934,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249119"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074589"
     },
     {
       "id": "arc-56",
@@ -1393,8 +1393,8 @@
       "lat": 5672436.2063295245,
       "lng": -10322809.000282135,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249121"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074591"
     },
     {
       "id": "arc-57",
@@ -1402,8 +1402,8 @@
       "lat": 5672436.2063295245,
       "lng": -10322809.000282135,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249125"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074593"
     },
     {
       "id": "arc-58",
@@ -1411,8 +1411,8 @@
       "lat": 5511630.608290709,
       "lng": -10329403.67823622,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249127"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074597"
     },
     {
       "id": "arc-59",
@@ -1420,8 +1420,8 @@
       "lat": 5511630.608290709,
       "lng": -10329403.67823622,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249129"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074599"
     },
     {
       "id": "arc-60",
@@ -1429,8 +1429,8 @@
       "lat": 5465269.017128567,
       "lng": -10269108.700562444,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249131"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074601"
     },
     {
       "id": "arc-61",
@@ -1438,8 +1438,8 @@
       "lat": 5465269.017128567,
       "lng": -10269108.700562444,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249133"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074603"
     },
     {
       "id": "arc-62",
@@ -1447,8 +1447,8 @@
       "lat": 5611314.964302993,
       "lng": -10580238.884965288,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249135"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074605"
     },
     {
       "id": "arc-63",
@@ -1456,8 +1456,8 @@
       "lat": 5611314.964302993,
       "lng": -10580238.884965288,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249137"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074607"
     },
     {
       "id": "arc-64",
@@ -1465,8 +1465,8 @@
       "lat": 5614130.9932397865,
       "lng": -10363285.212412532,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249139"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074609"
     },
     {
       "id": "arc-65",
@@ -1474,8 +1474,8 @@
       "lat": 5614009.400655553,
       "lng": -10357892.896278508,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249142"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074611"
     },
     {
       "id": "arc-66",
@@ -1483,8 +1483,8 @@
       "lat": 5613422.853483907,
       "lng": -10348158.56340609,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249144"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074615"
     },
     {
       "id": "arc-67",
@@ -1492,8 +1492,8 @@
       "lat": 5613422.853483907,
       "lng": -10348158.56340609,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249146"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074618"
     },
     {
       "id": "arc-68",
@@ -1501,8 +1501,8 @@
       "lat": 5613200.135980253,
       "lng": -10357194.47779327,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249148"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074620"
     },
     {
       "id": "arc-69",
@@ -1510,8 +1510,8 @@
       "lat": 5570087.912907794,
       "lng": -10424037.267915508,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249150"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074622"
     },
     {
       "id": "arc-70",
@@ -1519,8 +1519,8 @@
       "lat": 5491792.531088769,
       "lng": -10464672.221639777,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249154"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074624"
     },
     {
       "id": "arc-71",
@@ -1528,8 +1528,8 @@
       "lat": 5569824.778098404,
       "lng": -10423872.181110661,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249156"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074628"
     },
     {
       "id": "arc-72",
@@ -1537,8 +1537,8 @@
       "lat": 5661762.707839254,
       "lng": -10350936.986576797,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249158"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074630"
     },
     {
       "id": "arc-73",
@@ -1546,8 +1546,8 @@
       "lat": 5661762.707839254,
       "lng": -10350936.986576797,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249160"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074632"
     },
     {
       "id": "arc-74",
@@ -1555,8 +1555,8 @@
       "lat": 5976926.06456929,
       "lng": -10295721.071989954,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249162"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074634"
     },
     {
       "id": "arc-75",
@@ -1564,8 +1564,8 @@
       "lat": 5976926.06456929,
       "lng": -10295721.071989954,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249164"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074636"
     },
     {
       "id": "arc-76",
@@ -1573,8 +1573,8 @@
       "lat": 5599871.625302354,
       "lng": -10382718.144600824,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249166"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074638"
     },
     {
       "id": "arc-77",
@@ -1582,8 +1582,8 @@
       "lat": 5599883.875411775,
       "lng": -10381140.5247773,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249168"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074641"
     },
     {
       "id": "arc-78",
@@ -1591,8 +1591,8 @@
       "lat": 5416130.910266824,
       "lng": -10350491.04069668,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249171"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074643"
     },
     {
       "id": "arc-79",
@@ -1600,8 +1600,8 @@
       "lat": 5416198.483942655,
       "lng": -10349371.945855735,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249173"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074645"
     },
     {
       "id": "arc-80",
@@ -1609,8 +1609,8 @@
       "lat": 5416158.616953376,
       "lng": -10350204.838285852,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249177"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074647"
     },
     {
       "id": "arc-81",
@@ -1618,8 +1618,8 @@
       "lat": 5599726.981034516,
       "lng": -10383487.362282205,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249179"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074649"
     },
     {
       "id": "arc-82",
@@ -1627,8 +1627,8 @@
       "lat": 5599823.567341049,
       "lng": -10383490.256588968,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249181"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074651"
     },
     {
       "id": "arc-83",
@@ -1636,8 +1636,8 @@
       "lat": 5599818.541686647,
       "lng": -10381232.029398732,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249185"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074653"
     },
     {
       "id": "arc-84",
@@ -1645,8 +1645,8 @@
       "lat": 6041849.69191055,
       "lng": -10777374.348572114,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249187"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074657"
     },
     {
       "id": "arc-85",
@@ -1654,8 +1654,8 @@
       "lat": 6041849.69191055,
       "lng": -10777374.348572114,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249191"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074659"
     },
     {
       "id": "arc-86",
@@ -1663,8 +1663,8 @@
       "lat": 5581246.625001637,
       "lng": -10383525.322228568,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249193"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074663"
     },
     {
       "id": "arc-87",
@@ -1672,8 +1672,8 @@
       "lat": 5587520.023817477,
       "lng": -10381462.238105694,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249195"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074665"
     },
     {
       "id": "arc-88",
@@ -1681,8 +1681,8 @@
       "lat": 5587433.135799366,
       "lng": -10384610.130666347,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249197"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074667"
     },
     {
       "id": "arc-89",
@@ -1690,8 +1690,8 @@
       "lat": 5613733.975127251,
       "lng": -10364247.903368913,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249200"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074669"
     },
     {
       "id": "arc-90",
@@ -1699,8 +1699,8 @@
       "lat": 5886309.819471964,
       "lng": -10265945.33459257,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249202"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074671"
     },
     {
       "id": "arc-91",
@@ -1708,8 +1708,8 @@
       "lat": 5886309.819471964,
       "lng": -10265945.33459257,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249204"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074673"
     },
     {
       "id": "arc-92",
@@ -1717,8 +1717,8 @@
       "lat": 5606663.559226265,
       "lng": -10449541.453812173,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249206"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074675"
     },
     {
       "id": "arc-93",
@@ -1726,8 +1726,8 @@
       "lat": 5606663.559226265,
       "lng": -10449541.453812173,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249208"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074677"
     },
     {
       "id": "arc-94",
@@ -1735,8 +1735,8 @@
       "lat": 5714380.357244354,
       "lng": -10395993.773114357,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249210"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074679"
     },
     {
       "id": "arc-95",
@@ -1744,8 +1744,8 @@
       "lat": 5714380.357244354,
       "lng": -10395993.773114357,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249212"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074682"
     },
     {
       "id": "arc-96",
@@ -1753,8 +1753,8 @@
       "lat": 5771138.467409304,
       "lng": -10503492.556344625,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249216"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074684"
     },
     {
       "id": "arc-97",
@@ -1762,8 +1762,584 @@
       "lat": 5771138.467409304,
       "lng": -10503492.556344625,
       "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:22:33.249218"
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T03:27:04.074687"
+    },
+    {
+      "id": "news-2569916258969645649",
+      "title": "REPORT: Protest outside hotel near U of M campus ends in c...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMisAFBVV95cUxQU1BFQVl0Y3Y4OVp0elpicXlWXzktazlrcXNCY1Rjc3RoV3pDVF80aHBuM0JHbGlKcnh5bXp1UnFhdVJWQk5WX0ZsVERZUmVnM2Nhdk9iYW41clBhZldDRUZsZjdlV2hVdTlyc2VEbHlFRk1FZ21ndE1TZE5VemxnV1FpRmFNODNSdW5peGJJS2ZZTWZtU1hCOW1nVG53OXFPcHJVVDhmLVpzU05OTUlvZA?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687454"
+    },
+    {
+      "id": "news-7377603728062474153",
+      "title": "REPORT: Federal agents use teargas on protesters outside I...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMikgFBVV95cUxOeE8xU255UUd0UnU2RHNiU3VwdE5pTjI3RUNIYUJXTElmOWN5QjRkcXl3VkEtVy02OEk4R19Xd1I0TGRlV1JFUjJaRm9QV0ViaFQ5WHJDVkVXV3dkdXE3WUV1RU8wUUx6T2hHRWhwbXh2QURSVDFTWTFVaTBTYlQ1M0ExUW50WkxmYXBtSHgtV1Rxdw?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687475"
+    },
+    {
+      "id": "news--3672783398503433009",
+      "title": "REPORT: Federal agents deploy tear gas after protest, vand...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZkRpR0p4d01rVjJ1VG5BS0s1RVBUaWxlYndTTVJGd29KV01KU1k5VEhJaDJzcUQxSWJKUFlJTVJnUllVcVlVNnJMN3hXQXBwWGt2QnlkVHU4cG9PckhmZUVzNzJEX0dmNW5rWkQxUzk2VkdsNmhpTzJaaU1JeTB4R3B0Q0l2MG10QWlNY2ZLcV80eFF1SGdXZFB1eV92RzBaUUxLaFQ4cGJXVEk?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687481"
+    },
+    {
+      "id": "news--3234003116348548428",
+      "title": "REPORT: Protesters clash with federal agents outside Minne...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMivwFBVV95cUxPeVJyc0dkRWUyWVdCSlZNcmNYaXVxSVpWVEdHOXd2ZVRiRUM5azZZTldPT05XOWhxdkJ0eUVDSUdPY3d1ZldzVXhTRkotampOQWZWcjFvbHYtbXVObk1OT19Zb0xTVzhSUDNVWXd3V256cVF6eVhvVHVwWEJPaERhY1ZrTWZvN09tTExOQjJKcXdrTjhzdlZNajBVbUNtdmRGTzNJa3hfa0FfYXBnZ29xai1tOXhiWlAwWDFRSkh1cw?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687494"
+    },
+    {
+      "id": "news-1704929978774155516",
+      "title": "REPORT: MPD: Fed agents deployed chemicals during hotel pr...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMigAJBVV95cUxPc2xwMGszODNmbGtkNmkwaEl1OE9ZVmRRTGV1OHdVcDhUVURyZ2pRVURjWjdlNHVIT05XNzZPak9aZFdFTDBseDBQNWV2ZTVuaEdXUUd2S2oxLTl4eXkzeC1wcUc3NG9TdUhhZXY0S2w2WnFrdGhRR3JfWXpsUXZrSl96eXBVUFZuVVdkdUI3aWI3emRRYWc2ZndGU2c4dENpRUNjOE5jeTJFbUJNR19hYVNGVm9EMU8yXzNnVDFBRVJlRG44dFR3MWk2UTZJR3dwbDE1eTJDanVLSk1WSWNqMTY2bzJ6aUFjbWQ4RW1FX243NUtoUHF2VzZ3b1pmb1VW?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687499"
+    },
+    {
+      "id": "news-5677356519400368108",
+      "title": "REPORT: Video: Anti-ICE protest held in Minneapolis after ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiwgFBVV95cUxOdVlSeUYyTDVYQmkwbVREQ2U0RXotbFhXTHdfSERIZnhCQWUxNVdKOXNLY2JJdi1FN0lsSXhlbjF5ajRuTGJ2R0RKX3JOWFkzekNJR3RVRHVyZHBCR040LS14RWRQUHVkY3RpZm1kVkgtd05yTnRuX01EY3J0ZEtVREtGTjdxRXBzRktWRVI5Vm8xcEt5NDdpaEhncjdmRWVfM3NXNTNWX2tCVFh4Y3lYUUZfZHZqRHNuNDIyQ2JiSFFOZ9IBxwFBVV95cUxPZ01TVGNvaVZSVXJRZjY1MjUzNzR4SmlXQ0Zpc044MWQxQ3Vxb0R1ekRCZzFMSEpjbk5xaWdoNVd5WUdJdWtMblg5dUdiZndWTVpsOGNwOGFKREtPV3pYRW5OLVRLaVQ5bHhEZFJ5LXpEUTlxdmFTczlETTRRd2JUVU1idTJhTzBFMU5VX1lGUFNPVnRQckQ2VHFFblRBNmJGWnBTXy15Wmp4LVk5ZFFqNkZ5Qy1tMjVoVUJxUjBSemJNN3ZFekxB?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687510"
+    },
+    {
+      "id": "news--7881993912128802013",
+      "title": "REPORT: Report: Encrypted chats reveal protesters tracked ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi9AFBVV95cUxPS2lTZVJDczFxRFI0VEM5QnJhSGlyaS1qc21rdEdGaXdVNDktMndYaWxXWHZlWGtiSHdlOEYwZ0pOTS1xZjQ1a2tyM3NWMVhKZWJMenNQdkhWaGo3OXg4SzRlSngtV0wxYTVHN3A1dVZkQ0pNUzFNcF9BQlZqTGFHVnJrYWhhSXptWFNkbzJicEFqb2RUTnZlNzNwbTM4cGRlQkVybFROUUtvZzZNa0J4RUlVbjhHWTZBcGFNRnNVSFFTUGFQZDZxS2piS05Ca2xUQUR0YWlzSWF2Mmt4Tl9vdVpzRGhRZnZ5NlBiQjkxaUVWZGJR?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687515"
+    },
+    {
+      "id": "news--4801577300546511835",
+      "title": "REPORT: Hundreds of Coloradans protest federal agent killi...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMisgFBVV95cUxOQjlCaDlRaGoyTUZZaXphMmR5TjFsYTZ0SWpIU0VEd01Ec1NKVjFCT3JSV2J3Qk1CV1NQcE1EaWNXSHBuRDBUWjhKZi04WVU5eEtkcTZ1N2xyczVBcmlJZkJsWXZybUNrMGpzSi1zdHFQSjl5SjRiTzZsVWRTRFhLT1pqYnJYcDRFbERydTB2Q2oyZ1RHWVBtYnpXQURxMzZRa1ZJVHA2U1F1aWJXZUhBNS1R?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687528"
+    },
+    {
+      "id": "news-3119575597640707320",
+      "title": "REPORT: Protests against ICE violence in Minneapolis \u2013 in ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMisgFBVV95cUxQdWN5V1FkRy0zdjVYMC0ySkV1MzZJUFNxQkdHVy1OdlJpTlp4M0F2RUc2cDYwblRfcGU4ZWQyeW9sckVlTTI1MGtpaVZ6dmVDakViTlRPY3Myd3kxUHNSeGJWVW1DU1I2YWp1eFVHb1JhVG1zaWRzcDdWTUNZY1VpVWVUbzJfNGhEQ19UYTlSUlljbXp4VXlEeVcwenVZeDZuVzh6TkljSTZXMW02Y0FoSHZn?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687537"
+    },
+    {
+      "id": "news-1715409150974549756",
+      "title": "REPORT: ICE Protesters Enter Minneapolis Hotel Vestibule, ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMifkFVX3lxTE0tVVpwaXBZYzFzVmZsWG5RdWJNanVPM1BVYnlXdTN3MUdGSWJrWjNyT2FYbXRpLWNOVktfY0ZsNENzY3RFODM1bnlKbEtkRldxUjJxc04zU2cxbC1vYnA5dW9WZ2FnYTVWczlzLTRBZnRVazE0eVdBVEJIU1BKQQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687544"
+    },
+    {
+      "id": "news--8059840496820765474",
+      "title": "REPORT: Tear gas deployed by federal agents after protest,...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMivgFBVV95cUxQN01tMFo2X1ZlOGV2UjY1aVZBajZHYk13aVpJVldyNG1LX3dyQlZIMTV6NEJDRm5PNjAtQ0VGeExGM3AxOXRHWlEzZ05fVDZDQTFpYl9GYVlvNkVCYmJHa3k1RkNjdnFLWl9hdFRhT3BZbmlDdmlOcEpmaDY2c0RrNmtpMzdTSmgxMGY3NHpxY1UtU21HeE1KMVVHTUJ6UmY4UkkzaUgyQ1kzRURXdllfbXViWmhXc1paTUgwaldB?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687549"
+    },
+    {
+      "id": "news--7085075154354311861",
+      "title": "REPORT: Republicans face election risks in clash with gun ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMivgFBVV95cUxQRUgtUzVsUVYtVXVPcWhHajZfZVdjYzFpZ1BlMWxEOEdweDg3UlFRamJmSkpyRElqS2s0eFA2MmdsckhFVjBtVmdHU1NiTFQtR1JNZVdsRXludy0yNEh4M1k3NnVhNEg0RE9ldFNodzBvT3l6Zm1qdFduRk01V2tmWXFNYTVVNlR0MlpBU0JSUEdybUVwWDNrVUk4bEZ1RVpINXJLMUt3MXBKX3pBSFJ2ZkdCX2Rjd1JySF93LXRR?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687559"
+    },
+    {
+      "id": "news--69666888882768299",
+      "title": "REPORT: Killing of Alex Pretti in Minneapolis spurs protes...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi3AFBVV95cUxOa1V4YUlPZDVUQzlFa0VIYkl0UTA2YkVLQjNzMEtaeUUtNnRhNXBoS2pHOU1lOXpDVl8yMHpkdTAwX1Y2TDRQMXd1QmdJNDdhQ1k1VUlLOFR1QV9pM21kbGZXRlRFY1FzS2tnZGptSl9zRUFHUmJkZGtmcEhfZnJFWVFkeVppakh0Sk5fRVNhQmFMVWtFMkltbG1nRzdoRlFQSzJfVVZmdHFzRnJuNlFtWUxGT0NFRFlVd3JpV18yQ29uOE1MWC1uekdyTlF6a3hCNHl1ZkFxSjhzVHFB?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687569"
+    },
+    {
+      "id": "news-7359173188033994192",
+      "title": "REPORT: Parkites protest after 2nd Minneapolis resident ki...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMixgFBVV95cUxNN0tVWWpnY1FDblBrNlF3N1JUYk0yTG9ERm12X1diTm4wV056ZzRnd1ZEZlNIcnpEWUJYaDJWZ0tiN1Mwb2VITVlMZ1JtUDNNVEZtTU9sZWhWcUt0bkdlUXlYSGQ1aWlQSmR3M1dsQjFBU0hseUlrZnZYd1dwMGlNbHBwZzlFakQ0ZGFTamJXSEtUX2ppS3BJSFpiQUhrSEdYNzhlQmFxQWw2a01WMkxXRFlOWGY1Q09TUUtqeG9kUVZfV3YxNWc?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687574"
+    },
+    {
+      "id": "news-5317566726350231064",
+      "title": "REPORT: Hundreds march in Philadelphia to demand \u2018ICE off ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMicEFVX3lxTE51SERoSXNBZDNsRFVJN01yT0FHTjk3V0oxb1N4LTBaaVI1YWJHR2JMSWRmSVdNbmdpWm54RDJ2cWxFalN3THBRZjU3cmYxZkhBcE1MRnhDeVZyTFZVenlvOTRqVVd5RzItOVRROWotT24?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687583"
+    },
+    {
+      "id": "news--348095466845830674",
+      "title": "REPORT: Minneapolis protests intensify after killing foota...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMingFBVV95cUxOTjMwS2plMW56bHdJX2hvM0NCV0hXNFBQQlpSWVNjaGgtak12OHJPTVhZbUtnM3NSbUNReTBreGkyMWRnR3JfUmhIc05md0NXeE9IV1RMOVFqUThlRlU0U25KY2o1RU02TVFsLXZ6LWdkTUo0V1dVS1Jzbjc2eVdDMmtNdnprTnFobWZFRjZBOGdzcVptbzFnYVVsWE5Rdw?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687587"
+    },
+    {
+      "id": "news-5530644112197521462",
+      "title": "REPORT: Violent anti-ICE protesters swarm Minnesota hotel ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiswFBVV95cUxNbFFydndoSXZGQ1c0YllwM0NKdjVaLWlqNENMYktrVldxTGRySURmWVU5SEpoYUxwWG50Z3pRQzRzekxxTXpVcXFMa25YZDR3MGI1QzhSRk9yTmdhN0RvUGtFYTJnaTh6UGpXZUdERGllTkdIbEpPMzV4eE9sSGYzc2RuNDFjOHBQUko0bGFLUmh2UTBheEpVeXJuM3dOWnZ1T0czMWYwNU5ROTFvcjlRb1BMRQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687599"
+    },
+    {
+      "id": "news-2630336283007151144",
+      "title": "REPORT: Minneapolis mourns Alex Pretti as protests continu...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMivAFBVV95cUxOR1AzWmluQ1VYTTdDQmN1RTBzNGIxSHNaN3JubzV3UERuY1p0T0VRTk8xekg2Q0Rid2VJbXJ4TEc3YktxMFRGV1NySERfQ245QlMwS0g2SmpKX25HNnJhU1N0aXNMQXc2UGkxNm1vVHlTZE9va3hBS1dRNjJILVNyRHNLNUpSUUVWMVVnNklVd29tdjNpZzcxQk5RV1VvVklsMjFSb0I0X0cyeUJFbWdfc0o4Z1NTS1pxS1o5SdIBwgFBVV95cUxOakVDaDBKRWlqaHRBd1FWbzByWGZkWVduRDRhR0RldjlVN0xROEhoZ3FpRGFVZVBPTmIyRVY4cGRUU2hWaWJyRWdyUDc5WTM4RkgzX3I4bmIwTi14TllWM29MMUlnazU1bm56LWpjbF95NFVWdFNTVkltci1hdjJKZmVhajhJVm94Y01ScjN6WVVUNk5LbFdsSl9maDBFeGtHNXBlb19keU5kaGtsSnpSLUswNEsyY1lTRXBydVVtVEpTdw?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687607"
+    },
+    {
+      "id": "news--8569889911685241222",
+      "title": "REPORT: Big crowd protests ICE in Beaufort following anoth...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMirwFBVV95cUxORlhidXBTMnRMTURDRi1XVEYxVy1Vd2FQZkxLVk16ZTlRNlpRaVhORmRQOUVlbHZEemk4T2NfYnRkY0pobGhkNTQ1WWN4LWJsRDQyRTRoY1M5enZYb1pUaWNIQmZaLVJ4QWMxcGxWc1BwZUxrc095TnhLZVVOVk1rbVRSekxwMThJSllscVZpZXY3dWZoNnRoMEtkT0owTWtHZ0M5TWZubDhkaEFPXzQ40gHDAUFVX3lxTE1NRWVTc09yd0FYYmFPdVFwWkFXckFWd185clJvd0lqVE1LTEh6dGJFVkYyU0txdHpVY3VHOG5WaE4xR0hBRm1QaXFzb19wQkFiT2ZOb0FPNGRRNzFvTlJ3a0o0N3VnN0xBdDZfWkJpNUh6TzZMMnJFT0FveTlTOFA0VFp3Rmk5UUZkR0ZKS3FGMGRHUm5CQ1RPRW1UNF9IQ0RQS0Q5RVlPWDhhYTZaZkxUVUlRZmd3QVc1VTNZbDBZTk8wSQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687737"
+    },
+    {
+      "id": "news--1463116241372661885",
+      "title": "REPORT: Photos of Minneapolis ICE protests - weau.com...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMifEFVX3lxTE5BU0NjWEpYRURveWNMSUR4YVlkeWN4dVNhRnBCczI4Y29EVmtMX2RyRDdjRzR2VUljY2dtaUlyUXRoT3VFUmhiNXo5eVVGd2NQQTRld05ObF9mV3EzY1lmSlE1bzZVd1l2V1FvYXZpQWw5ck50Tk1VbTVXb3Q?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687784"
+    },
+    {
+      "id": "news-6461241192913217090",
+      "title": "REPORT: ICE raids in Minnesota spark protest in Pensacola ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi1AFBVV95cUxPYi12VGZuU2NPWlRNbVlpVkFjV1AySVBJNGViNkhoVkNrR0pmdnQ3OWlUOE52emREaUdsVG9sWGJjY0hrenp1OHNkUHpFRnpYaUItV1U1MlAyZ1pIamVRQktlN0VmZ0RBWklsRHJtek1NNjFpTGpuMVJNQ2NqLTJzN2ZYeW9QOEpxZjJRMUduMEZUTEdkZzBEdXpWU1NpSzFIRFJ5QUNFSWM2RXIyRTJJWHM0QkFBTmxLMGVDekt1YjUwRDBqWnRXRFlaUXpnaDdIV1htdw?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687627"
+    },
+    {
+      "id": "news-6126357808588659644",
+      "title": "REPORT: Federal agents, protesters face off following the ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMilgFBVV95cUxNTFlyUHh2ZlQtM2VqS1ZqUm4xVFVJWTV2ZTRkcHc3ZTRPcDFPYjVmMDFWVXhKal9kQ2MxaU1SSVhnQ1RkYnU3RkV6dS1aeFZjTHppN0Q2bFRZOUcybVZIU1Vtanc1LVlCOFFtUnhGejZwMS1aWkVYaURCbVRvcVp6eDFEUlJ1alF3WmoyaGxTMVZkMFNmeFE?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687632"
+    },
+    {
+      "id": "news--8529906342401405200",
+      "title": "REPORT: Another shooting by federal immigration agents in ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi1AFBVV95cUxQd2FFdWVLN2M5eXhNdzBFQ0hvaHRvQ1RYTDJGT0JYalYyQ2dQcE14U0lWeHlvQmJGQXdRYWFaWTFSOFRScm5nWk5GZlZWWmtKTFBIN1NYREo1Q1ZRSnVJUWdVOWk4NW4wQVNlU1N6MnltWXFXS0NYMEllckF2eHpsaW81OGxhSVFMRjRNbkVuM1d5QXdNendQQlZqX2lPcTFfUnUzOHl0eVpOSU1XazNnTmZOOF9Ta0lKY1pFNFlSVzRWZmU0ak1GbUx6NXVhLTl2aUNqbA?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687646"
+    },
+    {
+      "id": "news--9210477952112260923",
+      "title": "REPORT: Photos: Community protest and grief in the wake of...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMirgFBVV95cUxPV2FRZzVxRUJ2WmE0Ulg0YzFUTEhDTk9NZW1TSTkwaG1nczlEMVJ4VnlNSlBRZGJMbjlUVVJvdVZhWWY4Z2JaQkptYUJEX2huZ29lRThfS2RweG5jbW1FNi1jUHZLN1ZMdXUzR1FvM1JUQmhsYnd3VEthSFR5TG9wUC1XR3JMU0d1X2dSZXVHV2RxQUpUVlFqZTM2VWN4akMxS29sYXVOZkRZakJmUWc?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687665"
+    },
+    {
+      "id": "news--2803220010427894894",
+      "title": "REPORT: Former Minneapolis police chief compares Alex Pret...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi0wFBVV95cUxPcDhCOXNNdmx4QlRBVmlUVU1mV1Q1V1NYMldtdFpCX19FSXhrQTRSZ25jVXRfOEdXU2hrbGoyUGFBc29ldW1PU0gyVVFKcTk4N0pRXzNrN2l1SF9kdk9WcUctQjlOUi02Y0Q4QUY4SjFQNEVRU3V5TFdMVjlGZGszeFBnNkU1V2Zsa1NrclJiUTFUalJvUkhGTGhEYUUwcWFncWJyQkhZZk9iOVNGNkdSMnM4d29DMlpxVTBGUDNwQm9NbkFZT2NmcFplc3JwX3puSVVn?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687670"
+    },
+    {
+      "id": "news-4977245120195235824",
+      "title": "REPORT: Debate over gun rights and safety reignites after ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMisAFBVV95cUxPSTJFZjJlWGd4VU5hMkY1R3RfT1BNNE9oeGdjeXJrYUhEcWlBcW9TOXVqeDRvakpfTDViMjY0TnlRWkVWV0t2dmFrTGpsMjlnN2NtY045cVFtYUx2MXRzWUh3TFhHY3I4dFkyeVZaeEliQmZRTXNIMXNnTDJERUNyQU1OcmdoX3pnQ1RRdGhjS2lzZGhzVWNrcFlISjd3ZkFTN0h4eHNibEJzNmoycXZnTQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687682"
+    },
+    {
+      "id": "news--3065387937303518980",
+      "title": "REPORT: Sales surge at Minneapolis bookstore after resonat...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMimwFBVV95cUxNR0J1TTMzMzBSdk1GOFg4Tk50a0kyazNhbFdpNlBmVEZUQkYtXzNqbnhqWUFockp0bXBZRlE4RldnZVM1SWRLMWdsTVFiSHFsbDAyMlJXNnlsZGhFdUtSTGZKcFZaSEFSVUVNQnl1QnB1RHFfXzhPM2ZVUThTazhoSXVoUDF4N1pfcTU3R1hPSFphRmJlQTJKenh5bw?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687689"
+    },
+    {
+      "id": "news-7231213173150523836",
+      "title": "REPORT: Minneapolis Border Patrol shooting: What to know a...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi2gFBVV95cUxNc2J3ckNqVE1rSm5nSWotYWhhSjdLQ3dNOUw3YllzV0VndW0xXzlBN1ZRSTRsb0lDX0xtWng4MWJSZGRvQnZXSVNRQU9mZS1fMzJaMTl6NXJXdl8xYzRDMVBKZWxWRm5oVFQtMTBwaFJsbjE1ZG12cmtxcGFHVzFpSVBMWU1iS3I1Z2s1aFpRQVJ5UjhWVUNpdGNDZ3RPcEtsX0dqaDhsZC1sNVRzdXdBX2F0bjlVZDloSEJtNUZzTlNndjhzLURKWUtfU2ota2piQkg2bWRReml4Zw?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687696"
+    },
+    {
+      "id": "news--5416207941110541523",
+      "title": "REPORT: Verify: Rep. Tim Burchett claims protesters in Min...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi4gFBVV95cUxOVEIyaXZFc2ZBdVduNHh1RlZ3S2JpOFQtZFBsZ0tuUWRPT3BnWVhZTDBrS0lhN3pzel9VS3ByNmpKQzZ3VEFVUUh0VUhWOXZPaTBKYTBNVGMwTDh1RmJnTXJTdzVSTGhCbHhtbFV6Q05SUFNpMU9oQ2FsS0FMa19wbGRBQy0zUExuWGxZTnhYTGl1OF9aOTdoSnczbVpweHpsYlZhTG1zTGJQS0stdzh0TU9URkZFTHZDUlJLWmdaRHBQX1dZRHhpSk5hZ251UFRES2hvdmY5Y2JOR1ZlaDlnUHhn?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687701"
+    },
+    {
+      "id": "news--1442175737228757122",
+      "title": "REPORT: Minneapolis shootings and protests - NPR...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMieEFVX3lxTFBsSlgxcmxVY2lrZUtXQ09UMkE0WnFuYnlyWmVIN1ZGeFFQNmlHY2VDazBHZEFibkZzdkQtYWVCckVhVGIxZW1OQXFsRjJ5ZjRXWnZaLUxEaS1ZVk5JeTktWGhudGF5Q2swT1UyTEFXem1qbXQwbU5WTQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687705"
+    },
+    {
+      "id": "news--129198542650193838",
+      "title": "REPORT: Protesters call for ICE patrols to end following I...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMizAFBVV95cUxNbkJzX0E4REJVNURVV081SXhHbklMOFg0T3ZybTRkWDM4TVR2VGxKamVhbW1qWWZsWlB6UXBHYWIyZlRIRGR0VmtnX2gzOU5rR1ZFbkt6VDh5emNubkZCVG5ySHVtdEhIV3dqeDkyVGtEUWZCN21HRzZZMm1zcDRHZjVjUFA2QTZnWFNMT3hMLUIzQ1Y0cHQ1NFBKalpkNUtXOUx4aW5TSWRFX29SSG5NVjREa2NiYUt6T1VzZkNQTG0xVGNJM3M3N1JpTFQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687714"
+    },
+    {
+      "id": "news--6380973720631062512",
+      "title": "REPORT: Protests heat up in subzero Fairbanks after second...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi-gFBVV95cUxQd1lTVGtDM1lRT0FxZk5EcmtLT05XbXhmeWpWVHJYS1kyTmdXRk1LeW95MUFBcWs4dW5JdUNwcGhtZHkydmVTVmJZbHpkMU4teUdpTGh5X2R5aEVrcl9oTkVlVEZQSmVYdjNOaDNZOXZrZ0ZqM04tdjNKRE04dHU5MWdIb1BubWJJNDhwekhrRHlNR25FMFZXSWpfODlxUGM2QXRKTWlMSjVpS0tVQml4b0dabFJrLWg2Ni1TRXVWTWFpamNDNV9ROGt2eVdmbWxYT2VmNVBDMEFDemtKNTByT2o1bmx5OVpxR3ZIVjBGcEdEZDdkQVhwT0dB?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687719"
+    },
+    {
+      "id": "news--8557477240690714317",
+      "title": "REPORT: Alex Pretti: Protests in Minneapolis after man sho...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiWkFVX3lxTE00YjlKeldJaklBQVVNMER0eVZidzE5TGZlZVZwb0hVdXFmZWluOVFqeXNwRWlaMkZEMlVNTTRfSXhDeVJva3I5M09YYnR5OS1WMVJ4SjdqaW9qUdIBX0FVX3lxTFBnaTZxSlVMV0g4VjFzc0t3VU5KckdvWmotN19qSlNVSTllc29hYlFhVUZoREcxRWp4eTViRk1sNi16ekFfYVJucFppLWItVDZVQkkyREhua2o0XzVHVW5z?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687726"
+    },
+    {
+      "id": "news-8503051954195958208",
+      "title": "REPORT: Protest scheduled in Redding following fatal ICE s...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMipAFBVV95cUxNX3NveXBzYTNjUzRKOVRFVDdtVS1Zai1TamdVQmFHXzJybFlIWFQwZExMVmJiV1JURUptYm81TEJiSFhMZWE3S3JiVEF1TGo1RkE3czdtekQtWjY1NjdnVHZXbkVscXNCTXRIVWNOOHBFcVFmVFA4NDFLd3V5anlhaUYzMlRXVHZteUZkcklxTU1xTElIMGFJdHctU3pQVi1iMjdndQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687730"
+    },
+    {
+      "id": "news-6423373032527641869",
+      "title": "REPORT: Another day of protest: Coloradans react to deadly...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiywFBVV95cUxQcDZ2Zkg4Y0tyclpXTEdJVXZqQkZaT2ozRG91cDB4Q3RjdUQ4WmhWVmw4amVHbncyeEFHTDg2empjVHZLZy13amdNXzJIMHVuYUZoNGozN3lraTd6RGZXcExnUUkyVThOM2pvNS1QYlNUMkFWdE94UGVtZXdZNkJwc0VlTGdCNW5HZVhTNW85Q0FaZmlpUTFRanNoNkNKTi1jVWtua0gxZlEzN0JuNkV0WDdPbElaMHN3UUtZM0xRUjZvMl9la1hhUXNxZw?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687742"
+    },
+    {
+      "id": "news-644857044430819541",
+      "title": "REPORT: Amid lawsuits and protests, Trump signals changes ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMipAFBVV95cUxQOWpod1luUTZZc2xvWjJnSzBiWUZ1ZlVsVVljSDZKYmNqR3BtZzN3ZXlSNmVqWlJBLUJuUVlpMjNna3ExV0liaTVjVWswakFjYnE2bVBLT014VGl1SHcyTmhySExhSXhTZWx4c0R0YXNBTjF0NklpZzFTeGZzZUdRbkQ2MFUtRXNoRWl1VFZybFZZOGVHcU9sYlMwV3lMU1BDd2hDTg?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687746"
+    },
+    {
+      "id": "news-7146688213342710876",
+      "title": "REPORT: Minneapolis bookstore sales climb after owner spea...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMisgFBVV95cUxOTm8xMTV3TnlCOXBBOWFUV28ySWFwbjdTMXNHX2pRQlR0M0xTcmpGMkRMZGttdlpGX3RCemZvV3lyUGl5cUYyUFBRQ3NhQkk1a1BQVTR2ZzJQUEh4bFV1MDc2Y1U0Y0xvVUE3RG91a1p2d2dMUE1Rb3BrTjd1UlR5aGJaWGw5eEItSlY0OWRoWEJocGFqVTlvdi11bTdNVEZ3bHF2dGxoTllfTGlpaWRuWmtn?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687751"
+    },
+    {
+      "id": "news-5309660142134114796",
+      "title": "REPORT: Minneapolis live: Protesters gather in Minneapolis...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiVEFVX3lxTE1XY3lZZnkzOWZPZFF6eEh0TDA1N0FFQ3M5QUNaempFYVMxOExmMTFydmJzWXNCNlpMUlExQ1RuemxXa0t6cThfRDdnVE1DODRIa1FlTA?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687756"
+    },
+    {
+      "id": "news--8358728726547285105",
+      "title": "REPORT: Angry protesters spill into SoCal streets, decry s...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMif0FVX3lxTE9sUUhsaG9GRnNFWHczX0lZZGkxcjNRZU1RN1VYNXJIOXJGNHlIUlJEQ0YzQWtLZTVrbWZQdUxaaENBaDJZOTFwVGdfMm1TbGY5NVhNbEFNWFJIY20zZUtHeVFKS0JhTVNUOU9KUWlrZ3JzNEtsT2hZN1RhanNKclU?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687760"
+    },
+    {
+      "id": "news--3015949668506314561",
+      "title": "REPORT: Redding groups protest death of man shot by federa...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiyAFBVV95cUxQcDBFWHNzdlp5elBDSVZtaWtJZEZIYlBpY1F5NkdjcVVlaGdhdUZHWTJPV2g3a1RoeWQ3cFByUG1LanFNMEgySWR1Y2Z0bUYyLWRxZF9RR0JSLWMzcHcwTTVZaW5ra05Wc1BqVThldU94OEVxVVpEUm5NMjJpU1pmd25lMC1RZDh6Z2x2RUlvNEozdHJzd2hWZjdEX19KdFlJdG85TFJaNVNDMUpEclBmNzMzQUtzVzhDY0lUcGVxQ0h5am5RUDFScg?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687765"
+    },
+    {
+      "id": "news-1339970967295135030",
+      "title": "REPORT: Anti-ICE protests intensify after Border Patrol fa...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMigAFBVV95cUxOVEN1a0NwWnlSWjJiYVhhUXNYd1d6WFpyUDcyMVBFNFVRNkdoNEtCeFhXMmEyZVhaUHZXY3laR0ZLdWh4UkNVaDVCaXk5dDNDR3VBWHI1T2xsSnA2Z19tWnQ1a04xWXUtZ1V2cHhUbEZQQllCTmxkOUNDbUh5UUZ3OQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687776"
+    },
+    {
+      "id": "news-6000970675592154287",
+      "title": "REPORT: Gatherings across Wisconsin protest ICE shooting o...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMijgFBVV95cUxPc2JOYm1ycTVnWWVINHJKU3VzMWJOR0Z5WTdmMGZDdGpBaWY0Z19Wblk3emZ2amNxeFRSVlNXVy1Yamp2RVkzdmIyU3RydnZkQ1BNMjlBRDlseVB4MTdrU3VyVkExM0lKajJid19Ya01MSGFXeDBrcmN5NldEZUY3XzR4RDcyR3FIb3hRTkpR?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687780"
+    },
+    {
+      "id": "news-106155535087737809",
+      "title": "REPORT: Alex Pretti shooting in Minneapolis spurs protest ...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi3wFBVV95cUxPeHljb3hDSXhXTm9DYTlIY0ctbEp4S1o2T2xCbkNWZHhKWFkxY21fTGFBRW5ha194WDIxNEZiMGRXRl9fRU5wMVFPMG1YVUhoN3JaQ1d2cE8yTzVUVFN1Y3duV3BvTjRfWm1SXzNiU2pyaW0wRmNEVDNRdEY5WWc1WlRXYXFWTERaMDlOYzVlSkxhSURUWDM5Y0FVN1V1cG4wcGJ2U2Y2UXZUWF9UVHRIRVV0d1J1OEtnRFVfQWFqLW82aGdPLWl4bURDem5ET0tFXzJ4djFCYkFmdnBJV1l3?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687789"
+    },
+    {
+      "id": "news--6760726088738136661",
+      "title": "REPORT: Protesters in US damage Minneapolis hotel believed...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMisgFBVV95cUxQdVlGTWVIMGtuUWItcXBBX2U3cUY5Sjk4YzN6SzBtSjVpV3ZzRlBGOG9wOVFxWktfb2FBTHJwLWRjWERjQ3BGdlpMcWhuSDNxZ0xYbF9mN28wNFZyZFJ1MFFpQi03QVVfWUttS0VGODZtQ09HSUdCU25wTUF2RmZudjZya3F6M2FJUnNleFFCUzNybTNDaDJPU1FTZUlMcEoxb2RwNUliZWVOX0U0R1hSc3lB?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687799"
+    },
+    {
+      "id": "news--2162350882557976815",
+      "title": "REPORT: Omaha woman takes part in Minneapolis ICE protests...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbHJEWjFnSkQ0Q1dQTThZT2lxNU5yNlg2bmlrOXhXenhqY0E0RVh5UTZOTzV4SUJZQktmT0phUUpZT3RucDdNblZ2cldtbzFUTlhEVHVKaEVva0lua2czWkZnRTJNcEx0OFNsNFN0VGFtdy1ob1dHLUxyM3JBNDVsUVVmaklfd2ZQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687803"
+    },
+    {
+      "id": "news-6332558383267927570",
+      "title": "REPORT: Over 200 Atlantans joined \u201cICE Out\u201d protest in sol...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMikAFBVV95cUxOQXpRaEdZM3l5S0NqeFFpdFN3NWNMS3IwRXlGeUtjSmVxNjB0NkdEd2tHUDZRR05WbUxYMy1ReGJ5MlNHWnBtNTBOYzFtMTl3UV80c3RIdHFSYzhubFhlT0tLQjR2SjY1SjNfRHJPTnMwUk1BcndDTnlvTDRlUndKeC1qMGcyeGRjS09CcGFwWG4?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687813"
+    },
+    {
+      "id": "news--2893721084289146975",
+      "title": "REPORT: Alex Pretti memorial grows as Minnesotans mourn, p...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMivAFBVV95cUxNNTBtb0ZRR3czZDQ1YXRIY2RIQS1rcE5LbTdwNTJYQ2ItRUVYd21GOEtFLWVqY01DeHMyU3dLUnQ3WHJERTN0LURFSDVfYlVHT3JvR0RtQkNobWM3bW81c3B0dUZFRVlmOFAzSjkwc2FrUmtXZTZ2cXBjaGhRc3Q0NVE0Y0pCYnVzMEk1YmNWd3dENTlUMUNhelg2S2JGU0hDYWtBZWY1N0tnZy1xcUNkb3Z4S1dnU3gyMkNiTQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687820"
+    },
+    {
+      "id": "news--3885480747990608360",
+      "title": "REPORT: Atlanta protesters rally against ICE funding and a...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMixwFBVV95cUxNNDFkcFhKdmtyTVFhRk1yNlFTMVpPRTdWUE8yaGhvanBXX0JGOWhOMXFlRlVQem5HaUpDUmxLUW1fZWhCMGVJaDVsekdwNGRLUnhJaThVaWhsYVptcVNOZjREVzNIN3RJYXRLVlRoYVZUY3Q5ekQwd3hqYlhjSUxhVEk0VGd1R3ZGdXpBbmJwMXVqeFc2N0ctR1NXV1FIQ2NEdFVFSUhrcnA2S3BGZUJkenl0Y1YyOFVfSUlXMmpRalMzWVlIWWw40gHbAUFVX3lxTE9pVHZLZUJ3LUI3YjFJUGF6b0VTQ1c1V0JYVldkQ01uQkplWnRvalRmRFJ0M2Y4T0ZrQngzQ1pRdkhlQ0NmWC1kQ3N2Um5KcUxZUE9FRGJTd1hmR2N4eHpxRGNRMWFYM2lIMlh2bXlWeS1uUGFuN1FRNVRDcDF4N3V3enhzS0NYWmxvTGtBcnZCSldNTzQ5U0oxWEdIMjg2RjJ2TlNxVC1uajljaTMyaEdzbHdrQUxYZzdsSWZjWWVRRk5TQkRiZHJoOFIzYXU0VjdUQzhYMm1SN2hKRQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687825"
+    },
+    {
+      "id": "news--5234628871688901417",
+      "title": "REPORT: Chicagoans protest ICE despite snow and cold after...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiqAFBVV95cUxNV0JFN2xhbnlfSUpJRWg2RWVZNkZQWFR2RkEzN3JGY1VaLWlIMFBieW9sdXRZUTI5MVRJTEtMWS1VV1BtOFplbzdOS3Z1bGlNZWVYd3F5T3BMd0NvTFEtUjREa2s3OFVUR2lQOWVHemZybnRMaW9QVnJRY0VVZDBNOFd0MzBqRFgycm5GWTE0X2VyWDVyS0kxcFBuaGk3NHFoLU5pRzJuNjLSAa4BQVVfeXFMTjZ1Q1d2X2w3WlhpcjJWbWVvb180WjljdDc4MjRmanZ6Wm0zb1llMzNTT1NFUVdFY2wxRFhtMENaWkwwMFpjY0RBVDJaZEpiYmI4SS01Y3hWSGNMcTVpSWNzS1hpVzJweG51S2xBU25wMjMtSHV1a3hPLVh4UlczcG12NWR5YnZJSF9SdW04ZjFvbWsyZF9icVpEbXFnUkxVbkYtOE00bzFJbUswbjln?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687830"
+    },
+    {
+      "id": "news--475576699400565026",
+      "title": "REPORT: Madison protest at Capitol follows second fatal Mi...",
+      "lat": 44.95415262531848,
+      "lng": -93.10350514292631,
+      "type": "protest",
+      "desc": "Source: Google News (Capitol)\nLink: https://news.google.com/rss/articles/CBMi3AFBVV95cUxPRUJUQVB5NGtHcTJhRkppa1cyU1FwbzhoT2pCUlctSmY3Q01DZUdGVEU4QmV3R2dkaERTNGJBcFM1cEcwMTN0TFVObmZDamdpODZtNm1teWJWQmgycHI0MldyTGVrVXdFNGdXc3hmRVl4c2t2b3BlYzQtQk9UNmR1S29KM3VpNDJxWkZrelZ3M3BJRm1iaEZmcEZ6alRiNWlFWmNZWTNXMEN4UGI4VTgtZXQteExSbTRFdU81c1pkRThOUy1CdDhOYlo4UmNHeW1yVXMyTlBMTzRHbkxl?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687841"
+    },
+    {
+      "id": "news--1064689090776817479",
+      "title": "REPORT: Hundreds Protest In Palatine, Mount Prospect, Afte...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi0gFBVV95cUxQcUcwV0I2RmJXZzVRdzJfM2ZBS2d4YUlsaXlKU2lGVDlQbHJHdHpHYlFiUkdlMzZNZlVnQmQzdE9wQ05vT0FlOWFwOHVZbE16LW5EUktxOEZ0bmNucFJMSHZyTjhMa1hnZVNYVF9sdjQway1rYTlaR25Vc1ZZdzBwaHNBd0RjQmtqQURuRGxFWm0yd1BNTllLdlU0OEVSV0dvX0hqdTNEU2Y1bkZGWTUzZUFPUjdVemZ6Z1lKUVl2ZW8xOUZDMlJvaWxDVFNnNDJSQUE?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687858"
+    },
+    {
+      "id": "news--7245485471261295673",
+      "title": "REPORT: Yuma father takes to the streets with his daughter...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi1AFBVV95cUxQR244QUpoZG1BMFFoVVZwRlVkczJJalh3QjFudjdlRmlFTzlpT3FtSXJMVUt2ZEQyNFR6Z19EWlE1Z25LazllSEVZUG44UDZyM2RvZ21FaEtfNXFIMDUyRjl4eUhSQlpfa2VqRzlfNDl3Ukc0NmI4Y3R0V2x3bEl3d2VDbEIzX3VrMkdNd0VYQUtXbTUtQ05GbENJdEFDaFdYUkNEODlDcFlfUHBrRG9fTjFKN21FZWl3aVBQZTFFQS02cHMxNUplS1FaOXVvdHNrR1pScg?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687863"
+    },
+    {
+      "id": "news--4528661065858046599",
+      "title": "REPORT: Community members protest ICE following second Min...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiswFBVV95cUxQWkN2QW5hY1oyWkx1WTZKUU9Dd3o4TDNvaXJDT0kxYVhmRmRyd3FHaURLZ1BzNEpWVnloSl9VLTZoRGpPcGxoUk9sVGRuaDM5bmx2ZmxNOFY0bERMbkEtUlhSaF9JMFlISzRPQV9pUXRRUUxjU3VNZl95NkVuZHBIR3FmRjhFWVhUc2J2dk9kcnZSdmZDdG05Z293Nlpyd2UzQ2MzYU9uTGRhbU9WZ3F4U2Y3UQ?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687888"
+    },
+    {
+      "id": "news-1944751155191695436",
+      "title": "REPORT: Minneapolis shooting: Anti-ICE protests held downt...",
+      "lat": 44.97756760232483,
+      "lng": -93.27514899485391,
+      "type": "protest",
+      "desc": "Source: Google News (Downtown)\nLink: https://news.google.com/rss/articles/CBMi2wFBVV95cUxPZHUzd08tM0JRWkdtMlFINWZ6RDJYNzBpWkRreG9oUDlmMFdncWROLWxDb0cxTTdCa0NWZGpmR1FudmJ0ZGZ2d3YwYUFKV3pWV0J2OUlYTnpzUUZoakttUC1zYVNFUmVPVXltLVEwbks4VnZqOXcwZ2F0emJWMHM5NXRmbTMyQVdhT19PeWEyb3dnSkI1VEJEZ0hMNFNDWVZySEdzY0tYOXhqT1BrX1JxRXlrYThYTmdxNEZyVkU4aTFfeHA3d0lNRGpzcGFJQ3JxMlZhNGh2WV82QWfSAeABQVVfeXFMTWl5ZW9nSDBGSS1GRTBNSDFsWEdRM0dDeEJpUERkUjhZdjdHTmtsdlc0Um9xMDRIM1Q2LV9JaXowYjZoUF93VWJweEZVSTM2UkVBRUtkZ3NicTlWOUpqQjZndV9kcmtBN1luTmlYcWo3T1hZNW1ULURxOF8yTmFza2JjNUJRc3pmMWxiX0tUSUtDbktLV01ZLWxwR29sa1J5cVZsT0hYRUhBZ2lfNUZRZi1TUzVCQWNZalFibjEzckFhaXczb01GaWZwcDVEYmtUc2FlMW9PalY5bTZIcUliSTU?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687899"
+    },
+    {
+      "id": "news--8750544492619092377",
+      "title": "REPORT: Oklahomans weigh in on gun rights amid Minneapolis...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMirgFBVV95cUxNN3pISUpnMXM4b1lyekEwNlpTS0hJQmlwM203WEZ2LVU5bzFjZk5XYVNra19YX200VUlLZENGVVRENlpLc1dkUU1GTTNxQUQ4OHBwV29kZkRmc29CY3M0YU5NMEVpLVN4VEFRS0tRRDNZVk1EZ3V0aHNWd1Jka1l1c2ZJVVhwWm9KaFE0U2Nzclg4RWpkQTRRQWhRS2g4b3JvVmJ3U0Z0dTF5TkVXZVHSAbMBQVVfeXFMTm0tM3ZNNGNFWkZhSW5yUFhpa3V6V1BBbFJDcXBQQXZfRGp0UzgzaS1Cc0J3MWF5R1lTR3RoSERKSDNPRnVBYkIzYW1ic2ozOV9BQURBMEJXcnVicVlRRWFBLThjQ25uaE1qa2cyTTF1czZNR3NaR0tRNEVYT2RoYTZicUxid0daWmFWM0swcFVGVXJjX0ZSNnJlN3pIUGF0NFpmWERMWlJhSmFVMlpTSnZ5bUk?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687904"
+    },
+    {
+      "id": "news--2575744345195601930",
+      "title": "REPORT: Protests in Minneapolis: What's going on - BBC...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiY0FVX3lxTE5Qei15V3lER0FzOHBYZlZIMzlmU3J2QTNVWmtzcC1GSFdObjBnZTU5ODV6WTNfaHJJQmZkRmVoemRZdmxiTnJWcGtEYUNQVnZfU0ZFZG8ta3FXUmJ0SjBlVl9GTdIBaEFVX3lxTE85VlA3LUU4TmdBaUlYX29mejlFbzJ2LTZxQmtrWDFnR3oweUJINGVnUE5IZjJYTXBSbS1nbkFmbG9mWUNhYkZNOFVZTkt5enlwUXJQbU1MeDZ0SU0tVlJEWnBnXzZFWE1D?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687908"
+    },
+    {
+      "id": "news--1529901854824142211",
+      "title": "REPORT: Madison protests second ICE-related killing in Min...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiigFBVV95cUxONXZ0RDctdDNNemllUWJBZlRLb0FkUDcxLXBSQVdES2RMZG5kNzVhOUtucEZ1ZlFjcGxHeEMzVUVrVkhhVVR3UWg5aWk3VnJMeGdoSVRKdWpTLXpHdXZ1enBXMGg4eE1UYjFRbVdqR1lyelpLSG90STZwR1VvX3JIV0c0Q1hiWUs2OWc?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687913"
+    },
+    {
+      "id": "news--8934617333351768820",
+      "title": "REPORT: Students protest ICE action in solidarity with Min...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi2AFBVV95cUxQWUdkOUR4NERCWkowbnY1Z0Q4U0M3SUQxVXJKVFFmWm1CVHJjSDg3R2xwUGNESmJrdzJSOU85YzgwWTQzdERaTC1TRGxfcDFRQ09UQ0s4UTlyUmtLNDZSeXh6dHAteFctM1YteDA0bnFmRlBrN3dvNXRlOWc1NU4zSWJsLVg0bGtFZ0dLY3M2VHgtWE9zdU1jV1dsWi1JQlhCZ1E4S1h2OW92WGZvREppZjBGRm5vUlMxU0Ywb1B5Nkh1d3J2UVhaSzBsTGpVZnFiTDhuNWdPNlY?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687918"
+    },
+    {
+      "id": "news--7496245292330514448",
+      "title": "REPORT: Watsonville residents pack city\u2019s downtown plaza t...",
+      "lat": 44.97561240478555,
+      "lng": -93.27583188539455,
+      "type": "protest",
+      "desc": "Source: Google News (Downtown)\nLink: https://news.google.com/rss/articles/CBMi0AFBVV95cUxQMWpqbE91ZF9MX3VrWHd4TG9TQWwwblJVOFE2N2xiNW5JVEVZekJ6V2ZoNEpuU01XYkQyVnFBelBJTXNNSnN5Y2xGOW5EaG9DMVR2TnpIVnpKX3pCQnFhcG1XNE11OGJUNHlPNGM1bzNIeUROQ0pVU2E2TTZFdlhROTFnTUdOTVphX0NsalFBTV9SYTkxUDUxaFdhaGNzYm9OTFBibVREN0xCeTFCYXFMcnFvV09KSGpaQ3R2LTY3M1FUZ1JxZ3hsa0JrY1hmQ3My?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687928"
+    },
+    {
+      "id": "news-8474823246697712838",
+      "title": "REPORT: Minneapolis protests clampdown, killings by federa...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMilAFBVV95cUxQOFgtUTUzNHhCWnlockNqNEhmNlI0ajh6SlVjdHZvbTBZNjVNZGFKSFZHTlRfVy1jRVVGazBQcmV0MHRjcUhtUm5aM3RMbFR5dXNBRGFTSUxiVVQ3LXJaZHdfTmlCdkxUNnRfaTZ3TUNxLUdoR2JLODd2YTdqbzZNbkkwYWRlWF9rMmJabXF1bFhTbmNC0gGUAUFVX3lxTFBWS3BzdzVDNllNRi1VZjBhd2lVTzZuWDhUaVp4RGwwN2piQl9EdmY3ZlRFS2h4cU5YZUozNTRaUnY4MjVLTW1HbmNxSWVpNm1LZ2dCTUthOS1aTEJ1Z3FBSjc3am1nWHFfLU91VHlqb1RocUJuOXFpSE82b1JVQ2ZwQVVab2FrNkVzYUJCWWNoQWhUX2g?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687933"
+    },
+    {
+      "id": "news--5693005754813028056",
+      "title": "REPORT: Protesters line O street to speak out after deadly...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMipAFBVV95cUxNd3Bfa29sRzdGMGJRamVvaVBVTldLWVA2cE5pNEJhV29oRDVJajhNQkZ1ZmVpY3lpWkNVZXVoRUp3cmUzaVlCMnk1d1dUY0ZoTm0ycVZrVUNTVU5BbE1Ndkw3NWVJMGlwZXg3R1dkVzVhaW9QWmFOaHA0V3ZQd3RtTXpQblRHckdpMTNJWTJEeENmVWpURlRoOHlaS01pYWpVTzdfUg?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687940"
+    },
+    {
+      "id": "news-6838197462120321802",
+      "title": "REPORT: S.C. residents unite for protest following 2nd Min...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMimgFBVV95cUxQZDN6NjIxanhPWjVVMWppVzQ3VmtGczIya3BIc2RqTmRRamVCQ1FZc0t0NUFGdUl3MG1SZXpNTkxXZVhQWnYwWjRYS19LUTFGRVQ3Mml4TFhmMGhDR2NSZWpkMWVYemRkSWRNZHIwYTQ4VGMxc256NWdKTjFYZ01INXhxbzJQYXNaVldSbktyUkdpN0dkajZnZ2JB0gGuAUFVX3lxTFBFSG9yckQ2RXEydjhSblZQSXFST0ZGTzFnZ21KTjRwcFM0S25jaTRlUTZndkF6dHUxV2JoUHU3ZUNxNnQ5bmhELWhwQS1JeHgtS2NwMmt4eWNJZ0ZoRzVPcFJhQ2V3TG5waFJMMlNUV1RRem1icXJrSWJFaU0tWGYtT21Rc2VBY0JOaHlDeUxycmdWQnhpdVhWMGtBOWtlRHhfTVBKV1h4QV9fRHZVdw?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687944"
+    },
+    {
+      "id": "news-1579305899243291841",
+      "title": "REPORT: VIDEO: Community unites for emergency protest foll...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMiuwFBVV95cUxQakl3MTJkT0R1Q3FnTXZzQ3NGWEFsclNMcmxzZXJ4QS1OOG5XMFVLYTMwNDBMNlZZcmhkWEY1SlRpY1JlTUFraUYtOFRFSHdNM0tHcHR1NkhRMDBZcEEzVFFWOVYyU2hRWWdfb1c3X0RPdGRrZWFPVEVDaXJrWjE2dVRiNmozdndVd292WU5NQi1jbW43d0xJSUlhUmhQR3ppenRIakJsLTBVbkN1RVlCclpjSW4taHZCZXBN?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687952"
+    },
+    {
+      "id": "news-8145123144870226839",
+      "title": "REPORT: 'We are heartbroken': Sports world reacts after fe...",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "type": "protest",
+      "desc": "Source: Google News (General Alert)\nLink: https://news.google.com/rss/articles/CBMi3gFBVV95cUxOclRzNGZveTVMVmI0YkhiSHNNR0FnVF8zdGtjbVdJYmJlN3ZtVGpqaGx6bnh4SFFXeU5QZjRMY05vYW1yVDU4WWlHMi01SGJUakk3VTUyaDdYUXpEWDFSU2x6TlByeTJRaVd6ZFpTTGRBbVNDSC1CN0tYcUlpZWd6ZnQtcEdkYl96emUyaThab2Nvb1BvNXNmRTJMcTBXYVFjVWQyWkFPUERwa1o5amFDejBEWUxET01WWVNaTjVRTVlob3Z5STRwakV1QVVqMWE4R21ScjBYT3h0N29nOWc?oc=5",
+      "timestamp": "2026-01-27T03:27:04.687959"
     }
   ]
 }
