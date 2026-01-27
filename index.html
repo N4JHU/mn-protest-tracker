@@ -112,7 +112,7 @@
         <h2>Operation Metro Surge</h2>
         
         <div class="info-row" style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
-            <span class="info-val" id="clock-display" style="color: #fff; font-family: monospace;">LOADING TIME...</span>
+            <span class="info-val" id="clock-display" style="color: #fff; font-family: monospace;">LOADING...</span>
         </div>
 
         <div class="info-row">
@@ -158,6 +158,7 @@
     <script>
         // --- HELPER: TWIN CITIES TIME FORMATTER ---
         function formatMNTime(dateObj, includeDate = false) {
+            // DATE: (Monday 01/26/26)
             const dateOptions = { 
                 timeZone: 'America/Chicago', 
                 weekday: 'long', 
@@ -166,13 +167,16 @@
                 day: '2-digit' 
             };
             const rawDate = new Intl.DateTimeFormat('en-US', dateOptions).format(dateObj);
-            const dateStr = `( *** ${rawDate.replace(',', '')} )`;
+            // Reformat default "Monday, 01/26/26" to "(Monday 01/26/26)"
+            const dateStr = `(${rawDate.replace(',', '')})`;
 
+            // TIME: HH:mm:ss (24-hour)
             const timeOptions = { 
                 timeZone: 'America/Chicago', 
                 hour: '2-digit', 
                 minute: '2-digit',
-                hour12: true
+                second: '2-digit',
+                hour12: false
             };
             const timeStr = new Intl.DateTimeFormat('en-US', timeOptions).format(dateObj);
 
@@ -271,26 +275,15 @@
                         let pCount = 0;
                         let rCount = 0;
                         const now = new Date();
-                        
-                        // NEW FILTER RULE:
-                        // "Within Last 24 Hours OR Scheduled for Future"
-                        // Calculation: Event Time >= (Now - 24 Hours)
-                        // If Event Time is in future, it is greater than (Now - 24h), so it shows automatically.
                         const timeCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-                        
                         let validEvents = [];
 
                         data.features.forEach(event => {
                             let showEvent = false;
                             
-                            // RULE 1: ROAD CLOSURES
-                            // We trust the scraper (it fetches 'active' roads). 
-                            // If you want strict 24h filtering for roads too, uncomment the 'else' block below.
                             if (event.type === 'road_closure') {
                                 showEvent = true; 
                             } 
-                            // RULE 2: INTEL / PROTESTS
-                            // Must be recent (last 24h) OR future
                             else if (event.type === 'protest') {
                                 if (event.timestamp) {
                                     const t = new Date(event.timestamp);
@@ -298,7 +291,6 @@
                                         showEvent = true;
                                     }
                                 } else {
-                                    // If no timestamp, assume active
                                     showEvent = true;
                                 }
                             }
@@ -324,7 +316,6 @@
                 const container = document.getElementById('feed-container');
                 container.innerHTML = "";
 
-                // Sort Newest First (Future events will appear at the very top)
                 events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                 const recentEvents = events.slice(0, 15);
 
