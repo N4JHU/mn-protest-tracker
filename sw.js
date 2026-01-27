@@ -1,4 +1,4 @@
-const CACHE_NAME = 'metro-surge-v1';
+const CACHE_NAME = 'metro-surge-v2';
 const urlsToCache = [
   './',
   './index.html',
