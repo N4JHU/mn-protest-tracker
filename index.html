@@ -44,6 +44,35 @@
         .info-val.red { color: #ff5555; }
         .info-val.orange { color: #ffaa00; }
 
+        /* --- TACTICAL TOGGLE SWITCH --- */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 18px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 4px;
+            border: 1px solid #555;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 10px; width: 10px;
+            left: 3px; bottom: 3px;
+            background-color: #888;
+            transition: .4s;
+            border-radius: 2px;
+        }
+        input:checked + .slider { background-color: #004400; border-color: #00ff00; }
+        input:checked + .slider:before { transform: translateX(16px); background-color: #00ff00; }
+
         /* LIVE FEED STYLING */
         .feed-item { 
             border-bottom: 1px solid #333; 
@@ -81,6 +110,10 @@
         .type-road { background: #ffaa00; }
         .type-road.pulse { animation: pulse-orange 2s infinite; }
 
+        /* NEW: USER LOCATION BLUE PULSE */
+        .type-user { background: #00ccff; z-index: 9999 !important; }
+        .type-user.pulse { animation: pulse-blue 2s infinite; }
+
         @keyframes pulse-red {
             0% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(255, 51, 51, 0); }
@@ -90,6 +123,11 @@
             0% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(255, 170, 0, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); }
+        }
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 204, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0); }
         }
 
         /* CUSTOM POPUP */
@@ -123,6 +161,15 @@
             <span class="info-label">STATUS:</span>
             <span class="info-val red">LIVE MONITORING</span>
         </div>
+        
+        <div class="info-row" style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #333;">
+            <span class="info-label" style="color:#00ccff">SHOW MY POS:</span>
+            <label class="switch">
+                <input type="checkbox" id="user-loc-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
         <div class="info-row" style="margin-top:10px; border-top:1px solid #333; padding-top:5px;">
             <span class="info-label">ACTIVE THREATS:</span>
             <span class="info-val red" id="count-protest">0</span>
@@ -152,61 +199,32 @@
         <div style="font-size: 0.8rem; line-height: 1.5;">
             <div><span style="color:#ff3333; font-size: 1.2rem;">●</span> High Tension / Threat</div>
             <div><span style="color:#ffaa00; font-size: 1.2rem;">●</span> Road Closure / Hazard</div>
+            <div><span style="color:#00ccff; font-size: 1.2rem;">●</span> My Position</div>
         </div>
     </div>
 
     <script>
         // --- HELPER: TWIN CITIES TIME FORMATTER ---
         function formatMNTime(dateObj, includeDate = false) {
-            // DATE: (Monday 01/26/26)
-            const dateOptions = { 
-                timeZone: 'America/Chicago', 
-                weekday: 'long', 
-                year: '2-digit', 
-                month: '2-digit', 
-                day: '2-digit' 
-            };
+            const dateOptions = { timeZone: 'America/Chicago', weekday: 'long', year: '2-digit', month: '2-digit', day: '2-digit' };
             const rawDate = new Intl.DateTimeFormat('en-US', dateOptions).format(dateObj);
             const dateStr = `(${rawDate.replace(',', '')})`;
 
-            // TIME: HH:mm:ss (24-hour)
-            const timeOptions = { 
-                timeZone: 'America/Chicago', 
-                hour: '2-digit', 
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            };
+            const timeOptions = { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
             const timeStr = new Intl.DateTimeFormat('en-US', timeOptions).format(dateObj);
 
-            if (includeDate) {
-                return { date: dateStr, time: timeStr };
-            }
+            if (includeDate) return { date: dateStr, time: timeStr };
             return timeStr;
         }
 
-        // --- HELPER: SYNC TIME FORMATTER (MM/DD/YY HH:mm) ---
+        // --- HELPER: SYNC TIME FORMATTER ---
         function formatSyncTime(dateStr) {
             try {
-                // Ensure we parse the incoming string as UTC by adding "Z" if missing
-                // Python's datetime.now() usually sends "YYYY-MM-DD HH:mm:ss" without zone
                 const cleanDate = dateStr.replace(" ", "T") + "Z";
                 const dateObj = new Date(cleanDate);
-                
-                const options = {
-                    timeZone: 'America/Chicago',
-                    year: '2-digit', 
-                    month: '2-digit', 
-                    day: '2-digit',
-                    hour: '2-digit', 
-                    minute: '2-digit',
-                    hour12: false
-                };
-                // returns "01/26/26, 22:37" -> remove comma
+                const options = { timeZone: 'America/Chicago', year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false };
                 return new Intl.DateTimeFormat('en-US', options).format(dateObj).replace(',', '');
-            } catch (e) {
-                return "Unknown";
-            }
+            } catch (e) { return "Unknown"; }
         }
 
         // --- REAL-TIME CLOCK ---
@@ -235,7 +253,7 @@
 
                 onAdd() {
                     const div = document.createElement("div");
-                    div.className = `pulse-marker type-${this.type === 'protest' ? 'protest' : 'road'} pulse`;
+                    div.className = `pulse-marker type-${this.type} pulse`;
                     div.addEventListener("click", () => {
                         const content = `
                             <div class="popup-box">
@@ -284,13 +302,63 @@
                 disableDefaultUI: true 
             });
 
+            // --- USER GEOLOCATION LOGIC ---
+            const toggle = document.getElementById('user-loc-toggle');
+            let userMarker = null;
+            let watchId = null;
+
+            toggle.addEventListener('change', function() {
+                if (this.checked) {
+                    if (navigator.geolocation) {
+                        // Watch position allows real-time movement updates
+                        watchId = navigator.geolocation.watchPosition(
+                            (position) => {
+                                const userPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                                
+                                // Create marker if it doesn't exist
+                                if (!userMarker) {
+                                    userMarker = new HTMLMarker(userPos, 'user', 'MY LOCATION', 'Current Device Position', map);
+                                    map.panTo(userPos); // Center map on first fix
+                                    map.setZoom(13); // Zoom in closer
+                                } else {
+                                    // Update position (HTMLMarker creates a new DIV, so simple "setPosition" isn't enough for OverlayView)
+                                    // For simplicity in this overlay class, we re-create it or just move the lat/lng property and redraw
+                                    // Re-creating is safer for this specific implementation
+                                    userMarker.setMap(null);
+                                    userMarker = new HTMLMarker(userPos, 'user', 'MY LOCATION', 'Current Device Position', map);
+                                }
+                            },
+                            (error) => {
+                                alert("Error getting location: " + error.message);
+                                this.checked = false; // Reset toggle if failed
+                            },
+                            { enableHighAccuracy: true }
+                        );
+                    } else {
+                        alert("Geolocation is not supported by this browser.");
+                        this.checked = false;
+                    }
+                } else {
+                    // Turn off
+                    if (watchId !== null) {
+                        navigator.geolocation.clearWatch(watchId);
+                        watchId = null;
+                    }
+                    if (userMarker) {
+                        userMarker.setMap(null);
+                        userMarker = null;
+                    }
+                }
+            });
+
+
+            // --- DATA FEED ENGINE ---
             let activeMarkers = [];
 
             function updateMapData() {
                 fetch('events.json?nocache=' + (new Date()).getTime())
                     .then(response => response.json())
                     .then(data => {
-                        // FIX: Format the sync time to "MM/DD/YY HH:mm" (MN Time)
                         const formattedSync = formatSyncTime(data.last_updated);
                         document.getElementById('last-updated').innerText = "LAST SYNC: " + formattedSync;
                         
