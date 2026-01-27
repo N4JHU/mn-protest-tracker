@@ -3,134 +3,95 @@ import datetime
 import os
 import requests
 import time
-import random
 import urllib3
-import xml.etree.ElementTree as ET
 
-# Disable SSL warnings (We must skip verification to fix the "Hostname Mismatch" error)
+# Disable SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- CONFIGURATION ---
 OUTPUT_FILE = "events.json"
 DB_RETENTION_DAYS = 15
 
-# --- SOURCES ---
-# Source A: The Official XML Feed (Often more reliable for bots)
-XML_URL = "https://lb.511mn.org/mnlb/events/all?format=xml"
-
-# Source B: The Web API (Used by the 511mn.org website itself)
-WEB_API_URL = "https://511mn.org/api/events"
+# TARGET: MnDOT "Open511" Developer API
+# This is the official feed for app developers, distinct from the consumer website.
+OPEN511_URL = "https://api.511mn.org/api/events?format=json"
 
 def get_live_road_closures():
-    print("--- Connecting to MnDOT 511 ---")
+    print(f"Connecting to MnDOT Open511 Dev API ({OPEN511_URL})...")
     events = []
     
-    # 1. Setup a "Session" to look like a real browser
-    session = requests.Session()
-    session.headers.update({
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-        "Referer": "https://511mn.org/",
-        "Accept": "application/json, text/javascript, */*; q=0.01",
-        "Accept-Language": "en-US,en;q=0.9",
-    })
+    # Simple headers - Open511 usually doesn't require complex browser mimicking
+    headers = {
+        "User-Agent": "MN-Protest-Tracker-Bot/1.0",
+        "Accept": "application/json"
+    }
 
-    # --- ATTEMPT 1: XML FEED ---
     try:
-        print(f"Attempting Source A (XML)...")
-        # verify=False fixes the SSL Error you saw earlier
-        response = session.get(XML_URL, timeout=15, verify=False)
+        response = requests.get(OPEN511_URL, headers=headers, timeout=30, verify=False)
         
-        if response.status_code == 200 and "<events" in response.text:
-            # Parse XML
-            root = ET.fromstring(response.text)
-            count = 0
-            for event_elem in root.findall('event'):
-                try:
-                    e_id = event_elem.find('id').text
-                    headline = event_elem.find('headline').text or "Traffic Incident"
-                    desc = event_elem.find('description').text or ""
-                    
-                    # Find Lat/Lng (MnDOT XML structure varies, checking common tags)
+        # Check if we got a valid JSON response
+        try:
+            data = response.json()
+        except json.JSONDecodeError:
+            print(f"!! Failed to decode JSON. Response text: {response.text[:100]}...")
+            return []
+
+        # The API usually returns a simple list of events or a dict with an "events" key
+        items = data if isinstance(data, list) else data.get("events", [])
+        
+        print(f"API returned {len(items)} raw items.")
+
+        for item in items:
+            try:
+                # Filter for Incidents & Closures
+                # Open511 structure: "Type" is often "incident" or "construction"
+                event_type = item.get("type", "").lower()
+                headline = item.get("headline", "").lower()
+                desc = item.get("description", "").lower()
+
+                # KEYWORD FILTER
+                is_relevant = False
+                if "crash" in headline or "incident" in event_type or "closure" in headline or "blocked" in desc:
+                    is_relevant = True
+                
+                if is_relevant:
+                    # LOCATION EXTRACTION
+                    # Open511 typically uses "geography" or "locations"
                     lat, lng = None, None
-                    loc = event_elem.find('location')
-                    if loc is not None:
-                        lat = float(loc.find('lat').text)
-                        lng = float(loc.find('lon').text)
                     
+                    # Style 1: "locations" array
+                    if "locations" in item and len(item["locations"]) > 0:
+                        loc = item["locations"][0]
+                        # Sometimes keys are "lat"/"lon", sometimes "latitude"/"longitude"
+                        lat = loc.get("lat") or loc.get("latitude")
+                        lng = loc.get("lon") or loc.get("longitude")
+                    
+                    # Style 2: "geography" object (GeoJSON style)
+                    elif "geography" in item:
+                        coords = item["geography"].get("coordinates", [])
+                        if coords:
+                            lng, lat = coords # GeoJSON is [Lng, Lat]
+
                     if lat and lng:
                         events.append({
-                            "id": e_id,
-                            "title": headline,
-                            "lat": lat,
-                            "lng": lng,
+                            "id": item.get("id"),
+                            "title": item.get("headline", "Road Event"),
+                            "lat": float(lat),
+                            "lng": float(lng),
                             "type": "road_closure",
-                            "desc": desc,
+                            "desc": item.get("description", "See 511mn.org for details"),
                             "timestamp": datetime.datetime.now().isoformat()
                         })
-                        count += 1
-                except:
-                    continue
-            
-            print(f"--- SUCCESS: Source A (XML) returned {count} events.")
-            return events
-        else:
-            print(f"Source A failed. Status: {response.status_code}")
+            except Exception as e:
+                # Skip bad items silently
+                continue
+
+        print(f"--- SUCCESS: Found {len(events)} relevant events.")
+        return events
 
     except Exception as e:
-        print(f"Source A Error: {e}")
-
-    # --- ATTEMPT 2: WEB API (JSON) ---
-    try:
-        print(f"Switching to Source B (Web API)...")
-        # This requires the Referer header we set above
-        response = session.get(WEB_API_URL, timeout=15, verify=False)
-        
-        if response.status_code == 200:
-            data = response.json()
-            # The Web API returns a specific dictionary structure
-            # We look for the main list, usually under specific keys or just the root list
-            items = data if isinstance(data, list) else data.get('events', [])
-            
-            for item in items:
-                try:
-                    # Filter for real events
-                    if "incident" in item.get('type', '').lower() or "closure" in item.get('headline', '').lower():
-                         # Extract Location
-                        locs = item.get('locations', [{}])
-                        if locs:
-                            lat = locs[0].get('lat') or locs[0].get('latitude')
-                            lng = locs[0].get('lon') or locs[0].get('longitude')
-                            
-                            if lat and lng:
-                                events.append({
-                                    "id": item.get('id'),
-                                    "title": item.get('headline', 'Road Event'),
-                                    "lat": float(lat),
-                                    "lng": float(lng),
-                                    "type": "road_closure",
-                                    "desc": item.get('description', 'Check 511mn.org'),
-                                    "timestamp": datetime.datetime.now().isoformat()
-                                })
-                except:
-                    continue
-            
-            print(f"--- SUCCESS: Source B (Web API) returned {len(events)} events.")
-            return events
-
-    except Exception as e:
-        print(f"Source B Error: {e}")
-
-    # --- FALLBACK ---
-    if not events:
-        print("!! ALL SOURCES FAILED. Using 'System Offline' marker.")
-        return [{
-            "id": "ERR-1", "title": "SYSTEM OFFLINE", 
-            "lat": 44.97, "lng": -93.26, "type": "road_closure", 
-            "desc": "Could not contact MnDOT servers.", 
-            "timestamp": datetime.datetime.now().isoformat()
-        }]
-    
-    return events
+        print(f"!! Critical Error connecting to Open511: {e}")
+        return []
 
 # --- PROTEST PLACEHOLDER ---
 def get_protests():
@@ -155,7 +116,19 @@ def main():
     
     # 2. Fetch New Data
     new_events = []
-    new_events.extend(get_live_road_closures())
+    road_data = get_live_road_closures()
+    
+    if road_data:
+        new_events.extend(road_data)
+    else:
+        print("Warning: No road data fetched. Using System Offline marker.")
+        # If it fails, add the "Offline" marker so you see it on the map immediately
+        new_events.append({
+             "id": "ERR-OFFLINE", "title": "SYSTEM OFFLINE", "lat": 44.97, "lng": -93.26, 
+             "type": "road_closure", "desc": "Connection to MnDOT failed.", 
+             "timestamp": datetime.datetime.now().isoformat()
+        })
+        
     new_events.extend(get_protests())
 
     # 3. Merge
