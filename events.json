@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-27 00:31:07",
+  "last_updated": "2026-01-27 00:44:17",
   "features": [
     {
       "id": "RC-1",
@@ -7,33 +7,44 @@
       "lat": 44.96,
       "lng": -93.27,
       "type": "road_closure",
-      "desc": "Closed due to maintenance"
+      "desc": "Closed due to maintenance",
+      "timestamp": "2026-01-26T22:44:17.980562"
     },
     {
-      "id": "RC-2",
-      "title": "Hennepin Ave Blocked",
+      "id": "RC-OLD",
+      "title": "Old Resolved Closure",
+      "lat": 44.93,
+      "lng": -93.22,
+      "type": "road_closure",
+      "desc": "Cleared",
+      "timestamp": "2026-01-24T00:44:17.980562"
+    },
+    {
+      "id": "RC-FUTURE",
+      "title": "Scheduled: Parade Route",
       "lat": 44.98,
       "lng": -93.26,
       "type": "road_closure",
-      "desc": "Police activity reported"
+      "desc": "Road will be closed for parade",
+      "timestamp": "2026-01-28T00:44:17.980562"
     },
     {
-      "id": "P-1",
-      "title": "Peaceful March",
+      "id": "P-LIVE",
+      "title": "Live: Capitol Gathering",
       "lat": 44.95,
       "lng": -93.1,
       "type": "protest",
-      "desc": "March headed towards Capitol",
-      "time": "Live Now"
+      "desc": "Crowd gathering on steps",
+      "timestamp": "2026-01-27T00:44:17.980576"
     },
     {
-      "id": "P-2",
-      "title": "Past: City Hall Rally",
-      "lat": 44.97,
-      "lng": -93.26,
+      "id": "P-WEEK-OLD",
+      "title": "Rally Last Week",
+      "lat": 44.92,
+      "lng": -93.3,
       "type": "history",
-      "desc": "Occurred 2 days ago",
-      "time": "2023-10-25"
+      "desc": "Historical record",
+      "timestamp": "2026-01-20T00:44:17.980576"
     }
   ]
 }
