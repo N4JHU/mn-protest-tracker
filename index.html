@@ -2,87 +2,63 @@
 <html>
 <head>
     <title>Twin Cities Live Protest Map</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a1a">
     
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/564/564619.png">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
-        /* --- GLOBAL SETTINGS --- */
         body { margin: 0; padding: 0; background-color: #1a1a1a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
         #map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #222; }
         
-        /* HUD PANELS */
+        /* HUD PANELS - MOBILE OPTIMIZED */
         .hud-panel {
-            position: absolute; background: rgba(0, 0, 0, 0.85); border: 1px solid #444; color: #ddd;
-            padding: 10px; border-radius: 4px; backdrop-filter: blur(5px); z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            position: absolute; background: rgba(0, 0, 0, 0.9); border: 1px solid #444; color: #ddd;
+            padding: 8px; border-radius: 4px; backdrop-filter: blur(5px); z-index: 1000;
+            font-size: 11px;
         }
-        .top-left { top: 20px; left: 20px; width: 220px; }
-        .top-right { top: 20px; right: 20px; width: 240px; max-height: 80vh; overflow-y: auto; }
-        .bottom-left { bottom: 20px; left: 20px; }
         
-        h2 { margin: 0 0 8px 0; font-size: 0.85rem; color: #ff5555; text-transform: uppercase; letter-spacing: 1.2px; border-bottom: 1px solid #ff5555; padding-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
-        .info-row { font-size: 0.65rem; color: #ccc; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
-        .info-label { font-weight: bold; color: #888; }
+        /* Layout */
+        .top-left { top: 10px; left: 10px; width: 180px; }
+        .top-right { top: 10px; right: 10px; width: 160px; max-height: 40vh; overflow-y: auto; text-align: right; }
+        .bottom-left { bottom: 20px; left: 10px; pointer-events: none; }
+        
+        h2 { margin: 0 0 5px 0; font-size: 0.75rem; color: #ff5555; text-transform: uppercase; border-bottom: 1px solid #ff5555; padding-bottom: 2px; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 2px; }
         .info-val { color: #fff; font-weight: bold; }
-        .info-val.red { color: #ff5555; }
-        .info-val.orange { color: #ffaa00; }
-        .info-val.purple { color: #d400ff; }
+        .red { color: #ff5555; } .orange { color: #ffaa00; } .purple { color: #d400ff; }
 
-        /* CONTROLS */
-        .switch { position: relative; display: inline-block; width: 28px; height: 14px; }
+        /* SWITCH */
+        .switch { position: relative; display: inline-block; width: 24px; height: 12px; vertical-align: middle; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 4px; border: 1px solid #555; }
-        .slider:before { position: absolute; content: ""; height: 8px; width: 8px; left: 2px; bottom: 2px; background-color: #888; transition: .4s; border-radius: 2px; }
-        input:checked + .slider { background-color: #004400; border-color: #00ff00; }
-        input:checked + .slider:before { transform: translateX(14px); background-color: #00ff00; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #333; border-radius: 12px; }
+        .slider:before { position: absolute; content: ""; height: 8px; width: 8px; left: 2px; bottom: 2px; background: #888; border-radius: 50%; transition: .2s; }
+        input:checked + .slider { background: #004400; }
+        input:checked + .slider:before { transform: translateX(12px); background: #00ff00; }
 
-        .tac-btn { background: #330000; border: 1px solid #ff5555; color: #ff5555; font-size: 0.6rem; font-weight: bold; padding: 2px 6px; cursor: pointer; margin-left: 5px; text-decoration: none; display: inline-block; }
-        .tac-btn:hover { background: #ff5555; color: #000; }
-        .rpt-btn { background: #2a0033; border: 1px solid #d400ff; color: #d400ff; font-size: 0.6rem; font-weight: bold; padding: 2px 6px; cursor: pointer; text-decoration: none; display: inline-block; }
-        .rpt-btn:hover { background: #d400ff; color: #000; }
-
-        .feed-item { border-bottom: 1px solid #333; padding-bottom: 8px; margin-bottom: 8px; }
-        .feed-header { display: flex; justify-content: space-between; margin-bottom: 3px; }
-        .feed-date { color: #888; font-size: 0.55rem; font-family: monospace; }
-        .feed-time { color: #ff5555; font-size: 0.65rem; font-weight: bold; font-family: monospace; }
-        .feed-text { font-size: 0.65rem; line-height: 1.3; color: #bbb; }
-        
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #111; }
-        ::-webkit-scrollbar-thumb { background: #444; }
+        /* BUTTONS */
+        .tac-btn, .rpt-btn { background: #222; border: 1px solid #555; color: #ccc; padding: 2px 5px; font-size: 10px; cursor: pointer; text-decoration: none; margin-left: 3px; display: inline-block; }
+        .tac-btn { border-color: #ff5555; color: #ff5555; }
+        .rpt-btn { border-color: #d400ff; color: #d400ff; }
 
         /* MARKERS */
-        .pulse-marker { width: 14px; height: 14px; border-radius: 50%; box-shadow: 0 0 0 rgba(0, 0, 0, 1); border: 2px solid white; display: block; position: relative; }
-        .type-protest { background: #ff3333; } .type-protest.pulse { animation: pulse-red 2s infinite; }
-        .type-road { background: #ffaa00; } .type-road.pulse { animation: pulse-orange 2s infinite; }
-        .type-user { background: #00ccff; z-index: 500 !important; } .type-user.pulse { animation: pulse-blue 2s infinite; }
-        .type-report { background: #d400ff; z-index: 400 !important; } .type-report.pulse { animation: pulse-purple 2s infinite; }
+        .pulse-marker { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px black; }
+        .type-protest { background: #ff3333; }
+        .type-road { background: #ffaa00; }
+        .type-user { background: #00ccff; }
+        .type-report { background: #d400ff; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,255,255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0,0,0, 0); } 100% { box-shadow: 0 0 0 0 rgba(0,0,0, 0); } }
 
-        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 51, 51, 0 ) ; } 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); } }
-        @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 170, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); } }
-        @keyframes pulse-blue { 0% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 204, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0); } }
-        @keyframes pulse-purple { 0% { box-shadow: 0 0 0 0 rgba(212, 0, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(212, 0, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 0, 255, 0); } }
-
-        /* LEAFLET POPUP OVERRIDES */
-        .leaflet-popup-content-wrapper { background: #1a1a1a; border: 1px solid #ff5555; color: #ddd; padding: 0; border-radius: 0; }
-        .leaflet-popup-tip { background: #1a1a1a; border: 1px solid #ff5555; }
-        .popup-box { padding: 10px; width: 200px; font-family: 'Segoe UI', sans-serif; }
-        .popup-title { color: #ff5555; font-weight: bold; font-size: 14px; margin-bottom: 5px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        .popup-desc { font-size: 12px; color: #ccc; }
-
-        #report-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 280px; background: rgba(0, 0, 0, 0.95); border: 1px solid #d400ff; box-shadow: 0 0 20px rgba(212, 0, 255, 0.3); z-index: 2000; padding: 15px; border-radius: 4px; }
+        /* MODAL */
+        #report-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 300px; background: #111; border: 1px solid #d400ff; z-index: 2000; padding: 15px; }
         .form-group { margin-bottom: 10px; }
-        .form-label { display: block; color: #d400ff; font-size: 0.7rem; font-weight: bold; margin-bottom: 4px; }
-        .form-input, .form-select { width: 100%; background: #111; border: 1px solid #444; color: white; padding: 5px; font-size: 0.8rem; font-family: 'Segoe UI', sans-serif; box-sizing: border-box; }
-        .form-actions { display: flex; justify-content: space-between; margin-top: 15px; }
-        .cancel-btn { background: #333; color: #bbb; border: none; padding: 5px 10px; cursor: pointer; font-size: 0.7rem; }
-        .submit-btn { background: #2a0033; color: #d400ff; border: 1px solid #d400ff; padding: 5px 10px; cursor: pointer; font-weight: bold; font-size: 0.7rem; }
-        .submit-btn:hover { background: #d400ff; color: black; }
-        .search-group { display: flex; gap: 5px; }
-        .search-btn { background: #444; color: #fff; border: 1px solid #666; cursor: pointer; font-size: 0.7rem; padding: 0 8px; }
-        .search-btn:hover { background: #666; }
+        .form-input, select { width: 100%; background: #222; color: #fff; border: 1px solid #444; padding: 5px; }
     </style>
 </head>
 <body>
@@ -90,292 +66,111 @@
     <div id="map"></div>
 
     <div class="hud-panel top-left">
-        <h2>Operation Metro Surge</h2>
-        <div class="info-row" style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 8px;">
-            <span class="info-val" id="clock-display" style="color: #fff; font-family: monospace;">LOADING...</span>
-        </div>
-        <div class="info-row"><span class="info-label">LOCATION:</span><span class="info-val">TWIN CITIES, MN</span></div>
-        <div class="info-row"><span class="info-label">STATUS:</span><span class="info-val red">LIVE MONITORING</span></div>
-        <div class="info-row" style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #333;">
-            <span class="info-label" style="color:#00ccff">SHOW MY POS:</span>
+        <h2>METRO SURGE <span id="clock-display" style="color:#888; float:right; font-size:9px;">...</span></h2>
+        <div class="info-row"><span>STATUS:</span> <span class="red">LIVE</span></div>
+        <div class="info-row">
+            <span>MY POS:</span> 
             <label class="switch"><input type="checkbox" id="user-loc-toggle"><span class="slider"></span></label>
         </div>
-        <div class="info-row" style="margin-top:8px; border-top:1px solid #333; padding-top:4px;">
-            <span class="info-label">ACTIVE THREATS:</span><span class="info-val red" id="count-protest">0</span>
+        <div class="info-row" style="margin-top:5px; border-top:1px solid #333; padding-top:2px;">
+            <span>THREATS:</span> <span class="red" id="count-protest">0</span>
         </div>
-        <div class="info-row"><span class="info-label">ROAD CLOSURES:</span><span class="info-val orange" id="count-road">0</span></div>
-        <div class="info-row"><span class="info-label">USER REPORTS:</span><span class="info-val purple" id="count-report">0</span></div>
-        <div style="font-size: 0.55rem; color: #555; margin-top: 8px; text-align: right;" id="connection-status">Connecting...</div>
+        <div class="info-row"><span>REPORTS:</span> <span class="purple" id="count-report">0</span></div>
+        <div id="connection-status" style="font-size:9px; color:#555; text-align:right; margin-top:3px;">Connecting...</div>
     </div>
 
     <div class="hud-panel top-right">
-        <h2>Intel Feed <div><button class="rpt-btn" onclick="openReportModal()">REPORT</button><button class="tac-btn" onclick="executeTwitterScan()">SCAN X</button></div></h2>
-        <div id="feed-container">
-            <div class="feed-item"><div class="feed-header"><span class="feed-date">SYSTEM</span></div><div class="feed-text">Initializing Secure Data Link...</div></div>
-        </div>
+        <h2>INTEL <button class="rpt-btn" onclick="openReportModal()">RPT</button></h2>
+        <div id="feed-container"></div>
     </div>
 
     <div id="report-modal">
-        <h2 style="color:#d400ff; border-color:#d400ff;">MAKE FIELD REPORT</h2>
+        <h2 style="color:#d400ff">FIELD REPORT</h2>
         <div class="form-group">
-            <label class="form-label">FIND LOCATION</label>
-            <div class="search-group">
-                <input type="text" id="geo-input" class="form-input" placeholder="e.g. Lake & Hennepin, Minneapolis">
-                <button class="search-btn" onclick="performGeoSearch()">FIND</button>
-            </div>
-            <div id="geo-status" style="font-size:0.6rem; color:#888; margin-top:3px; font-style:italic;">Map will center on result</div>
+            <input type="text" id="geo-input" class="form-input" placeholder="Location (e.g. Lake St)">
+            <button class="tac-btn" style="width:100%; margin-top:5px;" onclick="performGeoSearch()">FIND LOCATION</button>
+            <div id="geo-status" style="font-size:10px; color:#888; margin-top:2px;">* Finds center if empty</div>
         </div>
-        <div class="form-group">
-            <label class="form-label">INCIDENT TYPE</label>
-            <select id="rpt-type" class="form-select">
-                <option value="Protest">Protest / Gathering</option>
-                <option value="Police">Police Activity</option>
-                <option value="Traffic">Traffic Hazard</option>
-                <option value="Intel">Intel / Sighting</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-label">DESCRIPTION</label>
-            <input type="text" id="rpt-desc" class="form-input" placeholder="e.g. 3 Squad cars blocking intersection...">
-        </div>
-        <div class="form-actions">
-            <button class="cancel-btn" onclick="closeReportModal()">CANCEL</button>
-            <button class="submit-btn" onclick="submitReport()">SUBMIT LIVE</button>
-        </div>
-    </div>
-
-    <div class="hud-panel bottom-left">
-        <h2>Map Key</h2>
-        <div style="font-size: 0.8rem; line-height: 1.5;">
-            <div><span style="color:#ff3333; font-size: 1.2rem;">●</span> High Tension / Threat</div>
-            <div><span style="color:#ffaa00; font-size: 1.2rem;">●</span> Road Closure / Hazard</div>
-            <div><span style="color:#d400ff; font-size: 1.2rem;">●</span> User Report</div>
-            <div><span style="color:#00ccff; font-size: 1.2rem;">●</span> My Position</div>
+        <select id="rpt-type" class="form-group"><option value="Protest">Protest</option><option value="Police">Police</option><option value="Traffic">Traffic</option></select>
+        <input type="text" id="rpt-desc" class="form-input form-group" placeholder="Description...">
+        <div style="display:flex; justify-content:space-between;">
+            <button class="tac-btn" onclick="closeReportModal()">CANCEL</button>
+            <button class="rpt-btn" onclick="submitReport()">SUBMIT</button>
         </div>
     </div>
 
     <script>
-        // --- 1. SUPABASE CONFIG (Renamed variable to 'metroDB') ---
         const SB_URL = 'https://mymlbldoignrhvkfqcnz.supabase.co'; 
         const SB_KEY = 'sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh';
         const metroDB = window.supabase.createClient(SB_URL, SB_KEY);
 
-        // --- GLOBALS ---
-        let map; 
-        let activeMarkers = []; 
-        let foundLocation = null;
-        let userMarker = null;
+        let map, activeMarkers=[], foundLocation=null, userMarker=null;
 
-        // --- LEAFLET MAP INIT ---
         function initMap() {
-            // Initialize Leaflet Map
-            map = L.map('map', {
-                zoomControl: false, // Tactical mode: remove default zoom buttons
-                attributionControl: false
-            }).setView([44.9778, -93.2650], 11);
-
-            // Add Dark Matter Tiles (CartoDB)
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                maxZoom: 19
-            }).addTo(map);
-
-            // Start Data Flow
+            map = L.map('map', { zoomControl: false }).setView([44.9778, -93.2650], 11);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
             loadInitialData();
-            subscribeToLiveUpdates();
-            setupUserLocation();
-        }
-
-        // --- HELPER: CREATE LEAFLET PULSE MARKER ---
-        function createPulseMarker(lat, lng, type, title, desc) {
-            const pulseIcon = L.divIcon({
-                className: '', 
-                html: `<div class="pulse-marker type-${type} pulse"></div>`,
-                iconSize: [20, 20],
-                iconAnchor: [10, 10]
-            });
-
-            const marker = L.marker([lat, lng], { icon: pulseIcon }).addTo(map);
-
-            const popupContent = `
-                <div class="popup-box">
-                    <div class="popup-title" style="color:${getColor(type)}">${title}</div>
-                    <div class="popup-desc">${desc}</div>
-                </div>`;
-            marker.bindPopup(popupContent);
-            return marker;
-        }
-
-        function getColor(type) {
-            if(type === 'report') return '#d400ff';
-            if(type === 'protest') return '#ff5555';
-            if(type === 'road_closure') return '#ffaa00';
-            return '#00ccff';
-        }
-
-        // --- 2. LIVE DATA ENGINE ---
-        async function loadInitialData() {
-            document.getElementById('connection-status').innerText = "Fetching Data...";
+            metroDB.channel('live').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'events' }, p => {
+                plotEvent(p.new); 
+                document.getElementById('connection-status').innerText="RX DATA..."; setTimeout(()=>{document.getElementById('connection-status').innerText="SECURE"},1000);
+            }).subscribe();
             
-            const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-            const { data, error } = await metroDB.from('events').select('*').gt('timestamp', yesterday);
-
-            if (error) {
-                console.error(error);
-                document.getElementById('connection-status').innerText = "DATA ERROR";
-                return;
-            }
-
-            // Clear Markers
-            activeMarkers.forEach(m => map.removeLayer(m));
-            activeMarkers = [];
-            
-            let pCount=0, rCount=0, repCount=0;
-            const feedData = [];
-
-            if(data) {
-                data.forEach(event => {
-                    const marker = createPulseMarker(event.lat, event.lng, event.type, event.title, event.desc);
-                    activeMarkers.push(marker);
-                    feedData.push(event);
-
-                    if(event.type === 'protest') pCount++;
-                    if(event.type === 'road_closure') rCount++;
-                    if(event.type === 'report') repCount++;
-                });
-            }
-
-            document.getElementById('count-protest').innerText = pCount;
-            document.getElementById('count-road').innerText = rCount;
-            document.getElementById('count-report').innerText = repCount;
-            
-            document.getElementById('connection-status').innerText = "LIVE (SECURE)";
-            document.getElementById('connection-status').style.color = "#00ff00";
-            
-            updateFeed(feedData);
-        }
-
-        function subscribeToLiveUpdates() {
-            metroDB.channel('live_events')
-                .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'events' }, payload => {
-                    const newEvent = payload.new;
-                    const marker = createPulseMarker(newEvent.lat, newEvent.lng, newEvent.type, newEvent.title, newEvent.desc);
-                    activeMarkers.push(marker);
-                    addFeedItem(newEvent);
-                    const status = document.getElementById('connection-status');
-                    status.innerText = "INCOMING INTEL..."; status.style.color = "white";
-                    setTimeout(() => { status.innerText = "LIVE (SECURE)"; status.style.color = "#00ff00"; }, 2000);
-                })
-                .subscribe();
-        }
-
-        // --- 3. SUBMIT REPORT ---
-        async function submitReport() {
-            const type = document.getElementById('rpt-type').value;
-            const desc = document.getElementById('rpt-desc').value;
-            if(!desc) { alert("Please enter a description."); return; }
-
-            let lat, lng;
-            if (foundLocation) { lat = foundLocation.lat; lng = foundLocation.lng; } 
-            else { const center = map.getCenter(); lat = center.lat; lng = center.lng; }
-
-            const newReport = {
-                id: `usr-${Date.now()}`, 
-                title: "USER REPORT: " + type.toUpperCase(),
-                desc: desc,
-                type: 'report',
-                lat: lat,
-                lng: lng,
-                timestamp: new Date().toISOString()
-            };
-
-            const { error } = await metroDB.from('events').insert([newReport]);
-            if (error) { alert("Report Failed: " + error.message); } 
-            else {
-                closeReportModal();
-                document.getElementById('rpt-desc').value = "";
-                document.getElementById('geo-input').value = "";
-                foundLocation = null;
-                document.getElementById('geo-status').innerText = "*Will use center of map view";
-                document.getElementById('geo-status').style.color = "#888";
-            }
-        }
-
-        // --- UTILS ---
-        function executeTwitterScan() {
-            const keywords = '("#MinneapolisProtest" OR "#ICE" OR "#ImmigrationAgents" OR "#WhippleFederalBuilding" OR "#BreakingNews" OR "#USImmigration") -filter:replies';
-            const encoded = encodeURIComponent(keywords);
-            window.open(`https://twitter.com/search?q=${encoded}&src=typed_query&f=live`, '_blank');
-        }
-
-        function performGeoSearch() {
-            const query = document.getElementById('geo-input').value;
-            const status = document.getElementById('geo-status');
-            if (!query) { status.innerText = "Please enter a location."; return; }
-            status.innerText = "Searching...";
-            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query + " Minnesota")}`)
-                .then(r => r.json()).then(data => {
-                    if (data.length > 0) {
-                        foundLocation = { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
-                        map.setView([foundLocation.lat, foundLocation.lng], 15);
-                        L.circleMarker([foundLocation.lat, foundLocation.lng], { color: 'green', radius: 10 }).addTo(map);
-                        status.innerText = "Target Locked."; status.style.color = "#00ff00";
-                    } else { status.innerText = "Not found."; status.style.color = "red"; }
-                });
-        }
-
-        function openReportModal() { document.getElementById('report-modal').style.display = 'block'; }
-        function closeReportModal() { document.getElementById('report-modal').style.display = 'none'; }
-        
-        function setupUserLocation() {
-            const el = document.getElementById('user-loc-toggle');
-            el.addEventListener('change', function() {
+            document.getElementById('user-loc-toggle').addEventListener('change', function() {
                 if(this.checked && navigator.geolocation) {
                     navigator.geolocation.watchPosition(pos => {
-                        const lat = pos.coords.latitude;
-                        const lng = pos.coords.longitude;
+                        const lat=pos.coords.latitude, lng=pos.coords.longitude;
                         if(userMarker) map.removeLayer(userMarker);
-                        
-                        const userIcon = L.divIcon({
-                            className: '',
-                            html: `<div class="pulse-marker type-user pulse"></div>`,
-                            iconSize: [20, 20],
-                            iconAnchor: [10, 10]
-                        });
-                        userMarker = L.marker([lat, lng], {icon: userIcon}).addTo(map);
-                        map.setView([lat, lng], 14);
+                        userMarker = L.marker([lat,lng], {icon: L.divIcon({className:'', html:'<div class="pulse-marker type-user pulse"></div>'})}).addTo(map);
+                        map.setView([lat,lng], 14);
                     });
                 }
             });
         }
-        
-        function formatMNTime(dateObj) {
-            const dateStr = `(${new Intl.DateTimeFormat('en-US', {timeZone:'America/Chicago', weekday:'short', month:'2-digit', day:'2-digit', year:'2-digit'}).format(dateObj).replace(',','')})`;
-            const timeStr = new Intl.DateTimeFormat('en-US', {timeZone:'America/Chicago', hour:'2-digit', minute:'2-digit', hour12:false}).format(dateObj);
-            return { date: dateStr, time: timeStr };
-        }
-        setInterval(() => {
-            const t = formatMNTime(new Date());
-            document.getElementById('clock-display').innerText = `${t.date} ${t.time}`;
-        }, 1000);
 
-        function updateFeed(events) {
-            const container = document.getElementById('feed-container');
-            container.innerHTML = "";
-            events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            events.slice(0, 15).forEach(e => addFeedItem(e));
+        async function loadInitialData() {
+            const { data } = await metroDB.from('events').select('*').gt('timestamp', new Date(Date.now()-86400000).toISOString());
+            if(data) {
+                let p=0, r=0;
+                data.forEach(e => { plotEvent(e); if(e.type=='protest') p++; if(e.type=='report') r++; });
+                document.getElementById('count-protest').innerText = p;
+                document.getElementById('count-report').innerText = r;
+                document.getElementById('connection-status').innerText = "SECURE";
+                document.getElementById('connection-status').style.color = "#00ff00";
+            }
         }
 
-        function addFeedItem(e) {
-            const container = document.getElementById('feed-container');
-            const t = formatMNTime(new Date(e.timestamp));
-            let color = e.type === 'protest' ? '#ff5555' : (e.type === 'report' ? '#d400ff' : '#ffaa00');
-            const div = document.createElement("div");
-            div.className = "feed-item";
-            div.innerHTML = `<div class="feed-header"><span class="feed-date">${t.date}</span><span class="feed-time">${t.time}</span></div><div class="feed-text"><strong style="color:${color}">${e.title}</strong><br>${e.desc.substring(0, 80)}...</div>`;
-            container.insertBefore(div, container.firstChild);
+        function plotEvent(e) {
+            const icon = L.divIcon({ className:'', html:`<div class="pulse-marker type-${e.type} pulse"></div>` });
+            const m = L.marker([e.lat, e.lng], {icon}).addTo(map).bindPopup(`<b style="color:${e.type=='report'?'#d400ff':'#ff5555'}">${e.title}</b><br>${e.desc}`);
+            activeMarkers.push(m);
+            const d = document.createElement('div');
+            d.innerHTML = `<div style="border-bottom:1px solid #333; margin-bottom:4px; padding-bottom:4px; font-size:10px;"><span style="color:${e.type=='report'?'#d400ff':'#ff5555'}">${e.title}</span><br>${e.desc}</div>`;
+            const c = document.getElementById('feed-container'); c.insertBefore(d, c.firstChild);
         }
 
-        // START
+        function performGeoSearch() {
+            const q = document.getElementById('geo-input').value;
+            if(!q) return;
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${q} Minnesota`).then(r=>r.json()).then(d=>{
+                if(d[0]) { foundLocation={lat:d[0].lat, lng:d[0].lon}; map.setView([d[0].lat,d[0].lon], 15); document.getElementById('geo-status').innerText="LOCKED"; document.getElementById('geo-status').style.color="#0f0"; }
+            });
+        }
+
+        async function submitReport() {
+            const t = document.getElementById('rpt-type').value, d = document.getElementById('rpt-desc').value;
+            if(!d) return alert("Desc required");
+            const loc = foundLocation || map.getCenter();
+            await metroDB.from('events').insert([{ id:`usr-${Date.now()}`, title:`RPT: ${t}`, desc:d, type:'report', lat:loc.lat||loc.lat(), lng:loc.lng||loc.lng(), timestamp:new Date().toISOString() }]);
+            closeReportModal();
+        }
+
+        function openReportModal(){document.getElementById('report-modal').style.display='block'}
+        function closeReportModal(){document.getElementById('report-modal').style.display='none'}
+        setInterval(()=>{document.getElementById('clock-display').innerText=new Date().toLocaleTimeString()},1000);
+
+        // INSTALL SERVICE WORKER
+        if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+
         initMap();
     </script>
 </body>
