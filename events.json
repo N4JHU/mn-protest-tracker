@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-27 02:14:14",
+  "last_updated": "2026-01-27 02:23:49",
   "features": [
     {
       "id": "RC-1",
@@ -48,12 +48,12 @@
     },
     {
       "id": "MANUAL-1",
-      "title": "Monitoring: Capitol Area",
+      "title": "Capitol Monitor",
       "lat": 44.95,
       "lng": -93.1,
       "type": "protest",
-      "desc": "Manual entry: Area of interest.",
-      "timestamp": "2026-01-27T02:14:14.342220"
+      "desc": "Area of interest.",
+      "timestamp": "2026-01-27T02:23:49.046611"
     },
     {
       "id": "arcgis-1",
