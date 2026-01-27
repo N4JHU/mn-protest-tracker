@@ -131,7 +131,7 @@
         }
     }
 
-    // --- MAIN MAP FUNCTION ---
+   // --- MAIN MAP FUNCTION ---
     function initMap() {
         // Dark Mode Map Style
         const darkStyle = [
@@ -150,26 +150,37 @@
             disableDefaultUI: true 
         });
 
-        fetch('events.json')
+        fetch('events.json?nocache=' + (new Date()).getTime()) // Force fresh data
             .then(response => response.json())
             .then(data => {
                 document.getElementById('last-updated').innerText = "LINK ESTABLISHED: " + data.last_updated;
                 
                 let pCount = 0;
                 let rCount = 0;
+                let debugTotal = 0;
 
                 // --- TIME FILTER LOGIC ---
                 const now = new Date();
-                // Calculate 24 hours ago (24 * 60 * 60 * 1000 milliseconds)
-                const displayCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+                const displayCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000)); // 24 hours ago
 
                 data.features.forEach(event => {
-                    // Convert string timestamp to Date object
-                    const eventTime = new Date(event.timestamp);
+                    debugTotal++;
+                    let showEvent = false;
 
-                    // DISPLAY RULE: Show if (Newer than 24h) OR (In the Future)
-                    if (eventTime >= displayCutoff) {
-                        
+                    // CHECK 1: Does it have a timestamp?
+                    if (event.timestamp) {
+                        const eventTime = new Date(event.timestamp);
+                        // If valid date AND newer than 24h (or future), show it
+                        if (!isNaN(eventTime) && eventTime >= displayCutoff) {
+                            showEvent = true;
+                        }
+                    } else {
+                        // FALLBACK: If no timestamp exists (old data format), SHOW IT anyway
+                        console.log("Event missing timestamp, forcing display:", event.title);
+                        showEvent = true; 
+                    }
+
+                    if (showEvent) {
                         const pos = new google.maps.LatLng(event.lat, event.lng);
                         
                         // Create Marker
@@ -183,8 +194,15 @@
 
                 document.getElementById('count-protest').innerText = pCount;
                 document.getElementById('count-road').innerText = rCount;
+                
+                // Debug log to console
+                console.log(`Loaded ${debugTotal} total events. Showing ${pCount + rCount}.`);
             })
-            .catch(err => console.error("Data Link Failed:", err));
+            .catch(err => {
+                console.error("Data Link Failed:", err);
+                document.getElementById('last-updated').innerText = "LINK FAILED (Check Console)";
+                document.getElementById('last-updated').style.color = "red";
+            });
     }
 </script>
 </body>
