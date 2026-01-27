@@ -1,91 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MN Tactical Live Map</title>
+    <title>Twin Cities Live Protest Map</title>
     <style>
         /* --- GLOBAL SETTINGS --- */
-        body { margin: 0; padding: 0; background: #000; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; overflow: hidden; }
-        #map { height: 100vh; width: 100%; }
-
-        /* --- TACTICAL HUD (Top Left) --- */
-        #hud-panel {
-            position: absolute; top: 20px; left: 20px; z-index: 5;
-            background: rgba(0, 0, 0, 0.9); /* Deep Black */
-            border: 1px solid #333;
-            border-top: 3px solid #ff3333; /* Red Top Accent */
+        body { margin: 0; padding: 0; background-color: #1a1a1a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
+        
+        /* MAP LAYER */
+        #map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        
+        /* --- HUD OVERLAYS --- */
+        .hud-panel {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85); /* Dark semi-transparent */
+            border: 1px solid #444;
+            color: #ddd;
             padding: 15px;
-            width: 300px;
-            color: #eee;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border-radius: 4px; /* Slightly sharper corners for tactical look */
+            backdrop-filter: blur(5px);
+            z-index: 1000; /* Sit above map */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
         }
-
-        /* HUD Typography */
-        #hud-panel h2 { 
+        
+        /* POSITIONING */
+        .top-left { top: 20px; left: 20px; width: 280px; }
+        .top-right { top: 20px; right: 20px; width: 300px; max-height: 80vh; overflow-y: auto; }
+        .bottom-left { bottom: 20px; left: 20px; }
+        
+        /* TYPOGRAPHY */
+        h2 { 
             margin: 0 0 10px 0; 
-            font-size: 18px; 
-            color: #ff3333; /* Red Title */
+            font-size: 1.1rem; 
+            color: #ff5555; /* Tactical Red */
             text-transform: uppercase; 
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-
-        .hud-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-            font-size: 13px;
-            border-bottom: 1px solid #222;
-            padding-bottom: 4px;
+            letter-spacing: 1.5px; 
+            border-bottom: 1px solid #ff5555; 
+            padding-bottom: 5px; 
         }
         
-        .hud-label { color: #888; font-weight: 600; }
-        .hud-value { color: #fff; font-weight: bold; }
-        .hud-value.red { color: #ff3333; }
+        .info-row { font-size: 0.8rem; color: #ccc; margin-bottom: 4px; display: flex; justify-content: space-between; }
+        .info-label { font-weight: bold; color: #888; }
+        .info-val { color: #fff; font-weight: bold; }
+        .info-val.red { color: #ff5555; }
+        .info-val.orange { color: #ffaa00; }
 
-        /* --- POPUP (INFO WINDOW) STYLE --- */
-        /* Restore standard Google White Bubble but customized */
-        .gm-style-iw {
-            padding: 0 !important;
-            overflow: hidden !important;
+        /* LIVE FEED STYLING */
+        .feed-item { 
+            border-bottom: 1px solid #333; 
+            padding-bottom: 8px; 
+            margin-bottom: 8px; 
         }
-        
-        .custom-popup {
-            max-width: 300px;
-            font-family: 'Segoe UI', sans-serif;
-        }
+        .feed-time { color: #ff5555; font-size: 0.7rem; font-weight: bold; margin-bottom: 2px; }
+        .feed-text { font-size: 0.8rem; line-height: 1.4; color: #bbb; }
+        .feed-link { color: #5599ff; text-decoration: none; }
 
-        .popup-header {
-            padding: 10px 15px;
-            border-bottom: 1px solid #eee;
-        }
+        /* SCROLLBAR FOR FEED */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: #444; }
 
-        .popup-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #000;
-            margin-bottom: 5px;
-        }
-
-        .popup-badge {
-            display: inline-block;
-            background: #ff3333;
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 2px;
-            text-transform: uppercase;
-        }
-        .popup-badge.road { background: #ffaa00; } /* Orange for roads */
-
-        .popup-body {
-            padding: 10px 15px;
-            font-size: 13px;
-            color: #444;
-            line-height: 1.4;
-        }
-
-        /* --- PULSING MARKERS --- */
+        /* PULSING MARKERS (Map Dots) */
         .pulse-marker {
             width: 14px; height: 14px;
             border-radius: 50%;
@@ -93,7 +67,7 @@
             transform: translate(-50%, -50%);
             cursor: pointer;
             box-shadow: 0 0 0 rgba(0, 0, 0, 1);
-            border: 2px solid white; /* White ring for visibility */
+            border: 2px solid white; 
         }
 
         .type-protest { background: #ff3333; }
@@ -107,178 +81,225 @@
             70% { box-shadow: 0 0 0 15px rgba(255, 51, 51, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); }
         }
-
         @keyframes pulse-orange {
             0% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(255, 170, 0, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); }
         }
+
+        /* CUSTOM POPUP */
+        .gm-style-iw { padding: 0 !important; overflow: hidden !important; background: #1a1a1a !important; color: #ddd !important; border: 1px solid #ff5555; }
+        .gm-style-iw-d { overflow: hidden !important; }
+        .gm-style-iw-tc { display: none; }
+        
+        .popup-box { padding: 10px; width: 250px; font-family: 'Segoe UI', sans-serif; }
+        .popup-title { color: #ff5555; font-weight: bold; font-size: 14px; margin-bottom: 5px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .popup-desc { font-size: 12px; color: #ccc; }
+
     </style>
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQwEfQg_ECrQw744IEqmR-XmxAt2lcT1I&callback=initMap" async defer></script>
 </head>
 <body>
 
-<div id="hud-panel">
-    <h2>OPERATION METRO SURGE</h2>
-    
-    <div class="hud-row">
-        <span class="hud-label">LOCATION:</span>
-        <span class="hud-value">TWIN CITIES, MN</span>
-    </div>
-    <div class="hud-row">
-        <span class="hud-label">STATUS:</span>
-        <span class="hud-value red">LIVE MONITORING</span>
-    </div>
-    
-    <br>
-    
-    <div class="hud-row">
-        <span class="hud-label">ACTIVE THREATS</span>
-        <span class="hud-value red" id="count-protest">0</span>
-    </div>
-    <div class="hud-row">
-        <span class="hud-label">ROAD CLOSURES</span>
-        <span class="hud-value" style="color:#ffaa00" id="count-road">0</span>
+    <div id="map"></div>
+
+    <div class="hud-panel top-left">
+        <h2>Operation Metro Surge</h2>
+        
+        <div class="info-row">
+            <span class="info-label">LOCATION:</span>
+            <span class="info-val">TWIN CITIES, MN</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">STATUS:</span>
+            <span class="info-val red">LIVE MONITORING</span>
+        </div>
+        <div class="info-row" style="margin-top:10px; border-top:1px solid #333; padding-top:5px;">
+            <span class="info-label">ACTIVE THREATS:</span>
+            <span class="info-val red" id="count-protest">0</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">ROAD CLOSURES:</span>
+            <span class="info-val orange" id="count-road">0</span>
+        </div>
+        
+        <div style="font-size: 0.65rem; color: #555; margin-top: 10px; text-align: right;" id="last-updated">Waiting for Sync...</div>
     </div>
 
-    <div style="margin-top:10px; font-size:10px; color:#555; text-align:right;" id="last-updated">
-        WAITING FOR DATA...
+    <div class="hud-panel top-right">
+        <h2>Live Intel Feed</h2>
+        <div id="feed-container">
+            <div class="feed-item">
+                <div class="feed-time">SYSTEM</div>
+                <div class="feed-text">Initializing Data Link...</div>
+            </div>
+        </div>
     </div>
-</div>
 
-<div id="map"></div>
+    <div class="hud-panel bottom-left">
+        <h2>Map Key</h2>
+        <div style="font-size: 0.8rem; line-height: 1.5;">
+            <div><span style="color:#ff3333; font-size: 1.2rem;">●</span> High Tension / Threat</div>
+            <div><span style="color:#ffaa00; font-size: 1.2rem;">●</span> Road Closure / Hazard</div>
+        </div>
+    </div>
 
-<script>
-    function initMap() {
-        class HTMLMarker extends google.maps.OverlayView {
-            constructor(position, type, title, desc, map) {
-                super();
-                this.position = position;
-                this.type = type;
-                this.title = title;
-                this.desc = desc;
-                this.div = null;
-                this.setMap(map);
+    <script>
+        function initMap() {
+            // 1. MARKER CLASS
+            class HTMLMarker extends google.maps.OverlayView {
+                constructor(position, type, title, desc, map) {
+                    super();
+                    this.position = position;
+                    this.type = type;
+                    this.title = title;
+                    this.desc = desc;
+                    this.div = null;
+                    this.setMap(map);
+                }
+
+                onAdd() {
+                    const div = document.createElement("div");
+                    div.className = `pulse-marker type-${this.type === 'protest' ? 'protest' : 'road'} pulse`;
+                    
+                    div.addEventListener("click", () => {
+                        const content = `
+                            <div class="popup-box">
+                                <div class="popup-title">${this.title}</div>
+                                <div class="popup-desc">${this.desc}</div>
+                            </div>
+                        `;
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: content,
+                            position: this.position
+                        });
+                        infoWindow.open(this.getMap());
+                    });
+
+                    this.div = div;
+                    const panes = this.getPanes();
+                    panes.overlayMouseTarget.appendChild(div);
+                }
+
+                draw() {
+                    const overlayProjection = this.getProjection();
+                    const position = overlayProjection.fromLatLngToDivPixel(this.position);
+                    if (this.div) {
+                        this.div.style.left = position.x + "px";
+                        this.div.style.top = position.y + "px";
+                    }
+                }
+
+                onRemove() {
+                    if (this.div) {
+                        this.div.parentNode.removeChild(this.div);
+                        this.div = null;
+                    }
+                }
             }
 
-            onAdd() {
-                const div = document.createElement("div");
-                div.className = `pulse-marker type-${this.type === 'protest' ? 'protest' : 'road'} pulse`;
-                
-                // CLICK EVENT: Open the new "White Box" Popup
-                div.addEventListener("click", () => {
-                    const badgeText = this.type === 'protest' ? 'ACTIVE CONFLICT' : 'TRAFFIC ALERT';
-                    const badgeClass = this.type === 'protest' ? 'popup-badge' : 'popup-badge road';
+            // 2. MAP SETUP
+            const darkStyle = [
+                { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+                { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+                { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+                { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
+                { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
+                { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }
+            ];
+
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 11,
+                center: { lat: 44.9778, lng: -93.2650 },
+                styles: darkStyle, 
+                disableDefaultUI: true 
+            });
+
+            // 3. DATA ENGINE
+            let activeMarkers = [];
+
+            function updateMapData() {
+                fetch('events.json?nocache=' + (new Date()).getTime())
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('last-updated').innerText = "SYNC: " + data.last_updated;
+                        
+                        // Clear Old
+                        activeMarkers.forEach(marker => marker.setMap(null));
+                        activeMarkers = [];
+
+                        let pCount = 0;
+                        let rCount = 0;
+                        const now = new Date();
+                        const protestCutoff = new Date(now.getTime() - (48 * 60 * 60 * 1000));
+                        
+                        // Arrays for sorting the Feed
+                        let validEvents = [];
+
+                        data.features.forEach(event => {
+                            let showEvent = false;
+
+                            // Filter Logic
+                            if (event.type === 'road_closure') showEvent = true;
+                            else if (event.type === 'protest') {
+                                if (event.timestamp) {
+                                    const t = new Date(event.timestamp);
+                                    if (!isNaN(t) && t >= protestCutoff) showEvent = true;
+                                } else {
+                                    showEvent = true;
+                                }
+                            }
+
+                            if (showEvent) {
+                                validEvents.push(event); // Add to list for feed
+                                
+                                const pos = new google.maps.LatLng(event.lat, event.lng);
+                                const newMarker = new HTMLMarker(pos, event.type, event.title, event.desc, map);
+                                activeMarkers.push(newMarker);
+
+                                if(event.type === 'protest') pCount++;
+                                if(event.type === 'road_closure') rCount++;
+                            }
+                        });
+
+                        document.getElementById('count-protest').innerText = pCount;
+                        document.getElementById('count-road').innerText = rCount;
+
+                        // 4. UPDATE LIVE INTEL FEED (Right Side)
+                        updateFeed(validEvents);
+                    });
+            }
+
+            function updateFeed(events) {
+                const container = document.getElementById('feed-container');
+                container.innerHTML = ""; // Clear existing
+
+                // Sort by time (Newest First)
+                events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                // Take top 10 most recent events
+                const recentEvents = events.slice(0, 10);
+
+                recentEvents.forEach(e => {
+                    const timeStr = e.timestamp ? new Date(e.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : "LIVE";
                     
-                    const contentString = `
-                        <div class="custom-popup">
-                            <div class="popup-header">
-                                <div class="popup-title">${this.title}</div>
-                                <span class="${badgeClass}">${badgeText}</span>
-                            </div>
-                            <div class="popup-body">
-                                ${this.desc}
-                            </div>
+                    const div = document.createElement("div");
+                    div.className = "feed-item";
+                    div.innerHTML = `
+                        <div class="feed-time">${timeStr}</div>
+                        <div class="feed-text">
+                            <strong style="color:${e.type === 'protest' ? '#ff5555' : '#ffaa00'}">${e.title}</strong><br>
+                            ${e.desc.substring(0, 80)}${e.desc.length > 80 ? '...' : ''}
                         </div>
                     `;
-
-                    const infoWindow = new google.maps.InfoWindow({
-                        content: contentString,
-                        position: this.position
-                    });
-                    infoWindow.open(this.getMap());
+                    container.appendChild(div);
                 });
-
-                this.div = div;
-                const panes = this.getPanes();
-                panes.overlayMouseTarget.appendChild(div);
             }
 
-            draw() {
-                const overlayProjection = this.getProjection();
-                const position = overlayProjection.fromLatLngToDivPixel(this.position);
-                if (this.div) {
-                    this.div.style.left = position.x + "px";
-                    this.div.style.top = position.y + "px";
-                }
-            }
-
-            onRemove() {
-                if (this.div) {
-                    this.div.parentNode.removeChild(this.div);
-                    this.div = null;
-                }
-            }
+            updateMapData();
+            setInterval(updateMapData, 60000); 
         }
-
-        // DARK MAP STYLE (Preserved)
-        const darkStyle = [
-            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-            { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-            { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
-            { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
-            { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }
-        ];
-
-        const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 10,
-            center: { lat: 44.9778, lng: -93.2650 },
-            styles: darkStyle, 
-            disableDefaultUI: true 
-        });
-
-        // DATA LOADER
-        let activeMarkers = [];
-
-        function updateMapData() {
-            fetch('events.json?nocache=' + (new Date()).getTime())
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('last-updated').innerText = "LAST SYNC: " + data.last_updated;
-                    
-                    activeMarkers.forEach(marker => marker.setMap(null));
-                    activeMarkers = [];
-
-                    let pCount = 0;
-                    let rCount = 0;
-                    const now = new Date();
-                    const protestCutoff = new Date(now.getTime() - (48 * 60 * 60 * 1000)); // 48h for protests
-
-                    data.features.forEach(event => {
-                        let showEvent = false;
-
-                        if (event.type === 'road_closure') {
-                            showEvent = true;
-                        } 
-                        else if (event.type === 'protest') {
-                            if (event.timestamp) {
-                                const t = new Date(event.timestamp);
-                                if (!isNaN(t) && t >= protestCutoff) showEvent = true;
-                            } else {
-                                showEvent = true; 
-                            }
-                        }
-
-                        if (showEvent) {
-                            const pos = new google.maps.LatLng(event.lat, event.lng);
-                            const newMarker = new HTMLMarker(pos, event.type, event.title, event.desc, map);
-                            activeMarkers.push(newMarker);
-
-                            if(event.type === 'protest') pCount++;
-                            if(event.type === 'road_closure') rCount++;
-                        }
-                    });
-
-                    document.getElementById('count-protest').innerText = pCount;
-                    document.getElementById('count-road').innerText = rCount;
-                });
-        }
-
-        updateMapData();
-        setInterval(updateMapData, 60000); 
-    }
-</script>
+    </script>
 </body>
 </html>
