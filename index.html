@@ -16,7 +16,7 @@
             box-shadow: 0 0 10px #00ff00; /* Glowing effect */
             padding: 15px;
             color: #00ff00;
-            width: 250px;
+            width: 280px;
         }
 
         #hud-panel h3 { margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #00ff00; padding-bottom: 5px; }
@@ -30,10 +30,9 @@
             height: 14px;
             border-radius: 50%;
             position: absolute;
-            transform: translate(-50%, -50%); /* Center the dot */
+            transform: translate(-50%, -50%);
             cursor: pointer;
             box-shadow: 0 0 0 rgba(0, 0, 0, 1);
-            animation: pulse 2s infinite;
         }
 
         /* Red Pulse (Protests) */
@@ -58,10 +57,10 @@
 
         /* Info Window Dark Style */
         .gm-style-iw { background-color: #111 !important; color: #00ff00 !important; border: 1px solid #00ff00; }
-        .gm-style-iw-tc { display: none; } /* Hide the little triangle tail */
+        .gm-style-iw-tc { display: none; }
     </style>
     
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQwEfQg_ECrQw744IEqmR-XmxAt2lcT1I&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 </head>
 <body>
 
@@ -83,9 +82,7 @@
 <div id="map"></div>
 
 <script>
-    // --- MAIN MAP FUNCTION ---
     function initMap() {
-        
         // 1. DEFINE MARKER CLASS
         class HTMLMarker extends google.maps.OverlayView {
             constructor(position, type, title, desc, map) {
@@ -142,14 +139,14 @@
         ];
 
         const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 11,
+            zoom: 10,
             center: { lat: 44.9778, lng: -93.2650 },
             styles: darkStyle, 
             disableDefaultUI: true 
         });
 
         // 3. AUTO-UPDATE ENGINE
-        let activeMarkers = []; // Keep track so we can clear them
+        let activeMarkers = [];
 
         function updateMapData() {
             console.log("Refreshing Data Feed...");
@@ -158,29 +155,40 @@
                 .then(data => {
                     document.getElementById('last-updated').innerText = "DATA SYNC: " + data.last_updated;
                     
-                    // A. Clear Old Markers
+                    // Clear Old Markers
                     activeMarkers.forEach(marker => marker.setMap(null));
                     activeMarkers = [];
 
                     let pCount = 0;
                     let rCount = 0;
                     const now = new Date();
-                    const displayCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+                    
+                    // Filter Logic:
+                    // Roads: SHOW ALL (No filtering)
+                    // Protests: SHOW ONLY LAST 24 HOURS
+                    const protestCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
 
-                    // B. Plot New Markers
                     data.features.forEach(event => {
                         let showEvent = false;
-                        if (event.timestamp) {
-                            const eventTime = new Date(event.timestamp);
-                            if (!isNaN(eventTime) && eventTime >= displayCutoff) showEvent = true;
-                        } else {
-                            showEvent = true; 
+
+                        if (event.type === 'road_closure') {
+                            // ALWAYS SHOW ROADS
+                            showEvent = true;
+                        } 
+                        else if (event.type === 'protest') {
+                            // ONLY SHOW RECENT PROTESTS
+                            if (event.timestamp) {
+                                const t = new Date(event.timestamp);
+                                if (!isNaN(t) && t >= protestCutoff) showEvent = true;
+                            } else {
+                                showEvent = true; // Fallback
+                            }
                         }
 
                         if (showEvent) {
                             const pos = new google.maps.LatLng(event.lat, event.lng);
                             const newMarker = new HTMLMarker(pos, event.type, event.title, event.desc, map);
-                            activeMarkers.push(newMarker); // Add to tracker
+                            activeMarkers.push(newMarker);
 
                             if(event.type === 'protest') pCount++;
                             if(event.type === 'road_closure') rCount++;
@@ -197,9 +205,8 @@
                 });
         }
 
-        // 4. START THE LOOP
-        updateMapData(); // Run immediately
-        setInterval(updateMapData, 60000); // Run again every 60 seconds
+        updateMapData();
+        setInterval(updateMapData, 60000); // Re-check every 60s
     }
 </script>
 </body>
