@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-27 03:10:01",
+  "last_updated": "2026-01-27 03:20:38",
   "features": [
     {
       "id": "RC-1",
@@ -53,7 +53,7 @@
       "lng": -93.1,
       "type": "protest",
       "desc": "Area of interest.",
-      "timestamp": "2026-01-27T03:10:01.365353"
+      "timestamp": "2026-01-27T03:20:38.505917"
     },
     {
       "id": "arcgis-1",
@@ -899,7 +899,7 @@
       "lng": -10483659.319267442,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363568"
+      "timestamp": "2026-01-27T03:20:38.503699"
     },
     {
       "id": "arc-2",
@@ -908,7 +908,7 @@
       "lng": -10483659.319267442,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363582"
+      "timestamp": "2026-01-27T03:20:38.503714"
     },
     {
       "id": "arc-3",
@@ -917,7 +917,7 @@
       "lng": -10371032.937652254,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363584"
+      "timestamp": "2026-01-27T03:20:38.503717"
     },
     {
       "id": "arc-4",
@@ -926,7 +926,7 @@
       "lng": -10439030.110894019,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363586"
+      "timestamp": "2026-01-27T03:20:38.503720"
     },
     {
       "id": "arc-5",
@@ -935,7 +935,7 @@
       "lng": -10439030.110894019,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363588"
+      "timestamp": "2026-01-27T03:20:38.503722"
     },
     {
       "id": "arc-6",
@@ -944,7 +944,7 @@
       "lng": -10353191.094945872,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363590"
+      "timestamp": "2026-01-27T03:20:38.503724"
     },
     {
       "id": "arc-7",
@@ -953,7 +953,7 @@
       "lng": -10353191.094945872,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363592"
+      "timestamp": "2026-01-27T03:20:38.503726"
     },
     {
       "id": "arc-8",
@@ -962,7 +962,7 @@
       "lng": -10374759.914204014,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363594"
+      "timestamp": "2026-01-27T03:20:38.503728"
     },
     {
       "id": "arc-9",
@@ -971,7 +971,7 @@
       "lng": -10503492.556344625,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363598"
+      "timestamp": "2026-01-27T03:20:38.503733"
     },
     {
       "id": "arc-10",
@@ -980,7 +980,7 @@
       "lng": -10393686.120070213,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363600"
+      "timestamp": "2026-01-27T03:20:38.503735"
     },
     {
       "id": "arc-11",
@@ -989,7 +989,7 @@
       "lng": -10764475.425215423,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363604"
+      "timestamp": "2026-01-27T03:20:38.503737"
     },
     {
       "id": "arc-12",
@@ -998,7 +998,7 @@
       "lng": -10764475.425215423,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363606"
+      "timestamp": "2026-01-27T03:20:38.503739"
     },
     {
       "id": "arc-13",
@@ -1007,7 +1007,7 @@
       "lng": -10385862.586257262,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363608"
+      "timestamp": "2026-01-27T03:20:38.503742"
     },
     {
       "id": "arc-14",
@@ -1016,7 +1016,7 @@
       "lng": -10733879.931087837,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363610"
+      "timestamp": "2026-01-27T03:20:38.503744"
     },
     {
       "id": "arc-15",
@@ -1025,7 +1025,7 @@
       "lng": -10733879.931087837,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363612"
+      "timestamp": "2026-01-27T03:20:38.503746"
     },
     {
       "id": "arc-16",
@@ -1034,7 +1034,7 @@
       "lng": -10455365.132973025,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363614"
+      "timestamp": "2026-01-27T03:20:38.503748"
     },
     {
       "id": "arc-17",
@@ -1043,7 +1043,7 @@
       "lng": -10694007.515875503,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363616"
+      "timestamp": "2026-01-27T03:20:38.503750"
     },
     {
       "id": "arc-18",
@@ -1052,7 +1052,7 @@
       "lng": -10694007.515875503,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363618"
+      "timestamp": "2026-01-27T03:20:38.503752"
     },
     {
       "id": "arc-19",
@@ -1061,7 +1061,7 @@
       "lng": -10384944.311777707,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363619"
+      "timestamp": "2026-01-27T03:20:38.503754"
     },
     {
       "id": "arc-20",
@@ -1070,7 +1070,7 @@
       "lng": -10777370.007111972,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363621"
+      "timestamp": "2026-01-27T03:20:38.503756"
     },
     {
       "id": "arc-21",
@@ -1079,7 +1079,7 @@
       "lng": -10365639.063045356,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363623"
+      "timestamp": "2026-01-27T03:20:38.503758"
     },
     {
       "id": "arc-22",
@@ -1088,7 +1088,7 @@
       "lng": -10464756.045216344,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363627"
+      "timestamp": "2026-01-27T03:20:38.503762"
     },
     {
       "id": "arc-23",
@@ -1097,7 +1097,7 @@
       "lng": -10359360.97772309,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363629"
+      "timestamp": "2026-01-27T03:20:38.503765"
     },
     {
       "id": "arc-24",
@@ -1106,7 +1106,7 @@
       "lng": -10359360.97772309,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363631"
+      "timestamp": "2026-01-27T03:20:38.503767"
     },
     {
       "id": "arc-25",
@@ -1115,7 +1115,7 @@
       "lng": -10464580.828337835,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363633"
+      "timestamp": "2026-01-27T03:20:38.503769"
     },
     {
       "id": "arc-26",
@@ -1124,7 +1124,7 @@
       "lng": -10383903.697177771,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363635"
+      "timestamp": "2026-01-27T03:20:38.503771"
     },
     {
       "id": "arc-27",
@@ -1133,7 +1133,7 @@
       "lng": -10365639.063045356,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363637"
+      "timestamp": "2026-01-27T03:20:38.503775"
     },
     {
       "id": "arc-28",
@@ -1142,7 +1142,7 @@
       "lng": -10365639.063045356,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363639"
+      "timestamp": "2026-01-27T03:20:38.503777"
     },
     {
       "id": "arc-29",
@@ -1151,7 +1151,7 @@
       "lng": -10396225.87425266,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363641"
+      "timestamp": "2026-01-27T03:20:38.503780"
     },
     {
       "id": "arc-30",
@@ -1160,565 +1160,601 @@
       "lng": -10396225.87425266,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363643"
+      "timestamp": "2026-01-27T03:20:38.503782"
     },
     {
       "id": "arc-31",
+      "title": "Road Event",
+      "lat": 5837332.357365473,
+      "lng": -10552210.640934374,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503784"
+    },
+    {
+      "id": "arc-32",
+      "title": "Road Event",
+      "lat": 5837332.357365473,
+      "lng": -10552210.640934374,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503786"
+    },
+    {
+      "id": "arc-33",
+      "title": "Road Event",
+      "lat": 5603437.89329662,
+      "lng": -10359771.190046662,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503790"
+    },
+    {
+      "id": "arc-34",
+      "title": "Road Event",
+      "lat": 5603437.89329662,
+      "lng": -10359771.190046662,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503792"
+    },
+    {
+      "id": "arc-35",
       "title": "Road Event",
       "lat": 5586190.75970408,
       "lng": -10384792.138033792,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363644"
+      "timestamp": "2026-01-27T03:20:38.503796"
     },
     {
-      "id": "arc-32",
+      "id": "arc-36",
       "title": "Road Event",
       "lat": 5640663.503422265,
       "lng": -10378955.434492521,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363646"
+      "timestamp": "2026-01-27T03:20:38.503799"
     },
     {
-      "id": "arc-33",
+      "id": "arc-37",
       "title": "Road Event",
       "lat": 5599818.07053169,
       "lng": -10385827.743256643,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363648"
+      "timestamp": "2026-01-27T03:20:38.503801"
     },
     {
-      "id": "arc-34",
+      "id": "arc-38",
       "title": "Road Event",
       "lat": 5599658.5074649565,
       "lng": -10386116.951293726,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363650"
+      "timestamp": "2026-01-27T03:20:38.503803"
     },
     {
-      "id": "arc-35",
+      "id": "arc-39",
       "title": "Road Event",
       "lat": 5975974.300512086,
       "lng": -10295724.522894168,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363654"
+      "timestamp": "2026-01-27T03:20:38.503805"
     },
     {
-      "id": "arc-36",
+      "id": "arc-40",
       "title": "Road Event",
       "lat": 5921710.3378015235,
       "lng": -10771808.262712957,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363656"
+      "timestamp": "2026-01-27T03:20:38.503807"
     },
     {
-      "id": "arc-37",
+      "id": "arc-41",
       "title": "Road Event",
       "lat": 6064950.328013415,
       "lng": -10439030.110894019,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363658"
+      "timestamp": "2026-01-27T03:20:38.503809"
     },
     {
-      "id": "arc-38",
+      "id": "arc-42",
       "title": "Road Event",
       "lat": 5607989.39086091,
       "lng": -10391727.676268687,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363660"
+      "timestamp": "2026-01-27T03:20:38.503811"
     },
     {
-      "id": "arc-39",
+      "id": "arc-43",
       "title": "Road Event",
       "lat": 5649157.283112298,
       "lng": -10378845.673474599,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363661"
-    },
-    {
-      "id": "arc-40",
-      "title": "Road Event",
-      "lat": 5478610.679442452,
-      "lng": -10479117.150084602,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363663"
-    },
-    {
-      "id": "arc-41",
-      "title": "Road Event",
-      "lat": 5478610.679442452,
-      "lng": -10479117.150084602,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363665"
-    },
-    {
-      "id": "arc-42",
-      "title": "Road Event",
-      "lat": 5585727.38232355,
-      "lng": -10456181.21616003,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363667"
-    },
-    {
-      "id": "arc-43",
-      "title": "Road Event",
-      "lat": 5585727.38232355,
-      "lng": -10456181.21616003,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363671"
+      "timestamp": "2026-01-27T03:20:38.503813"
     },
     {
       "id": "arc-44",
+      "title": "Road Event",
+      "lat": 5478610.679442452,
+      "lng": -10479117.150084602,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503815"
+    },
+    {
+      "id": "arc-45",
+      "title": "Road Event",
+      "lat": 5478610.679442452,
+      "lng": -10479117.150084602,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503817"
+    },
+    {
+      "id": "arc-46",
+      "title": "Road Event",
+      "lat": 5585727.38232355,
+      "lng": -10456181.21616003,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503819"
+    },
+    {
+      "id": "arc-47",
+      "title": "Road Event",
+      "lat": 5585727.38232355,
+      "lng": -10456181.21616003,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503822"
+    },
+    {
+      "id": "arc-48",
       "title": "Road Event",
       "lat": 5649168.968707684,
       "lng": -10378845.562155109,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363673"
+      "timestamp": "2026-01-27T03:20:38.503825"
     },
     {
-      "id": "arc-45",
+      "id": "arc-49",
       "title": "Road Event",
       "lat": 5613743.570050077,
       "lng": -10364967.917835364,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363675"
+      "timestamp": "2026-01-27T03:20:38.503828"
     },
     {
-      "id": "arc-46",
+      "id": "arc-50",
       "title": "Road Event",
       "lat": 5613947.582544064,
       "lng": -10360265.893863747,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363677"
+      "timestamp": "2026-01-27T03:20:38.503830"
     },
     {
-      "id": "arc-47",
+      "id": "arc-51",
       "title": "Road Event",
       "lat": 5492032.314746332,
       "lng": -10464569.251110792,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363679"
+      "timestamp": "2026-01-27T03:20:38.503832"
     },
     {
-      "id": "arc-48",
+      "id": "arc-52",
       "title": "Road Event",
       "lat": 5491994.135180406,
       "lng": -10464474.072946163,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363683"
-    },
-    {
-      "id": "arc-49",
-      "title": "Road Event",
-      "lat": 5901253.08780343,
-      "lng": -10252610.484109934,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363685"
-    },
-    {
-      "id": "arc-50",
-      "title": "Road Event",
-      "lat": 5901253.08780343,
-      "lng": -10252610.484109934,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363687"
-    },
-    {
-      "id": "arc-51",
-      "title": "Road Event",
-      "lat": 5672436.2063295245,
-      "lng": -10322809.000282135,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363689"
-    },
-    {
-      "id": "arc-52",
-      "title": "Road Event",
-      "lat": 5672436.2063295245,
-      "lng": -10322809.000282135,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363691"
+      "timestamp": "2026-01-27T03:20:38.503834"
     },
     {
       "id": "arc-53",
       "title": "Road Event",
-      "lat": 5511630.608290709,
-      "lng": -10329403.67823622,
+      "lat": 5901253.08780343,
+      "lng": -10252610.484109934,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363693"
+      "timestamp": "2026-01-27T03:20:38.503836"
     },
     {
       "id": "arc-54",
       "title": "Road Event",
-      "lat": 5511630.608290709,
-      "lng": -10329403.67823622,
+      "lat": 5901253.08780343,
+      "lng": -10252610.484109934,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363695"
+      "timestamp": "2026-01-27T03:20:38.503838"
     },
     {
       "id": "arc-55",
       "title": "Road Event",
-      "lat": 5465269.017128567,
-      "lng": -10269108.700562444,
+      "lat": 5672436.2063295245,
+      "lng": -10322809.000282135,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363697"
+      "timestamp": "2026-01-27T03:20:38.503840"
     },
     {
       "id": "arc-56",
       "title": "Road Event",
-      "lat": 5465269.017128567,
-      "lng": -10269108.700562444,
+      "lat": 5672436.2063295245,
+      "lng": -10322809.000282135,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363699"
+      "timestamp": "2026-01-27T03:20:38.503842"
     },
     {
       "id": "arc-57",
       "title": "Road Event",
-      "lat": 5611314.964302993,
-      "lng": -10580238.884965288,
+      "lat": 5511630.608290709,
+      "lng": -10329403.67823622,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363701"
+      "timestamp": "2026-01-27T03:20:38.503845"
     },
     {
       "id": "arc-58",
+      "title": "Road Event",
+      "lat": 5511630.608290709,
+      "lng": -10329403.67823622,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503847"
+    },
+    {
+      "id": "arc-59",
+      "title": "Road Event",
+      "lat": 5465269.017128567,
+      "lng": -10269108.700562444,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503849"
+    },
+    {
+      "id": "arc-60",
+      "title": "Road Event",
+      "lat": 5465269.017128567,
+      "lng": -10269108.700562444,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503851"
+    },
+    {
+      "id": "arc-61",
       "title": "Road Event",
       "lat": 5611314.964302993,
       "lng": -10580238.884965288,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363703"
+      "timestamp": "2026-01-27T03:20:38.503855"
     },
     {
-      "id": "arc-59",
+      "id": "arc-62",
+      "title": "Road Event",
+      "lat": 5611314.964302993,
+      "lng": -10580238.884965288,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503857"
+    },
+    {
+      "id": "arc-63",
       "title": "Road Event",
       "lat": 5614130.9932397865,
       "lng": -10363285.212412532,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363705"
+      "timestamp": "2026-01-27T03:20:38.503859"
     },
     {
-      "id": "arc-60",
+      "id": "arc-64",
       "title": "Road Event",
       "lat": 5614009.400655553,
       "lng": -10357892.896278508,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363707"
+      "timestamp": "2026-01-27T03:20:38.503863"
     },
     {
-      "id": "arc-61",
+      "id": "arc-65",
       "title": "Road Event",
       "lat": 5613422.853483907,
       "lng": -10348158.56340609,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363710"
+      "timestamp": "2026-01-27T03:20:38.503865"
     },
     {
-      "id": "arc-62",
+      "id": "arc-66",
       "title": "Road Event",
       "lat": 5613422.853483907,
       "lng": -10348158.56340609,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363712"
+      "timestamp": "2026-01-27T03:20:38.503868"
     },
     {
-      "id": "arc-63",
+      "id": "arc-67",
       "title": "Road Event",
       "lat": 5613200.135980253,
       "lng": -10357194.47779327,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363714"
+      "timestamp": "2026-01-27T03:20:38.503870"
     },
     {
-      "id": "arc-64",
+      "id": "arc-68",
       "title": "Road Event",
       "lat": 5570087.912907794,
       "lng": -10424037.267915508,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363716"
+      "timestamp": "2026-01-27T03:20:38.503872"
     },
     {
-      "id": "arc-65",
+      "id": "arc-69",
       "title": "Road Event",
       "lat": 5491792.531088769,
       "lng": -10464672.221639777,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363718"
+      "timestamp": "2026-01-27T03:20:38.503874"
     },
     {
-      "id": "arc-66",
+      "id": "arc-70",
       "title": "Road Event",
       "lat": 5569824.778098404,
       "lng": -10423872.181110661,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363720"
-    },
-    {
-      "id": "arc-67",
-      "title": "Road Event",
-      "lat": 5661762.707839254,
-      "lng": -10350936.986576797,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363722"
-    },
-    {
-      "id": "arc-68",
-      "title": "Road Event",
-      "lat": 5661762.707839254,
-      "lng": -10350936.986576797,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363724"
-    },
-    {
-      "id": "arc-69",
-      "title": "Road Event",
-      "lat": 5976926.06456929,
-      "lng": -10295721.071989954,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363726"
-    },
-    {
-      "id": "arc-70",
-      "title": "Road Event",
-      "lat": 5976926.06456929,
-      "lng": -10295721.071989954,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363728"
+      "timestamp": "2026-01-27T03:20:38.503876"
     },
     {
       "id": "arc-71",
+      "title": "Road Event",
+      "lat": 5661762.707839254,
+      "lng": -10350936.986576797,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503878"
+    },
+    {
+      "id": "arc-72",
+      "title": "Road Event",
+      "lat": 5661762.707839254,
+      "lng": -10350936.986576797,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503880"
+    },
+    {
+      "id": "arc-73",
+      "title": "Road Event",
+      "lat": 5976926.06456929,
+      "lng": -10295721.071989954,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503882"
+    },
+    {
+      "id": "arc-74",
+      "title": "Road Event",
+      "lat": 5976926.06456929,
+      "lng": -10295721.071989954,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503886"
+    },
+    {
+      "id": "arc-75",
       "title": "Road Event",
       "lat": 5599871.625302354,
       "lng": -10382718.144600824,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363730"
+      "timestamp": "2026-01-27T03:20:38.503888"
     },
     {
-      "id": "arc-72",
+      "id": "arc-76",
       "title": "Road Event",
       "lat": 5599883.875411775,
       "lng": -10381140.5247773,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363732"
+      "timestamp": "2026-01-27T03:20:38.503891"
     },
     {
-      "id": "arc-73",
+      "id": "arc-77",
       "title": "Road Event",
       "lat": 5416130.910266824,
       "lng": -10350491.04069668,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363734"
+      "timestamp": "2026-01-27T03:20:38.503894"
     },
     {
-      "id": "arc-74",
+      "id": "arc-78",
       "title": "Road Event",
       "lat": 5416198.483942655,
       "lng": -10349371.945855735,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363738"
+      "timestamp": "2026-01-27T03:20:38.503897"
     },
     {
-      "id": "arc-75",
+      "id": "arc-79",
       "title": "Road Event",
       "lat": 5416158.616953376,
       "lng": -10350204.838285852,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363740"
+      "timestamp": "2026-01-27T03:20:38.503899"
     },
     {
-      "id": "arc-76",
+      "id": "arc-80",
       "title": "Road Event",
       "lat": 5599726.981034516,
       "lng": -10383487.362282205,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363742"
+      "timestamp": "2026-01-27T03:20:38.503901"
     },
     {
-      "id": "arc-77",
+      "id": "arc-81",
       "title": "Road Event",
       "lat": 5599823.567341049,
       "lng": -10383490.256588968,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363744"
+      "timestamp": "2026-01-27T03:20:38.503904"
     },
     {
-      "id": "arc-78",
+      "id": "arc-82",
       "title": "Road Event",
       "lat": 5599818.541686647,
       "lng": -10381232.029398732,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363746"
+      "timestamp": "2026-01-27T03:20:38.503906"
     },
     {
-      "id": "arc-79",
+      "id": "arc-83",
       "title": "Road Event",
       "lat": 6041849.69191055,
       "lng": -10777374.348572114,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363748"
+      "timestamp": "2026-01-27T03:20:38.503908"
     },
     {
-      "id": "arc-80",
+      "id": "arc-84",
       "title": "Road Event",
       "lat": 6041849.69191055,
       "lng": -10777374.348572114,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363750"
+      "timestamp": "2026-01-27T03:20:38.503910"
     },
     {
-      "id": "arc-81",
+      "id": "arc-85",
       "title": "Road Event",
       "lat": 5581246.625001637,
       "lng": -10383525.322228568,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363752"
+      "timestamp": "2026-01-27T03:20:38.503912"
     },
     {
-      "id": "arc-82",
+      "id": "arc-86",
       "title": "Road Event",
       "lat": 5587520.023817477,
       "lng": -10381462.238105694,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363754"
+      "timestamp": "2026-01-27T03:20:38.503914"
     },
     {
-      "id": "arc-83",
+      "id": "arc-87",
       "title": "Road Event",
       "lat": 5587433.135799366,
       "lng": -10384610.130666347,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363756"
+      "timestamp": "2026-01-27T03:20:38.503918"
     },
     {
-      "id": "arc-84",
+      "id": "arc-88",
       "title": "Road Event",
       "lat": 5613733.975127251,
       "lng": -10364247.903368913,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363758"
-    },
-    {
-      "id": "arc-85",
-      "title": "Road Event",
-      "lat": 5886309.819471964,
-      "lng": -10265945.33459257,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363760"
-    },
-    {
-      "id": "arc-86",
-      "title": "Road Event",
-      "lat": 5886309.819471964,
-      "lng": -10265945.33459257,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363762"
-    },
-    {
-      "id": "arc-87",
-      "title": "Road Event",
-      "lat": 5606663.559226265,
-      "lng": -10449541.453812173,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363765"
-    },
-    {
-      "id": "arc-88",
-      "title": "Road Event",
-      "lat": 5606663.559226265,
-      "lng": -10449541.453812173,
-      "type": "road_closure",
-      "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363767"
+      "timestamp": "2026-01-27T03:20:38.503920"
     },
     {
       "id": "arc-89",
       "title": "Road Event",
-      "lat": 5714380.357244354,
-      "lng": -10395993.773114357,
+      "lat": 5886309.819471964,
+      "lng": -10265945.33459257,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363769"
+      "timestamp": "2026-01-27T03:20:38.503922"
     },
     {
       "id": "arc-90",
       "title": "Road Event",
-      "lat": 5714380.357244354,
-      "lng": -10395993.773114357,
+      "lat": 5886309.819471964,
+      "lng": -10265945.33459257,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363771"
+      "timestamp": "2026-01-27T03:20:38.503924"
     },
     {
       "id": "arc-91",
       "title": "Road Event",
-      "lat": 5771138.467409304,
-      "lng": -10503492.556344625,
+      "lat": 5606663.559226265,
+      "lng": -10449541.453812173,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363773"
+      "timestamp": "2026-01-27T03:20:38.503926"
     },
     {
       "id": "arc-92",
+      "title": "Road Event",
+      "lat": 5606663.559226265,
+      "lng": -10449541.453812173,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503928"
+    },
+    {
+      "id": "arc-93",
+      "title": "Road Event",
+      "lat": 5714380.357244354,
+      "lng": -10395993.773114357,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503930"
+    },
+    {
+      "id": "arc-94",
+      "title": "Road Event",
+      "lat": 5714380.357244354,
+      "lng": -10395993.773114357,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503932"
+    },
+    {
+      "id": "arc-95",
       "title": "Road Event",
       "lat": 5771138.467409304,
       "lng": -10503492.556344625,
       "type": "road_closure",
       "desc": "See 511mn.org for details",
-      "timestamp": "2026-01-27T03:10:01.363775"
+      "timestamp": "2026-01-27T03:20:38.503935"
+    },
+    {
+      "id": "arc-96",
+      "title": "Road Event",
+      "lat": 5771138.467409304,
+      "lng": -10503492.556344625,
+      "type": "road_closure",
+      "desc": "See 511mn.org for details",
+      "timestamp": "2026-01-27T03:20:38.503938"
     }
   ]
 }
