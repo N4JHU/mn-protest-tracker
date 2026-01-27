@@ -32,6 +32,7 @@
         .info-val { color: #fff; font-weight: bold; }
         .info-val.red { color: #ff5555; }
         .info-val.orange { color: #ffaa00; }
+        .info-val.purple { color: #d400ff; }
 
         /* TOGGLE SWITCH */
         .switch { position: relative; display: inline-block; width: 28px; height: 14px; }
@@ -41,7 +42,7 @@
         input:checked + .slider { background-color: #004400; border-color: #00ff00; }
         input:checked + .slider:before { transform: translateX(14px); background-color: #00ff00; }
 
-        /* TACTICAL BUTTON (New!) */
+        /* TACTICAL BUTTONS */
         .tac-btn {
             background: #330000;
             border: 1px solid #ff5555;
@@ -53,8 +54,24 @@
             text-decoration: none;
             display: inline-block;
             transition: 0.2s;
+            margin-left: 5px;
         }
         .tac-btn:hover { background: #ff5555; color: #000; }
+        
+        /* REPORT BUTTON (Purple) */
+        .rpt-btn {
+            background: #2a0033;
+            border: 1px solid #d400ff;
+            color: #d400ff;
+            font-size: 0.6rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.2s;
+        }
+        .rpt-btn:hover { background: #d400ff; color: #000; }
 
         /* FEED ITEMS */
         .feed-item { border-bottom: 1px solid #333; padding-bottom: 8px; margin-bottom: 8px; }
@@ -72,10 +89,31 @@
         .type-protest { background: #ff3333; } .type-protest.pulse { animation: pulse-red 2s infinite; }
         .type-road { background: #ffaa00; } .type-road.pulse { animation: pulse-orange 2s infinite; }
         .type-user { background: #00ccff; z-index: 9999 !important; } .type-user.pulse { animation: pulse-blue 2s infinite; }
+        .type-report { background: #d400ff; z-index: 5000 !important; } .type-report.pulse { animation: pulse-purple 2s infinite; }
 
         @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 51, 51, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); } }
         @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 170, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); } }
         @keyframes pulse-blue { 0% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 204, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0); } }
+        @keyframes pulse-purple { 0% { box-shadow: 0 0 0 0 rgba(212, 0, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(212, 0, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 0, 255, 0); } }
+
+        /* MODAL FORM */
+        #report-modal {
+            display: none; /* Hidden by default */
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 260px; background: rgba(0, 0, 0, 0.95);
+            border: 1px solid #d400ff; box-shadow: 0 0 20px rgba(212, 0, 255, 0.3);
+            z-index: 2000; padding: 15px; border-radius: 4px;
+        }
+        .form-group { margin-bottom: 10px; }
+        .form-label { display: block; color: #d400ff; font-size: 0.7rem; font-weight: bold; margin-bottom: 4px; }
+        .form-input, .form-select { 
+            width: 100%; background: #111; border: 1px solid #444; color: white; 
+            padding: 5px; font-size: 0.8rem; font-family: 'Segoe UI', sans-serif;
+        }
+        .form-actions { display: flex; justify-content: space-between; margin-top: 15px; }
+        .cancel-btn { background: #333; color: #bbb; border: none; padding: 5px 10px; cursor: pointer; font-size: 0.7rem; }
+        .submit-btn { background: #2a0033; color: #d400ff; border: 1px solid #d400ff; padding: 5px 10px; cursor: pointer; font-weight: bold; font-size: 0.7rem; }
+        .submit-btn:hover { background: #d400ff; color: black; }
 
         /* POPUPS */
         .gm-style-iw { padding: 0 !important; overflow: hidden !important; background: #1a1a1a !important; color: #ddd !important; border: 1px solid #ff5555; }
@@ -111,16 +149,51 @@
         <div class="info-row">
             <span class="info-label">ROAD CLOSURES:</span><span class="info-val orange" id="count-road">0</span>
         </div>
+        <div class="info-row">
+            <span class="info-label">USER REPORTS:</span><span class="info-val purple" id="count-report">0</span>
+        </div>
         <div style="font-size: 0.55rem; color: #555; margin-top: 8px; text-align: right;" id="last-updated">Waiting for Sync...</div>
     </div>
 
     <div class="hud-panel top-right">
         <h2>
             Intel Feed
-            <button class="tac-btn" onclick="executeTwitterScan()">SCAN X</button>
+            <div>
+                <button class="rpt-btn" onclick="openReportModal()">REPORT</button>
+                <button class="tac-btn" onclick="executeTwitterScan()">SCAN X</button>
+            </div>
         </h2>
         <div id="feed-container">
             <div class="feed-item"><div class="feed-header"><span class="feed-date">SYSTEM</span></div><div class="feed-text">Initializing Secure Data Link...</div></div>
+        </div>
+    </div>
+
+    <div id="report-modal">
+        <h2 style="color:#d400ff; border-color:#d400ff;">MAKE FIELD REPORT</h2>
+        
+        <div class="form-group">
+            <label class="form-label">INCIDENT TYPE</label>
+            <select id="rpt-type" class="form-select">
+                <option value="Protest">Protest / Gathering</option>
+                <option value="Police">Police Activity</option>
+                <option value="Traffic">Traffic Hazard</option>
+                <option value="Intel">Intel / Sighting</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">DESCRIPTION / SITREP</label>
+            <input type="text" id="rpt-desc" class="form-input" placeholder="e.g. 3 Squad cars blocking intersection...">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">LOCATION</label>
+            <div style="font-size:0.6rem; color:#888; margin-bottom:3px;">*Will use center of map view</div>
+        </div>
+
+        <div class="form-actions">
+            <button class="cancel-btn" onclick="closeReportModal()">CANCEL</button>
+            <button class="submit-btn" onclick="submitReport()">SUBMIT REPORT</button>
         </div>
     </div>
 
@@ -129,19 +202,67 @@
         <div style="font-size: 0.8rem; line-height: 1.5;">
             <div><span style="color:#ff3333; font-size: 1.2rem;">●</span> High Tension / Threat</div>
             <div><span style="color:#ffaa00; font-size: 1.2rem;">●</span> Road Closure / Hazard</div>
+            <div><span style="color:#d400ff; font-size: 1.2rem;">●</span> User Report</div>
             <div><span style="color:#00ccff; font-size: 1.2rem;">●</span> My Position</div>
         </div>
     </div>
 
     <script>
+        // --- GLOBAL MAP VAR ---
+        let map; 
+        let userReports = []; // Store local reports here
+
         // --- TACTICAL FUNCTIONS ---
         function executeTwitterScan() {
-            // Generates a boolean query for Minneapolis Protest keywords
-            // Sorted by "Latest" to find real-time incidents
-            const keywords = '("Minneapolis" OR "St Paul" OR "Twin Cities") AND ("Protest" OR "Riot" OR "Police" OR "Shots" OR "March") -filter:replies';
+            const keywords = '("#MinneapolisProtest" OR "#ICE" OR "#ImmigrationAgents" OR "#WhippleFederalBuilding" OR "#BreakingNews" OR "#USImmigration") -filter:replies';
             const encoded = encodeURIComponent(keywords);
             const url = `https://twitter.com/search?q=${encoded}&src=typed_query&f=live`;
             window.open(url, '_blank');
+        }
+
+        // --- REPORTING LOGIC ---
+        function openReportModal() {
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        function submitReport() {
+            const type = document.getElementById('rpt-type').value;
+            const desc = document.getElementById('rpt-desc').value;
+            
+            if(!desc) { alert("Please enter a description."); return; }
+
+            // Get Center of Map for the report
+            const center = map.getCenter();
+            
+            // Create Event Object
+            const newReport = {
+                title: "USER REPORT: " + type.toUpperCase(),
+                desc: desc,
+                type: 'report', // Purple
+                lat: center.lat(),
+                lng: center.lng(),
+                timestamp: new Date().toISOString() // Current UTC
+            };
+
+            // Add to Local List
+            userReports.push(newReport);
+            
+            // Render immediately
+            new HTMLMarker(center, 'report', newReport.title, newReport.desc, map);
+            
+            // Update Feed
+            addFeedItem(newReport);
+            
+            // Update Count
+            document.getElementById('count-report').innerText = userReports.length;
+
+            // Close
+            closeReportModal();
+            document.getElementById('rpt-desc').value = ""; // Clear
         }
 
         // --- TIME FORMATTER ---
@@ -167,37 +288,66 @@
         }
         startClock();
 
-        function initMap() {
-            class HTMLMarker extends google.maps.OverlayView {
-                constructor(position, type, title, desc, map) {
-                    super();
-                    this.position = position;
-                    this.type = type;
-                    this.title = title;
-                    this.desc = desc;
-                    this.div = null;
-                    this.setMap(map);
-                }
-                onAdd() {
-                    const div = document.createElement("div");
-                    div.className = `pulse-marker type-${this.type} pulse`;
-                    div.addEventListener("click", () => {
-                        const content = `<div class="popup-box"><div class="popup-title">${this.title}</div><div class="popup-desc">${this.desc}</div></div>`;
-                        const infoWindow = new google.maps.InfoWindow({ content: content, position: this.position });
-                        infoWindow.open(this.getMap());
-                    });
-                    this.div = div;
-                    const panes = this.getPanes();
-                    panes.overlayMouseTarget.appendChild(div);
-                }
-                draw() {
-                    const overlayProjection = this.getProjection();
-                    const position = overlayProjection.fromLatLngToDivPixel(this.position);
-                    if (this.div) { this.div.style.left = position.x + "px"; this.div.style.top = position.y + "px"; }
-                }
-                onRemove() { if (this.div) { this.div.parentNode.removeChild(this.div); this.div = null; } }
+        // --- MARKER CLASS ---
+        class HTMLMarker extends google.maps.OverlayView {
+            constructor(position, type, title, desc, map) {
+                super();
+                this.position = position;
+                this.type = type;
+                this.title = title;
+                this.desc = desc;
+                this.div = null;
+                this.setMap(map);
             }
+            onAdd() {
+                const div = document.createElement("div");
+                div.className = `pulse-marker type-${this.type} pulse`;
+                div.addEventListener("click", () => {
+                    const content = `<div class="popup-box"><div class="popup-title" style="color:${this.getColor()}">${this.title}</div><div class="popup-desc">${this.desc}</div></div>`;
+                    const infoWindow = new google.maps.InfoWindow({ content: content, position: this.position });
+                    infoWindow.open(this.getMap());
+                });
+                this.div = div;
+                const panes = this.getPanes();
+                panes.overlayMouseTarget.appendChild(div);
+            }
+            getColor() {
+                if(this.type === 'report') return '#d400ff';
+                if(this.type === 'protest') return '#ff5555';
+                if(this.type === 'road_closure') return '#ffaa00';
+                return '#00ccff';
+            }
+            draw() {
+                const overlayProjection = this.getProjection();
+                const position = overlayProjection.fromLatLngToDivPixel(this.position);
+                if (this.div) { this.div.style.left = position.x + "px"; this.div.style.top = position.y + "px"; }
+            }
+            onRemove() { if (this.div) { this.div.parentNode.removeChild(this.div); this.div = null; } }
+        }
 
+        function addFeedItem(e) {
+            const container = document.getElementById('feed-container');
+            let dateDisplay = "LIVE"; let timeDisplay = "";
+            if (e.timestamp) {
+                const t = new Date(e.timestamp);
+                const mnTime = formatMNTime(t, true);
+                dateDisplay = mnTime.date; timeDisplay = mnTime.time;
+            }
+            
+            // Color Logic
+            let color = '#ffaa00';
+            if(e.type === 'protest') color = '#ff5555';
+            if(e.type === 'report') color = '#d400ff';
+
+            const div = document.createElement("div");
+            div.className = "feed-item";
+            div.innerHTML = `<div class="feed-header"><span class="feed-date">${dateDisplay}</span><span class="feed-time">${timeDisplay}</span></div><div class="feed-text"><strong style="color:${color}">${e.title}</strong><br>${e.desc.substring(0, 80)}${e.desc.length > 80 ? '...' : ''}</div>`;
+            
+            // Insert at Top
+            container.insertBefore(div, container.firstChild);
+        }
+
+        function initMap() {
             const darkStyle = [
                 { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
                 { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -207,12 +357,13 @@
                 { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }
             ];
 
-            const map = new google.maps.Map(document.getElementById("map"), {
+            map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 11,
                 center: { lat: 44.9778, lng: -93.2650 },
                 styles: darkStyle, disableDefaultUI: true 
             });
 
+            // Toggle Location
             const toggle = document.getElementById('user-loc-toggle');
             let userMarker = null; let watchId = null;
             toggle.addEventListener('change', function() {
@@ -235,6 +386,7 @@
                 }
             });
 
+            // Data Feed
             let activeMarkers = [];
             function updateMapData() {
                 fetch('events.json?nocache=' + (new Date()).getTime())
@@ -253,6 +405,7 @@
                         const timeCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
                         let validEvents = [];
 
+                        // 1. Load Server Events
                         data.features.forEach(event => {
                             let showEvent = false;
                             if (event.type === 'road_closure') showEvent = true; 
@@ -272,6 +425,13 @@
                             }
                         });
 
+                        // 2. Re-Load User Local Reports
+                        userReports.forEach(rep => {
+                            validEvents.push(rep);
+                            const pos = new google.maps.LatLng(rep.lat, rep.lng);
+                            activeMarkers.push(new HTMLMarker(pos, 'report', rep.title, rep.desc, map));
+                        });
+
                         document.getElementById('count-protest').innerText = pCount;
                         document.getElementById('count-road').innerText = rCount;
                         updateFeed(validEvents);
@@ -284,20 +444,16 @@
                 events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                 
                 events.slice(0, 15).forEach(e => {
-                    let dateDisplay = "LIVE"; let timeDisplay = "";
-                    if (e.timestamp) {
-                        const t = new Date(e.timestamp);
-                        const mnTime = formatMNTime(t, true);
-                        dateDisplay = mnTime.date;
-                        timeDisplay = mnTime.time;
-                    }
-                    const div = document.createElement("div");
-                    div.className = "feed-item";
-                    div.innerHTML = `<div class="feed-header"><span class="feed-date">${dateDisplay}</span><span class="feed-time">${timeDisplay}</span></div><div class="feed-text"><strong style="color:${e.type === 'protest' ? '#ff5555' : '#ffaa00'}">${e.title}</strong><br>${e.desc.substring(0, 80)}${e.desc.length > 80 ? '...' : ''}</div>`;
-                    container.appendChild(div);
+                    addFeedItem(e); // Helper function reused
                 });
             }
 
+            // Helper to prevent duplicates in feed helper
+            const _originalAddFeed = addFeedItem;
+            // Overwrite feed generator to use the container clearing logic of updateFeed
+            // Actually, we just need updateFeed to do the work.
+            // addFeedItem is only for instant feedback on new reports.
+            
             updateMapData();
             setInterval(updateMapData, 60000); 
         }
