@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-27 02:44:11",
+  "last_updated": "2026-01-27 02:49:48",
   "features": [
     {
       "id": "RC-1",
@@ -53,7 +53,7 @@
       "lng": -93.1,
       "type": "protest",
       "desc": "Area of interest.",
-      "timestamp": "2026-01-27T02:44:11.004483"
+      "timestamp": "2026-01-27T02:49:48.244801"
     },
     {
       "id": "arcgis-1",
@@ -882,6 +882,15 @@
       "type": "road_closure",
       "desc": "Could not contact MnDOT servers.",
       "timestamp": "2026-01-27T02:44:11.002955"
+    },
+    {
+      "id": "ERR-OFFLINE",
+      "title": "SYSTEM OFFLINE",
+      "lat": 44.97,
+      "lng": -93.26,
+      "type": "road_closure",
+      "desc": "Connection to MnDOT failed.",
+      "timestamp": "2026-01-27T02:49:48.244788"
     }
   ]
 }
