@@ -12,85 +12,77 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 OUTPUT_FILE = "events.json"
 DB_RETENTION_DAYS = 15
 
-# TARGET: MnDOT "Open511" Developer API
-# This is the official feed for app developers, distinct from the consumer website.
-OPEN511_URL = "https://api.511mn.org/api/events?format=json"
+# TARGET: Iowa/MN DOT ArcGIS "Feature Service"
+# We use the Item ID to find the live server URL dynamically.
+ARCGIS_ITEM_ID = "081587d29d944a89ad189b1633e509e4"
+ARCGIS_METADATA_URL = f"https://www.arcgis.com/sharing/rest/content/items/{ARCGIS_ITEM_ID}?f=json"
 
 def get_live_road_closures():
-    print(f"Connecting to MnDOT Open511 Dev API ({OPEN511_URL})...")
+    print("--- Connecting to ArcGIS Feature Server ---")
     events = []
     
-    # Simple headers - Open511 usually doesn't require complex browser mimicking
-    headers = {
-        "User-Agent": "MN-Protest-Tracker-Bot/1.0",
-        "Accept": "application/json"
-    }
-
     try:
-        response = requests.get(OPEN511_URL, headers=headers, timeout=30, verify=False)
+        # STEP 1: Get the live Server URL from the Metadata
+        # This prevents us from guessing the wrong URL or using a dead link.
+        meta_response = requests.get(ARCGIS_METADATA_URL, timeout=15)
+        meta_data = meta_response.json()
         
-        # Check if we got a valid JSON response
-        try:
-            data = response.json()
-        except json.JSONDecodeError:
-            print(f"!! Failed to decode JSON. Response text: {response.text[:100]}...")
+        service_url = meta_data.get("url")
+        if not service_url:
+            print("!! Could not find Service URL in metadata.")
             return []
-
-        # The API usually returns a simple list of events or a dict with an "events" key
-        items = data if isinstance(data, list) else data.get("events", [])
+            
+        print(f"Found Live Server: {service_url}")
         
-        print(f"API returned {len(items)} raw items.")
-
-        for item in items:
+        # STEP 2: Query the Live Server directly
+        # We ask for "where=1=1" (Give me everything) in JSON format.
+        query_url = f"{service_url}/0/query"
+        params = {
+            "where": "1=1",
+            "outFields": "*",
+            "f": "json"
+        }
+        
+        response = requests.get(query_url, params=params, timeout=30)
+        data = response.json()
+        
+        features = data.get("features", [])
+        print(f"Server returned {len(features)} live events.")
+        
+        for feature in features:
             try:
-                # Filter for Incidents & Closures
-                # Open511 structure: "Type" is often "incident" or "construction"
-                event_type = item.get("type", "").lower()
-                headline = item.get("headline", "").lower()
-                desc = item.get("description", "").lower()
-
-                # KEYWORD FILTER
-                is_relevant = False
-                if "crash" in headline or "incident" in event_type or "closure" in headline or "blocked" in desc:
-                    is_relevant = True
+                attrs = feature.get("attributes", {})
+                geom = feature.get("geometry", {})
                 
-                if is_relevant:
-                    # LOCATION EXTRACTION
-                    # Open511 typically uses "geography" or "locations"
-                    lat, lng = None, None
+                # Extract Location (ArcGIS JSON uses x/y)
+                lat = geom.get("y")
+                lng = geom.get("x")
+                
+                # Filter: Ensure it has coordinates
+                if lat and lng:
+                    # Clean up the Title
+                    # "Headline" is usually the best field in this dataset
+                    title = attrs.get("Headline") or attrs.get("EventType") or "Road Event"
                     
-                    # Style 1: "locations" array
-                    if "locations" in item and len(item["locations"]) > 0:
-                        loc = item["locations"][0]
-                        # Sometimes keys are "lat"/"lon", sometimes "latitude"/"longitude"
-                        lat = loc.get("lat") or loc.get("latitude")
-                        lng = loc.get("lon") or loc.get("longitude")
-                    
-                    # Style 2: "geography" object (GeoJSON style)
-                    elif "geography" in item:
-                        coords = item["geography"].get("coordinates", [])
-                        if coords:
-                            lng, lat = coords # GeoJSON is [Lng, Lat]
-
-                    if lat and lng:
+                    # Filter out test/empty data
+                    if title and "test" not in title.lower():
                         events.append({
-                            "id": item.get("id"),
-                            "title": item.get("headline", "Road Event"),
+                            "id": attrs.get("EventID") or f"arc-{attrs.get('OBJECTID')}",
+                            "title": title,
                             "lat": float(lat),
                             "lng": float(lng),
                             "type": "road_closure",
-                            "desc": item.get("description", "See 511mn.org for details"),
+                            "desc": attrs.get("EventDescription", "See 511mn.org for details"),
                             "timestamp": datetime.datetime.now().isoformat()
                         })
-            except Exception as e:
-                # Skip bad items silently
+            except Exception:
                 continue
 
-        print(f"--- SUCCESS: Found {len(events)} relevant events.")
+        print(f"--- SUCCESS: Processed {len(events)} valid events.")
         return events
 
     except Exception as e:
-        print(f"!! Critical Error connecting to Open511: {e}")
+        print(f"!! Critical Error: {e}")
         return []
 
 # --- PROTEST PLACEHOLDER ---
@@ -122,7 +114,6 @@ def main():
         new_events.extend(road_data)
     else:
         print("Warning: No road data fetched. Using System Offline marker.")
-        # If it fails, add the "Offline" marker so you see it on the map immediately
         new_events.append({
              "id": "ERR-OFFLINE", "title": "SYSTEM OFFLINE", "lat": 44.97, "lng": -93.26, 
              "type": "road_closure", "desc": "Connection to MnDOT failed.", 
