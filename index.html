@@ -58,7 +58,7 @@
         }
         .tac-btn:hover { background: #ff5555; color: #000; }
         
-        /* REPORT BUTTON (Purple) */
+        /* REPORT BUTTON */
         .rpt-btn {
             background: #2a0033;
             border: 1px solid #d400ff;
@@ -99,7 +99,7 @@
         /* MODAL FORM */
         #report-modal {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 260px; background: rgba(0, 0, 0, 0.95);
+            width: 280px; background: rgba(0, 0, 0, 0.95);
             border: 1px solid #d400ff; box-shadow: 0 0 20px rgba(212, 0, 255, 0.3);
             z-index: 2000; padding: 15px; border-radius: 4px;
         }
@@ -108,11 +108,17 @@
         .form-input, .form-select { 
             width: 100%; background: #111; border: 1px solid #444; color: white; 
             padding: 5px; font-size: 0.8rem; font-family: 'Segoe UI', sans-serif;
+            box-sizing: border-box; /* Fix width issues */
         }
         .form-actions { display: flex; justify-content: space-between; margin-top: 15px; }
         .cancel-btn { background: #333; color: #bbb; border: none; padding: 5px 10px; cursor: pointer; font-size: 0.7rem; }
         .submit-btn { background: #2a0033; color: #d400ff; border: 1px solid #d400ff; padding: 5px 10px; cursor: pointer; font-weight: bold; font-size: 0.7rem; }
         .submit-btn:hover { background: #d400ff; color: black; }
+
+        /* SEARCH GROUP */
+        .search-group { display: flex; gap: 5px; }
+        .search-btn { background: #444; color: #fff; border: 1px solid #666; cursor: pointer; font-size: 0.7rem; padding: 0 8px; }
+        .search-btn:hover { background: #666; }
 
         /* POPUPS */
         .gm-style-iw { padding: 0 !important; overflow: hidden !important; background: #1a1a1a !important; color: #ddd !important; border: 1px solid #ff5555; }
@@ -136,32 +142,20 @@
         </div>
         <div class="info-row"><span class="info-label">LOCATION:</span><span class="info-val">TWIN CITIES, MN</span></div>
         <div class="info-row"><span class="info-label">STATUS:</span><span class="info-val red">LIVE MONITORING</span></div>
-        
         <div class="info-row" style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #333;">
             <span class="info-label" style="color:#00ccff">SHOW MY POS:</span>
             <label class="switch"><input type="checkbox" id="user-loc-toggle"><span class="slider"></span></label>
         </div>
-
         <div class="info-row" style="margin-top:8px; border-top:1px solid #333; padding-top:4px;">
             <span class="info-label">ACTIVE THREATS:</span><span class="info-val red" id="count-protest">0</span>
         </div>
-        <div class="info-row">
-            <span class="info-label">ROAD CLOSURES:</span><span class="info-val orange" id="count-road">0</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">USER REPORTS:</span><span class="info-val purple" id="count-report">0</span>
-        </div>
+        <div class="info-row"><span class="info-label">ROAD CLOSURES:</span><span class="info-val orange" id="count-road">0</span></div>
+        <div class="info-row"><span class="info-label">USER REPORTS:</span><span class="info-val purple" id="count-report">0</span></div>
         <div style="font-size: 0.55rem; color: #555; margin-top: 8px; text-align: right;" id="last-updated">Waiting for Sync...</div>
     </div>
 
     <div class="hud-panel top-right">
-        <h2>
-            Intel Feed
-            <div>
-                <button class="rpt-btn" onclick="openReportModal()">REPORT</button>
-                <button class="tac-btn" onclick="executeTwitterScan()">SCAN X</button>
-            </div>
-        </h2>
+        <h2>Intel Feed <div><button class="rpt-btn" onclick="openReportModal()">REPORT</button><button class="tac-btn" onclick="executeTwitterScan()">SCAN X</button></div></h2>
         <div id="feed-container">
             <div class="feed-item"><div class="feed-header"><span class="feed-date">SYSTEM</span></div><div class="feed-text">Initializing Secure Data Link...</div></div>
         </div>
@@ -169,6 +163,16 @@
 
     <div id="report-modal">
         <h2 style="color:#d400ff; border-color:#d400ff;">MAKE FIELD REPORT</h2>
+        
+        <div class="form-group">
+            <label class="form-label">FIND LOCATION (Address or Cross Streets)</label>
+            <div class="search-group">
+                <input type="text" id="geo-input" class="form-input" placeholder="e.g. Lake & Hennepin, Minneapolis">
+                <button class="search-btn" onclick="performGeoSearch()">FIND</button>
+            </div>
+            <div id="geo-status" style="font-size:0.6rem; color:#888; margin-top:3px; font-style:italic;">Map will center on result</div>
+        </div>
+
         <div class="form-group">
             <label class="form-label">INCIDENT TYPE</label>
             <select id="rpt-type" class="form-select">
@@ -179,13 +183,10 @@
             </select>
         </div>
         <div class="form-group">
-            <label class="form-label">DESCRIPTION / SITREP</label>
+            <label class="form-label">DESCRIPTION</label>
             <input type="text" id="rpt-desc" class="form-input" placeholder="e.g. 3 Squad cars blocking intersection...">
         </div>
-        <div class="form-group">
-            <label class="form-label">LOCATION</label>
-            <div style="font-size:0.6rem; color:#888; margin-bottom:3px;">*Will use center of map view</div>
-        </div>
+        
         <div class="form-actions">
             <button class="cancel-btn" onclick="closeReportModal()">CANCEL</button>
             <button class="submit-btn" onclick="submitReport()">SUBMIT REPORT</button>
@@ -203,32 +204,71 @@
     </div>
 
     <script>
-        // --- GLOBAL VARIABLES (Scope Safety Fix) ---
+        // --- GLOBALS ---
         let map; 
-        let HTMLMarker = null; // Defined globally, initialized in initMap
+        let HTMLMarker = null; 
         let userReports = [];
+
+        // --- GEOCODING (NOMINATIM) ---
+        function performGeoSearch() {
+            const query = document.getElementById('geo-input').value;
+            const status = document.getElementById('geo-status');
+            
+            if (!query) { status.innerText = "Please enter a location."; return; }
+            status.innerText = "Searching satellite data...";
+            
+            // Append 'Minnesota' to narrow search if user didn't specify
+            const safeQuery = encodeURIComponent(query + " Minnesota");
+            
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${safeQuery}`)
+                .then(r => r.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        const lat = parseFloat(data[0].lat);
+                        const lon = parseFloat(data[0].lon);
+                        const locPos = new google.maps.LatLng(lat, lon);
+                        
+                        map.panTo(locPos);
+                        map.setZoom(15);
+                        
+                        // Show temporary target
+                        new google.maps.Marker({
+                            position: locPos,
+                            map: map,
+                            animation: google.maps.Animation.DROP,
+                            title: "Target Location"
+                        });
+
+                        status.innerText = "Target Locked. Confirm details below.";
+                        status.style.color = "#00ff00";
+                    } else {
+                        status.innerText = "Location not found. Try 'Street, City'.";
+                        status.style.color = "red";
+                    }
+                })
+                .catch(e => {
+                    status.innerText = "Connection Error.";
+                });
+        }
 
         // --- TACTICAL FUNCTIONS ---
         function executeTwitterScan() {
             const keywords = '("#MinneapolisProtest" OR "#ICE" OR "#ImmigrationAgents" OR "#WhippleFederalBuilding" OR "#BreakingNews" OR "#USImmigration") -filter:replies';
             const encoded = encodeURIComponent(keywords);
-            const url = `https://twitter.com/search?q=${encoded}&src=typed_query&f=live`;
-            window.open(url, '_blank');
+            window.open(`https://twitter.com/search?q=${encoded}&src=typed_query&f=live`, '_blank');
         }
 
-        // --- REPORTING LOGIC ---
         function openReportModal() { document.getElementById('report-modal').style.display = 'block'; }
         function closeReportModal() { document.getElementById('report-modal').style.display = 'none'; }
 
         function submitReport() {
-            if (!HTMLMarker) { alert("Map system initializing... please wait."); return; }
+            if (!HTMLMarker) return;
             const type = document.getElementById('rpt-type').value;
             const desc = document.getElementById('rpt-desc').value;
             
             if(!desc) { alert("Please enter a description."); return; }
 
             const center = map.getCenter();
-            
             const newReport = {
                 title: "USER REPORT: " + type.toUpperCase(),
                 desc: desc,
@@ -239,16 +279,15 @@
             };
 
             userReports.push(newReport);
-            
-            // Render using the global HTMLMarker class
             new HTMLMarker(center, 'report', newReport.title, newReport.desc, map);
-            
-            // Add to Feed
             addFeedItem(newReport);
             document.getElementById('count-report').innerText = userReports.length;
 
             closeReportModal();
             document.getElementById('rpt-desc').value = "";
+            document.getElementById('geo-input').value = "";
+            document.getElementById('geo-status').innerText = "*Will use center of map view";
+            document.getElementById('geo-status').style.color = "#888";
         }
 
         // --- TIME FORMATTERS ---
@@ -272,7 +311,6 @@
         }
         startClock();
 
-        // --- FEED HELPER ---
         function addFeedItem(e) {
             const container = document.getElementById('feed-container');
             let dateDisplay = "LIVE"; let timeDisplay = "";
@@ -284,16 +322,14 @@
             let color = '#ffaa00';
             if(e.type === 'protest') color = '#ff5555';
             if(e.type === 'report') color = '#d400ff';
-
             const div = document.createElement("div");
             div.className = "feed-item";
             div.innerHTML = `<div class="feed-header"><span class="feed-date">${dateDisplay}</span><span class="feed-time">${timeDisplay}</span></div><div class="feed-text"><strong style="color:${color}">${e.title}</strong><br>${e.desc.substring(0, 80)}${e.desc.length > 80 ? '...' : ''}</div>`;
             container.insertBefore(div, container.firstChild);
         }
 
-        // --- GOOGLE MAPS INIT ---
+        // --- MAP INIT ---
         function initMap() {
-            // 1. DEFINE CLASS AND ASSIGN TO GLOBAL
             HTMLMarker = class extends google.maps.OverlayView {
                 constructor(position, type, title, desc, map) {
                     super();
@@ -345,7 +381,6 @@
                 styles: darkStyle, disableDefaultUI: true 
             });
 
-            // Toggle Location
             const toggle = document.getElementById('user-loc-toggle');
             let userMarker = null; let watchId = null;
             toggle.addEventListener('change', function() {
@@ -368,7 +403,6 @@
                 }
             });
 
-            // Data Feed
             let activeMarkers = [];
             function updateMapData() {
                 fetch('events.json?nocache=' + (new Date()).getTime())
@@ -396,7 +430,6 @@
                                     if (!isNaN(t) && t >= timeCutoff) showEvent = true;
                                 } else showEvent = true;
                             }
-
                             if (showEvent) {
                                 validEvents.push(event);
                                 const pos = new google.maps.LatLng(event.lat, event.lng);
@@ -406,7 +439,6 @@
                             }
                         });
 
-                        // Re-add Local Reports
                         userReports.forEach(rep => {
                             validEvents.push(rep);
                             const pos = new google.maps.LatLng(rep.lat, rep.lng);
