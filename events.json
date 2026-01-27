@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-27 02:00:49",
+  "last_updated": "2026-01-27 02:05:57",
   "features": [
     {
       "id": "RC-1",
@@ -53,7 +53,7 @@
       "lng": -93.1,
       "type": "protest",
       "desc": "Manual entry: Area of interest.",
-      "timestamp": "2026-01-27T02:00:49.352279"
+      "timestamp": "2026-01-27T02:05:57.378386"
     }
   ]
 }
