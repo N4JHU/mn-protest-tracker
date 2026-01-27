@@ -26,7 +26,7 @@
         .bottom-left { bottom: 20px; left: 20px; }
         
         /* TYPOGRAPHY */
-        h2 { margin: 0 0 8px 0; font-size: 0.85rem; color: #ff5555; text-transform: uppercase; letter-spacing: 1.2px; border-bottom: 1px solid #ff5555; padding-bottom: 4px; }
+        h2 { margin: 0 0 8px 0; font-size: 0.85rem; color: #ff5555; text-transform: uppercase; letter-spacing: 1.2px; border-bottom: 1px solid #ff5555; padding-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
         .info-row { font-size: 0.65rem; color: #ccc; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
         .info-label { font-weight: bold; color: #888; }
         .info-val { color: #fff; font-weight: bold; }
@@ -40,6 +40,21 @@
         .slider:before { position: absolute; content: ""; height: 8px; width: 8px; left: 2px; bottom: 2px; background-color: #888; transition: .4s; border-radius: 2px; }
         input:checked + .slider { background-color: #004400; border-color: #00ff00; }
         input:checked + .slider:before { transform: translateX(14px); background-color: #00ff00; }
+
+        /* TACTICAL BUTTON (New!) */
+        .tac-btn {
+            background: #330000;
+            border: 1px solid #ff5555;
+            color: #ff5555;
+            font-size: 0.6rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.2s;
+        }
+        .tac-btn:hover { background: #ff5555; color: #000; }
 
         /* FEED ITEMS */
         .feed-item { border-bottom: 1px solid #333; padding-bottom: 8px; margin-bottom: 8px; }
@@ -100,7 +115,10 @@
     </div>
 
     <div class="hud-panel top-right">
-        <h2>Live Intel Feed</h2>
+        <h2>
+            Intel Feed
+            <button class="tac-btn" onclick="executeTwitterScan()">SCAN X</button>
+        </h2>
         <div id="feed-container">
             <div class="feed-item"><div class="feed-header"><span class="feed-date">SYSTEM</span></div><div class="feed-text">Initializing Secure Data Link...</div></div>
         </div>
@@ -116,7 +134,17 @@
     </div>
 
     <script>
-        // --- TIME FORMATTER (Forces everything to Chicago Time) ---
+        // --- TACTICAL FUNCTIONS ---
+        function executeTwitterScan() {
+            // Generates a boolean query for Minneapolis Protest keywords
+            // Sorted by "Latest" to find real-time incidents
+            const keywords = '("Minneapolis" OR "St Paul" OR "Twin Cities") AND ("Protest" OR "Riot" OR "Police" OR "Shots" OR "March") -filter:replies';
+            const encoded = encodeURIComponent(keywords);
+            const url = `https://twitter.com/search?q=${encoded}&src=typed_query&f=live`;
+            window.open(url, '_blank');
+        }
+
+        // --- TIME FORMATTER ---
         function formatMNTime(dateObj, includeDate = false) {
             const dateOptions = { timeZone: 'America/Chicago', weekday: 'long', year: '2-digit', month: '2-digit', day: '2-digit' };
             const rawDate = new Intl.DateTimeFormat('en-US', dateOptions).format(dateObj);
@@ -185,7 +213,6 @@
                 styles: darkStyle, disableDefaultUI: true 
             });
 
-            // Toggle Location
             const toggle = document.getElementById('user-loc-toggle');
             let userMarker = null; let watchId = null;
             toggle.addEventListener('change', function() {
@@ -208,18 +235,15 @@
                 }
             });
 
-            // Data Feed
             let activeMarkers = [];
             function updateMapData() {
                 fetch('events.json?nocache=' + (new Date()).getTime())
                     .then(response => response.json())
                     .then(data => {
-                        // SYNC TIME: No hacks needed, standard Date parser handles the 'Z' correctly now
                         const syncDate = new Date(data.last_updated);
                         const mnSync = formatMNTime(syncDate, true);
-                        // Format: MM/DD/YY HH:mm
-                        const shortDate = mnSync.date.replace(/[()]/g, '').split(' ')[1]; // Extract 01/26/26
-                        const shortTime = mnSync.time.split(':').slice(0,2).join(':'); // Extract 23:22
+                        const shortDate = mnSync.date.replace(/[()]/g, '').split(' ')[1]; 
+                        const shortTime = mnSync.time.split(':').slice(0,2).join(':'); 
                         document.getElementById('last-updated').innerText = `LAST SYNC: ${shortDate} ${shortTime}`;
                         
                         activeMarkers.forEach(marker => marker.setMap(null));
