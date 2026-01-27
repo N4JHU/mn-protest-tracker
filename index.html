@@ -146,49 +146,6 @@
         const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 11,
             center: { lat: 44.9778, lng: -93.2650 },
-            styles: darkStyle, // Apply the dark theme
-            disableDefaultUI: true // Remove default buttons for cleaner look
-        });
-
-        fetch('events.json')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('last-updated').innerText = "LINK ESTABLISHED: " + data.last_updated;
-                
-                let pCount = 0;
-                let rCount = 0;
-
-                data.features.forEach(event => {
-                    const pos = new google.maps.LatLng(event.lat, event.lng);
-                    
-                    // Create our Custom Pulsing Marker
-                    new HTMLMarker(pos, event.type, event.title, event.desc, map);
-
-                    // Update Counts
-                    if(event.type === 'protest') pCount++;
-                    if(event.type === 'road_closure') rCount++;
-                });
-
-                document.getElementById('count-protest').innerText = pCount;
-                document.getElementById('count-road').innerText = rCount;
-            })
-            .catch(err => console.error("Data Link Failed:", err));
-    }
-</script>// 
-    function initMap() {
-        // Dark Mode Map Style
-        const darkStyle = [
-            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-            { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-            { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
-            { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
-            { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }
-        ];
-
-        const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 11,
-            center: { lat: 44.9778, lng: -93.2650 },
             styles: darkStyle, 
             disableDefaultUI: true 
         });
@@ -229,5 +186,6 @@
             })
             .catch(err => console.error("Data Link Failed:", err));
     }
+</script>
 </body>
 </html>
