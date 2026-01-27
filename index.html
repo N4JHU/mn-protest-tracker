@@ -1,234 +1,282 @@
-import json
-import datetime
-import os
-import requests
-import time
-import urllib3
-import random
-import xml.etree.ElementTree as ET
-
-# Disable SSL warnings
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
-# --- CONFIGURATION ---
-OUTPUT_FILE = "events.json"
-DB_RETENTION_DAYS = 15
-
-# --- 1. ROAD DATA SOURCE (MnDOT/ArcGIS) ---
-ARCGIS_METADATA_URL = "https://www.arcgis.com/sharing/rest/content/items/081587d29d944a89ad189b1633e509e4?f=json"
-
-# --- 2. INTELLIGENCE SOURCES ---
-# Targeted Google News Command
-NEWS_QUERY = (
-    "(protest OR riot OR march OR police OR crash OR gunfire OR standoff) "
-    "AND ("
-    "site:startribune.com OR site:wcco.com OR site:kstp.com OR "
-    "site:kare11.com OR site:mprnews.org OR site:bringmethenews.com OR "
-    "site:dps.mn.gov OR site:minneapolismn.gov OR site:stpaul.gov OR "
-    "site:aclu-mn.org OR site:cuapb.org"
-    ") when:12h"
-)
-NEWS_RSS_URL = f"https://news.google.com/rss/search?q={requests.utils.quote(NEWS_QUERY)}&ceid=US:en&hl=en-US&gl=US"
-
-REDDIT_SUBS = ["Minneapolis", "TwinCities", "Minnesota", "AltMpls"]
-THREAT_KEYWORDS = ["riot", "tear gas", "standoff", "looting", "shots fired", "shuts down", "blocking"]
-VIGIL_KEYWORDS = ["vigil", "gathering", "march", "rally", "memorial", "protest"]
-
-LOCATIONS = {
-    "capitol": (44.9543, -93.1022),
-    "gov": (44.9543, -93.1022),
-    "uptown": (44.9497, -93.2933),
-    "downtown": (44.9765, -93.2761),
-    "city hall": (44.9761, -93.2636),
-    "3rd precinct": (44.9481, -93.2356),
-    "1st precinct": (44.9775, -93.2650),
-    "hennepin": (44.9780, -93.2630),
-    "94": (44.9650, -93.2750),
-    "35w": (44.9740, -93.2540),
-    "fort snelling": (44.8940, -93.1760),
-    "whipple": (44.8940, -93.1760),
-    "airport": (44.8848, -93.2223),
-}
-
-# --- HELPER: UTC TIMESTAMP ---
-def get_utc_now():
-    # Returns 2026-01-26T12:00:00+00:00 (Explicit UTC)
-    return datetime.datetime.now(datetime.timezone.utc).isoformat()
-
-# --- MODULE 1: ROAD SCRAPER ---
-def get_live_road_closures():
-    print("--- Connecting to ArcGIS Feature Server ---")
-    events = []
-    try:
-        meta = requests.get(ARCGIS_METADATA_URL, timeout=10).json()
-        service_url = meta.get("url")
-        if not service_url: return []
-
-        query_url = f"{service_url}/0/query"
-        params = {"where": "1=1", "outFields": "*", "f": "json"}
-        resp = requests.get(query_url, params=params, timeout=30)
-        features = resp.json().get("features", [])
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twin Cities Live Protest Map</title>
+    <style>
+        /* --- GLOBAL SETTINGS --- */
+        body { margin: 0; padding: 0; background-color: #1a1a1a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
+        #map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
         
-        for feature in features:
-            attrs = feature.get("attributes", {})
-            geom = feature.get("geometry", {})
-            lat, lng = geom.get("y"), geom.get("x")
-            
-            if lat and lng:
-                raw_title = attrs.get("Headline") or attrs.get("EventType") or "Road Event"
-                title = "TRAFFIC: " + raw_title
-                
-                if "test" not in title.lower():
-                    events.append({
-                        "id": f"road-{attrs.get('EventID', random.randint(1000,9999))}",
-                        "title": title,
-                        "lat": float(lat),
-                        "lng": float(lng),
-                        "type": "road_closure",
-                        "desc": attrs.get("EventDescription", "See 511mn.org"),
-                        "timestamp": get_utc_now()
-                    })
-        print(f"--- SUCCESS: Found {len(events)} road events.")
-        return events
-    except Exception as e:
-        print(f"!! Road Scraper Error: {e}")
-        return []
-
-# --- MODULE 2: INTEL AGGREGATOR ---
-def get_intel_feed():
-    print("--- Scanning Targeted Intelligence Sources ---")
-    events = []
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"}
-
-    # A. NEWS & OFFICIAL SOURCES
-    try:
-        print(f"Scanning News/Gov Feed...")
-        resp = requests.get(NEWS_RSS_URL, headers=headers, timeout=15)
-        root = ET.fromstring(resp.content)
+        /* --- HUD PANELS --- */
+        .hud-panel {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #444;
+            color: #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+        }
         
-        for item in root.findall('.//item'):
-            title = item.find('title').text
-            link = item.find('link').text
-            source_tag = "Unknown"
-            if "Star Tribune" in title: source_tag = "Star Tribune"
-            elif "WCCO" in title: source_tag = "WCCO (CBS)"
-            elif "KSTP" in title: source_tag = "KSTP (ABC)"
-            elif "KARE" in title: source_tag = "KARE 11"
-            elif "MPR" in title: source_tag = "MPR News"
-            elif ".gov" in link: source_tag = "OFFICIAL GOV ALERT"
-            
-            lat, lng = (44.9778, -93.2650)
-            for landmark, coords in LOCATIONS.items():
-                if landmark in title.lower():
-                    lat, lng = coords
-                    break
-            
-            lat += random.uniform(-0.02, 0.02)
-            lng += random.uniform(-0.02, 0.02)
+        /* SIZING & POSITION */
+        .top-left { top: 20px; left: 20px; width: 220px; }
+        .top-right { top: 20px; right: 20px; width: 240px; max-height: 80vh; overflow-y: auto; }
+        .bottom-left { bottom: 20px; left: 20px; }
+        
+        /* TYPOGRAPHY */
+        h2 { margin: 0 0 8px 0; font-size: 0.85rem; color: #ff5555; text-transform: uppercase; letter-spacing: 1.2px; border-bottom: 1px solid #ff5555; padding-bottom: 4px; }
+        .info-row { font-size: 0.65rem; color: #ccc; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
+        .info-label { font-weight: bold; color: #888; }
+        .info-val { color: #fff; font-weight: bold; }
+        .info-val.red { color: #ff5555; }
+        .info-val.orange { color: #ffaa00; }
 
-            events.append({
-                "id": f"news-{hash(title)}",
-                "title": f"INTEL: {title[:60]}...",
-                "lat": lat,
-                "lng": lng,
-                "type": "protest",
-                "desc": f"<b>SOURCE: {source_tag}</b><br>{title}<br><br><a href='{link}' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
-                "timestamp": get_utc_now()
-            })
-    except Exception as e:
-        print(f"!! News Feed Error: {e}")
+        /* TOGGLE SWITCH */
+        .switch { position: relative; display: inline-block; width: 28px; height: 14px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 4px; border: 1px solid #555; }
+        .slider:before { position: absolute; content: ""; height: 8px; width: 8px; left: 2px; bottom: 2px; background-color: #888; transition: .4s; border-radius: 2px; }
+        input:checked + .slider { background-color: #004400; border-color: #00ff00; }
+        input:checked + .slider:before { transform: translateX(14px); background-color: #00ff00; }
 
-    # B. REDDIT SCANNER
-    try:
-        for sub in REDDIT_SUBS:
-            print(f"Scanning r/{sub}...")
-            url = f"https://www.reddit.com/r/{sub}/new.json?limit=15"
-            resp = requests.get(url, headers={"User-Agent": "MN-Intel-Bot/2.0"}, timeout=10)
-            
-            if resp.status_code == 200:
-                posts = resp.json().get("data", {}).get("children", [])
-                for post in posts:
-                    data = post.get("data", {})
-                    title = data.get("title", "")
-                    
-                    is_threat = any(k in title.lower() for k in THREAT_KEYWORDS)
-                    is_vigil = any(k in title.lower() for k in VIGIL_KEYWORDS)
-                    
-                    if is_threat or is_vigil:
-                        lat, lng = (44.9778, -93.2650)
-                        for landmark, coords in LOCATIONS.items():
-                            if landmark in title.lower():
-                                lat, lng = coords
-                                break
-                        lat += random.uniform(-0.02, 0.02)
-                        lng += random.uniform(-0.02, 0.02)
-                        tag = "HIGH THREAT" if is_threat else "COMMUNITY"
+        /* FEED ITEMS */
+        .feed-item { border-bottom: 1px solid #333; padding-bottom: 8px; margin-bottom: 8px; }
+        .feed-header { display: flex; justify-content: space-between; margin-bottom: 3px; }
+        .feed-date { color: #888; font-size: 0.55rem; font-family: monospace; }
+        .feed-time { color: #ff5555; font-size: 0.65rem; font-weight: bold; font-family: monospace; }
+        .feed-text { font-size: 0.65rem; line-height: 1.3; color: #bbb; }
+        
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: #444; }
+
+        /* MARKERS */
+        .pulse-marker { width: 14px; height: 14px; border-radius: 50%; position: absolute; transform: translate(-50%, -50%); cursor: pointer; box-shadow: 0 0 0 rgba(0, 0, 0, 1); border: 2px solid white; }
+        .type-protest { background: #ff3333; } .type-protest.pulse { animation: pulse-red 2s infinite; }
+        .type-road { background: #ffaa00; } .type-road.pulse { animation: pulse-orange 2s infinite; }
+        .type-user { background: #00ccff; z-index: 9999 !important; } .type-user.pulse { animation: pulse-blue 2s infinite; }
+
+        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 51, 51, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); } }
+        @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 170, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); } }
+        @keyframes pulse-blue { 0% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 204, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0); } }
+
+        /* POPUPS */
+        .gm-style-iw { padding: 0 !important; overflow: hidden !important; background: #1a1a1a !important; color: #ddd !important; border: 1px solid #ff5555; }
+        .gm-style-iw-d { overflow: hidden !important; }
+        .gm-style-iw-tc { display: none; }
+        .popup-box { padding: 10px; width: 250px; font-family: 'Segoe UI', sans-serif; }
+        .popup-title { color: #ff5555; font-weight: bold; font-size: 14px; margin-bottom: 5px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .popup-desc { font-size: 12px; color: #ccc; }
+    </style>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQwEfQg_ECrQw744IEqmR-XmxAt2lcT1I&callback=initMap" async defer></script>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <div class="hud-panel top-left">
+        <h2>Operation Metro Surge</h2>
+        <div class="info-row" style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 8px;">
+            <span class="info-val" id="clock-display" style="color: #fff; font-family: monospace;">LOADING...</span>
+        </div>
+        <div class="info-row"><span class="info-label">LOCATION:</span><span class="info-val">TWIN CITIES, MN</span></div>
+        <div class="info-row"><span class="info-label">STATUS:</span><span class="info-val red">LIVE MONITORING</span></div>
+        
+        <div class="info-row" style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #333;">
+            <span class="info-label" style="color:#00ccff">SHOW MY POS:</span>
+            <label class="switch"><input type="checkbox" id="user-loc-toggle"><span class="slider"></span></label>
+        </div>
+
+        <div class="info-row" style="margin-top:8px; border-top:1px solid #333; padding-top:4px;">
+            <span class="info-label">ACTIVE THREATS:</span><span class="info-val red" id="count-protest">0</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">ROAD CLOSURES:</span><span class="info-val orange" id="count-road">0</span>
+        </div>
+        <div style="font-size: 0.55rem; color: #555; margin-top: 8px; text-align: right;" id="last-updated">Waiting for Sync...</div>
+    </div>
+
+    <div class="hud-panel top-right">
+        <h2>Live Intel Feed</h2>
+        <div id="feed-container">
+            <div class="feed-item"><div class="feed-header"><span class="feed-date">SYSTEM</span></div><div class="feed-text">Initializing Secure Data Link...</div></div>
+        </div>
+    </div>
+
+    <div class="hud-panel bottom-left">
+        <h2>Map Key</h2>
+        <div style="font-size: 0.8rem; line-height: 1.5;">
+            <div><span style="color:#ff3333; font-size: 1.2rem;">●</span> High Tension / Threat</div>
+            <div><span style="color:#ffaa00; font-size: 1.2rem;">●</span> Road Closure / Hazard</div>
+            <div><span style="color:#00ccff; font-size: 1.2rem;">●</span> My Position</div>
+        </div>
+    </div>
+
+    <script>
+        // --- TIME FORMATTER (Forces everything to Chicago Time) ---
+        function formatMNTime(dateObj, includeDate = false) {
+            const dateOptions = { timeZone: 'America/Chicago', weekday: 'long', year: '2-digit', month: '2-digit', day: '2-digit' };
+            const rawDate = new Intl.DateTimeFormat('en-US', dateOptions).format(dateObj);
+            const dateStr = `(${rawDate.replace(',', '')})`;
+
+            const timeOptions = { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const timeStr = new Intl.DateTimeFormat('en-US', timeOptions).format(dateObj);
+
+            if (includeDate) return { date: dateStr, time: timeStr };
+            return timeStr;
+        }
+
+        function startClock() {
+            const clockEl = document.getElementById('clock-display');
+            setInterval(() => {
+                const now = new Date();
+                const formatted = formatMNTime(now, true);
+                clockEl.innerText = `${formatted.date} ${formatted.time}`;
+            }, 1000);
+        }
+        startClock();
+
+        function initMap() {
+            class HTMLMarker extends google.maps.OverlayView {
+                constructor(position, type, title, desc, map) {
+                    super();
+                    this.position = position;
+                    this.type = type;
+                    this.title = title;
+                    this.desc = desc;
+                    this.div = null;
+                    this.setMap(map);
+                }
+                onAdd() {
+                    const div = document.createElement("div");
+                    div.className = `pulse-marker type-${this.type} pulse`;
+                    div.addEventListener("click", () => {
+                        const content = `<div class="popup-box"><div class="popup-title">${this.title}</div><div class="popup-desc">${this.desc}</div></div>`;
+                        const infoWindow = new google.maps.InfoWindow({ content: content, position: this.position });
+                        infoWindow.open(this.getMap());
+                    });
+                    this.div = div;
+                    const panes = this.getPanes();
+                    panes.overlayMouseTarget.appendChild(div);
+                }
+                draw() {
+                    const overlayProjection = this.getProjection();
+                    const position = overlayProjection.fromLatLngToDivPixel(this.position);
+                    if (this.div) { this.div.style.left = position.x + "px"; this.div.style.top = position.y + "px"; }
+                }
+                onRemove() { if (this.div) { this.div.parentNode.removeChild(this.div); this.div = null; } }
+            }
+
+            const darkStyle = [
+                { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+                { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+                { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+                { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
+                { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
+                { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }
+            ];
+
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 11,
+                center: { lat: 44.9778, lng: -93.2650 },
+                styles: darkStyle, disableDefaultUI: true 
+            });
+
+            // Toggle Location
+            const toggle = document.getElementById('user-loc-toggle');
+            let userMarker = null; let watchId = null;
+            toggle.addEventListener('change', function() {
+                if (this.checked) {
+                    if (navigator.geolocation) {
+                        watchId = navigator.geolocation.watchPosition((position) => {
+                            const userPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                            if (!userMarker) {
+                                userMarker = new HTMLMarker(userPos, 'user', 'MY LOCATION', 'Current Device Position', map);
+                                map.panTo(userPos); map.setZoom(13);
+                            } else {
+                                userMarker.setMap(null);
+                                userMarker = new HTMLMarker(userPos, 'user', 'MY LOCATION', 'Current Device Position', map);
+                            }
+                        });
+                    }
+                } else {
+                    if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+                    if (userMarker) { userMarker.setMap(null); userMarker = null; }
+                }
+            });
+
+            // Data Feed
+            let activeMarkers = [];
+            function updateMapData() {
+                fetch('events.json?nocache=' + (new Date()).getTime())
+                    .then(response => response.json())
+                    .then(data => {
+                        // SYNC TIME: No hacks needed, standard Date parser handles the 'Z' correctly now
+                        const syncDate = new Date(data.last_updated);
+                        const mnSync = formatMNTime(syncDate, true);
+                        // Format: MM/DD/YY HH:mm
+                        const shortDate = mnSync.date.replace(/[()]/g, '').split(' ')[1]; // Extract 01/26/26
+                        const shortTime = mnSync.time.split(':').slice(0,2).join(':'); // Extract 23:22
+                        document.getElementById('last-updated').innerText = `LAST SYNC: ${shortDate} ${shortTime}`;
                         
-                        events.append({
-                            "id": f"reddit-{data.get('id')}",
-                            "title": f"REDDIT: {title[:50]}...",
-                            "lat": lat,
-                            "lng": lng,
-                            "type": "protest",
-                            "desc": f"<b>TAG: {tag}</b><br>u/{data.get('author')}: {title}<br><br><a href='https://reddit.com{data.get('permalink')}' target='_blank' style='color:#ff5555'>VIEW THREAD</a>",
-                            "timestamp": get_utc_now()
-                        })
-            time.sleep(1)
-    except Exception as e:
-        print(f"!! Reddit Error: {e}")
+                        activeMarkers.forEach(marker => marker.setMap(null));
+                        activeMarkers = [];
+                        let pCount = 0; let rCount = 0;
+                        const now = new Date();
+                        const timeCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+                        let validEvents = [];
 
-    print(f"--- SUCCESS: Found {len(events)} intel items.")
-    return events
+                        data.features.forEach(event => {
+                            let showEvent = false;
+                            if (event.type === 'road_closure') showEvent = true; 
+                            else if (event.type === 'protest') {
+                                if (event.timestamp) {
+                                    const t = new Date(event.timestamp);
+                                    if (!isNaN(t) && t >= timeCutoff) showEvent = true;
+                                } else showEvent = true;
+                            }
 
-# --- MAIN ENGINE ---
-def main():
-    print("--- STARTING METRO SURGE UPDATE ---")
-    
-    # Load History
-    existing_events = []
-    if os.path.exists(OUTPUT_FILE):
-        try:
-            with open(OUTPUT_FILE, "r") as f:
-                data = json.load(f)
-                existing_events = data.get("features", [])
-        except: existing_events = []
-    
-    # Fetch New
-    new_events = []
-    new_events.extend(get_live_road_closures())
-    new_events.extend(get_intel_feed())
+                            if (showEvent) {
+                                validEvents.push(event);
+                                const pos = new google.maps.LatLng(event.lat, event.lng);
+                                activeMarkers.push(new HTMLMarker(pos, event.type, event.title, event.desc, map));
+                                if(event.type === 'protest') pCount++;
+                                if(event.type === 'road_closure') rCount++;
+                            }
+                        });
 
-    # Merge
-    event_db = {e["id"]: e for e in existing_events} 
-    for event in new_events:
-        event_db[event["id"]] = event
-    
-    # Clean Old Data (Using Offset-Aware Comparison)
-    cutoff = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=DB_RETENTION_DAYS)
-    
-    final_features = []
-    for e in event_db.values():
-        if e.get("timestamp"):
-            try:
-                # Parse timestamp and ensure it has timezone info
-                t_obj = datetime.datetime.fromisoformat(e["timestamp"])
-                if t_obj.tzinfo is None:
-                    # If old data has no timezone, assume UTC
-                    t_obj = t_obj.replace(tzinfo=datetime.timezone.utc)
+                        document.getElementById('count-protest').innerText = pCount;
+                        document.getElementById('count-road').innerText = rCount;
+                        updateFeed(validEvents);
+                    });
+            }
+
+            function updateFeed(events) {
+                const container = document.getElementById('feed-container');
+                container.innerHTML = "";
+                events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                 
-                if t_obj > cutoff:
-                    final_features.append(e)
-            except:
-                continue
+                events.slice(0, 15).forEach(e => {
+                    let dateDisplay = "LIVE"; let timeDisplay = "";
+                    if (e.timestamp) {
+                        const t = new Date(e.timestamp);
+                        const mnTime = formatMNTime(t, true);
+                        dateDisplay = mnTime.date;
+                        timeDisplay = mnTime.time;
+                    }
+                    const div = document.createElement("div");
+                    div.className = "feed-item";
+                    div.innerHTML = `<div class="feed-header"><span class="feed-date">${dateDisplay}</span><span class="feed-time">${timeDisplay}</span></div><div class="feed-text"><strong style="color:${e.type === 'protest' ? '#ff5555' : '#ffaa00'}">${e.title}</strong><br>${e.desc.substring(0, 80)}${e.desc.length > 80 ? '...' : ''}</div>`;
+                    container.appendChild(div);
+                });
+            }
 
-    # Save
-    with open(OUTPUT_FILE, "w") as f:
-        json.dump({
-            "last_updated": get_utc_now(), # Global sync timestamp
-            "features": final_features
-        }, f, indent=2)
-    
-    print(f"--- DATABASE UPDATED: {len(final_features)} Total Events ---")
-
-if __name__ == "__main__":
-    main()
+            updateMapData();
+            setInterval(updateMapData, 60000); 
+        }
+    </script>
+</body>
+</html>
