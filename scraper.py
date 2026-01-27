@@ -16,12 +16,9 @@ NEWS_RSS_URL = f"https://news.google.com/rss/search?q={requests.utils.quote(NEWS
 ARCGIS_URL = "https://www.arcgis.com/sharing/rest/content/items/081587d29d944a89ad189b1633e509e4?f=json"
 
 LOCATIONS = {
-    "whipple": (44.8940, -93.1760),
-    "downtown": (44.9765, -93.2761),
-    "uptown": (44.9497, -93.2933),
-    "capitol": (44.9543, -93.1022),
-    "minneapolis": (44.9778, -93.2650),
-    "st paul": (44.9537, -93.0900)
+    "whipple": (44.8940, -93.1760), "downtown": (44.9765, -93.2761),
+    "uptown": (44.9497, -93.2933), "capitol": (44.9543, -93.1022),
+    "minneapolis": (44.9778, -93.2650), "st paul": (44.9537, -93.0900)
 }
 
 def analyze_intel(text):
@@ -68,40 +65,38 @@ def single_scan():
             for f in features:
                 if 'y' in f.get('geometry', {}):
                     attr = f.get('attributes', {})
+                    # FIX: Handle empty titles to prevent "TRAFFIC: None"
+                    raw_title = attr.get('Headline') or attr.get('EventType')
+                    if not raw_title: continue 
+                    
                     events.append({
                         "id": f"road-{attr.get('EventID', random.randint(10000,99999))}",
-                        "title": f"TRAFFIC: {attr.get('EventType')}",
+                        "title": f"TRAFFIC: {raw_title}",
                         "lat": f['geometry']['y'], "lng": f['geometry']['x'],
                         "type": "road_closure", "desc": attr.get('EventDescription',''),
                         "timestamp": get_utc_now()
                     })
     except Exception as e: print(f"Road Err: {e}")
 
-   # --- PHASE 3: SMART UPLOAD (PRESERVE HISTORY) ---
+    # UPLOAD (With History Preservation)
     if events:
-        # 1. Deduplicate the new batch
-        unique_new = {e['id']: e for e in events}.values()
-        
-        # 2. Get list of IDs we are about to upload
-        new_ids = [e['id'] for e in unique_new]
-        
-        # 3. Ask Database: "Which of these already exist?"
-        existing_rows = supabase.table('events').select('id, first_seen').in_('id', new_ids).execute().data
-        existing_map = {row['id']: row['first_seen'] for row in existing_rows}
-        
-        # 4. Merge: Keep old 'first_seen' if exists, otherwise use 'now'
-        final_upload = []
-        for item in unique_new:
-            if item['id'] in existing_map:
-                item['first_seen'] = existing_map[item['id']] # KEEP ORIGINAL START TIME
-            else:
-                item['first_seen'] = item['timestamp'] # NEW EVENT
-            final_upload.append(item)
-
-        print(f"Uploading {len(final_upload)} Intelligent Items...")
+        unique = {e['id']: e for e in events}.values()
+        ids = [e['id'] for e in unique]
         try:
-            supabase.table('events').upsert(final_upload).execute()
-            print("--- UPLOAD SUCCESSFUL ---")
-        except Exception as e: print(f"!! Upload Failed: {e}")
-    else:
-        print("--- NO RELEVANT INTEL FOUND ---")
+            existing = supabase.table('events').select('id, first_seen').in_('id', ids).execute().data
+            exist_map = {r['id']: r['first_seen'] for r in existing}
+            
+            final = []
+            for item in unique:
+                if item['id'] in exist_map: item['first_seen'] = exist_map[item['id']]
+                else: item['first_seen'] = item['timestamp']
+                final.append(item)
+                
+            supabase.table('events').upsert(final).execute()
+            print(f"Uploaded {len(final)} items.")
+        except Exception as e: print(f"Upload Err: {e}")
+
+if __name__ == "__main__":
+    for i in range(4):
+        single_scan()
+        if i < 3: time.sleep(60)
