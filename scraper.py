@@ -3,91 +3,86 @@ import datetime
 import os
 import requests
 import time
-import random
 import urllib3
 
-# Disable the "Insecure Request" warning since we are skipping SSL verify
+# Disable SSL warnings for the backup feeds if needed
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- CONFIGURATION ---
 OUTPUT_FILE = "events.json"
 DB_RETENTION_DAYS = 15
 
-# TARGET: Official MnDOT 511 Feed
-MNDOT_API_URL = "https://lb.511mn.org/mnlb/events/all?format=json"
+# TARGET: MnDOT Open Data (via ArcGIS Public Feed)
+# This is a public geojson feed that doesn't block bots.
+DATA_URL = "https://public-iowadot.opendata.arcgis.com/datasets/081587d29d944a89ad189b1633e509e4_0.geojson"
 
-# --- REAL DATA FETCHER ---
+# MINNESOTA BOUNDARIES (Rough Box)
+# We use this to filter out Iowa/Wisconsin points that might be in the feed
+MN_LAT_MIN, MN_LAT_MAX = 43.4, 49.4
+MN_LNG_MIN, MN_LNG_MAX = -97.3, -89.4
+
 def get_live_road_closures():
-    print(f"Connecting to MnDOT Command Center...")
-    
-    # ROTATING HEADERS: Makes the robot look like a real human user
-    user_agents = [
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15",
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1"
-    ]
-    
-    headers = {
-        "User-Agent": random.choice(user_agents),
-        "Accept": "application/json, text/plain, */*",
-        "Referer": "https://511mn.org/",
-        "Origin": "https://511mn.org"
-    }
-    
+    print(f"Connecting to Open Data Feed ({DATA_URL})...")
     events = []
 
     try:
-        # Add a tiny delay to seem more human
-        time.sleep(1)
-        
-        # ADDED verify=False TO FIX THE SSL ERROR
-        response = requests.get(MNDOT_API_URL, headers=headers, timeout=20, verify=False)
+        # 1. Fetch Data
+        response = requests.get(DATA_URL, timeout=30)
         
         if response.status_code == 200:
             data = response.json()
-            for item in data:
+            features = data.get("features", [])
+            print(f"Feed returned {len(features)} total raw items.")
+            
+            for feature in features:
                 try:
-                    # Filter: Only show active issues
-                    desc = item.get("description", "").lower()
-                    headline = item.get("headline", "").lower()
+                    props = feature.get("properties", {})
+                    geom = feature.get("geometry", {})
                     
-                    # KEYWORDS: What are we looking for?
-                    is_incident = "crash" in headline or "incident" in headline or "stalled" in headline
-                    is_closure = "closed" in headline or "closure" in headline or "blocked" in desc
-                    
-                    if is_incident or is_closure:
-                        loc = item.get("locations", [{}])[0]
-                        if loc.get("lat") and loc.get("lon"):
+                    # 2. Extract Coordinates (GeoJSON is [Longitude, Latitude])
+                    if geom and geom.get("type") == "Point":
+                        lng, lat = geom.get("coordinates")
+                        
+                        # 3. Filter: Is this point actually in Minnesota?
+                        if (MN_LAT_MIN <= lat <= MN_LAT_MAX) and (MN_LNG_MIN <= lng <= MN_LNG_MAX):
                             
-                            # Clean up the title
-                            title = item.get("headline", "Traffic Incident")
-                            if "minnesota department of transportation" in title.lower():
-                                title = "Roadwork/Maintenance"
+                            # Clean up the Title
+                            raw_title = props.get("Headline", "Road Event")
+                            # Shorten generic titles
+                            if "minnesota department of transportation" in raw_title.lower():
+                                title = "Roadwork / Alert"
+                            else:
+                                title = raw_title
 
                             events.append({
-                                "id": item.get("id"),
+                                "id": props.get("EventID", f"arc-{random.randint(1000,9999)}"),
                                 "title": title,
-                                "lat": loc.get("lat"),
-                                "lng": loc.get("lon"),
+                                "lat": lat,
+                                "lng": lng,
                                 "type": "road_closure",
-                                "desc": item.get("description", "Check local traffic reports."),
+                                "desc": props.get("EventDescription", "See local signs."),
                                 "timestamp": datetime.datetime.now().isoformat()
                             })
-                except:
+                except Exception:
                     continue
+
+            print(f"--- SUCCESS: Found {len(events)} valid MN events inside state borders.")
             
-            print(f"--- SUCCESS: MnDOT Link Established. Found {len(events)} events.")
+            # Debug: Print the first one to prove it works
+            if len(events) > 0:
+                print(f"DEBUG SAMPLE: {events[0]['title']} at {events[0]['lat']}, {events[0]['lng']}")
+                
             return events
         
         else:
-            print(f"!! MnDOT Blocked Us. Status Code: {response.status_code}")
+            print(f"!! Feed Failed. Status Code: {response.status_code}")
             return []
 
     except Exception as e:
-        print(f"!! Connection Error: {e}")
+        print(f"!! Critical Error: {e}")
         return []
 
-# --- PROTEST PLACEHOLDER (Manual Entry) ---
+# --- PROTEST PLACEHOLDER ---
 def get_protests():
     now = datetime.datetime.now()
     return [
@@ -110,12 +105,13 @@ def main():
     
     # 2. Fetch New Data
     new_events = []
-    # Note: If MnDOT fails, we return an empty list rather than fake Iowa data
-    mn_data = get_live_road_closures()
-    if mn_data:
-        new_events.extend(mn_data)
+    import random # Late import for the ID generation
+    
+    road_data = get_live_road_closures()
+    if road_data:
+        new_events.extend(road_data)
     else:
-        print("Warning: No road data fetched this run.")
+        print("Warning: No road data fetched. Using previous data if available.")
         
     new_events.extend(get_protests())
 
