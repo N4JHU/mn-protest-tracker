@@ -83,57 +83,56 @@
 <div id="map"></div>
 
 <script>
-    // --- CUSTOM OVERLAY CLASS (Allows HTML Markers) ---
-    class HTMLMarker extends google.maps.OverlayView {
-        constructor(position, type, title, desc, map) {
-            super();
-            this.position = position;
-            this.type = type;
-            this.title = title;
-            this.desc = desc;
-            this.div = null;
-            this.setMap(map); // Adds to map immediately
-        }
-
-        onAdd() {
-            const div = document.createElement("div");
-            div.className = `pulse-marker type-${this.type === 'protest' ? 'protest' : 'road'} pulse`;
-            div.title = this.title;
-
-            // Click Listener for InfoWindow
-            div.addEventListener("click", () => {
-                const infoWindow = new google.maps.InfoWindow({
-                    content: `<div style="color:black; font-weight:bold;">${this.title}</div><div>${this.desc}</div>`,
-                    position: this.position
-                });
-                infoWindow.open(this.getMap());
-            });
-
-            this.div = div;
-            const panes = this.getPanes();
-            panes.overlayMouseTarget.appendChild(div);
-        }
-
-        draw() {
-            const overlayProjection = this.getProjection();
-            const position = overlayProjection.fromLatLngToDivPixel(this.position);
-            if (this.div) {
-                this.div.style.left = position.x + "px";
-                this.div.style.top = position.y + "px";
-            }
-        }
-
-        onRemove() {
-            if (this.div) {
-                this.div.parentNode.removeChild(this.div);
-                this.div = null;
-            }
-        }
-    }
-
-   // --- MAIN MAP FUNCTION ---
+    // --- MAIN MAP FUNCTION ---
     function initMap() {
-        // Dark Mode Map Style
+        // 1. DEFINE CLASS INSIDE initMap (Fixes the "google is not defined" error)
+        class HTMLMarker extends google.maps.OverlayView {
+            constructor(position, type, title, desc, map) {
+                super();
+                this.position = position;
+                this.type = type;
+                this.title = title;
+                this.desc = desc;
+                this.div = null;
+                this.setMap(map);
+            }
+
+            onAdd() {
+                const div = document.createElement("div");
+                div.className = `pulse-marker type-${this.type === 'protest' ? 'protest' : 'road'} pulse`;
+                div.title = this.title;
+
+                div.addEventListener("click", () => {
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `<div style="color:black; font-weight:bold;">${this.title}</div><div>${this.desc}</div>`,
+                        position: this.position
+                    });
+                    infoWindow.open(this.getMap());
+                });
+
+                this.div = div;
+                const panes = this.getPanes();
+                panes.overlayMouseTarget.appendChild(div);
+            }
+
+            draw() {
+                const overlayProjection = this.getProjection();
+                const position = overlayProjection.fromLatLngToDivPixel(this.position);
+                if (this.div) {
+                    this.div.style.left = position.x + "px";
+                    this.div.style.top = position.y + "px";
+                }
+            }
+
+            onRemove() {
+                if (this.div) {
+                    this.div.parentNode.removeChild(this.div);
+                    this.div = null;
+                }
+            }
+        }
+
+        // 2. MAP SETUP
         const darkStyle = [
             { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
             { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -150,43 +149,35 @@
             disableDefaultUI: true 
         });
 
-        fetch('events.json?nocache=' + (new Date()).getTime()) // Force fresh data
+        // 3. FETCH DATA
+        fetch('events.json?nocache=' + (new Date()).getTime())
             .then(response => response.json())
             .then(data => {
                 document.getElementById('last-updated').innerText = "LINK ESTABLISHED: " + data.last_updated;
                 
                 let pCount = 0;
                 let rCount = 0;
-                let debugTotal = 0;
 
-                // --- TIME FILTER LOGIC ---
                 const now = new Date();
-                const displayCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000)); // 24 hours ago
+                const displayCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
 
                 data.features.forEach(event => {
-                    debugTotal++;
                     let showEvent = false;
 
-                    // CHECK 1: Does it have a timestamp?
                     if (event.timestamp) {
                         const eventTime = new Date(event.timestamp);
-                        // If valid date AND newer than 24h (or future), show it
                         if (!isNaN(eventTime) && eventTime >= displayCutoff) {
                             showEvent = true;
                         }
                     } else {
-                        // FALLBACK: If no timestamp exists (old data format), SHOW IT anyway
-                        console.log("Event missing timestamp, forcing display:", event.title);
+                        // Fallback for old data
                         showEvent = true; 
                     }
 
                     if (showEvent) {
                         const pos = new google.maps.LatLng(event.lat, event.lng);
-                        
-                        // Create Marker
                         new HTMLMarker(pos, event.type, event.title, event.desc, map);
 
-                        // Update Counts
                         if(event.type === 'protest') pCount++;
                         if(event.type === 'road_closure') rCount++;
                     }
@@ -194,9 +185,6 @@
 
                 document.getElementById('count-protest').innerText = pCount;
                 document.getElementById('count-road').innerText = rCount;
-                
-                // Debug log to console
-                console.log(`Loaded ${debugTotal} total events. Showing ${pCount + rCount}.`);
             })
             .catch(err => {
                 console.error("Data Link Failed:", err);
