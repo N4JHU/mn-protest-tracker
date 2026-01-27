@@ -4,6 +4,10 @@ import os
 import requests
 import time
 import random
+import urllib3
+
+# Disable the "Insecure Request" warning since we are skipping SSL verify
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- CONFIGURATION ---
 OUTPUT_FILE = "events.json"
@@ -36,7 +40,8 @@ def get_live_road_closures():
         # Add a tiny delay to seem more human
         time.sleep(1)
         
-        response = requests.get(MNDOT_API_URL, headers=headers, timeout=20)
+        # ADDED verify=False TO FIX THE SSL ERROR
+        response = requests.get(MNDOT_API_URL, headers=headers, timeout=20, verify=False)
         
         if response.status_code == 200:
             data = response.json()
