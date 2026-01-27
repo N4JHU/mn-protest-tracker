@@ -85,7 +85,8 @@
 <script>
     // --- MAIN MAP FUNCTION ---
     function initMap() {
-        // 1. DEFINE CLASS INSIDE initMap (Fixes the "google is not defined" error)
+        
+        // 1. DEFINE MARKER CLASS
         class HTMLMarker extends google.maps.OverlayView {
             constructor(position, type, title, desc, map) {
                 super();
@@ -101,7 +102,6 @@
                 const div = document.createElement("div");
                 div.className = `pulse-marker type-${this.type === 'protest' ? 'protest' : 'road'} pulse`;
                 div.title = this.title;
-
                 div.addEventListener("click", () => {
                     const infoWindow = new google.maps.InfoWindow({
                         content: `<div style="color:black; font-weight:bold;">${this.title}</div><div>${this.desc}</div>`,
@@ -109,7 +109,6 @@
                     });
                     infoWindow.open(this.getMap());
                 });
-
                 this.div = div;
                 const panes = this.getPanes();
                 panes.overlayMouseTarget.appendChild(div);
@@ -132,7 +131,7 @@
             }
         }
 
-        // 2. MAP SETUP
+        // 2. SETUP MAP
         const darkStyle = [
             { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
             { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -149,48 +148,58 @@
             disableDefaultUI: true 
         });
 
-        // 3. FETCH DATA
-        fetch('events.json?nocache=' + (new Date()).getTime())
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('last-updated').innerText = "LINK ESTABLISHED: " + data.last_updated;
-                
-                let pCount = 0;
-                let rCount = 0;
+        // 3. AUTO-UPDATE ENGINE
+        let activeMarkers = []; // Keep track so we can clear them
 
-                const now = new Date();
-                const displayCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+        function updateMapData() {
+            console.log("Refreshing Data Feed...");
+            fetch('events.json?nocache=' + (new Date()).getTime())
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('last-updated').innerText = "DATA SYNC: " + data.last_updated;
+                    
+                    // A. Clear Old Markers
+                    activeMarkers.forEach(marker => marker.setMap(null));
+                    activeMarkers = [];
 
-                data.features.forEach(event => {
-                    let showEvent = false;
+                    let pCount = 0;
+                    let rCount = 0;
+                    const now = new Date();
+                    const displayCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
 
-                    if (event.timestamp) {
-                        const eventTime = new Date(event.timestamp);
-                        if (!isNaN(eventTime) && eventTime >= displayCutoff) {
-                            showEvent = true;
+                    // B. Plot New Markers
+                    data.features.forEach(event => {
+                        let showEvent = false;
+                        if (event.timestamp) {
+                            const eventTime = new Date(event.timestamp);
+                            if (!isNaN(eventTime) && eventTime >= displayCutoff) showEvent = true;
+                        } else {
+                            showEvent = true; 
                         }
-                    } else {
-                        // Fallback for old data
-                        showEvent = true; 
-                    }
 
-                    if (showEvent) {
-                        const pos = new google.maps.LatLng(event.lat, event.lng);
-                        new HTMLMarker(pos, event.type, event.title, event.desc, map);
+                        if (showEvent) {
+                            const pos = new google.maps.LatLng(event.lat, event.lng);
+                            const newMarker = new HTMLMarker(pos, event.type, event.title, event.desc, map);
+                            activeMarkers.push(newMarker); // Add to tracker
 
-                        if(event.type === 'protest') pCount++;
-                        if(event.type === 'road_closure') rCount++;
-                    }
+                            if(event.type === 'protest') pCount++;
+                            if(event.type === 'road_closure') rCount++;
+                        }
+                    });
+
+                    document.getElementById('count-protest').innerText = pCount;
+                    document.getElementById('count-road').innerText = rCount;
+                })
+                .catch(err => {
+                    console.error("Sync Failed:", err);
+                    document.getElementById('last-updated').innerText = "SYNC LOST";
+                    document.getElementById('last-updated').style.color = "red";
                 });
+        }
 
-                document.getElementById('count-protest').innerText = pCount;
-                document.getElementById('count-road').innerText = rCount;
-            })
-            .catch(err => {
-                console.error("Data Link Failed:", err);
-                document.getElementById('last-updated').innerText = "LINK FAILED (Check Console)";
-                document.getElementById('last-updated').style.color = "red";
-            });
+        // 4. START THE LOOP
+        updateMapData(); // Run immediately
+        setInterval(updateMapData, 60000); // Run again every 60 seconds
     }
 </script>
 </body>
