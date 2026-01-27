@@ -3,44 +3,65 @@ import datetime
 import os
 import requests
 import time
+import random
 
 # --- CONFIGURATION ---
 OUTPUT_FILE = "events.json"
 DB_RETENTION_DAYS = 15
 
-# Source A: Official MnDOT Load Balancer (Fastest, but sometimes blocks bots)
-SOURCE_A_URL = "https://lb.511mn.org/mnlb/events/all?format=json"
-
-# Source B: Public ArcGIS Feed (Slower, but very reliable/open)
-SOURCE_B_URL = "https://public-iowadot.opendata.arcgis.com/datasets/081587d29d944a89ad189b1633e509e4_0.geojson"
+# TARGET: Official MnDOT 511 Feed
+MNDOT_API_URL = "https://lb.511mn.org/mnlb/events/all?format=json"
 
 # --- REAL DATA FETCHER ---
 def get_live_road_closures():
-    print(f"Attempting to fetch live road data...")
+    print(f"Connecting to MnDOT Command Center...")
+    
+    # ROTATING HEADERS: Makes the robot look like a real human user
+    user_agents = [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15",
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1"
+    ]
+    
+    headers = {
+        "User-Agent": random.choice(user_agents),
+        "Accept": "application/json, text/plain, */*",
+        "Referer": "https://511mn.org/",
+        "Origin": "https://511mn.org"
+    }
+    
     events = []
 
-    # --- ATTEMPT 1: MnDOT Direct ---
     try:
-        print(f"Trying Source A ({SOURCE_A_URL})...")
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-            "Referer": "https://511mn.org/"
-        }
-        response = requests.get(SOURCE_A_URL, headers=headers, timeout=10)
+        # Add a tiny delay to seem more human
+        time.sleep(1)
+        
+        response = requests.get(MNDOT_API_URL, headers=headers, timeout=20)
         
         if response.status_code == 200:
             data = response.json()
             for item in data:
                 try:
-                    # Filter for only real incidents/closures
+                    # Filter: Only show active issues
                     desc = item.get("description", "").lower()
                     headline = item.get("headline", "").lower()
-                    if "closure" in headline or "crash" in headline or "incident" in headline or "blocked" in desc:
+                    
+                    # KEYWORDS: What are we looking for?
+                    is_incident = "crash" in headline or "incident" in headline or "stalled" in headline
+                    is_closure = "closed" in headline or "closure" in headline or "blocked" in desc
+                    
+                    if is_incident or is_closure:
                         loc = item.get("locations", [{}])[0]
                         if loc.get("lat") and loc.get("lon"):
+                            
+                            # Clean up the title
+                            title = item.get("headline", "Traffic Incident")
+                            if "minnesota department of transportation" in title.lower():
+                                title = "Roadwork/Maintenance"
+
                             events.append({
                                 "id": item.get("id"),
-                                "title": item.get("headline", "Traffic Incident"),
+                                "title": title,
                                 "lat": loc.get("lat"),
                                 "lng": loc.get("lon"),
                                 "type": "road_closure",
@@ -49,57 +70,23 @@ def get_live_road_closures():
                             })
                 except:
                     continue
-            print(f"--- SUCCESS: Source A provided {len(events)} events.")
+            
+            print(f"--- SUCCESS: MnDOT Link Established. Found {len(events)} events.")
             return events
+        
         else:
-            print(f"!! Source A Failed with Status Code: {response.status_code}")
+            print(f"!! MnDOT Blocked Us. Status Code: {response.status_code}")
+            return []
 
     except Exception as e:
-        print(f"!! Source A Error: {e}")
+        print(f"!! Connection Error: {e}")
+        return []
 
-    # --- ATTEMPT 2: ArcGIS Backup ---
-    print(f"Switching to Backup Source B ({SOURCE_B_URL})...")
-    try:
-        response = requests.get(SOURCE_B_URL, timeout=15)
-        if response.status_code == 200:
-            data = response.json()
-            for feature in data.get("features", []):
-                try:
-                    props = feature.get("properties", {})
-                    geom = feature.get("geometry", {})
-                    
-                    # ArcGIS puts coordinates in [long, lat] order
-                    if geom.get("type") == "Point":
-                        lng, lat = geom.get("coordinates")
-                        
-                        events.append({
-                            "id": props.get("EventID", f"arcgis-{props.get('OBJECTID')}"),
-                            "title": props.get("Headline", "Road Event"),
-                            "lat": lat,
-                            "lng": lng,
-                            "type": "road_closure",
-                            "desc": props.get("EventDescription", "No details."),
-                            "timestamp": datetime.datetime.now().isoformat()
-                        })
-                except:
-                    continue
-            print(f"--- SUCCESS: Source B provided {len(events)} events.")
-            return events
-    except Exception as e:
-        print(f"!! Source B Error: {e}")
-
-    # --- FALLBACK: Mock Data (Only if BOTH fail) ---
-    print("!! ALL SOURCES FAILED. Reverting to Mock Data.")
-    return [
-        {"id": "RC-MOCK-1", "title": "DATA LINK SEVERED", "lat": 44.97, "lng": -93.26, "type": "road_closure", "desc": "Could not reach MnDOT servers.", "timestamp": datetime.datetime.now().isoformat()}
-    ]
-
-# --- PROTEST PLACEHOLDER ---
+# --- PROTEST PLACEHOLDER (Manual Entry) ---
 def get_protests():
-    # Keeping the manual entry so the 'Threats' counter isn't empty
     now = datetime.datetime.now()
     return [
-        {"id": "MANUAL-1", "title": "Monitoring: Capitol Area", "lat": 44.95, "lng": -93.10, "type": "protest", "desc": "Manual entry: Area of interest.", "timestamp": now.isoformat()}
+        {"id": "MANUAL-1", "title": "Capitol Monitor", "lat": 44.95, "lng": -93.10, "type": "protest", "desc": "Area of interest.", "timestamp": now.isoformat()}
     ]
 
 # --- MAIN ENGINE ---
@@ -118,14 +105,21 @@ def main():
     
     # 2. Fetch New Data
     new_events = []
-    new_events.extend(get_live_road_closures())
+    # Note: If MnDOT fails, we return an empty list rather than fake Iowa data
+    mn_data = get_live_road_closures()
+    if mn_data:
+        new_events.extend(mn_data)
+    else:
+        print("Warning: No road data fetched this run.")
+        
     new_events.extend(get_protests())
 
-    # 3. Merge & Clean
+    # 3. Merge
     event_db = {e["id"]: e for e in existing_events} 
     for event in new_events:
         event_db[event["id"]] = event
     
+    # 4. Clean (15 Days)
     cutoff_time = datetime.datetime.now() - datetime.timedelta(days=DB_RETENTION_DAYS)
     final_features = []
     for event in event_db.values():
@@ -138,7 +132,7 @@ def main():
         except:
             continue
 
-    # 4. Save
+    # 5. Save
     output_data = {
         "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "features": final_features
