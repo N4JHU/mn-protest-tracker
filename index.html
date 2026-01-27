@@ -29,7 +29,7 @@
         
         /* MARKERS */
         .pulse-marker { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px black; }
-        .type-protest { background: #ff3333; box-shadow: 0 0 10px #ff3333; } /* High Priority */
+        .type-protest { background: #ff3333; box-shadow: 0 0 10px #ff3333; }
         .type-police { background: #0088ff; }
         .type-road_closure { background: #ffaa00; }
         .type-intel { background: #888888; }
@@ -99,13 +99,20 @@
         function init() {
             map = L.map('map', {zoomControl:false}).setView([44.9778, -93.2650], 11);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {maxZoom:19}).addTo(map);
+            
+            // 1. Load Data Immediately
             loadData();
             
+            // 2. Subscribe to Real-Time Updates
             DB.channel('live').on('postgres_changes', {event:'INSERT', schema:'public', table:'events'}, p => {
                 plot(p.new);
                 status("RX DATA...", "#fff"); setTimeout(()=>status("SECURE", "#0f0"), 1000);
             }).subscribe();
 
+            // 3. AUTO-REFRESH EVERY 60 SECONDS (The Failsafe)
+            setInterval(loadData, 60000); 
+
+            // GPS Logic
             document.getElementById('gps-toggle').addEventListener('change', function() {
                 if(this.checked && navigator.geolocation) {
                     watchId = navigator.geolocation.watchPosition(p => {
@@ -127,7 +134,6 @@
             const { data } = await DB.from('events').select('*').gt('timestamp', new Date(Date.now()-86400000).toISOString());
             if(data) {
                 document.getElementById('feed').innerHTML = "";
-                // SORT: Protests first, then Police, then Reports
                 data.sort((a,b) => getPriority(b.type) - getPriority(a.type));
                 let counts = {protest:0, police:0};
                 data.forEach(e => {
@@ -142,28 +148,33 @@
         }
 
         function getPriority(type) {
-            if(type === 'protest') return 1000; // Highest
+            if(type === 'protest') return 1000;
             if(type === 'report') return 900;
             if(type === 'police') return 800;
             if(type === 'road_closure') return 500;
-            return 100; // Intel/Info
+            return 100;
         }
 
         function plot(e) {
-            // Priority Z-Index
             const z = getPriority(e.type);
             const icon = L.divIcon({className:'', html:`<div class="pulse-marker type-${e.type} pulse"></div>`});
-            const m = L.marker([e.lat, e.lng], {icon:icon, zIndexOffset:z}).addTo(map)
-                .bindPopup(`<b class="${getColorClass(e.type)}">${e.title}</b><br>${e.desc}`);
-            markers.push(m);
+            // Check if marker already exists to prevent duplicates on refresh
+            const exists = markers.find(m => m.options.title === e.id);
+            if(!exists) {
+                const m = L.marker([e.lat, e.lng], {icon:icon, zIndexOffset:z, title:e.id}).addTo(map)
+                    .bindPopup(`<b class="${getColorClass(e.type)}">${e.title}</b><br>${e.desc}`);
+                markers.push(m);
+            }
             
-            // Add to feed
-            const d = document.createElement('div');
-            d.style.marginBottom = "5px"; d.style.borderBottom = "1px solid #333";
-            d.innerHTML = `<span class="${getColorClass(e.type)}" style="font-weight:bold">${e.title}</span><br><span style="color:#aaa">${e.desc.substring(0,60)}...</span>`;
+            // Re-render feed
             const f = document.getElementById('feed');
-            // Insert at top if high priority
-            if(z >= 800) f.insertBefore(d, f.firstChild); else f.appendChild(d);
+            if(!document.getElementById(`feed-${e.id}`)) {
+                const d = document.createElement('div');
+                d.id = `feed-${e.id}`;
+                d.style.marginBottom = "5px"; d.style.borderBottom = "1px solid #333";
+                d.innerHTML = `<span class="${getColorClass(e.type)}" style="font-weight:bold">${e.title}</span><br><span style="color:#aaa">${e.desc.substring(0,60)}...</span>`;
+                if(z >= 800) f.insertBefore(d, f.firstChild); else f.appendChild(d);
+            }
         }
 
         function getColorClass(t) {
