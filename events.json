@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-27 02:05:57",
+  "last_updated": "2026-01-27 02:14:14",
   "features": [
     {
       "id": "RC-1",
@@ -53,7 +53,826 @@
       "lng": -93.1,
       "type": "protest",
       "desc": "Manual entry: Area of interest.",
-      "timestamp": "2026-01-27T02:05:57.378386"
+      "timestamp": "2026-01-27T02:14:14.342220"
+    },
+    {
+      "id": "arcgis-1",
+      "title": "Road Event",
+      "lat": 5733369.44339577,
+      "lng": -10483659.3192674,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340479"
+    },
+    {
+      "id": "arcgis-2",
+      "title": "Road Event",
+      "lat": 5733369.44339577,
+      "lng": -10483659.3192674,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340492"
+    },
+    {
+      "id": "arcgis-3",
+      "title": "Road Event",
+      "lat": 5599708.7632452,
+      "lng": -10371032.9376523,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340495"
+    },
+    {
+      "id": "arcgis-4",
+      "title": "Road Event",
+      "lat": 6064950.32801342,
+      "lng": -10439030.110894,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340498"
+    },
+    {
+      "id": "arcgis-5",
+      "title": "Road Event",
+      "lat": 6064950.32801342,
+      "lng": -10439030.110894,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340501"
+    },
+    {
+      "id": "arcgis-6",
+      "title": "Road Event",
+      "lat": 5603572.541467,
+      "lng": -10353191.0949459,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340503"
+    },
+    {
+      "id": "arcgis-7",
+      "title": "Road Event",
+      "lat": 5603572.541467,
+      "lng": -10353191.0949459,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340506"
+    },
+    {
+      "id": "arcgis-8",
+      "title": "Road Event",
+      "lat": 5599811.31731334,
+      "lng": -10374759.914204,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340508"
+    },
+    {
+      "id": "arcgis-9",
+      "title": "Road Event",
+      "lat": 5771138.4674093,
+      "lng": -10503492.5563446,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340510"
+    },
+    {
+      "id": "arcgis-10",
+      "title": "Road Event",
+      "lat": 5616974.33568136,
+      "lng": -10393686.1200702,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340513"
+    },
+    {
+      "id": "arcgis-11",
+      "title": "Road Event",
+      "lat": 5693921.69662774,
+      "lng": -10764475.4252154,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340516"
+    },
+    {
+      "id": "arcgis-12",
+      "title": "Road Event",
+      "lat": 5693921.69662774,
+      "lng": -10764475.4252154,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340518"
+    },
+    {
+      "id": "arcgis-13",
+      "title": "Road Event",
+      "lat": 5599806.29166574,
+      "lng": -10385862.5862573,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340520"
+    },
+    {
+      "id": "arcgis-14",
+      "title": "Road Event",
+      "lat": 5507244.64553568,
+      "lng": -10733879.9310878,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340523"
+    },
+    {
+      "id": "arcgis-15",
+      "title": "Road Event",
+      "lat": 5507244.64553568,
+      "lng": -10733879.9310878,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340525"
+    },
+    {
+      "id": "arcgis-16",
+      "title": "Road Event",
+      "lat": 5539497.22073864,
+      "lng": -10455365.132973,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340527"
+    },
+    {
+      "id": "arcgis-17",
+      "title": "Road Event",
+      "lat": 5622888.23552089,
+      "lng": -10694007.5158755,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340530"
+    },
+    {
+      "id": "arcgis-18",
+      "title": "Road Event",
+      "lat": 5622888.23552089,
+      "lng": -10694007.5158755,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340535"
+    },
+    {
+      "id": "arcgis-19",
+      "title": "Road Event",
+      "lat": 5587552.64624896,
+      "lng": -10384944.3117777,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340537"
+    },
+    {
+      "id": "arcgis-20",
+      "title": "Road Event",
+      "lat": 6042447.09118145,
+      "lng": -10777370.007112,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340539"
+    },
+    {
+      "id": "arcgis-21",
+      "title": "Road Event",
+      "lat": 5491680.63419814,
+      "lng": -10464756.0452163,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340542"
+    },
+    {
+      "id": "arcgis-22",
+      "title": "Road Event",
+      "lat": 5491694.29144299,
+      "lng": -10464580.8283378,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340544"
+    },
+    {
+      "id": "arcgis-23",
+      "title": "Road Event",
+      "lat": 6025750.33740239,
+      "lng": -10300737.796162,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340546"
+    },
+    {
+      "id": "arcgis-24",
+      "title": "Road Event",
+      "lat": 6025750.33740239,
+      "lng": -10300737.796162,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340548"
+    },
+    {
+      "id": "arcgis-25",
+      "title": "Road Event",
+      "lat": 5454919.94896959,
+      "lng": -10569431.2095626,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340551"
+    },
+    {
+      "id": "arcgis-26",
+      "title": "Road Event",
+      "lat": 5454919.94896959,
+      "lng": -10569431.2095626,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340553"
+    },
+    {
+      "id": "arcgis-27",
+      "title": "Road Event",
+      "lat": 5586190.75970408,
+      "lng": -10384792.1380338,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340558"
+    },
+    {
+      "id": "arcgis-28",
+      "title": "Road Event",
+      "lat": 5640663.50342226,
+      "lng": -10378955.4344925,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340560"
+    },
+    {
+      "id": "arcgis-29",
+      "title": "Road Event",
+      "lat": 5603226.57670025,
+      "lng": -10366606.3181009,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340562"
+    },
+    {
+      "id": "arcgis-30",
+      "title": "Road Event",
+      "lat": 5603226.57670025,
+      "lng": -10366606.3181009,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340565"
+    },
+    {
+      "id": "arcgis-31",
+      "title": "Road Event",
+      "lat": 5692807.35125784,
+      "lng": -10351515.402651,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340569"
+    },
+    {
+      "id": "arcgis-32",
+      "title": "Road Event",
+      "lat": 5599818.07053169,
+      "lng": -10385827.7432566,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340572"
+    },
+    {
+      "id": "arcgis-33",
+      "title": "Road Event",
+      "lat": 5599658.50746496,
+      "lng": -10386116.9512937,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340574"
+    },
+    {
+      "id": "arcgis-34",
+      "title": "Road Event",
+      "lat": 5975974.30051209,
+      "lng": -10295724.5228942,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340576"
+    },
+    {
+      "id": "arcgis-35",
+      "title": "Road Event",
+      "lat": 5921710.33780152,
+      "lng": -10771808.262713,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340579"
+    },
+    {
+      "id": "arcgis-36",
+      "title": "Road Event",
+      "lat": 6064950.32801342,
+      "lng": -10439030.110894,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340581"
+    },
+    {
+      "id": "arcgis-37",
+      "title": "Road Event",
+      "lat": 5607989.39086091,
+      "lng": -10391727.6762687,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340583"
+    },
+    {
+      "id": "arcgis-38",
+      "title": "Road Event",
+      "lat": 5649157.2831123,
+      "lng": -10378845.6734746,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340585"
+    },
+    {
+      "id": "arcgis-39",
+      "title": "Road Event",
+      "lat": 5478610.67944245,
+      "lng": -10479117.1500846,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340588"
+    },
+    {
+      "id": "arcgis-40",
+      "title": "Road Event",
+      "lat": 5478610.67944245,
+      "lng": -10479117.1500846,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340590"
+    },
+    {
+      "id": "arcgis-41",
+      "title": "Road Event",
+      "lat": 5585727.38232355,
+      "lng": -10456181.21616,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340592"
+    },
+    {
+      "id": "arcgis-42",
+      "title": "Road Event",
+      "lat": 5585727.38232355,
+      "lng": -10456181.21616,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340597"
+    },
+    {
+      "id": "arcgis-43",
+      "title": "Road Event",
+      "lat": 5649168.96870768,
+      "lng": -10378845.5621551,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340600"
+    },
+    {
+      "id": "arcgis-44",
+      "title": "Road Event",
+      "lat": 5613743.57005008,
+      "lng": -10364967.9178354,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340609"
+    },
+    {
+      "id": "arcgis-45",
+      "title": "Road Event",
+      "lat": 5613947.58254406,
+      "lng": -10360265.8938637,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340611"
+    },
+    {
+      "id": "arcgis-46",
+      "title": "Road Event",
+      "lat": 5492032.31474633,
+      "lng": -10464569.2511108,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340613"
+    },
+    {
+      "id": "arcgis-47",
+      "title": "Road Event",
+      "lat": 5491994.13518041,
+      "lng": -10464474.0729462,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340615"
+    },
+    {
+      "id": "arcgis-48",
+      "title": "Road Event",
+      "lat": 5901253.08780343,
+      "lng": -10252610.4841099,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340618"
+    },
+    {
+      "id": "arcgis-49",
+      "title": "Road Event",
+      "lat": 5901253.08780343,
+      "lng": -10252610.4841099,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340620"
+    },
+    {
+      "id": "arcgis-50",
+      "title": "Road Event",
+      "lat": 5672436.20632952,
+      "lng": -10322809.0002821,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340622"
+    },
+    {
+      "id": "arcgis-51",
+      "title": "Road Event",
+      "lat": 5672436.20632952,
+      "lng": -10322809.0002821,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340625"
+    },
+    {
+      "id": "arcgis-52",
+      "title": "Road Event",
+      "lat": 5511630.60829071,
+      "lng": -10329403.6782362,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340627"
+    },
+    {
+      "id": "arcgis-53",
+      "title": "Road Event",
+      "lat": 5511630.60829071,
+      "lng": -10329403.6782362,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340629"
+    },
+    {
+      "id": "arcgis-54",
+      "title": "Road Event",
+      "lat": 5465269.01712857,
+      "lng": -10269108.7005624,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340632"
+    },
+    {
+      "id": "arcgis-55",
+      "title": "Road Event",
+      "lat": 5465269.01712857,
+      "lng": -10269108.7005624,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340634"
+    },
+    {
+      "id": "arcgis-56",
+      "title": "Road Event",
+      "lat": 5611314.96430299,
+      "lng": -10580238.8849653,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340636"
+    },
+    {
+      "id": "arcgis-57",
+      "title": "Road Event",
+      "lat": 5611314.96430299,
+      "lng": -10580238.8849653,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340641"
+    },
+    {
+      "id": "arcgis-58",
+      "title": "Road Event",
+      "lat": 5614130.99323979,
+      "lng": -10363285.2124125,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340643"
+    },
+    {
+      "id": "arcgis-59",
+      "title": "Road Event",
+      "lat": 5614009.40065555,
+      "lng": -10357892.8962785,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340648"
+    },
+    {
+      "id": "arcgis-60",
+      "title": "Road Event",
+      "lat": 5613422.85348391,
+      "lng": -10348158.5634061,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340650"
+    },
+    {
+      "id": "arcgis-61",
+      "title": "Road Event",
+      "lat": 5613422.85348391,
+      "lng": -10348158.5634061,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340652"
+    },
+    {
+      "id": "arcgis-62",
+      "title": "Road Event",
+      "lat": 5613200.13598025,
+      "lng": -10357194.4777933,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340654"
+    },
+    {
+      "id": "arcgis-63",
+      "title": "Road Event",
+      "lat": 5570087.91290779,
+      "lng": -10424037.2679155,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340657"
+    },
+    {
+      "id": "arcgis-64",
+      "title": "Road Event",
+      "lat": 5491792.53108877,
+      "lng": -10464672.2216398,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340659"
+    },
+    {
+      "id": "arcgis-65",
+      "title": "Road Event",
+      "lat": 5569824.7780984,
+      "lng": -10423872.1811107,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340661"
+    },
+    {
+      "id": "arcgis-66",
+      "title": "Road Event",
+      "lat": 5661762.70783925,
+      "lng": -10350936.9865768,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340664"
+    },
+    {
+      "id": "arcgis-67",
+      "title": "Road Event",
+      "lat": 5661762.70783925,
+      "lng": -10350936.9865768,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340666"
+    },
+    {
+      "id": "arcgis-68",
+      "title": "Road Event",
+      "lat": 5976926.06456929,
+      "lng": -10295721.07199,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340668"
+    },
+    {
+      "id": "arcgis-69",
+      "title": "Road Event",
+      "lat": 5976926.06456929,
+      "lng": -10295721.07199,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340671"
+    },
+    {
+      "id": "arcgis-70",
+      "title": "Road Event",
+      "lat": 5599871.62530235,
+      "lng": -10382718.1446008,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340675"
+    },
+    {
+      "id": "arcgis-71",
+      "title": "Road Event",
+      "lat": 5599883.87541177,
+      "lng": -10381140.5247773,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340677"
+    },
+    {
+      "id": "arcgis-72",
+      "title": "Road Event",
+      "lat": 5416130.91026682,
+      "lng": -10350491.0406967,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340680"
+    },
+    {
+      "id": "arcgis-73",
+      "title": "Road Event",
+      "lat": 5416198.48394265,
+      "lng": -10349371.9458557,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340682"
+    },
+    {
+      "id": "arcgis-74",
+      "title": "Road Event",
+      "lat": 5416158.61695338,
+      "lng": -10350204.8382859,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340684"
+    },
+    {
+      "id": "arcgis-75",
+      "title": "Road Event",
+      "lat": 5599726.98103452,
+      "lng": -10383487.3622822,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340686"
+    },
+    {
+      "id": "arcgis-76",
+      "title": "Road Event",
+      "lat": 5599823.56734105,
+      "lng": -10383490.256589,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340689"
+    },
+    {
+      "id": "arcgis-77",
+      "title": "Road Event",
+      "lat": 5599818.54168665,
+      "lng": -10381232.0293987,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340691"
+    },
+    {
+      "id": "arcgis-78",
+      "title": "Road Event",
+      "lat": 6041849.69191055,
+      "lng": -10777374.3485721,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340694"
+    },
+    {
+      "id": "arcgis-79",
+      "title": "Road Event",
+      "lat": 6041849.69191055,
+      "lng": -10777374.3485721,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340696"
+    },
+    {
+      "id": "arcgis-80",
+      "title": "Road Event",
+      "lat": 5581246.62500164,
+      "lng": -10383525.3222286,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340698"
+    },
+    {
+      "id": "arcgis-81",
+      "title": "Road Event",
+      "lat": 5587520.02381748,
+      "lng": -10381462.2381057,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340701"
+    },
+    {
+      "id": "arcgis-82",
+      "title": "Road Event",
+      "lat": 5587433.13579937,
+      "lng": -10384610.1306663,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340703"
+    },
+    {
+      "id": "arcgis-83",
+      "title": "Road Event",
+      "lat": 5613733.97512725,
+      "lng": -10364247.9033689,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340708"
+    },
+    {
+      "id": "arcgis-84",
+      "title": "Road Event",
+      "lat": 5886309.81947196,
+      "lng": -10265945.3345926,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340710"
+    },
+    {
+      "id": "arcgis-85",
+      "title": "Road Event",
+      "lat": 5886309.81947196,
+      "lng": -10265945.3345926,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340712"
+    },
+    {
+      "id": "arcgis-86",
+      "title": "Road Event",
+      "lat": 5606663.55922627,
+      "lng": -10449541.4538122,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340715"
+    },
+    {
+      "id": "arcgis-87",
+      "title": "Road Event",
+      "lat": 5606663.55922627,
+      "lng": -10449541.4538122,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340717"
+    },
+    {
+      "id": "arcgis-88",
+      "title": "Road Event",
+      "lat": 5714380.35724435,
+      "lng": -10395993.7731144,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340719"
+    },
+    {
+      "id": "arcgis-89",
+      "title": "Road Event",
+      "lat": 5714380.35724435,
+      "lng": -10395993.7731144,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340721"
+    },
+    {
+      "id": "arcgis-90",
+      "title": "Road Event",
+      "lat": 5771138.4674093,
+      "lng": -10503492.5563446,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340726"
+    },
+    {
+      "id": "arcgis-91",
+      "title": "Road Event",
+      "lat": 5771138.4674093,
+      "lng": -10503492.5563446,
+      "type": "road_closure",
+      "desc": "No details.",
+      "timestamp": "2026-01-27T02:14:14.340728"
     }
   ]
 }
