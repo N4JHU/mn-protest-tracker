@@ -16,21 +16,26 @@
         body { margin: 0; padding: 0; background-color: #1a1a1a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
         #map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #222; }
         
-        /* HUD PANELS - MOBILE OPTIMIZED */
+        /* HUD PANELS */
         .hud-panel {
             position: absolute; background: rgba(0, 0, 0, 0.9); border: 1px solid #444; color: #ddd;
             padding: 8px; border-radius: 4px; backdrop-filter: blur(5px); z-index: 1000;
             font-size: 11px;
         }
         
-        /* Layout */
+        /* LAYOUT */
         .top-left { top: 10px; left: 10px; width: 180px; }
         .top-right { top: 10px; right: 10px; width: 160px; max-height: 40vh; overflow-y: auto; text-align: right; }
-        .bottom-left { bottom: 20px; left: 10px; pointer-events: none; }
+        /* NEW MINI LEGEND */
+        .bottom-bar { 
+            bottom: 20px; left: 50%; transform: translateX(-50%); 
+            display: flex; gap: 15px; white-space: nowrap; 
+            background: rgba(0,0,0,0.8); border: 1px solid #444; 
+            padding: 6px 12px; border-radius: 20px; 
+        }
         
         h2 { margin: 0 0 5px 0; font-size: 0.75rem; color: #ff5555; text-transform: uppercase; border-bottom: 1px solid #ff5555; padding-bottom: 2px; }
         .info-row { display: flex; justify-content: space-between; margin-bottom: 2px; }
-        .info-val { color: #fff; font-weight: bold; }
         .red { color: #ff5555; } .orange { color: #ffaa00; } .purple { color: #d400ff; }
 
         /* SWITCH */
@@ -59,6 +64,9 @@
         #report-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 300px; background: #111; border: 1px solid #d400ff; z-index: 2000; padding: 15px; }
         .form-group { margin-bottom: 10px; }
         .form-input, select { width: 100%; background: #222; color: #fff; border: 1px solid #444; padding: 5px; }
+        
+        /* LEGEND DOTS */
+        .dot { height: 8px; width: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
     </style>
 </head>
 <body>
@@ -84,6 +92,12 @@
         <div id="feed-container"></div>
     </div>
 
+    <div class="hud-panel bottom-bar">
+        <div><span class="dot" style="background:#ff3333"></span>Threat</div>
+        <div><span class="dot" style="background:#ffaa00"></span>Road</div>
+        <div><span class="dot" style="background:#d400ff"></span>User</div>
+    </div>
+
     <div id="report-modal">
         <h2 style="color:#d400ff">FIELD REPORT</h2>
         <div class="form-group">
@@ -100,182 +114,80 @@
     </div>
 
     <script>
-    // --- 1. SUPABASE CONFIG ---
-    const SB_URL = 'https://mymlbldoignrhvkfqcnz.supabase.co'; 
-    const SB_KEY = 'sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh';
-    const metroDB = window.supabase.createClient(SB_URL, SB_KEY);
+        const SB_URL = 'https://mymlbldoignrhvkfqcnz.supabase.co'; 
+        const SB_KEY = 'sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh';
+        const metroDB = window.supabase.createClient(SB_URL, SB_KEY);
 
-    // --- GLOBALS ---
-    let map; 
-    let activeMarkers = []; 
-    let foundLocation = null;
-    let userMarker = null;
-    let watchId = null; // NEW: Tracks the GPS process so we can kill it
+        let map, activeMarkers=[], foundLocation=null, userMarker=null, watchId=null;
 
-    // --- LEAFLET MAP INIT ---
-    function initMap() {
-        map = L.map('map', { zoomControl: false, attributionControl: false }).setView([44.9778, -93.2650], 11);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
-        
-        loadInitialData();
-        subscribeToLiveUpdates();
-        setupUserLocation();
-    }
-
-    // --- 2. USER LOCATION FIX ---
-    function setupUserLocation() {
-        const el = document.getElementById('user-loc-toggle');
-        el.addEventListener('change', function() {
-            if(this.checked) {
-                // TURN ON
-                if (navigator.geolocation) {
+        function initMap() {
+            map = L.map('map', { zoomControl: false }).setView([44.9778, -93.2650], 11);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+            loadInitialData();
+            metroDB.channel('live').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'events' }, p => {
+                plotEvent(p.new); 
+                document.getElementById('connection-status').innerText="RX DATA..."; setTimeout(()=>{document.getElementById('connection-status').innerText="SECURE"},1000);
+            }).subscribe();
+            
+            document.getElementById('user-loc-toggle').addEventListener('change', function() {
+                if(this.checked && navigator.geolocation) {
                     watchId = navigator.geolocation.watchPosition(pos => {
-                        const lat = pos.coords.latitude;
-                        const lng = pos.coords.longitude;
-                        
-                        // Update Marker
+                        const lat=pos.coords.latitude, lng=pos.coords.longitude;
                         if(userMarker) map.removeLayer(userMarker);
-                        const userIcon = L.divIcon({className:'', html:`<div class="pulse-marker type-user pulse"></div>`, iconSize:[20,20], iconAnchor:[10,10]});
-                        userMarker = L.marker([lat, lng], {icon: userIcon}).addTo(map);
-                        
-                        // Pan Map
-                        map.setView([lat, lng], 14);
-                    }, err => {
-                        console.error(err);
-                        this.checked = false; // Turn off if error
-                        alert("GPS Error: " + err.message);
-                    }, { enableHighAccuracy: true });
+                        userMarker = L.marker([lat,lng], {icon: L.divIcon({className:'', html:'<div class="pulse-marker type-user pulse"></div>'})}).addTo(map);
+                        map.setView([lat,lng], 14);
+                    }, e => { alert("GPS Error"); this.checked=false; }, {enableHighAccuracy:true});
+                } else {
+                    if(watchId) navigator.geolocation.clearWatch(watchId);
+                    if(userMarker) map.removeLayer(userMarker);
                 }
-            } else {
-                // TURN OFF (The Fix)
-                if (watchId !== null) {
-                    navigator.geolocation.clearWatch(watchId); // STOP TRACKING
-                    watchId = null;
-                }
-                if (userMarker) {
-                    map.removeLayer(userMarker); // REMOVE DOT
-                    userMarker = null;
-                }
-            }
-        });
-    }
-
-    // --- 3. LIVE DATA ENGINE ---
-    function createPulseMarker(lat, lng, type, title, desc) {
-        const pulseIcon = L.divIcon({ className:'', html:`<div class="pulse-marker type-${type} pulse"></div>`, iconSize:[20,20], iconAnchor:[10,10] });
-        const marker = L.marker([lat, lng], {icon: pulseIcon}).addTo(map);
-        const popupContent = `<div class="popup-box"><div class="popup-title" style="color:${getColor(type)}">${title}</div><div class="popup-desc">${desc}</div></div>`;
-        marker.bindPopup(popupContent);
-        return marker;
-    }
-
-    function getColor(type) {
-        if(type === 'report') return '#d400ff';
-        if(type === 'protest') return '#ff5555';
-        if(type === 'road_closure') return '#ffaa00';
-        return '#00ccff';
-    }
-
-    async function loadInitialData() {
-        document.getElementById('connection-status').innerText = "Fetching Data...";
-        const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-        const { data, error } = await metroDB.from('events').select('*').gt('timestamp', yesterday);
-
-        if (error) { document.getElementById('connection-status').innerText = "DATA ERROR"; return; }
-
-        activeMarkers.forEach(m => map.removeLayer(m));
-        activeMarkers = [];
-        let p=0, r=0, rep=0;
-        document.getElementById('feed-container').innerHTML = ""; // Clear feed
-
-        if(data) {
-            data.forEach(e => {
-                const m = createPulseMarker(e.lat, e.lng, e.type, e.title, e.desc);
-                activeMarkers.push(m);
-                addFeedItem(e); // Populate feed
-                if(e.type==='protest') p++; if(e.type==='road_closure') r++; if(e.type==='report') rep++;
             });
         }
-        updateCounts(p, r, rep);
-        document.getElementById('connection-status').innerText = "LIVE (SECURE)";
-        document.getElementById('connection-status').style.color = "#00ff00";
-    }
 
-    function subscribeToLiveUpdates() {
-        metroDB.channel('live_events').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'events' }, payload => {
-            const e = payload.new;
-            const m = createPulseMarker(e.lat, e.lng, e.type, e.title, e.desc);
-            activeMarkers.push(m);
-            addFeedItem(e);
-            
-            // Auto-update counts (simplified)
-            let p = parseInt(document.getElementById('count-protest').innerText);
-            let r = parseInt(document.getElementById('count-road').innerText);
-            let rep = parseInt(document.getElementById('count-report').innerText);
-            if(e.type==='protest') p++; if(e.type==='road_closure') r++; if(e.type==='report') rep++;
-            updateCounts(p, r, rep);
-
-            const s = document.getElementById('connection-status');
-            s.innerText = "INCOMING INTEL..."; s.style.color = "white";
-            setTimeout(() => { s.innerText = "LIVE (SECURE)"; s.style.color = "#00ff00"; }, 2000);
-        }).subscribe();
-    }
-
-    function updateCounts(p, r, rep) {
-        document.getElementById('count-protest').innerText = p;
-        document.getElementById('count-road').innerText = r;
-        document.getElementById('count-report').innerText = rep;
-    }
-
-    // --- 4. SUBMIT & UTILS ---
-    async function submitReport() {
-        const t = document.getElementById('rpt-type').value;
-        const d = document.getElementById('rpt-desc').value;
-        if(!d) return alert("Desc required");
-        let lat, lng;
-        if(foundLocation) { lat=foundLocation.lat; lng=foundLocation.lng; } 
-        else { const c=map.getCenter(); lat=c.lat; lng=c.lng; }
-
-        await metroDB.from('events').insert([{ id:`usr-${Date.now()}`, title:`RPT: ${t}`, desc:d, type:'report', lat:lat, lng:lng, timestamp:new Date().toISOString() }]);
-        closeReportModal();
-        document.getElementById('rpt-desc').value = "";
-    }
-
-    function executeTwitterScan() {
-        const k = '("#MinneapolisProtest" OR "#ICE" OR "#ImmigrationAgents" OR "#WhippleFederalBuilding" OR "#BreakingNews") -filter:replies';
-        window.open(`https://twitter.com/search?q=${encodeURIComponent(k)}&src=typed_query&f=live`, '_blank');
-    }
-
-    function performGeoSearch() {
-        const q = document.getElementById('geo-input').value;
-        if(!q) return;
-        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q+" Minnesota")}`).then(r=>r.json()).then(d=>{
-            if(d[0]) { 
-                foundLocation={lat:parseFloat(d[0].lat), lng:parseFloat(d[0].lon)}; 
-                map.setView([foundLocation.lat,foundLocation.lng], 15); 
-                L.circleMarker([foundLocation.lat,foundLocation.lng],{color:'green',radius:10}).addTo(map);
-                document.getElementById('geo-status').innerText="LOCKED"; 
-                document.getElementById('geo-status').style.color="#0f0"; 
+        async function loadInitialData() {
+            const { data } = await metroDB.from('events').select('*').gt('timestamp', new Date(Date.now()-86400000).toISOString());
+            if(data) {
+                let p=0, r=0;
+                document.getElementById('feed-container').innerHTML = "";
+                data.forEach(e => { plotEvent(e); if(e.type=='protest') p++; if(e.type=='report') r++; });
+                document.getElementById('count-protest').innerText = p;
+                document.getElementById('count-report').innerText = r;
+                document.getElementById('connection-status').innerText = "SECURE";
+                document.getElementById('connection-status').style.color = "#00ff00";
             }
-        });
-    }
+        }
 
-    function openReportModal(){document.getElementById('report-modal').style.display='block'}
-    function closeReportModal(){document.getElementById('report-modal').style.display='none'}
-    
-    function addFeedItem(e) {
-        const c = document.getElementById('feed-container');
-        const t = new Date(e.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-        let col = getColor(e.type);
-        const d = document.createElement('div');
-        d.className = "feed-item";
-        d.innerHTML = `<div class="feed-header"><span class="feed-time">${t}</span></div><div class="feed-text"><strong style="color:${col}">${e.title}</strong><br>${e.desc.substring(0,80)}...</div>`;
-        c.insertBefore(d, c.firstChild);
-    }
+        function plotEvent(e) {
+            const icon = L.divIcon({ className:'', html:`<div class="pulse-marker type-${e.type} pulse"></div>` });
+            const m = L.marker([e.lat, e.lng], {icon}).addTo(map).bindPopup(`<b style="color:${e.type=='report'?'#d400ff':'#ff5555'}">${e.title}</b><br>${e.desc}`);
+            activeMarkers.push(m);
+            const d = document.createElement('div');
+            d.innerHTML = `<div style="border-bottom:1px solid #333; margin-bottom:4px; padding-bottom:4px; font-size:10px;"><span style="color:${e.type=='report'?'#d400ff':'#ff5555'}">${e.title}</span><br>${e.desc}</div>`;
+            const c = document.getElementById('feed-container'); c.insertBefore(d, c.firstChild);
+        }
 
-    setInterval(()=>{document.getElementById('clock-display').innerText=new Date().toLocaleTimeString()},1000);
-    if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
-    initMap();
+        function performGeoSearch() {
+            const q = document.getElementById('geo-input').value;
+            if(!q) return;
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${q} Minnesota`).then(r=>r.json()).then(d=>{
+                if(d[0]) { foundLocation={lat:d[0].lat, lng:d[0].lon}; map.setView([d[0].lat,d[0].lon], 15); document.getElementById('geo-status').innerText="LOCKED"; document.getElementById('geo-status').style.color="#0f0"; }
+            });
+        }
+
+        async function submitReport() {
+            const t = document.getElementById('rpt-type').value, d = document.getElementById('rpt-desc').value;
+            if(!d) return alert("Desc required");
+            const loc = foundLocation || map.getCenter();
+            await metroDB.from('events').insert([{ id:`usr-${Date.now()}`, title:`RPT: ${t}`, desc:d, type:'report', lat:loc.lat||loc.lat(), lng:loc.lng||loc.lng(), timestamp:new Date().toISOString() }]);
+            closeReportModal();
+        }
+
+        function openReportModal(){document.getElementById('report-modal').style.display='block'}
+        function closeReportModal(){document.getElementById('report-modal').style.display='none'}
+        setInterval(()=>{document.getElementById('clock-display').innerText=new Date().toLocaleTimeString()},1000);
+
+        if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+        initMap();
     </script>
 </body>
 </html>
