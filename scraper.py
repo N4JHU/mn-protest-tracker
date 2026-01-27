@@ -11,9 +11,34 @@ SUPABASE_KEY = "sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # --- 2. INTELLIGENCE SOURCES ---
-NEWS_QUERY = "(protest OR riot OR police OR ICE OR whipple OR standoff OR crash) AND (site:startribune.com OR site:wcco.com OR site:kstp.com OR site:mprnews.org) when:12h"
+# Broad search to catch everything, then we filter in Python
+NEWS_QUERY = "(protest OR riot OR police OR ICE OR whipple OR standoff OR crash OR arrest) AND (site:startribune.com OR site:wcco.com OR site:kstp.com OR site:mprnews.org) when:12h"
 NEWS_RSS_URL = f"https://news.google.com/rss/search?q={requests.utils.quote(NEWS_QUERY)}&ceid=US:en&hl=en-US&gl=US"
 ARCGIS_URL = "https://www.arcgis.com/sharing/rest/content/items/081587d29d944a89ad189b1633e509e4?f=json"
+
+# --- 3. THE "BRAIN" (CLASSIFIER) ---
+def analyze_intel(text):
+    text = text.lower()
+    
+    # 1. IGNORE (Noise Filter)
+    ignore_words = ["sports", "varsity", "hockey", "basketball", "baseball", "recipe", "weather", "forecast", "lottery", "gophers", "vikings", "twins", "wild", "wolves"]
+    if any(x in text for x in ignore_words):
+        return None # Throw away
+
+    # 2. SEVERE THREAT (RED)
+    if any(x in text for x in ["riot", "protest", "shoot", "fire", "kill", "dead", "standoff", "gun", "attack", "threat", "emergency"]):
+        return "protest" # Red
+
+    # 3. POLICE / GOV (BLUE)
+    if any(x in text for x in ["police", "cop", "officer", "sheriff", "trooper", "ice", "agent", "arrest", "federal", "court", "judge", "jail", "charged"]):
+        return "police" # Blue
+
+    # 4. TRAFFIC (ORANGE)
+    if any(x in text for x in ["crash", "accident", "closed", "closure", "blocked", "traffic", "detour"]):
+        return "road_closure" # Orange
+
+    # 5. GENERAL INTEL (GREY)
+    return "intel" # Grey
 
 LOCATIONS = {
     "whipple": (44.8940, -93.1760),
@@ -28,7 +53,7 @@ def get_utc_now():
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 def get_intel():
-    print("--- STARTING TACTICAL SCAN ---")
+    print("--- STARTING INTELLIGENT SCAN ---")
     events = []
     
     # --- PHASE 1: NEWS SCAN ---
@@ -38,11 +63,18 @@ def get_intel():
         root = ET.fromstring(resp.content)
         for item in root.findall('.//item'):
             title = item.find('title').text
-            lat, lng = 44.9778, -93.2650 # Default
+            
+            # CLASSIFY
+            event_type = analyze_intel(title)
+            if not event_type:
+                continue # Skip Noise
+            
+            # LOCATE
+            lat, lng = 44.9778, -93.2650
             for key, coords in LOCATIONS.items():
                 if key in title.lower(): lat, lng = coords; break
             
-            # Jitter to prevent stacking
+            # Jitter
             lat += random.uniform(-0.015, 0.015)
             lng += random.uniform(-0.015, 0.015)
             
@@ -50,7 +82,7 @@ def get_intel():
                 "id": f"news-{hash(title)}",
                 "title": f"INTEL: {title[:60]}...",
                 "lat": lat, "lng": lng, 
-                "type": "protest",
+                "type": event_type,
                 "desc": title, 
                 "timestamp": get_utc_now()
             })
@@ -58,21 +90,20 @@ def get_intel():
 
     # --- PHASE 2: TRAFFIC SCAN ---
     try:
-        print("Scanning DOT Road Sensors...")
+        print("Scanning Road Sensors...")
         meta = requests.get(ARCGIS_URL, timeout=10).json()
         if 'url' in meta:
             query_url = f"{meta['url']}/0/query"
             params = {"where": "1=1", "outFields": "*", "f": "json"}
             features = requests.get(query_url, params=params, timeout=15).json().get("features", [])
-            
             for f in features:
                 attr = f.get('attributes', {})
                 geom = f.get('geometry', {})
                 if 'y' in geom:
-                    raw_title = attr.get('Headline') or attr.get('EventType') or "Road Closure"
+                    title = attr.get('Headline') or attr.get('EventType') or "Road Closure"
                     events.append({
                         "id": f"road-{attr.get('EventID', random.randint(10000,99999))}",
-                        "title": f"TRAFFIC: {raw_title}",
+                        "title": f"TRAFFIC: {title}",
                         "lat": geom['y'], "lng": geom['x'], 
                         "type": "road_closure",
                         "desc": attr.get('EventDescription', 'Check 511mn.org'),
@@ -82,22 +113,15 @@ def get_intel():
 
     # --- PHASE 3: DEDUPLICATE & UPLOAD ---
     if events:
-        print(f"Raw Intel Count: {len(events)}")
-        
-        # *** THE FIX: Remove duplicates by ID ***
-        # This creates a dictionary where the Key is the ID. 
-        # If two items have the same ID, the second one overwrites the first, automatically removing duplicates.
         unique_events = {e['id']: e for e in events}.values()
         clean_list = list(unique_events)
-        
-        print(f"Clean Intel Count: {len(clean_list)} (Removed {len(events) - len(clean_list)} duplicates)")
-        
+        print(f"Uploading {len(clean_list)} Verified Intel Items...")
         try:
-            data, count = supabase.table('events').upsert(clean_list).execute()
+            supabase.table('events').upsert(clean_list).execute()
             print("--- UPLOAD SUCCESSFUL ---")
         except Exception as e: print(f"!! Upload Failed: {e}")
     else:
-        print("--- NO NEW INTEL FOUND ---")
+        print("--- NO RELEVANT INTEL FOUND ---")
 
 if __name__ == "__main__":
     get_intel()
