@@ -2,8 +2,8 @@ name: Update Map Data
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # CHANGED: Runs every 5 minutes (Max Speed)
-  workflow_dispatch: # Allows manual trigger
+    - cron: '*/5 * * * *' # Runs every 5 minutes
+  workflow_dispatch: # Allows manual button click
 
 permissions:
   contents: write
@@ -20,6 +20,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
+      # --- THIS WAS MISSING ---
+      - name: Install Dependencies
+        run: pip install requests
+      # ------------------------
 
       - name: Run Scraper
         run: python scraper.py
