@@ -46,6 +46,9 @@
         .feed-time { color: #ff5555; font-size: 0.65rem; font-weight: bold; font-family: monospace; }
         .feed-text { font-size: 0.65rem; line-height: 1.3; color: #bbb; }
         
+        /* DIAGNOSTIC ERROR BOX */
+        #error-display { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #500; color: #fff; font-family: monospace; font-size: 12px; padding: 10px; z-index: 99999; border-top: 2px solid #f00; }
+
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: #444; }
@@ -82,11 +85,12 @@
         .popup-desc { font-size: 12px; color: #ccc; }
     </style>
     
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQwEfQg_ECrQw744IEqmR-XmxAt2lcT1I&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQwEfQg_ECrQw744IEqmR-XmxAt2lcT1I&callback=initMap" async defer onerror="showError('FAILED TO LOAD GOOGLE MAPS API')"></script>
 </head>
 <body>
 
     <div id="map"></div>
+    <div id="error-display"></div>
 
     <div class="hud-panel top-left">
         <h2>Operation Metro Surge</h2>
@@ -154,10 +158,28 @@
     </div>
 
     <script>
-        // --- 1. SUPABASE CONFIGURATION (KEYS INSERTED) ---
+        // --- ERROR HANDLER ---
+        function showError(msg) {
+            const el = document.getElementById('error-display');
+            el.style.display = 'block';
+            el.innerText = "SYSTEM ERROR: " + msg;
+            console.error(msg);
+        }
+
+        // --- 1. SUPABASE CONFIGURATION (SAFE MODE) ---
         const SB_URL = 'https://mymlbldoignrhvkfqcnz.supabase.co'; 
         const SB_KEY = 'sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh';
-        const supabase = window.supabase.createClient(SB_URL, SB_KEY);
+        let supabase = null;
+
+        try {
+            if (window.supabase) {
+                supabase = window.supabase.createClient(SB_URL, SB_KEY);
+            } else {
+                showError("Supabase Library Not Loaded. Check Internet Connection.");
+            }
+        } catch (e) {
+            showError("Supabase Init Failed: " + e.message);
+        }
 
         // --- GLOBALS ---
         let map; 
@@ -167,138 +189,137 @@
 
         // --- MAP INIT ---
         function initMap() {
-            // DEFINE MARKER
-            HTMLMarker = class extends google.maps.OverlayView {
-                constructor(position, type, title, desc, map) {
-                    super();
-                    this.position = position;
-                    this.type = type;
-                    this.title = title;
-                    this.desc = desc;
-                    this.div = null;
-                    this.setMap(map);
-                }
-                onAdd() {
-                    const div = document.createElement("div");
-                    div.className = `pulse-marker type-${this.type} pulse`;
-                    div.addEventListener("click", () => {
-                        const content = `<div class="popup-box"><div class="popup-title" style="color:${this.getColor()}">${this.title}</div><div class="popup-desc">${this.desc}</div></div>`;
-                        const infoWindow = new google.maps.InfoWindow({ content: content, position: this.position });
-                        infoWindow.open(this.getMap());
-                    });
-                    this.div = div;
-                    const panes = this.getPanes();
-                    panes.overlayMouseTarget.appendChild(div);
-                }
-                getColor() {
-                    if(this.type === 'report') return '#d400ff';
-                    if(this.type === 'protest') return '#ff5555';
-                    if(this.type === 'road_closure') return '#ffaa00';
-                    return '#00ccff';
-                }
-                draw() {
-                    const overlayProjection = this.getProjection();
-                    const position = overlayProjection.fromLatLngToDivPixel(this.position);
-                    if (this.div) { this.div.style.left = position.x + "px"; this.div.style.top = position.y + "px"; }
-                }
-                onRemove() { if (this.div) { this.div.parentNode.removeChild(this.div); this.div = null; } }
-            };
+            try {
+                // DEFINE MARKER
+                HTMLMarker = class extends google.maps.OverlayView {
+                    constructor(position, type, title, desc, map) {
+                        super();
+                        this.position = position;
+                        this.type = type;
+                        this.title = title;
+                        this.desc = desc;
+                        this.div = null;
+                        this.setMap(map);
+                    }
+                    onAdd() {
+                        const div = document.createElement("div");
+                        div.className = `pulse-marker type-${this.type} pulse`;
+                        div.addEventListener("click", () => {
+                            const content = `<div class="popup-box"><div class="popup-title" style="color:${this.getColor()}">${this.title}</div><div class="popup-desc">${this.desc}</div></div>`;
+                            const infoWindow = new google.maps.InfoWindow({ content: content, position: this.position });
+                            infoWindow.open(this.getMap());
+                        });
+                        this.div = div;
+                        const panes = this.getPanes();
+                        panes.overlayMouseTarget.appendChild(div);
+                    }
+                    getColor() {
+                        if(this.type === 'report') return '#d400ff';
+                        if(this.type === 'protest') return '#ff5555';
+                        if(this.type === 'road_closure') return '#ffaa00';
+                        return '#00ccff';
+                    }
+                    draw() {
+                        const overlayProjection = this.getProjection();
+                        const position = overlayProjection.fromLatLngToDivPixel(this.position);
+                        if (this.div) { this.div.style.left = position.x + "px"; this.div.style.top = position.y + "px"; }
+                    }
+                    onRemove() { if (this.div) { this.div.parentNode.removeChild(this.div); this.div = null; } }
+                };
 
-            const darkStyle = [
-                { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-                { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-                { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-                { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
-                { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
-                { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }
-            ];
+                const darkStyle = [
+                    { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+                    { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+                    { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+                    { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
+                    { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
+                    { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }
+                ];
 
-            map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 11,
-                center: { lat: 44.9778, lng: -93.2650 },
-                styles: darkStyle, disableDefaultUI: true 
-            });
+                map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 11,
+                    center: { lat: 44.9778, lng: -93.2650 },
+                    styles: darkStyle, disableDefaultUI: true 
+                });
 
-            // Start Data Flow
-            loadInitialData();
-            subscribeToLiveUpdates();
-            setupUserLocation();
+                // Start Data Flow only if Supabase is alive
+                if(supabase) {
+                    loadInitialData();
+                    subscribeToLiveUpdates();
+                }
+                setupUserLocation();
+
+            } catch (e) {
+                showError("Map Crash: " + e.message);
+            }
         }
 
-        // --- 2. LIVE DATA ENGINE (REPLACES JSON FETCH) ---
+        // --- 2. LIVE DATA ENGINE ---
         async function loadInitialData() {
             document.getElementById('connection-status').innerText = "Fetching Data...";
             
-            // Get last 24 hours of data
-            const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-            
-            const { data, error } = await supabase
-                .from('events')
-                .select('*')
-                .gt('timestamp', yesterday);
+            try {
+                const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                const { data, error } = await supabase.from('events').select('*').gt('timestamp', yesterday);
 
-            if (error) {
-                console.error("Supabase Error:", error);
+                if (error) throw error;
+
+                // Clear & Draw
+                activeMarkers.forEach(m => m.setMap(null));
+                activeMarkers = [];
+                
+                let pCount=0, rCount=0, repCount=0;
+                const feedData = [];
+
+                if(data) {
+                    data.forEach(event => {
+                        const pos = new google.maps.LatLng(event.lat, event.lng);
+                        const marker = new HTMLMarker(pos, event.type, event.title, event.desc, map);
+                        activeMarkers.push(marker);
+                        feedData.push(event);
+
+                        if(event.type === 'protest') pCount++;
+                        if(event.type === 'road_closure') rCount++;
+                        if(event.type === 'report') repCount++;
+                    });
+                }
+
+                document.getElementById('count-protest').innerText = pCount;
+                document.getElementById('count-road').innerText = rCount;
+                document.getElementById('count-report').innerText = repCount;
+                
+                document.getElementById('connection-status').innerText = "LIVE (SECURE)";
+                document.getElementById('connection-status').style.color = "#00ff00";
+                
+                updateFeed(feedData);
+            } catch (e) {
+                console.error(e);
                 document.getElementById('connection-status').innerText = "DATA ERROR";
-                return;
+                showError("Database Error: " + e.message);
             }
-
-            // Clear & Draw
-            activeMarkers.forEach(m => m.setMap(null));
-            activeMarkers = [];
-            
-            let pCount=0, rCount=0, repCount=0;
-            const feedData = [];
-
-            data.forEach(event => {
-                const pos = new google.maps.LatLng(event.lat, event.lng);
-                const marker = new HTMLMarker(pos, event.type, event.title, event.desc, map);
-                activeMarkers.push(marker);
-                feedData.push(event);
-
-                if(event.type === 'protest') pCount++;
-                if(event.type === 'road_closure') rCount++;
-                if(event.type === 'report') repCount++;
-            });
-
-            document.getElementById('count-protest').innerText = pCount;
-            document.getElementById('count-road').innerText = rCount;
-            document.getElementById('count-report').innerText = repCount;
-            
-            document.getElementById('connection-status').innerText = "LIVE (SECURE)";
-            document.getElementById('connection-status').style.color = "#00ff00";
-            
-            updateFeed(feedData);
         }
 
         function subscribeToLiveUpdates() {
+            if(!supabase) return;
             supabase
                 .channel('live_events')
                 .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'events' }, payload => {
                     const newEvent = payload.new;
-                    console.log("NEW EVENT RECEIVED:", newEvent);
-                    
-                    // Instant Plot
                     const pos = new google.maps.LatLng(newEvent.lat, newEvent.lng);
                     const marker = new HTMLMarker(pos, newEvent.type, newEvent.title, newEvent.desc, map);
                     activeMarkers.push(marker);
-                    
-                    // Update Feed
                     addFeedItem(newEvent);
-                    
-                    // Flash Status
                     const status = document.getElementById('connection-status');
                     status.innerText = "INCOMING INTEL...";
                     status.style.color = "white";
                     setTimeout(() => { status.innerText = "LIVE (SECURE)"; status.style.color = "#00ff00"; }, 2000);
-
                 })
                 .subscribe();
         }
 
-        // --- 3. SUBMIT TO DATABASE (INSTEAD OF GITHUB) ---
+        // --- 3. SUBMIT REPORT ---
         async function submitReport() {
-            if (!HTMLMarker) return;
+            if (!HTMLMarker || !supabase) return;
             const type = document.getElementById('rpt-type').value;
             const desc = document.getElementById('rpt-desc').value;
             if(!desc) { alert("Please enter a description."); return; }
@@ -308,7 +329,7 @@
             else { const center = map.getCenter(); lat = center.lat(); lng = center.lng(); }
 
             const newReport = {
-                id: `usr-${Date.now()}`, // Unique ID
+                id: `usr-${Date.now()}`, 
                 title: "USER REPORT: " + type.toUpperCase(),
                 desc: desc,
                 type: 'report',
@@ -317,13 +338,11 @@
                 timestamp: new Date().toISOString()
             };
 
-            // DIRECT DB INSERT
             const { error } = await supabase.from('events').insert([newReport]);
 
             if (error) {
                 alert("Report Failed: " + error.message);
             } else {
-                // Success - Close Modal (The Live Subscription will draw the dot for us!)
                 closeReportModal();
                 document.getElementById('rpt-desc').value = "";
                 document.getElementById('geo-input').value = "";
@@ -358,15 +377,21 @@
 
         function openReportModal() { document.getElementById('report-modal').style.display = 'block'; }
         function closeReportModal() { document.getElementById('report-modal').style.display = 'none'; }
+        
         function setupUserLocation() {
-            document.getElementById('user-loc-toggle').addEventListener('change', function() {
-                if(this.checked && navigator.geolocation) {
-                    navigator.geolocation.watchPosition(pos => {
-                        const p = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                        new HTMLMarker(p, 'user', 'MY LOCATION', '', map);
-                    });
-                }
-            });
+            const el = document.getElementById('user-loc-toggle');
+            if(el) {
+                el.addEventListener('change', function() {
+                    if(this.checked && navigator.geolocation) {
+                        navigator.geolocation.watchPosition(pos => {
+                            if(HTMLMarker && map) {
+                                const p = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                                new HTMLMarker(p, 'user', 'MY LOCATION', '', map);
+                            }
+                        });
+                    }
+                });
+            }
         }
         
         function formatMNTime(dateObj) {
