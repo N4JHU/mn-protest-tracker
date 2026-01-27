@@ -2,24 +2,19 @@
 <html>
 <head>
     <title>Twin Cities Live Protest Map</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         /* --- GLOBAL SETTINGS --- */
         body { margin: 0; padding: 0; background-color: #1a1a1a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
         #map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
         
-        /* --- HUD PANELS --- */
+        /* HUD PANELS */
         .hud-panel {
-            position: absolute;
-            background: rgba(0, 0, 0, 0.85);
-            border: 1px solid #444;
-            color: #ddd;
-            padding: 10px;
-            border-radius: 4px;
-            backdrop-filter: blur(5px);
-            z-index: 1000;
+            position: absolute; background: rgba(0, 0, 0, 0.85); border: 1px solid #444; color: #ddd;
+            padding: 10px; border-radius: 4px; backdrop-filter: blur(5px); z-index: 1000;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
         }
-        
         .top-left { top: 20px; left: 20px; width: 220px; }
         .top-right { top: 20px; right: 20px; width: 240px; max-height: 80vh; overflow-y: auto; }
         .bottom-left { bottom: 20px; left: 20px; }
@@ -32,6 +27,7 @@
         .info-val.orange { color: #ffaa00; }
         .info-val.purple { color: #d400ff; }
 
+        /* CONTROLS */
         .switch { position: relative; display: inline-block; width: 28px; height: 14px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 4px; border: 1px solid #555; }
@@ -41,7 +37,6 @@
 
         .tac-btn { background: #330000; border: 1px solid #ff5555; color: #ff5555; font-size: 0.6rem; font-weight: bold; padding: 2px 6px; cursor: pointer; margin-left: 5px; text-decoration: none; display: inline-block; }
         .tac-btn:hover { background: #ff5555; color: #000; }
-        
         .rpt-btn { background: #2a0033; border: 1px solid #d400ff; color: #d400ff; font-size: 0.6rem; font-weight: bold; padding: 2px 6px; cursor: pointer; text-decoration: none; display: inline-block; }
         .rpt-btn:hover { background: #d400ff; color: #000; }
 
@@ -55,32 +50,14 @@
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: #444; }
 
-        /* --- MARKER STACKING (Z-INDEX) --- */
-        .pulse-marker { 
-            width: 14px; height: 14px; border-radius: 50%; 
-            position: absolute; transform: translate(-50%, -50%); 
-            cursor: pointer; box-shadow: 0 0 0 rgba(0, 0, 0, 1); border: 2px solid white; 
-            z-index: 1; /* Default Low Priority */
-        }
-        
-        /* Threat & Road (Standard) */
+        /* MARKERS */
+        .pulse-marker { width: 14px; height: 14px; border-radius: 50%; position: absolute; transform: translate(-50%, -50%); cursor: pointer; box-shadow: 0 0 0 rgba(0, 0, 0, 1); border: 2px solid white; z-index: 1; }
         .type-protest { background: #ff3333; } .type-protest.pulse { animation: pulse-red 2s infinite; }
         .type-road { background: #ffaa00; } .type-road.pulse { animation: pulse-orange 2s infinite; }
-        
-        /* High Priority Layers */
-        .type-report { 
-            background: #d400ff; 
-            z-index: 10000 !important; /* Always on top of threats */
-        } 
-        .type-report.pulse { animation: pulse-purple 2s infinite; }
+        .type-user { background: #00ccff; z-index: 20000 !important; } .type-user.pulse { animation: pulse-blue 2s infinite; }
+        .type-report { background: #d400ff; z-index: 10000 !important; } .type-report.pulse { animation: pulse-purple 2s infinite; }
 
-        .type-user { 
-            background: #00ccff; 
-            z-index: 20000 !important; /* Always on top of everything */
-        } 
-        .type-user.pulse { animation: pulse-blue 2s infinite; }
-
-        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 51, 51, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); } }
+        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 51, 51, 0 ) ; } 100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); } }
         @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 170, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); } }
         @keyframes pulse-blue { 0% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 204, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 204, 255, 0); } }
         @keyframes pulse-purple { 0% { box-shadow: 0 0 0 0 rgba(212, 0, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(212, 0, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 0, 255, 0); } }
@@ -127,7 +104,7 @@
         </div>
         <div class="info-row"><span class="info-label">ROAD CLOSURES:</span><span class="info-val orange" id="count-road">0</span></div>
         <div class="info-row"><span class="info-label">USER REPORTS:</span><span class="info-val purple" id="count-report">0</span></div>
-        <div style="font-size: 0.55rem; color: #555; margin-top: 8px; text-align: right;" id="last-updated">Waiting for Sync...</div>
+        <div style="font-size: 0.55rem; color: #555; margin-top: 8px; text-align: right;" id="connection-status">Connecting...</div>
     </div>
 
     <div class="hud-panel top-right">
@@ -140,7 +117,7 @@
     <div id="report-modal">
         <h2 style="color:#d400ff; border-color:#d400ff;">MAKE FIELD REPORT</h2>
         <div class="form-group">
-            <label class="form-label">FIND LOCATION (Address or Cross Streets)</label>
+            <label class="form-label">FIND LOCATION</label>
             <div class="search-group">
                 <input type="text" id="geo-input" class="form-input" placeholder="e.g. Lake & Hennepin, Minneapolis">
                 <button class="search-btn" onclick="performGeoSearch()">FIND</button>
@@ -162,7 +139,7 @@
         </div>
         <div class="form-actions">
             <button class="cancel-btn" onclick="closeReportModal()">CANCEL</button>
-            <button class="submit-btn" onclick="submitReport()">SUBMIT TO DB</button>
+            <button class="submit-btn" onclick="submitReport()">SUBMIT LIVE</button>
         </div>
     </div>
 
@@ -177,125 +154,20 @@
     </div>
 
     <script>
+        // --- 1. SUPABASE CONFIGURATION (KEYS INSERTED) ---
+        const SB_URL = 'https://mymlbldoignrhvkfqcnz.supabase.co'; 
+        const SB_KEY = 'sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh';
+        const supabase = window.supabase.createClient(SB_URL, SB_KEY);
+
+        // --- GLOBALS ---
         let map; 
         let HTMLMarker = null; 
-        let userReports = [];
+        let activeMarkers = []; 
         let foundLocation = null;
 
-        function performGeoSearch() {
-            const query = document.getElementById('geo-input').value;
-            const status = document.getElementById('geo-status');
-            if (!query) { status.innerText = "Please enter a location."; return; }
-            status.innerText = "Searching satellite data...";
-            const safeQuery = encodeURIComponent(query + " Minnesota");
-            
-            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${safeQuery}`)
-                .then(r => r.json())
-                .then(data => {
-                    if (data && data.length > 0) {
-                        const lat = parseFloat(data[0].lat);
-                        const lon = parseFloat(data[0].lon);
-                        foundLocation = { lat: lat, lng: lon };
-                        const locPos = new google.maps.LatLng(lat, lon);
-                        map.panTo(locPos); map.setZoom(15);
-                        new google.maps.Marker({
-                            position: locPos, map: map, animation: google.maps.Animation.DROP, title: "Target Location"
-                        });
-                        status.innerText = "Target Locked. Location saved.";
-                        status.style.color = "#00ff00";
-                    } else {
-                        status.innerText = "Location not found.";
-                        status.style.color = "red";
-                        foundLocation = null;
-                    }
-                })
-                .catch(e => { status.innerText = "Connection Error."; foundLocation = null; });
-        }
-
-        function submitReport() {
-            if (!HTMLMarker) return;
-            const type = document.getElementById('rpt-type').value;
-            const desc = document.getElementById('rpt-desc').value;
-            if(!desc) { alert("Please enter a description."); return; }
-
-            let lat, lng;
-            if (foundLocation) { lat = foundLocation.lat; lng = foundLocation.lng; } 
-            else { const center = map.getCenter(); lat = center.lat(); lng = center.lng(); }
-
-            const newReport = {
-                title: "USER REPORT: " + type.toUpperCase(),
-                desc: desc,
-                type: 'report',
-                lat: lat,
-                lng: lng,
-                timestamp: new Date().toISOString()
-            };
-
-            userReports.push(newReport);
-            new HTMLMarker(new google.maps.LatLng(lat, lng), 'report', newReport.title, newReport.desc, map);
-            addFeedItem(newReport);
-            document.getElementById('count-report').innerText = userReports.length;
-
-            const issueTitle = encodeURIComponent(`REPORT: ${type.toUpperCase()} - ${new Date().toLocaleTimeString()}`);
-            const issueBody = encodeURIComponent(`**AUTOMATED FIELD REPORT**\n\n\`\`\`json\n${JSON.stringify(newReport, null, 2)}\n\`\`\``);
-            const repoUrl = "https://github.com/N4JHU/mn-protest-tracker/issues/new";
-            window.open(`${repoUrl}?title=${issueTitle}&body=${issueBody}&labels=field-report`, '_blank');
-
-            closeReportModal();
-            document.getElementById('rpt-desc').value = "";
-            document.getElementById('geo-input').value = "";
-            foundLocation = null;
-            document.getElementById('geo-status').innerText = "*Will use center of map view";
-            document.getElementById('geo-status').style.color = "#888";
-        }
-
-        function executeTwitterScan() {
-            const keywords = '("#MinneapolisProtest" OR "#ICE" OR "#ImmigrationAgents" OR "#WhippleFederalBuilding" OR "#BreakingNews" OR "#USImmigration") -filter:replies';
-            const encoded = encodeURIComponent(keywords);
-            window.open(`https://twitter.com/search?q=${encoded}&src=typed_query&f=live`, '_blank');
-        }
-
-        function openReportModal() { document.getElementById('report-modal').style.display = 'block'; }
-        function closeReportModal() { document.getElementById('report-modal').style.display = 'none'; }
-
-        function formatMNTime(dateObj, includeDate = false) {
-            const dateOptions = { timeZone: 'America/Chicago', weekday: 'long', year: '2-digit', month: '2-digit', day: '2-digit' };
-            const rawDate = new Intl.DateTimeFormat('en-US', dateOptions).format(dateObj);
-            const dateStr = `(${rawDate.replace(',', '')})`;
-            const timeOptions = { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            const timeStr = new Intl.DateTimeFormat('en-US', timeOptions).format(dateObj);
-            if (includeDate) return { date: dateStr, time: timeStr };
-            return timeStr;
-        }
-
-        function startClock() {
-            const clockEl = document.getElementById('clock-display');
-            setInterval(() => {
-                const now = new Date();
-                const formatted = formatMNTime(now, true);
-                clockEl.innerText = `${formatted.date} ${formatted.time}`;
-            }, 1000);
-        }
-        startClock();
-
-        function addFeedItem(e) {
-            const container = document.getElementById('feed-container');
-            let dateDisplay = "LIVE"; let timeDisplay = "";
-            if (e.timestamp) {
-                const t = new Date(e.timestamp);
-                const mnTime = formatMNTime(t, true);
-                dateDisplay = mnTime.date; timeDisplay = mnTime.time;
-            }
-            let color = '#ffaa00';
-            if(e.type === 'protest') color = '#ff5555';
-            if(e.type === 'report') color = '#d400ff';
-            const div = document.createElement("div");
-            div.className = "feed-item";
-            div.innerHTML = `<div class="feed-header"><span class="feed-date">${dateDisplay}</span><span class="feed-time">${timeDisplay}</span></div><div class="feed-text"><strong style="color:${color}">${e.title}</strong><br>${e.desc.substring(0, 80)}${e.desc.length > 80 ? '...' : ''}</div>`;
-            container.insertBefore(div, container.firstChild);
-        }
-
+        // --- MAP INIT ---
         function initMap() {
+            // DEFINE MARKER
             HTMLMarker = class extends google.maps.OverlayView {
                 constructor(position, type, title, desc, map) {
                     super();
@@ -347,86 +219,181 @@
                 styles: darkStyle, disableDefaultUI: true 
             });
 
-            const toggle = document.getElementById('user-loc-toggle');
-            let userMarker = null; let watchId = null;
-            toggle.addEventListener('change', function() {
-                if (this.checked) {
-                    if (navigator.geolocation) {
-                        watchId = navigator.geolocation.watchPosition((position) => {
-                            const userPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                            if (!userMarker) {
-                                userMarker = new HTMLMarker(userPos, 'user', 'MY LOCATION', 'Current Device Position', map);
-                                map.panTo(userPos); map.setZoom(13);
-                            } else {
-                                userMarker.setMap(null);
-                                userMarker = new HTMLMarker(userPos, 'user', 'MY LOCATION', 'Current Device Position', map);
-                            }
-                        });
-                    }
-                } else {
-                    if (watchId !== null) navigator.geolocation.clearWatch(watchId);
-                    if (userMarker) { userMarker.setMap(null); userMarker = null; }
-                }
+            // Start Data Flow
+            loadInitialData();
+            subscribeToLiveUpdates();
+            setupUserLocation();
+        }
+
+        // --- 2. LIVE DATA ENGINE (REPLACES JSON FETCH) ---
+        async function loadInitialData() {
+            document.getElementById('connection-status').innerText = "Fetching Data...";
+            
+            // Get last 24 hours of data
+            const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+            
+            const { data, error } = await supabase
+                .from('events')
+                .select('*')
+                .gt('timestamp', yesterday);
+
+            if (error) {
+                console.error("Supabase Error:", error);
+                document.getElementById('connection-status').innerText = "DATA ERROR";
+                return;
+            }
+
+            // Clear & Draw
+            activeMarkers.forEach(m => m.setMap(null));
+            activeMarkers = [];
+            
+            let pCount=0, rCount=0, repCount=0;
+            const feedData = [];
+
+            data.forEach(event => {
+                const pos = new google.maps.LatLng(event.lat, event.lng);
+                const marker = new HTMLMarker(pos, event.type, event.title, event.desc, map);
+                activeMarkers.push(marker);
+                feedData.push(event);
+
+                if(event.type === 'protest') pCount++;
+                if(event.type === 'road_closure') rCount++;
+                if(event.type === 'report') repCount++;
             });
 
-            let activeMarkers = [];
-            function updateMapData() {
-                fetch('events.json?nocache=' + (new Date()).getTime())
-                    .then(response => response.json())
-                    .then(data => {
-                        const syncDate = new Date(data.last_updated);
-                        const mnSync = formatMNTime(syncDate, true);
-                        const shortDate = mnSync.date.replace(/[()]/g, '').split(' ')[1]; 
-                        const shortTime = mnSync.time.split(':').slice(0,2).join(':'); 
-                        document.getElementById('last-updated').innerText = `LAST SYNC: ${shortDate} ${shortTime}`;
-                        
-                        activeMarkers.forEach(marker => marker.setMap(null));
-                        activeMarkers = [];
-                        let pCount = 0; let rCount = 0;
-                        const now = new Date();
-                        const timeCutoff = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-                        let validEvents = [];
+            document.getElementById('count-protest').innerText = pCount;
+            document.getElementById('count-road').innerText = rCount;
+            document.getElementById('count-report').innerText = repCount;
+            
+            document.getElementById('connection-status').innerText = "LIVE (SECURE)";
+            document.getElementById('connection-status').style.color = "#00ff00";
+            
+            updateFeed(feedData);
+        }
 
-                        data.features.forEach(event => {
-                            let showEvent = false;
-                            if (event.type === 'road_closure') showEvent = true; 
-                            else if (event.type === 'protest') {
-                                if (event.timestamp) {
-                                    const t = new Date(event.timestamp);
-                                    if (!isNaN(t) && t >= timeCutoff) showEvent = true;
-                                } else showEvent = true;
-                            }
-                            if (showEvent) {
-                                validEvents.push(event);
-                                const pos = new google.maps.LatLng(event.lat, event.lng);
-                                activeMarkers.push(new HTMLMarker(pos, event.type, event.title, event.desc, map));
-                                if(event.type === 'protest') pCount++;
-                                if(event.type === 'road_closure') rCount++;
-                            }
-                        });
+        function subscribeToLiveUpdates() {
+            supabase
+                .channel('live_events')
+                .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'events' }, payload => {
+                    const newEvent = payload.new;
+                    console.log("NEW EVENT RECEIVED:", newEvent);
+                    
+                    // Instant Plot
+                    const pos = new google.maps.LatLng(newEvent.lat, newEvent.lng);
+                    const marker = new HTMLMarker(pos, newEvent.type, newEvent.title, newEvent.desc, map);
+                    activeMarkers.push(marker);
+                    
+                    // Update Feed
+                    addFeedItem(newEvent);
+                    
+                    // Flash Status
+                    const status = document.getElementById('connection-status');
+                    status.innerText = "INCOMING INTEL...";
+                    status.style.color = "white";
+                    setTimeout(() => { status.innerText = "LIVE (SECURE)"; status.style.color = "#00ff00"; }, 2000);
 
-                        userReports.forEach(rep => {
-                            validEvents.push(rep);
-                            const pos = new google.maps.LatLng(rep.lat, rep.lng);
-                            activeMarkers.push(new HTMLMarker(pos, 'report', rep.title, rep.desc, map));
-                        });
+                })
+                .subscribe();
+        }
 
-                        document.getElementById('count-protest').innerText = pCount;
-                        document.getElementById('count-road').innerText = rCount;
-                        document.getElementById('count-report').innerText = userReports.length; 
-                        updateFeed(validEvents);
+        // --- 3. SUBMIT TO DATABASE (INSTEAD OF GITHUB) ---
+        async function submitReport() {
+            if (!HTMLMarker) return;
+            const type = document.getElementById('rpt-type').value;
+            const desc = document.getElementById('rpt-desc').value;
+            if(!desc) { alert("Please enter a description."); return; }
+
+            let lat, lng;
+            if (foundLocation) { lat = foundLocation.lat; lng = foundLocation.lng; } 
+            else { const center = map.getCenter(); lat = center.lat(); lng = center.lng(); }
+
+            const newReport = {
+                id: `usr-${Date.now()}`, // Unique ID
+                title: "USER REPORT: " + type.toUpperCase(),
+                desc: desc,
+                type: 'report',
+                lat: lat,
+                lng: lng,
+                timestamp: new Date().toISOString()
+            };
+
+            // DIRECT DB INSERT
+            const { error } = await supabase.from('events').insert([newReport]);
+
+            if (error) {
+                alert("Report Failed: " + error.message);
+            } else {
+                // Success - Close Modal (The Live Subscription will draw the dot for us!)
+                closeReportModal();
+                document.getElementById('rpt-desc').value = "";
+                document.getElementById('geo-input').value = "";
+                foundLocation = null;
+                document.getElementById('geo-status').innerText = "*Will use center of map view";
+                document.getElementById('geo-status').style.color = "#888";
+            }
+        }
+
+        // --- UTILS ---
+        function executeTwitterScan() {
+            const keywords = '("#MinneapolisProtest" OR "#ICE" OR "#ImmigrationAgents" OR "#WhippleFederalBuilding" OR "#BreakingNews" OR "#USImmigration") -filter:replies';
+            const encoded = encodeURIComponent(keywords);
+            window.open(`https://twitter.com/search?q=${encoded}&src=typed_query&f=live`, '_blank');
+        }
+
+        function performGeoSearch() {
+            const query = document.getElementById('geo-input').value;
+            const status = document.getElementById('geo-status');
+            if (!query) { status.innerText = "Please enter a location."; return; }
+            status.innerText = "Searching...";
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query + " Minnesota")}`)
+                .then(r => r.json()).then(data => {
+                    if (data.length > 0) {
+                        foundLocation = { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+                        map.panTo(new google.maps.LatLng(foundLocation.lat, foundLocation.lng)); map.setZoom(15);
+                        new google.maps.Marker({ position: foundLocation, map: map, animation: google.maps.Animation.DROP });
+                        status.innerText = "Target Locked."; status.style.color = "#00ff00";
+                    } else { status.innerText = "Not found."; status.style.color = "red"; }
+                });
+        }
+
+        function openReportModal() { document.getElementById('report-modal').style.display = 'block'; }
+        function closeReportModal() { document.getElementById('report-modal').style.display = 'none'; }
+        function setupUserLocation() {
+            document.getElementById('user-loc-toggle').addEventListener('change', function() {
+                if(this.checked && navigator.geolocation) {
+                    navigator.geolocation.watchPosition(pos => {
+                        const p = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                        new HTMLMarker(p, 'user', 'MY LOCATION', '', map);
                     });
-            }
+                }
+            });
+        }
+        
+        function formatMNTime(dateObj) {
+            const dateStr = `(${new Intl.DateTimeFormat('en-US', {timeZone:'America/Chicago', weekday:'short', month:'2-digit', day:'2-digit', year:'2-digit'}).format(dateObj).replace(',','')})`;
+            const timeStr = new Intl.DateTimeFormat('en-US', {timeZone:'America/Chicago', hour:'2-digit', minute:'2-digit', hour12:false}).format(dateObj);
+            return { date: dateStr, time: timeStr };
+        }
+        setInterval(() => {
+            const t = formatMNTime(new Date());
+            document.getElementById('clock-display').innerText = `${t.date} ${t.time}`;
+        }, 1000);
 
-            function updateFeed(events) {
-                const container = document.getElementById('feed-container');
-                container.innerHTML = "";
-                events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-                events.slice(0, 15).forEach(e => addFeedItem(e));
-            }
+        function updateFeed(events) {
+            const container = document.getElementById('feed-container');
+            container.innerHTML = "";
+            events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            events.slice(0, 15).forEach(e => addFeedItem(e));
+        }
 
-            updateMapData();
-            setInterval(updateMapData, 60000); 
+        function addFeedItem(e) {
+            const container = document.getElementById('feed-container');
+            const t = formatMNTime(new Date(e.timestamp));
+            let color = e.type === 'protest' ? '#ff5555' : (e.type === 'report' ? '#d400ff' : '#ffaa00');
+            const div = document.createElement("div");
+            div.className = "feed-item";
+            div.innerHTML = `<div class="feed-header"><span class="feed-date">${t.date}</span><span class="feed-time">${t.time}</span></div><div class="feed-text"><strong style="color:${color}">${e.title}</strong><br>${e.desc.substring(0, 80)}...</div>`;
+            container.insertBefore(div, container.firstChild);
         }
     </script>
 </body>
