@@ -77,20 +77,31 @@ def single_scan():
                     })
     except Exception as e: print(f"Road Err: {e}")
 
-    # UPLOAD
+   # --- PHASE 3: SMART UPLOAD (PRESERVE HISTORY) ---
     if events:
-        unique = list({e['id']: e for e in events}.values())
-        print(f"Uploading {len(unique)} items...")
-        try: supabase.table('events').upsert(unique).execute()
-        except: pass
-    else: print("No Data.")
+        # 1. Deduplicate the new batch
+        unique_new = {e['id']: e for e in events}.values()
+        
+        # 2. Get list of IDs we are about to upload
+        new_ids = [e['id'] for e in unique_new]
+        
+        # 3. Ask Database: "Which of these already exist?"
+        existing_rows = supabase.table('events').select('id, first_seen').in_('id', new_ids).execute().data
+        existing_map = {row['id']: row['first_seen'] for row in existing_rows}
+        
+        # 4. Merge: Keep old 'first_seen' if exists, otherwise use 'now'
+        final_upload = []
+        for item in unique_new:
+            if item['id'] in existing_map:
+                item['first_seen'] = existing_map[item['id']] # KEEP ORIGINAL START TIME
+            else:
+                item['first_seen'] = item['timestamp'] # NEW EVENT
+            final_upload.append(item)
 
-# --- THE ENDURANCE LOOP ---
-if __name__ == "__main__":
-    # Run 4 times with 60s sleep (Total ~4 mins)
-    # This keeps the scraper alive between GitHub 5-min intervals
-    for i in range(4):
-        single_scan()
-        if i < 3: # Don't sleep on the last run
-            print(f"--- Sleeping 60s (Cycle {i+1}/4) ---")
-            time.sleep(60)
+        print(f"Uploading {len(final_upload)} Intelligent Items...")
+        try:
+            supabase.table('events').upsert(final_upload).execute()
+            print("--- UPLOAD SUCCESSFUL ---")
+        except Exception as e: print(f"!! Upload Failed: {e}")
+    else:
+        print("--- NO RELEVANT INTEL FOUND ---")
