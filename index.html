@@ -167,7 +167,6 @@
                 day: '2-digit' 
             };
             const rawDate = new Intl.DateTimeFormat('en-US', dateOptions).format(dateObj);
-            // Reformat default "Monday, 01/26/26" to "(Monday 01/26/26)"
             const dateStr = `(${rawDate.replace(',', '')})`;
 
             // TIME: HH:mm:ss (24-hour)
@@ -184,6 +183,30 @@
                 return { date: dateStr, time: timeStr };
             }
             return timeStr;
+        }
+
+        // --- HELPER: SYNC TIME FORMATTER (MM/DD/YY HH:mm) ---
+        function formatSyncTime(dateStr) {
+            try {
+                // Ensure we parse the incoming string as UTC by adding "Z" if missing
+                // Python's datetime.now() usually sends "YYYY-MM-DD HH:mm:ss" without zone
+                const cleanDate = dateStr.replace(" ", "T") + "Z";
+                const dateObj = new Date(cleanDate);
+                
+                const options = {
+                    timeZone: 'America/Chicago',
+                    year: '2-digit', 
+                    month: '2-digit', 
+                    day: '2-digit',
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    hour12: false
+                };
+                // returns "01/26/26, 22:37" -> remove comma
+                return new Intl.DateTimeFormat('en-US', options).format(dateObj).replace(',', '');
+            } catch (e) {
+                return "Unknown";
+            }
         }
 
         // --- REAL-TIME CLOCK ---
@@ -267,7 +290,9 @@
                 fetch('events.json?nocache=' + (new Date()).getTime())
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById('last-updated').innerText = "LAST SYNC: " + data.last_updated;
+                        // FIX: Format the sync time to "MM/DD/YY HH:mm" (MN Time)
+                        const formattedSync = formatSyncTime(data.last_updated);
+                        document.getElementById('last-updated').innerText = "LAST SYNC: " + formattedSync;
                         
                         activeMarkers.forEach(marker => marker.setMap(null));
                         activeMarkers = [];
