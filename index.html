@@ -1,64 +1,178 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MN Protest & Road Tracker</title>
+    <title>MN Tactical Live Map</title>
     <style>
+        /* --- HUD & GENERAL STYLING --- */
+        body { margin: 0; padding: 0; background: #000; font-family: 'Courier New', Courier, monospace; overflow: hidden; }
+        
         #map { height: 100vh; width: 100%; }
-        body { margin: 0; padding: 0; }
-        #legend {
-            background: white; padding: 10px; margin: 10px; border: 1px solid #ccc;
-            font-family: Arial, sans-serif; position: absolute; top: 10px; left: 10px; z-index: 5;
+
+        /* The "Tactical" Box Top-Left */
+        #hud-panel {
+            position: absolute; top: 20px; left: 20px; z-index: 5;
+            background: rgba(0, 20, 0, 0.85); /* Semi-transparent dark green */
+            border: 1px solid #00ff00; /* Neon Green Border */
+            box-shadow: 0 0 10px #00ff00; /* Glowing effect */
+            padding: 15px;
+            color: #00ff00;
+            width: 250px;
         }
-        .dot { height: 10px; width: 10px; display: inline-block; border-radius: 50%; margin-right: 5px; }
+
+        #hud-panel h3 { margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #00ff00; padding-bottom: 5px; }
+        
+        .stat-line { display: flex; align-items: center; margin-bottom: 8px; font-size: 14px; }
+        .stat-value { margin-left: auto; font-weight: bold; }
+
+        /* --- PULSING DOTS CSS --- */
+        .pulse-marker {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%); /* Center the dot */
+            cursor: pointer;
+            box-shadow: 0 0 0 rgba(0, 0, 0, 1);
+            animation: pulse 2s infinite;
+        }
+
+        /* Red Pulse (Protests) */
+        .type-protest { background: #ff3333; box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7); }
+        .type-protest.pulse { animation: pulse-red 2s infinite; }
+
+        /* Orange Pulse (Roads) */
+        .type-road { background: #ffaa00; box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); }
+        .type-road.pulse { animation: pulse-orange 2s infinite; }
+
+        @keyframes pulse-red {
+            0% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7); }
+            70% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 15px rgba(255, 51, 51, 0); }
+            100% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); }
+        }
+
+        @keyframes pulse-orange {
+            0% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.7); }
+            70% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 15px rgba(255, 170, 0, 0); }
+            100% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 0 0 rgba(255, 170, 0, 0); }
+        }
+
+        /* Info Window Dark Style */
+        .gm-style-iw { background-color: #111 !important; color: #00ff00 !important; border: 1px solid #00ff00; }
+        .gm-style-iw-tc { display: none; } /* Hide the little triangle tail */
     </style>
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQwEfQg_ECrQw744IEqmR-XmxAt2lcT1I&callback=initMap" async defer></script>
 </head>
 <body>
 
-<div id="legend">
-    <h3>Live Tracker</h3>
-    <div><span class="dot" style="background:red;"></span>Protest (Live)</div>
-    <div><span class="dot" style="background:orange;"></span>Road Closure</div>
-    <div id="last-updated" style="margin-top:5px; font-size:0.8em; color:#666;"></div>
+<div id="hud-panel">
+    <h3>SYSTEM STATUS</h3>
+    <div class="stat-line">
+        <span class="type-protest pulse-marker" style="position:relative; transform:none; display:inline-block; margin-right:10px;"></span>
+        ACTIVE THREATS
+        <span class="stat-value" id="count-protest">0</span>
+    </div>
+    <div class="stat-line">
+        <span class="type-road pulse-marker" style="position:relative; transform:none; display:inline-block; margin-right:10px;"></span>
+        ROAD CLOSURES
+        <span class="stat-value" id="count-road">0</span>
+    </div>
+    <div id="last-updated" style="margin-top:15px; font-size:10px; color:#00aa00; text-align:right;">NO DATA</div>
 </div>
 
 <div id="map"></div>
 
 <script>
+    // --- CUSTOM OVERLAY CLASS (Allows HTML Markers) ---
+    class HTMLMarker extends google.maps.OverlayView {
+        constructor(position, type, title, desc, map) {
+            super();
+            this.position = position;
+            this.type = type;
+            this.title = title;
+            this.desc = desc;
+            this.div = null;
+            this.setMap(map); // Adds to map immediately
+        }
+
+        onAdd() {
+            const div = document.createElement("div");
+            div.className = `pulse-marker type-${this.type === 'protest' ? 'protest' : 'road'} pulse`;
+            div.title = this.title;
+
+            // Click Listener for InfoWindow
+            div.addEventListener("click", () => {
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `<div style="color:black; font-weight:bold;">${this.title}</div><div>${this.desc}</div>`,
+                    position: this.position
+                });
+                infoWindow.open(this.getMap());
+            });
+
+            this.div = div;
+            const panes = this.getPanes();
+            panes.overlayMouseTarget.appendChild(div);
+        }
+
+        draw() {
+            const overlayProjection = this.getProjection();
+            const position = overlayProjection.fromLatLngToDivPixel(this.position);
+            if (this.div) {
+                this.div.style.left = position.x + "px";
+                this.div.style.top = position.y + "px";
+            }
+        }
+
+        onRemove() {
+            if (this.div) {
+                this.div.parentNode.removeChild(this.div);
+                this.div = null;
+            }
+        }
+    }
+
+    // --- MAIN MAP FUNCTION ---
     function initMap() {
-        const mnCenter = { lat: 44.9778, lng: -93.2650 };
+        // Dark Mode Map Style
+        const darkStyle = [
+            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+            { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+            { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
+            { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
+            { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }
+        ];
+
         const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 10,
-            center: mnCenter,
-            mapTypeId: 'roadmap'
+            zoom: 11,
+            center: { lat: 44.9778, lng: -93.2650 },
+            styles: darkStyle, // Apply the dark theme
+            disableDefaultUI: true // Remove default buttons for cleaner look
         });
 
-        // Load the live data
         fetch('events.json')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('last-updated').innerText = "Updated: " + data.last_updated;
+                document.getElementById('last-updated').innerText = "LINK ESTABLISHED: " + data.last_updated;
+                
+                let pCount = 0;
+                let rCount = 0;
 
                 data.features.forEach(event => {
-                    let color = "gray"; 
-                    if (event.type === 'protest') color = "red";
-                    if (event.type === 'road_closure') color = "orange";
+                    const pos = new google.maps.LatLng(event.lat, event.lng);
+                    
+                    // Create our Custom Pulsing Marker
+                    new HTMLMarker(pos, event.type, event.title, event.desc, map);
 
-                    new google.maps.Marker({
-                        position: { lat: event.lat, lng: event.lng },
-                        map: map,
-                        title: event.title,
-                        icon: {
-                            path: google.maps.SymbolPath.CIRCLE,
-                            scale: 8,
-                            fillColor: color,
-                            fillOpacity: 0.8,
-                            strokeWeight: 1,
-                            strokeColor: "white"
-                        }
-                    });
+                    // Update Counts
+                    if(event.type === 'protest') pCount++;
+                    if(event.type === 'road_closure') rCount++;
                 });
-            });
+
+                document.getElementById('count-protest').innerText = pCount;
+                document.getElementById('count-road').innerText = rCount;
+            })
+            .catch(err => console.error("Data Link Failed:", err));
     }
 </script>
 </body>
