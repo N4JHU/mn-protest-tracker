@@ -2,140 +2,116 @@
 <html>
 <head>
     <title>Twin Cities Live Protest Map</title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/564/564619.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#1a1a1a">
-    
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/564/564619.png">
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/564/564619.png">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/564/564619.png">
+    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
-        body { margin: 0; padding: 0; background-color: #1a1a1a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
+        body { margin: 0; padding: 0; background: #1a1a1a; font-family: 'Segoe UI', Tahoma, sans-serif; overflow: hidden; }
         #map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #222; }
         
-        /* HUD PANELS */
-        .hud-panel {
-            position: absolute; background: rgba(0, 0, 0, 0.9); border: 1px solid #444; color: #ddd;
-            padding: 8px; border-radius: 4px; backdrop-filter: blur(5px); z-index: 1000;
-            font-size: 11px;
-        }
-        
-        /* LAYOUT */
+        .hud-panel { position: absolute; background: rgba(0,0,0,0.9); border: 1px solid #444; color: #ddd; padding: 8px; border-radius: 4px; z-index: 1000; font-size: 11px; }
         .top-left { top: 10px; left: 10px; width: 180px; }
         .top-right { top: 10px; right: 10px; width: 160px; max-height: 40vh; overflow-y: auto; text-align: right; }
-        /* NEW MINI LEGEND */
-        .bottom-bar { 
-            bottom: 20px; left: 50%; transform: translateX(-50%); 
-            display: flex; gap: 15px; white-space: nowrap; 
-            background: rgba(0,0,0,0.8); border: 1px solid #444; 
-            padding: 6px 12px; border-radius: 20px; 
-        }
-        
-        h2 { margin: 0 0 5px 0; font-size: 0.75rem; color: #ff5555; text-transform: uppercase; border-bottom: 1px solid #ff5555; padding-bottom: 2px; }
-        .info-row { display: flex; justify-content: space-between; margin-bottom: 2px; }
-        .red { color: #ff5555; } .orange { color: #ffaa00; } .purple { color: #d400ff; }
+        .bottom-bar { bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; background: rgba(0,0,0,0.8); border: 1px solid #444; padding: 6px 12px; border-radius: 20px; white-space: nowrap; }
 
-        /* SWITCH */
+        h2 { margin: 0 0 5px 0; font-size: 0.75rem; color: #ff5555; border-bottom: 1px solid #ff5555; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 2px; }
+        
+        /* COLORS */
+        .red { color: #ff3333; } .blue { color: #0088ff; } .orange { color: #ffaa00; } .purple { color: #d400ff; } .grey { color: #888; }
+        
+        /* MARKERS */
+        .pulse-marker { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px black; }
+        .type-protest { background: #ff3333; box-shadow: 0 0 10px #ff3333; } /* High Priority */
+        .type-police { background: #0088ff; }
+        .type-road_closure { background: #ffaa00; }
+        .type-intel { background: #888888; }
+        .type-user { background: #00ccff; }
+        .type-report { background: #d400ff; }
+        
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); } 70% { box-shadow: 0 0 0 10px rgba(0,0,0,0); } }
+
+        /* LEGEND DOTS */
+        .dot { height: 8px; width: 8px; border-radius: 50%; display: inline-block; margin-right: 3px; }
+        
+        /* CONTROLS */
         .switch { position: relative; display: inline-block; width: 24px; height: 12px; vertical-align: middle; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #333; border-radius: 12px; }
-        .slider:before { position: absolute; content: ""; height: 8px; width: 8px; left: 2px; bottom: 2px; background: #888; border-radius: 50%; transition: .2s; }
+        .slider:before { position: absolute; left: 2px; bottom: 2px; height: 8px; width: 8px; background: #888; border-radius: 50%; transition: .2s; content: ""; }
         input:checked + .slider { background: #004400; }
         input:checked + .slider:before { transform: translateX(12px); background: #00ff00; }
 
-        /* BUTTONS */
-        .tac-btn, .rpt-btn { background: #222; border: 1px solid #555; color: #ccc; padding: 2px 5px; font-size: 10px; cursor: pointer; text-decoration: none; margin-left: 3px; display: inline-block; }
-        .tac-btn { border-color: #ff5555; color: #ff5555; }
-        .rpt-btn { border-color: #d400ff; color: #d400ff; }
-
-        /* MARKERS */
-        .pulse-marker { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px black; }
-        .type-protest { background: #ff3333; }
-        .type-road { background: #ffaa00; }
-        .type-user { background: #00ccff; }
-        .type-report { background: #d400ff; }
-        .pulse { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,255,255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0,0,0, 0); } 100% { box-shadow: 0 0 0 0 rgba(0,0,0, 0); } }
-
         /* MODAL */
         #report-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 300px; background: #111; border: 1px solid #d400ff; z-index: 2000; padding: 15px; }
-        .form-group { margin-bottom: 10px; }
-        .form-input, select { width: 100%; background: #222; color: #fff; border: 1px solid #444; padding: 5px; }
-        
-        /* LEGEND DOTS */
-        .dot { height: 8px; width: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+        .form-input, select { width: 100%; background: #222; color: #fff; border: 1px solid #444; padding: 5px; margin-bottom: 10px; }
+        .btn { background: #222; border: 1px solid #555; color: #ccc; padding: 4px 8px; font-size: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
-
     <div id="map"></div>
 
     <div class="hud-panel top-left">
-        <h2>METRO SURGE <span id="clock-display" style="color:#888; float:right; font-size:9px;">...</span></h2>
+        <h2>METRO SURGE <span id="clock" style="float:right; color:#888">...</span></h2>
         <div class="info-row"><span>STATUS:</span> <span class="red">LIVE</span></div>
-        <div class="info-row">
-            <span>MY POS:</span> 
-            <label class="switch"><input type="checkbox" id="user-loc-toggle"><span class="slider"></span></label>
-        </div>
-        <div class="info-row" style="margin-top:5px; border-top:1px solid #333; padding-top:2px;">
-            <span>THREATS:</span> <span class="red" id="count-protest">0</span>
-        </div>
-        <div class="info-row"><span>REPORTS:</span> <span class="purple" id="count-report">0</span></div>
-        <div id="connection-status" style="font-size:9px; color:#555; text-align:right; margin-top:3px;">Connecting...</div>
+        <div class="info-row"><span>GPS:</span> <label class="switch"><input type="checkbox" id="gps-toggle"><span class="slider"></span></label></div>
+        <div class="info-row" style="margin-top:5px; border-top:1px solid #444"><span>THREATS:</span> <span class="red" id="c-protest">0</span></div>
+        <div class="info-row"><span>POLICE:</span> <span class="blue" id="c-police">0</span></div>
+        <div id="status" style="text-align:right; color:#555; margin-top:5px">...</div>
     </div>
 
     <div class="hud-panel top-right">
-        <h2>INTEL <button class="rpt-btn" onclick="openReportModal()">RPT</button></h2>
-        <div id="feed-container"></div>
+        <h2>INTEL <button class="btn" style="border-color:#d400ff; color:#d400ff" onclick="openModal()">RPT</button></h2>
+        <div id="feed"></div>
     </div>
 
     <div class="hud-panel bottom-bar">
         <div><span class="dot" style="background:#ff3333"></span>Threat</div>
+        <div><span class="dot" style="background:#0088ff"></span>Police</div>
         <div><span class="dot" style="background:#ffaa00"></span>Road</div>
-        <div><span class="dot" style="background:#d400ff"></span>User</div>
+        <div><span class="dot" style="background:#888"></span>Info</div>
     </div>
 
     <div id="report-modal">
         <h2 style="color:#d400ff">FIELD REPORT</h2>
-        <div class="form-group">
-            <input type="text" id="geo-input" class="form-input" placeholder="Location (e.g. Lake St)">
-            <button class="tac-btn" style="width:100%; margin-top:5px;" onclick="performGeoSearch()">FIND LOCATION</button>
-            <div id="geo-status" style="font-size:10px; color:#888; margin-top:2px;">* Finds center if empty</div>
-        </div>
-        <select id="rpt-type" class="form-group"><option value="Protest">Protest</option><option value="Police">Police</option><option value="Traffic">Traffic</option></select>
-        <input type="text" id="rpt-desc" class="form-input form-group" placeholder="Description...">
-        <div style="display:flex; justify-content:space-between;">
-            <button class="tac-btn" onclick="closeReportModal()">CANCEL</button>
-            <button class="rpt-btn" onclick="submitReport()">SUBMIT</button>
+        <input id="geo-input" class="form-input" placeholder="Location...">
+        <button class="btn" style="width:100%; margin-bottom:10px" onclick="geoSearch()">FIND</button>
+        <select id="rpt-type"><option value="Protest">Threat/Protest</option><option value="Police">Police</option><option value="Traffic">Traffic</option></select>
+        <input id="rpt-desc" class="form-input" placeholder="Description...">
+        <div style="display:flex; justify-content:space-between">
+            <button class="btn" onclick="closeModal()">CANCEL</button>
+            <button class="btn" style="border-color:#d400ff; color:#d400ff" onclick="submitReport()">SUBMIT</button>
         </div>
     </div>
 
     <script>
-        const SB_URL = 'https://mymlbldoignrhvkfqcnz.supabase.co'; 
-        const SB_KEY = 'sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh';
-        const metroDB = window.supabase.createClient(SB_URL, SB_KEY);
-
-        let map, activeMarkers=[], foundLocation=null, userMarker=null, watchId=null;
-
-        function initMap() {
-            map = L.map('map', { zoomControl: false }).setView([44.9778, -93.2650], 11);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
-            loadInitialData();
-            metroDB.channel('live').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'events' }, p => {
-                plotEvent(p.new); 
-                document.getElementById('connection-status').innerText="RX DATA..."; setTimeout(()=>{document.getElementById('connection-status').innerText="SECURE"},1000);
-            }).subscribe();
+        const DB = window.supabase.createClient('https://mymlbldoignrhvkfqcnz.supabase.co', 'sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh');
+        let map, markers=[], userMarker, watchId;
+        
+        function init() {
+            map = L.map('map', {zoomControl:false}).setView([44.9778, -93.2650], 11);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {maxZoom:19}).addTo(map);
+            loadData();
             
-            document.getElementById('user-loc-toggle').addEventListener('change', function() {
+            DB.channel('live').on('postgres_changes', {event:'INSERT', schema:'public', table:'events'}, p => {
+                plot(p.new);
+                status("RX DATA...", "#fff"); setTimeout(()=>status("SECURE", "#0f0"), 1000);
+            }).subscribe();
+
+            document.getElementById('gps-toggle').addEventListener('change', function() {
                 if(this.checked && navigator.geolocation) {
-                    watchId = navigator.geolocation.watchPosition(pos => {
-                        const lat=pos.coords.latitude, lng=pos.coords.longitude;
+                    watchId = navigator.geolocation.watchPosition(p => {
+                        const lat=p.coords.latitude, lng=p.coords.longitude;
                         if(userMarker) map.removeLayer(userMarker);
-                        userMarker = L.marker([lat,lng], {icon: L.divIcon({className:'', html:'<div class="pulse-marker type-user pulse"></div>'})}).addTo(map);
+                        userMarker = L.marker([lat,lng], {icon:L.divIcon({className:'', html:'<div class="pulse-marker type-user pulse"></div>'})}).addTo(map);
                         map.setView([lat,lng], 14);
                     }, e => { alert("GPS Error"); this.checked=false; }, {enableHighAccuracy:true});
                 } else {
@@ -143,52 +119,81 @@
                     if(userMarker) map.removeLayer(userMarker);
                 }
             });
+            setInterval(() => document.getElementById('clock').innerText = new Date().toLocaleTimeString(), 1000);
         }
 
-        async function loadInitialData() {
-            const { data } = await metroDB.from('events').select('*').gt('timestamp', new Date(Date.now()-86400000).toISOString());
+        async function loadData() {
+            status("SYNC...", "#ea0");
+            const { data } = await DB.from('events').select('*').gt('timestamp', new Date(Date.now()-86400000).toISOString());
             if(data) {
-                let p=0, r=0;
-                document.getElementById('feed-container').innerHTML = "";
-                data.forEach(e => { plotEvent(e); if(e.type=='protest') p++; if(e.type=='report') r++; });
-                document.getElementById('count-protest').innerText = p;
-                document.getElementById('count-report').innerText = r;
-                document.getElementById('connection-status').innerText = "SECURE";
-                document.getElementById('connection-status').style.color = "#00ff00";
+                document.getElementById('feed').innerHTML = "";
+                // SORT: Protests first, then Police, then Reports
+                data.sort((a,b) => getPriority(b.type) - getPriority(a.type));
+                let counts = {protest:0, police:0};
+                data.forEach(e => {
+                    plot(e);
+                    if(e.type==='protest') counts.protest++;
+                    if(e.type==='police') counts.police++;
+                });
+                document.getElementById('c-protest').innerText = counts.protest;
+                document.getElementById('c-police').innerText = counts.police;
+                status("SECURE", "#0f0");
             }
         }
 
-        function plotEvent(e) {
-            const icon = L.divIcon({ className:'', html:`<div class="pulse-marker type-${e.type} pulse"></div>` });
-            const m = L.marker([e.lat, e.lng], {icon}).addTo(map).bindPopup(`<b style="color:${e.type=='report'?'#d400ff':'#ff5555'}">${e.title}</b><br>${e.desc}`);
-            activeMarkers.push(m);
-            const d = document.createElement('div');
-            d.innerHTML = `<div style="border-bottom:1px solid #333; margin-bottom:4px; padding-bottom:4px; font-size:10px;"><span style="color:${e.type=='report'?'#d400ff':'#ff5555'}">${e.title}</span><br>${e.desc}</div>`;
-            const c = document.getElementById('feed-container'); c.insertBefore(d, c.firstChild);
+        function getPriority(type) {
+            if(type === 'protest') return 1000; // Highest
+            if(type === 'report') return 900;
+            if(type === 'police') return 800;
+            if(type === 'road_closure') return 500;
+            return 100; // Intel/Info
         }
 
-        function performGeoSearch() {
+        function plot(e) {
+            // Priority Z-Index
+            const z = getPriority(e.type);
+            const icon = L.divIcon({className:'', html:`<div class="pulse-marker type-${e.type} pulse"></div>`});
+            const m = L.marker([e.lat, e.lng], {icon:icon, zIndexOffset:z}).addTo(map)
+                .bindPopup(`<b class="${getColorClass(e.type)}">${e.title}</b><br>${e.desc}`);
+            markers.push(m);
+            
+            // Add to feed
+            const d = document.createElement('div');
+            d.style.marginBottom = "5px"; d.style.borderBottom = "1px solid #333";
+            d.innerHTML = `<span class="${getColorClass(e.type)}" style="font-weight:bold">${e.title}</span><br><span style="color:#aaa">${e.desc.substring(0,60)}...</span>`;
+            const f = document.getElementById('feed');
+            // Insert at top if high priority
+            if(z >= 800) f.insertBefore(d, f.firstChild); else f.appendChild(d);
+        }
+
+        function getColorClass(t) {
+            if(t==='protest') return 'red';
+            if(t==='police') return 'blue';
+            if(t==='road_closure') return 'orange';
+            if(t==='report') return 'purple';
+            return 'grey';
+        }
+
+        function status(msg, col) { const el=document.getElementById('status'); el.innerText=msg; el.style.color=col; }
+        function openModal(){document.getElementById('report-modal').style.display='block'}
+        function closeModal(){document.getElementById('report-modal').style.display='none'}
+        
+        async function submitReport() {
+            const t=document.getElementById('rpt-type').value, d=document.getElementById('rpt-desc').value;
+            const c=map.getCenter();
+            await DB.from('events').insert([{id:`usr-${Date.now()}`, title:`RPT: ${t}`, desc:d, type:'report', lat:c.lat, lng:c.lng, timestamp:new Date().toISOString()}]);
+            closeModal();
+        }
+        
+        function geoSearch() {
             const q = document.getElementById('geo-input').value;
-            if(!q) return;
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${q} Minnesota`).then(r=>r.json()).then(d=>{
-                if(d[0]) { foundLocation={lat:d[0].lat, lng:d[0].lon}; map.setView([d[0].lat,d[0].lon], 15); document.getElementById('geo-status').innerText="LOCKED"; document.getElementById('geo-status').style.color="#0f0"; }
+                if(d[0]) map.setView([d[0].lat,d[0].lon], 15);
             });
         }
 
-        async function submitReport() {
-            const t = document.getElementById('rpt-type').value, d = document.getElementById('rpt-desc').value;
-            if(!d) return alert("Desc required");
-            const loc = foundLocation || map.getCenter();
-            await metroDB.from('events').insert([{ id:`usr-${Date.now()}`, title:`RPT: ${t}`, desc:d, type:'report', lat:loc.lat||loc.lat(), lng:loc.lng||loc.lng(), timestamp:new Date().toISOString() }]);
-            closeReportModal();
-        }
-
-        function openReportModal(){document.getElementById('report-modal').style.display='block'}
-        function closeReportModal(){document.getElementById('report-modal').style.display='none'}
-        setInterval(()=>{document.getElementById('clock-display').innerText=new Date().toLocaleTimeString()},1000);
-
         if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
-        initMap();
+        init();
     </script>
 </body>
 </html>
