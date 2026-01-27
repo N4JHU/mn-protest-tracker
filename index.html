@@ -12,33 +12,33 @@
         /* --- HUD OVERLAYS --- */
         .hud-panel {
             position: absolute;
-            background: rgba(0, 0, 0, 0.85); /* Dark semi-transparent */
+            background: rgba(0, 0, 0, 0.85);
             border: 1px solid #444;
             color: #ddd;
             padding: 15px;
-            border-radius: 4px; /* Slightly sharper corners for tactical look */
+            border-radius: 4px;
             backdrop-filter: blur(5px);
-            z-index: 1000; /* Sit above map */
+            z-index: 1000;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
         }
         
         /* POSITIONING */
-        .top-left { top: 20px; left: 20px; width: 280px; }
-        .top-right { top: 20px; right: 20px; width: 300px; max-height: 80vh; overflow-y: auto; }
+        .top-left { top: 20px; left: 20px; width: 300px; }
+        .top-right { top: 20px; right: 20px; width: 320px; max-height: 80vh; overflow-y: auto; }
         .bottom-left { bottom: 20px; left: 20px; }
         
         /* TYPOGRAPHY */
         h2 { 
             margin: 0 0 10px 0; 
             font-size: 1.1rem; 
-            color: #ff5555; /* Tactical Red */
+            color: #ff5555; 
             text-transform: uppercase; 
             letter-spacing: 1.5px; 
             border-bottom: 1px solid #ff5555; 
             padding-bottom: 5px; 
         }
         
-        .info-row { font-size: 0.8rem; color: #ccc; margin-bottom: 4px; display: flex; justify-content: space-between; }
+        .info-row { font-size: 0.85rem; color: #ccc; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
         .info-label { font-weight: bold; color: #888; }
         .info-val { color: #fff; font-weight: bold; }
         .info-val.red { color: #ff5555; }
@@ -47,19 +47,24 @@
         /* LIVE FEED STYLING */
         .feed-item { 
             border-bottom: 1px solid #333; 
-            padding-bottom: 8px; 
-            margin-bottom: 8px; 
+            padding-bottom: 10px; 
+            margin-bottom: 10px; 
         }
-        .feed-time { color: #ff5555; font-size: 0.7rem; font-weight: bold; margin-bottom: 2px; }
-        .feed-text { font-size: 0.8rem; line-height: 1.4; color: #bbb; }
-        .feed-link { color: #5599ff; text-decoration: none; }
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .feed-date { color: #888; font-size: 0.7rem; font-family: monospace; }
+        .feed-time { color: #ff5555; font-size: 0.8rem; font-weight: bold; font-family: monospace; }
+        .feed-text { font-size: 0.85rem; line-height: 1.4; color: #bbb; }
 
-        /* SCROLLBAR FOR FEED */
+        /* SCROLLBAR */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: #444; }
 
-        /* PULSING MARKERS (Map Dots) */
+        /* PULSING MARKERS */
         .pulse-marker {
             width: 14px; height: 14px;
             border-radius: 50%;
@@ -95,7 +100,6 @@
         .popup-box { padding: 10px; width: 250px; font-family: 'Segoe UI', sans-serif; }
         .popup-title { color: #ff5555; font-weight: bold; font-size: 14px; margin-bottom: 5px; border-bottom: 1px solid #333; padding-bottom: 5px; }
         .popup-desc { font-size: 12px; color: #ccc; }
-
     </style>
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQwEfQg_ECrQw744IEqmR-XmxAt2lcT1I&callback=initMap" async defer></script>
@@ -107,6 +111,10 @@
     <div class="hud-panel top-left">
         <h2>Operation Metro Surge</h2>
         
+        <div class="info-row" style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
+            <span class="info-val" id="clock-display" style="color: #fff; font-family: monospace;">LOADING TIME...</span>
+        </div>
+
         <div class="info-row">
             <span class="info-label">LOCATION:</span>
             <span class="info-val">TWIN CITIES, MN</span>
@@ -131,8 +139,10 @@
         <h2>Live Intel Feed</h2>
         <div id="feed-container">
             <div class="feed-item">
-                <div class="feed-time">SYSTEM</div>
-                <div class="feed-text">Initializing Data Link...</div>
+                <div class="feed-header">
+                    <span class="feed-date">SYSTEM</span>
+                </div>
+                <div class="feed-text">Initializing Secure Data Link...</div>
             </div>
         </div>
     </div>
@@ -146,8 +156,49 @@
     </div>
 
     <script>
+        // --- HELPER: TWIN CITIES TIME FORMATTER ---
+        // Forces all times to display as Minneapolis Time (CST/CDT)
+        function formatMNTime(dateObj, includeDate = false) {
+            // 1. Get Date Part: ( *** Monday 01/26/26 )
+            const dateOptions = { 
+                timeZone: 'America/Chicago', 
+                weekday: 'long', 
+                year: '2-digit', 
+                month: '2-digit', 
+                day: '2-digit' 
+            };
+            const rawDate = new Intl.DateTimeFormat('en-US', dateOptions).format(dateObj);
+            // Reformat "Monday, 01/26/26" to "Monday 01/26/26" (remove comma)
+            const dateStr = `( *** ${rawDate.replace(',', '')} )`;
+
+            // 2. Get Time Part: 10:05 AM
+            const timeOptions = { 
+                timeZone: 'America/Chicago', 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true
+            };
+            const timeStr = new Intl.DateTimeFormat('en-US', timeOptions).format(dateObj);
+
+            if (includeDate) {
+                return { date: dateStr, time: timeStr };
+            }
+            return timeStr;
+        }
+
+        // --- REAL-TIME CLOCK ---
+        function startClock() {
+            const clockEl = document.getElementById('clock-display');
+            setInterval(() => {
+                const now = new Date();
+                const formatted = formatMNTime(now, true);
+                clockEl.innerText = `${formatted.date} ${formatted.time}`;
+            }, 1000);
+        }
+        startClock(); // Start immediately
+
+        // --- GOOGLE MAPS ---
         function initMap() {
-            // 1. MARKER CLASS
             class HTMLMarker extends google.maps.OverlayView {
                 constructor(position, type, title, desc, map) {
                     super();
@@ -162,7 +213,6 @@
                 onAdd() {
                     const div = document.createElement("div");
                     div.className = `pulse-marker type-${this.type === 'protest' ? 'protest' : 'road'} pulse`;
-                    
                     div.addEventListener("click", () => {
                         const content = `
                             <div class="popup-box">
@@ -170,13 +220,9 @@
                                 <div class="popup-desc">${this.desc}</div>
                             </div>
                         `;
-                        const infoWindow = new google.maps.InfoWindow({
-                            content: content,
-                            position: this.position
-                        });
+                        const infoWindow = new google.maps.InfoWindow({ content: content, position: this.position });
                         infoWindow.open(this.getMap());
                     });
-
                     this.div = div;
                     const panes = this.getPanes();
                     panes.overlayMouseTarget.appendChild(div);
@@ -199,7 +245,6 @@
                 }
             }
 
-            // 2. MAP SETUP
             const darkStyle = [
                 { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
                 { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -216,16 +261,14 @@
                 disableDefaultUI: true 
             });
 
-            // 3. DATA ENGINE
             let activeMarkers = [];
 
             function updateMapData() {
                 fetch('events.json?nocache=' + (new Date()).getTime())
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById('last-updated').innerText = "SYNC: " + data.last_updated;
+                        document.getElementById('last-updated').innerText = "LAST SYNC: " + data.last_updated;
                         
-                        // Clear Old
                         activeMarkers.forEach(marker => marker.setMap(null));
                         activeMarkers = [];
 
@@ -233,27 +276,20 @@
                         let rCount = 0;
                         const now = new Date();
                         const protestCutoff = new Date(now.getTime() - (48 * 60 * 60 * 1000));
-                        
-                        // Arrays for sorting the Feed
                         let validEvents = [];
 
                         data.features.forEach(event => {
                             let showEvent = false;
-
-                            // Filter Logic
                             if (event.type === 'road_closure') showEvent = true;
                             else if (event.type === 'protest') {
                                 if (event.timestamp) {
                                     const t = new Date(event.timestamp);
                                     if (!isNaN(t) && t >= protestCutoff) showEvent = true;
-                                } else {
-                                    showEvent = true;
-                                }
+                                } else showEvent = true;
                             }
 
                             if (showEvent) {
-                                validEvents.push(event); // Add to list for feed
-                                
+                                validEvents.push(event);
                                 const pos = new google.maps.LatLng(event.lat, event.lng);
                                 const newMarker = new HTMLMarker(pos, event.type, event.title, event.desc, map);
                                 activeMarkers.push(newMarker);
@@ -265,29 +301,37 @@
 
                         document.getElementById('count-protest').innerText = pCount;
                         document.getElementById('count-road').innerText = rCount;
-
-                        // 4. UPDATE LIVE INTEL FEED (Right Side)
                         updateFeed(validEvents);
                     });
             }
 
             function updateFeed(events) {
                 const container = document.getElementById('feed-container');
-                container.innerHTML = ""; // Clear existing
+                container.innerHTML = "";
 
-                // Sort by time (Newest First)
+                // Sort Newest First
                 events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-                // Take top 10 most recent events
-                const recentEvents = events.slice(0, 10);
+                const recentEvents = events.slice(0, 15); // Show top 15
 
                 recentEvents.forEach(e => {
-                    const timeStr = e.timestamp ? new Date(e.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : "LIVE";
+                    // Convert Event Time to MN Time
+                    let dateDisplay = "LIVE";
+                    let timeDisplay = "";
                     
+                    if (e.timestamp) {
+                        const t = new Date(e.timestamp);
+                        const mnTime = formatMNTime(t, true); // Get {date, time}
+                        dateDisplay = mnTime.date;
+                        timeDisplay = mnTime.time;
+                    }
+
                     const div = document.createElement("div");
                     div.className = "feed-item";
                     div.innerHTML = `
-                        <div class="feed-time">${timeStr}</div>
+                        <div class="feed-header">
+                            <span class="feed-date">${dateDisplay}</span>
+                            <span class="feed-time">${timeDisplay}</span>
+                        </div>
                         <div class="feed-text">
                             <strong style="color:${e.type === 'protest' ? '#ff5555' : '#ffaa00'}">${e.title}</strong><br>
                             ${e.desc.substring(0, 80)}${e.desc.length > 80 ? '...' : ''}
