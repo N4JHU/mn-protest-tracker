@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-27T05:50:35.575838+00:00",
+  "last_updated": "2026-01-27T05:59:59.848964+00:00",
   "features": [
     {
       "id": "RC-1",
@@ -3775,11 +3775,11 @@
     {
       "id": "road-4075",
       "title": "TRAFFIC: Road Event",
-      "lat": 5491694.291442987,
-      "lng": -10464580.828337835,
+      "lat": 5491994.135180406,
+      "lng": -10464474.072946163,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T04:50:32.500828"
+      "timestamp": "2026-01-27T05:59:55.097734+00:00"
     },
     {
       "id": "road-1461",
@@ -4009,11 +4009,11 @@
     {
       "id": "road-5700",
       "title": "TRAFFIC: Road Event",
-      "lat": 5613743.570050077,
-      "lng": -10364967.917835364,
+      "lat": 5599658.5074649565,
+      "lng": -10386116.951293726,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T04:26:39.720133"
+      "timestamp": "2026-01-27T05:59:55.097621+00:00"
     },
     {
       "id": "road-3095",
@@ -8986,11 +8986,11 @@
     {
       "id": "road-3528",
       "title": "TRAFFIC: Road Event",
-      "lat": 5603572.541467002,
-      "lng": -10353191.094945872,
+      "lat": 5632445.997314305,
+      "lng": -10397342.520064808,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T05:05:02.093716"
+      "timestamp": "2026-01-27T05:59:55.097614+00:00"
     },
     {
       "id": "road-4047",
@@ -9670,11 +9670,11 @@
     {
       "id": "road-9089",
       "title": "TRAFFIC: Road Event",
-      "lat": 5416158.616953376,
-      "lng": -10350204.838285852,
+      "lat": 5693921.696627737,
+      "lng": -10764475.425215423,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T05:05:02.093954"
+      "timestamp": "2026-01-27T05:59:55.097558+00:00"
     },
     {
       "id": "road-1774",
@@ -10804,11 +10804,11 @@
     {
       "id": "road-7682",
       "title": "TRAFFIC: Road Event",
-      "lat": 5616974.335681363,
-      "lng": -10393686.120070213,
+      "lat": 5599871.625302354,
+      "lng": -10382718.144600824,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T05:10:38.947839"
+      "timestamp": "2026-01-27T05:59:55.097827+00:00"
     },
     {
       "id": "road-5723",
@@ -11101,11 +11101,11 @@
     {
       "id": "road-2669",
       "title": "TRAFFIC: Road Event",
-      "lat": 6037495.770625042,
-      "lng": -10301851.32502845,
+      "lat": 5603035.060573351,
+      "lng": -10370912.601282706,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T05:10:38.947942"
+      "timestamp": "2026-01-27T05:59:55.097665+00:00"
     },
     {
       "id": "road-7941",
@@ -11276,7 +11276,7 @@
       "lng": -10329403.67823622,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T05:10:38.948005"
+      "timestamp": "2026-01-27T05:59:55.097761+00:00"
     },
     {
       "id": "road-3593",
@@ -12856,11 +12856,11 @@
     {
       "id": "road-2004",
       "title": "TRAFFIC: Road Event",
-      "lat": 6037495.770625042,
-      "lng": -10301851.32502845,
+      "lat": 5465269.017128567,
+      "lng": -10269108.700562444,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T05:19:17.356294"
+      "timestamp": "2026-01-27T05:59:55.097768+00:00"
     },
     {
       "id": "road-9224",
@@ -16123,11 +16123,11 @@
     {
       "id": "road-4521",
       "title": "TRAFFIC: Road Event",
-      "lat": 5640663.503422265,
-      "lng": -10378955.434492521,
+      "lat": 5587433.135799366,
+      "lng": -10384610.130666347,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T05:50:30.746907+00:00"
+      "timestamp": "2026-01-27T05:59:55.097875+00:00"
     },
     {
       "id": "road-2338",
@@ -16204,11 +16204,11 @@
     {
       "id": "road-7365",
       "title": "TRAFFIC: Road Event",
-      "lat": 5700275.100367047,
-      "lng": -10417536.988889618,
+      "lat": 5507244.645535676,
+      "lng": -10733879.931087837,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T05:50:30.747000+00:00"
+      "timestamp": "2026-01-27T05:59:55.097565+00:00"
     },
     {
       "id": "road-9935",
@@ -16573,11 +16573,11 @@
     {
       "id": "road-5115",
       "title": "TRAFFIC: Road Event",
-      "lat": 6041849.69191055,
-      "lng": -10777374.348572114,
+      "lat": 5478610.679442452,
+      "lng": -10479117.150084602,
       "type": "road_closure",
       "desc": "See 511mn.org",
-      "timestamp": "2026-01-27T05:50:30.747438+00:00"
+      "timestamp": "2026-01-27T05:59:55.097704+00:00"
     },
     {
       "id": "road-7772",
@@ -17577,6 +17577,1644 @@
       "type": "protest",
       "desc": "<b>SOURCE: Unknown</b><br>Apple Valley High School students walk out in protest of ICE activity in Minnesota - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi6wFBVV95cUxQWUE5RVAyTjF3OWFVb2lIWGNIbDF4d213NTd4SGtmcjd1b3FpaHE5SUxtMlBGdy1zQmJ4MHJHRWxkVHdOUElPSG9EUkVMTUdCdmlDOFd2UVhKcFVsU1Fzd3BkT1FfYklFUTkzM1lqNjVtNmxHOWtEZkdOMXpKeWU0a29YZUYtU0JER1BPWV9sbnM1bEF3Sjg4UGxPMEhqcVlWSTA2YTJTZjZQcHRzaldkVDBqbkZ0QjktV2o5UVoxcGxyRERXaTlhY01aN2xmVnB4TFh1cmVwRmpTQl8yNnpENDN3RTIzUlNXekI0?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
       "timestamp": "2026-01-27T05:50:31.348755+00:00"
+    },
+    {
+      "id": "road-1217",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5733369.443395773,
+      "lng": -10483659.319267442,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097502+00:00"
+    },
+    {
+      "id": "road-7139",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5733369.443395773,
+      "lng": -10483659.319267442,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097518+00:00"
+    },
+    {
+      "id": "road-9443",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5599708.763245199,
+      "lng": -10371032.937652254,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097524+00:00"
+    },
+    {
+      "id": "road-4130",
+      "title": "TRAFFIC: Road Event",
+      "lat": 6064950.328013415,
+      "lng": -10439030.110894019,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097528+00:00"
+    },
+    {
+      "id": "road-1205",
+      "title": "TRAFFIC: Road Event",
+      "lat": 6064950.328013415,
+      "lng": -10439030.110894019,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097532+00:00"
+    },
+    {
+      "id": "road-1870",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5603572.541467002,
+      "lng": -10353191.094945872,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097536+00:00"
+    },
+    {
+      "id": "road-3176",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5603572.541467002,
+      "lng": -10353191.094945872,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097540+00:00"
+    },
+    {
+      "id": "road-3370",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5599811.317313336,
+      "lng": -10374759.914204014,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097544+00:00"
+    },
+    {
+      "id": "road-5458",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5771138.467409304,
+      "lng": -10503492.556344625,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097547+00:00"
+    },
+    {
+      "id": "road-9109",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5616974.335681363,
+      "lng": -10393686.120070213,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097551+00:00"
+    },
+    {
+      "id": "road-6396",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5693921.696627737,
+      "lng": -10764475.425215423,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097555+00:00"
+    },
+    {
+      "id": "road-3701",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5599806.291665741,
+      "lng": -10385862.586257262,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097562+00:00"
+    },
+    {
+      "id": "road-7669",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5507244.645535676,
+      "lng": -10733879.931087837,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097569+00:00"
+    },
+    {
+      "id": "road-9925",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5539497.220738644,
+      "lng": -10455365.132973025,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097573+00:00"
+    },
+    {
+      "id": "road-9049",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5622888.235520893,
+      "lng": -10694007.515875503,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097576+00:00"
+    },
+    {
+      "id": "road-2003",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5622888.235520893,
+      "lng": -10694007.515875503,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097580+00:00"
+    },
+    {
+      "id": "road-1946",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5587552.646248959,
+      "lng": -10384944.311777707,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097584+00:00"
+    },
+    {
+      "id": "road-1772",
+      "title": "TRAFFIC: Road Event",
+      "lat": 6042447.091181446,
+      "lng": -10777370.007111972,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097587+00:00"
+    },
+    {
+      "id": "road-9644",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5491680.634198138,
+      "lng": -10464756.045216344,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097591+00:00"
+    },
+    {
+      "id": "road-5885",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5491694.291442987,
+      "lng": -10464580.828337835,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097595+00:00"
+    },
+    {
+      "id": "road-8252",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5586190.75970408,
+      "lng": -10384792.138033792,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097598+00:00"
+    },
+    {
+      "id": "road-4366",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5640663.503422265,
+      "lng": -10378955.434492521,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097602+00:00"
+    },
+    {
+      "id": "road-2655",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5840330.063256734,
+      "lng": -10567470.205412824,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097606+00:00"
+    },
+    {
+      "id": "road-9190",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5632445.997314305,
+      "lng": -10397342.520064808,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097610+00:00"
+    },
+    {
+      "id": "road-2920",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5599818.07053169,
+      "lng": -10385827.743256643,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097617+00:00"
+    },
+    {
+      "id": "road-5182",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5613779.118541559,
+      "lng": -10364947.546368549,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097624+00:00"
+    },
+    {
+      "id": "road-8763",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5603035.060573351,
+      "lng": -10370912.601282706,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097628+00:00"
+    },
+    {
+      "id": "road-8641",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5700275.100367047,
+      "lng": -10417536.988889618,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097672+00:00"
+    },
+    {
+      "id": "road-1457",
+      "title": "TRAFFIC: Road Event",
+      "lat": 6037495.770625042,
+      "lng": -10301851.32502845,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097676+00:00"
+    },
+    {
+      "id": "road-5670",
+      "title": "TRAFFIC: Road Event",
+      "lat": 6037495.770625042,
+      "lng": -10301851.32502845,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097680+00:00"
+    },
+    {
+      "id": "road-2776",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5975974.300512086,
+      "lng": -10295724.522894168,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097683+00:00"
+    },
+    {
+      "id": "road-6102",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5921710.3378015235,
+      "lng": -10771808.262712957,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097687+00:00"
+    },
+    {
+      "id": "road-7027",
+      "title": "TRAFFIC: Road Event",
+      "lat": 6064950.328013415,
+      "lng": -10439030.110894019,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097691+00:00"
+    },
+    {
+      "id": "road-8418",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5607989.39086091,
+      "lng": -10391727.676268687,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097696+00:00"
+    },
+    {
+      "id": "road-2361",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5649157.283112298,
+      "lng": -10378845.673474599,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097700+00:00"
+    },
+    {
+      "id": "road-6183",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5478610.679442452,
+      "lng": -10479117.150084602,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097708+00:00"
+    },
+    {
+      "id": "road-1600",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5585727.38232355,
+      "lng": -10456181.21616003,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097711+00:00"
+    },
+    {
+      "id": "road-6740",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5585727.38232355,
+      "lng": -10456181.21616003,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097715+00:00"
+    },
+    {
+      "id": "road-5226",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5649168.968707684,
+      "lng": -10378845.562155109,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097719+00:00"
+    },
+    {
+      "id": "road-4203",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5613743.570050077,
+      "lng": -10364967.917835364,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097722+00:00"
+    },
+    {
+      "id": "road-8217",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5613947.582544064,
+      "lng": -10360265.893863747,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097726+00:00"
+    },
+    {
+      "id": "road-6368",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5492032.314746332,
+      "lng": -10464569.251110792,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097730+00:00"
+    },
+    {
+      "id": "road-4393",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5901253.08780343,
+      "lng": -10252610.484109934,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097740+00:00"
+    },
+    {
+      "id": "road-4971",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5901253.08780343,
+      "lng": -10252610.484109934,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097744+00:00"
+    },
+    {
+      "id": "road-4312",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5672436.2063295245,
+      "lng": -10322809.000282135,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097750+00:00"
+    },
+    {
+      "id": "road-7826",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5672436.2063295245,
+      "lng": -10322809.000282135,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097753+00:00"
+    },
+    {
+      "id": "road-6242",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5511630.608290709,
+      "lng": -10329403.67823622,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097757+00:00"
+    },
+    {
+      "id": "road-5442",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5465269.017128567,
+      "lng": -10269108.700562444,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097764+00:00"
+    },
+    {
+      "id": "road-2016",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5611314.964302993,
+      "lng": -10580238.884965288,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097772+00:00"
+    },
+    {
+      "id": "road-9626",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5611314.964302993,
+      "lng": -10580238.884965288,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097776+00:00"
+    },
+    {
+      "id": "road-9973",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5614130.9932397865,
+      "lng": -10363285.212412532,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097779+00:00"
+    },
+    {
+      "id": "road-2240",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5614009.400655553,
+      "lng": -10357892.896278508,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097783+00:00"
+    },
+    {
+      "id": "road-1968",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5613422.853483907,
+      "lng": -10348158.56340609,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097787+00:00"
+    },
+    {
+      "id": "road-3418",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5613422.853483907,
+      "lng": -10348158.56340609,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097790+00:00"
+    },
+    {
+      "id": "road-2455",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5613200.135980253,
+      "lng": -10357194.47779327,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097794+00:00"
+    },
+    {
+      "id": "road-6593",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5570087.912907794,
+      "lng": -10424037.267915508,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097799+00:00"
+    },
+    {
+      "id": "road-8205",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5491792.531088769,
+      "lng": -10464672.221639777,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097803+00:00"
+    },
+    {
+      "id": "road-4842",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5569824.778098404,
+      "lng": -10423872.181110661,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097807+00:00"
+    },
+    {
+      "id": "road-2927",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5661762.707839254,
+      "lng": -10350936.986576797,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097810+00:00"
+    },
+    {
+      "id": "road-2512",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5661762.707839254,
+      "lng": -10350936.986576797,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097814+00:00"
+    },
+    {
+      "id": "road-4884",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5976926.06456929,
+      "lng": -10295721.071989954,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097818+00:00"
+    },
+    {
+      "id": "road-5745",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5976926.06456929,
+      "lng": -10295721.071989954,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097821+00:00"
+    },
+    {
+      "id": "road-2489",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5599883.875411775,
+      "lng": -10381140.5247773,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097831+00:00"
+    },
+    {
+      "id": "road-3444",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5416130.910266824,
+      "lng": -10350491.04069668,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097835+00:00"
+    },
+    {
+      "id": "road-8226",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5416198.483942655,
+      "lng": -10349371.945855735,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097841+00:00"
+    },
+    {
+      "id": "road-4290",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5416158.616953376,
+      "lng": -10350204.838285852,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097844+00:00"
+    },
+    {
+      "id": "road-8658",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5599726.981034516,
+      "lng": -10383487.362282205,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097848+00:00"
+    },
+    {
+      "id": "road-6865",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5599823.567341049,
+      "lng": -10383490.256588968,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097854+00:00"
+    },
+    {
+      "id": "road-6952",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5599818.541686647,
+      "lng": -10381232.029398732,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097857+00:00"
+    },
+    {
+      "id": "road-5687",
+      "title": "TRAFFIC: Road Event",
+      "lat": 6041849.69191055,
+      "lng": -10777374.348572114,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097861+00:00"
+    },
+    {
+      "id": "road-8724",
+      "title": "TRAFFIC: Road Event",
+      "lat": 6041849.69191055,
+      "lng": -10777374.348572114,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097865+00:00"
+    },
+    {
+      "id": "road-2304",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5581246.625001637,
+      "lng": -10383525.322228568,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097868+00:00"
+    },
+    {
+      "id": "road-9556",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5587520.023817477,
+      "lng": -10381462.238105694,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097872+00:00"
+    },
+    {
+      "id": "road-9391",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5613733.975127251,
+      "lng": -10364247.903368913,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097879+00:00"
+    },
+    {
+      "id": "road-7283",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5886309.819471964,
+      "lng": -10265945.33459257,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097882+00:00"
+    },
+    {
+      "id": "road-6018",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5886309.819471964,
+      "lng": -10265945.33459257,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097886+00:00"
+    },
+    {
+      "id": "road-7722",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5606663.559226265,
+      "lng": -10449541.453812173,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097889+00:00"
+    },
+    {
+      "id": "road-9523",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5606663.559226265,
+      "lng": -10449541.453812173,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097893+00:00"
+    },
+    {
+      "id": "road-7098",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5714380.357244354,
+      "lng": -10395993.773114357,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097897+00:00"
+    },
+    {
+      "id": "road-6210",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5714380.357244354,
+      "lng": -10395993.773114357,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097902+00:00"
+    },
+    {
+      "id": "road-2421",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5771138.467409304,
+      "lng": -10503492.556344625,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097905+00:00"
+    },
+    {
+      "id": "road-9144",
+      "title": "TRAFFIC: Road Event",
+      "lat": 5771138.467409304,
+      "lng": -10503492.556344625,
+      "type": "road_closure",
+      "desc": "See 511mn.org",
+      "timestamp": "2026-01-27T05:59:55.097909+00:00"
+    },
+    {
+      "id": "news--2090409702351760270",
+      "title": "INTEL: Protest outside hotel near U of M campus ends in clash with ...",
+      "lat": 44.975866099834825,
+      "lng": -93.25653576049501,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Protest outside hotel near U of M campus ends in clash with federal agents - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMisAFBVV95cUxQU1BFQVl0Y3Y4OVp0elpicXlWXzktazlrcXNCY1Rjc3RoV3pDVF80aHBuM0JHbGlKcnh5bXp1UnFhdVJWQk5WX0ZsVERZUmVnM2Nhdk9iYW41clBhZldDRUZsZjdlV2hVdTlyc2VEbHlFRk1FZ21ndE1TZE5VemxnV1FpRmFNODNSdW5peGJJS2ZZTWZtU1hCOW1nVG53OXFPcHJVVDhmLVpzU05OTUlvZA?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.634921+00:00"
+    },
+    {
+      "id": "news-7362604672331608158",
+      "title": "INTEL: Live: Some federal agents will start leaving Tuesday, Frey s...",
+      "lat": 44.99016138995153,
+      "lng": -93.25668742421186,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Live: Some federal agents will start leaving Tuesday, Frey says after phone call with Trump - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMiaEFVX3lxTE1OaGpLeV9RS3F6ekFOU0oyaHUtSTZINUd3NmRIcXNJQTRzWnlhajJjRnJtWEtyMWhYWVB4VUhCcGFjYU1FZUtRT19wTlY1S21FUDFpUk1qRGFXQjgzU3kyNVk1UU9hOGlv?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.634935+00:00"
+    },
+    {
+      "id": "news-6831956446543451883",
+      "title": "INTEL: Across Minnesota, many businesses closed Friday to protest I...",
+      "lat": 44.983405883535674,
+      "lng": -93.2530227012216,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Across Minnesota, many businesses closed Friday to protest ICE action - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMinAFBVV95cUxNVHM2RE10OUdHZTFqT2VCencyYkRnQkZUUURmR2R4ZTNJVG1Gc3JpNk5INGpmeDg3UE96TndESF9QZWdEWkV5NmJ3ZldVSEZaS29CcE8yTzZqbmRJWGhVUHVuZU1NLS1CWWk1dTAxMnFNSVFmYk0xZWJiMGFKOGVCUzBwVXVJdkhQNXVqX1Y3TXA4ajh5R3dXN0s2c3E?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.634946+00:00"
+    },
+    {
+      "id": "news--266478294002655661",
+      "title": "INTEL: Federal agents clash with protesters after another fatal sho...",
+      "lat": 44.968387598485364,
+      "lng": -93.24739023318597,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Federal agents clash with protesters after another fatal shooting in Minneapolis - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMiiwJBVV95cUxNRmVYNXhXek1KalBuY3BOcjFObGFHTGhmcHJaWXdueC03YnBTbi1MRjJCb3BPY0gxT29GVFByX0xmRzdrX3dTZk5nQ0tSX29ZNW9NTlgxN1R4STZOSjlQSEpkalM3OS1YZ1ZrLVVtNV9zM0JlNnNfTjFMYlNDTTZndkRkSlVHVm43S0E1SlJGRkxEOGZLbHotenNaY1NCZUxFMXJCajI0eGxBSmg1Zl9JczJwNVN6My12VERCV0FjZXR2bTJWR0gwbmotNWR2NWNJOUx0X1hoZ2JIT3NFdlNaVnM2RDdzUjZRU056SV94ZFlLQlFtMGR3bmVkUUtYbjFNaUF4R0xpMmJnZkU?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.634953+00:00"
+    },
+    {
+      "id": "news-1597003268871473934",
+      "title": "INTEL: Federal agents deploy tear gas after protest, vandalism at M...",
+      "lat": 44.96829614397292,
+      "lng": -93.24603866123775,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Federal agents deploy tear gas after protest, vandalism at Minneapolis hotel - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZkRpR0p4d01rVjJ1VG5BS0s1RVBUaWxlYndTTVJGd29KV01KU1k5VEhJaDJzcUQxSWJKUFlJTVJnUllVcVlVNnJMN3hXQXBwWGt2QnlkVHU4cG9PckhmZUVzNzJEX0dmNW5rWkQxUzk2VkdsNmhpTzJaaU1JeTB4R3B0Q0l2MG10QWlNY2ZLcV80eFF1SGdXZFB1eV92RzBaUUxLaFQ4cGJXVEk?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.634960+00:00"
+    },
+    {
+      "id": "news-2165977766538284903",
+      "title": "INTEL: MPD: Fed agents deployed chemicals during hotel protest resp...",
+      "lat": 44.99258259834291,
+      "lng": -93.269329551044,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>MPD: Fed agents deployed chemicals during hotel protest response - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMigAJBVV95cUxPc2xwMGszODNmbGtkNmkwaEl1OE9ZVmRRTGV1OHdVcDhUVURyZ2pRVURjWjdlNHVIT05XNzZPak9aZFdFTDBseDBQNWV2ZTVuaEdXUUd2S2oxLTl4eXkzeC1wcUc3NG9TdUhhZXY0S2w2WnFrdGhRR3JfWXpsUXZrSl96eXBVUFZuVVdkdUI3aWI3emRRYWc2ZndGU2c4dENpRUNjOE5jeTJFbUJNR19hYVNGVm9EMU8yXzNnVDFBRVJlRG44dFR3MWk2UTZJR3dwbDE1eTJDanVLSk1WSWNqMTY2bzJ6aUFjbWQ4RW1FX243NUtoUHF2VzZ3b1pmb1VW?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.634969+00:00"
+    },
+    {
+      "id": "news-5217861699257424345",
+      "title": "INTEL: Church protesters freed as White House circulates fake arres...",
+      "lat": 44.96860166151223,
+      "lng": -93.28093658221015,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Church protesters freed as White House circulates fake arrest image - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiuwFBVV95cUxNNEpYbFdNR0RQYzZHclNOa293NHNfWVV0X3NkMWdfNUN3RVBfVDRHN3pUa2Z5aERrX2hnVXdLSE9lT2o5ZHR1bUlERzRCRU9lcFJjdXBrTmpqZDlkeFdfMVdJLTEzdnNFLXNNV3VZUXlEeDgxeXRlcXJ0TWlxOFdRanJMRklpcmE3WXZxS2twcmI5RHJsZ200N3lFclpYeTBPcjNXYU43VUpyal9WUjNVSlBHaXo3VU94d2lr?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.634975+00:00"
+    },
+    {
+      "id": "news--1162103472015580501",
+      "title": "INTEL: Violent crime is down in Minneapolis, but police overtime is...",
+      "lat": 44.96302976221683,
+      "lng": -93.26335304106921,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Violent crime is down in Minneapolis, but police overtime is up amid ICE surge - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMikwFBVV95cUxOaVRMLTlzUGM0VG15cV9XT0JDMWxwQ0tjQjNJX3VNVmVybDd4ZXVMVU5BZVpYX21FTmh5V2ppTkk0bFUtNVEyUUVWTWgyNElJZ1pzd1hrVnc5M3MzY2JORjFkMzNaNDlYZzNJZ3h1VF9wRkdWckRpQ1piRUFwZUI2SEpjZEJWUU85UE40SV83R2JCdWM?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.634981+00:00"
+    },
+    {
+      "id": "news--4533946350126448436",
+      "title": "INTEL: Tear gas deployed by federal agents after protest, vandalism...",
+      "lat": 44.974086241876094,
+      "lng": -93.25145306526578,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Tear gas deployed by federal agents after protest, vandalism at Minneapolis hotel - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMivgFBVV95cUxQN01tMFo2X1ZlOGV2UjY1aVZBajZHYk13aVpJVldyNG1LX3dyQlZIMTV6NEJDRm5PNjAtQ0VGeExGM3AxOXRHWlEzZ05fVDZDQTFpYl9GYVlvNkVCYmJHa3k1RkNjdnFLWl9hdFRhT3BZbmlDdmlOcEpmaDY2c0RrNmtpMzdTSmgxMGY3NHpxY1UtU21HeE1KMVVHTUJ6UmY4UkkzaUgyQ1kzRURXdllfbXViWmhXc1paTUgwaldB?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.634987+00:00"
+    },
+    {
+      "id": "news-4238809555824865778",
+      "title": "INTEL: The day after in Minneapolis: Whittier neighborhood recovers...",
+      "lat": 44.99169781155543,
+      "lng": -93.26971381858962,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>The day after in Minneapolis: Whittier neighborhood recovers after Pretti killing, protests - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMirAFBVV95cUxPSjJZUEhlYWJBX3lpZzRJVkxlbm5oQ0VZYW1CdHdrYlNlak9YeVdiVm5XZ3JrR1k1bHFQOFk0MzRLYmhLVC1wSTNScTdUZDJwVU0wMXBzRk5sYVcwX29VRDBtLTRzc1d0X2dDQkNVWnZ6VFBhZXRodzZ2bGlVSTZfVjFsQl83RkJLV05uU2RTZ1pyUU5BMkhPMTFNZ0g0Y0JXUTJsNzVGa1NlUkty?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.634994+00:00"
+    },
+    {
+      "id": "news-6263038318266488726",
+      "title": "INTEL: NRA, local gun rights advocates reject Trump officials blami...",
+      "lat": 44.99298500707465,
+      "lng": -93.2500834528166,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>NRA, local gun rights advocates reject Trump officials blaming Alex Pretti for being armed - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMixgFBVV95cUxQeG1laG1KaUtuU19YRG1wZUlNV192TWxBQkdCWTQ4WmtOVDJLZG1lYzNBaE13R3JKN0dUZ2o2V2d5NEtmTHNCaDY3Y0M0Nk5RcnBKSGxVa190TVVCNVBQM2NzN0NLZ0o0b0xHTzVmMlRyZXY3RFpZYi1BeGJYLWFyNXB4Tzc1dnRVYlpURE5PenhSOC1HOEQwWDBrcW8tTGU1UDFHNFRfQ1lOUkFDMVpxb3JJMDlORXVjMURuZndZYlp6QmJCM2c?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635000+00:00"
+    },
+    {
+      "id": "news--222850331238928438",
+      "title": "INTEL: List of ICE raids, major updates in Minnesota on Monday, Jan...",
+      "lat": 44.95848392544388,
+      "lng": -93.24610823072481,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>List of ICE raids, major updates in Minnesota on Monday, Jan. 26 - bringmethenews.com<br><br><a href='https://news.google.com/rss/articles/CBMipgFBVV95cUxOUEVqWHN0dWhGYk94Y1RWT1RSdlFlWFdYelBrbTBDbXhiSk5rTGsxUDRNcE5zTG83ZXVIWlNpYVpIVU1jRHBNUmZZMzR6by1XekJWNTJabzVkTmE3bXlXb2owejBPQkxyRTNqNXY2b0NiRHNlX1R1Q1d1QXBsdlp5eWFTNlZJTFNOMWtMNzluOXJ0cTZOZFo5SjU4a2FiVU1HWk13NEN3?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635008+00:00"
+    },
+    {
+      "id": "news-8586801209379565707",
+      "title": "INTEL: Minnesota CEOs issue joint letter urging de-escalation in Mi...",
+      "lat": 44.9656547548128,
+      "lng": -93.24804321793876,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Minnesota CEOs issue joint letter urging de-escalation in Minnesota after shooting - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMivwFBVV95cUxNMVN4WTdCLUVYOUUxT09xbUNuVzl1ejlGd3k1UElQbXdPcjhtTW5WWnBsRFg3bFZqM3ljQzB3YTFhdlBiZGJ4U29sTGpHVVBETVd2bklCSjJhajBDWTdVVmVoN25TWlV5c2JhaVNHTThiNWFZU1AtZGN6NHlLUDUweHVIZFc3cXFZMHNJak5qTV9qU1JPNG1WcDNQMzhUTlQ1dHk2WEtKRXdIeWZEWEVaUlBBQkJkUTNXdUtDVTVzRQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635015+00:00"
+    },
+    {
+      "id": "news--6728669432133322024",
+      "title": "INTEL: Minnesota in \u2018uncharted territory\u2019 as state, feds clash over...",
+      "lat": 44.96894440796898,
+      "lng": -93.24556513145363,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Minnesota in \u2018uncharted territory\u2019 as state, feds clash over shooting of Alex Pretti - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMivgFBVV95cUxNcmt5RWpzYzNtb2tSRUVxRWVrdi1CQ1RiaWxXMUZBeUN6YW1nT0tzX2NDYUkyWnV4RlpPS295Y181M2xxbXp1N2pLZmN0ci1iWE5sOXlxbDJnRS1JcUZpWHFCTUw5bVpncV9qRmVVdV9ranlyOUxhekphYnhrRzZxWE1sODhlTF85N3RwRmllSDg2S0tXZlFIZHJsSS1jQ0pCVXlTNk9NZFEyZW9VM3RLMDJmS2Y3c0dSeUF4dmFB?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635033+00:00"
+    },
+    {
+      "id": "news--1038499716136441913",
+      "title": "INTEL: Police: 37-year-old US citizen shot, killed by federal agent...",
+      "lat": 44.99302096019573,
+      "lng": -93.25780903205755,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Police: 37-year-old US citizen shot, killed by federal agents in Minneapolis - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMirAFBVV95cUxQQVZLbFZsOTIzUVVrai0zd2MyVXN4ZjRIQ1hSRnZ6WEE4SFV3ZkY0QVRwd0p2TkcxLUlSRVVXcWljNUVuOUt5WmFNX0k4cnVzazFSMDIxUUM1bHJCUDNqOGNLWHQycVpUalhzaXFJRm5sclBiVzRiUmdWMzNPX21HYU9KV01ITURPZzVRUWlxb2p5cDFoSHRBQVJnX0FBclpPelczbC1vc1pvbGFj?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635040+00:00"
+    },
+    {
+      "id": "news--5847857063333891326",
+      "title": "INTEL: Minneapolis, Hennepin County request support of Minnesota Na...",
+      "lat": 44.98551336530707,
+      "lng": -93.26692909769463,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Minneapolis, Hennepin County request support of Minnesota National Guard - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi5AFBVV95cUxNWVY4ZnFxcG1BYjBvdjVmMHZMUWpya0lDbllyaEd2UmhCYUlTSU41d182YnVvV1hRYk9hejRIQ2RfT2JyUkhFVjNqMXpJbUtpRHFWY1BMNlJQUGwzMTR4Rjc3Q3FMX0N6aWZXdVg4eTg4Q01QX2xTSUFxRU1XOGllczlDYWJCb1RCSkVnM0lhVVI1Q0NPR0Voa0s5X3otbThDWmJWcU9XbkJiMXRwalMtVXcxUUYxdXlzdlBOVmx3eWtwTUJaM3VwSWxucEJkU3RKWVc4SlczVlRSVzZucU5UVlBmRVk?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635048+00:00"
+    },
+    {
+      "id": "news-5167061995019614039",
+      "title": "INTEL: Fact check: Video, witnesses contradict critical claims of f...",
+      "lat": 44.958629183420015,
+      "lng": -93.26930014160052,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Fact check: Video, witnesses contradict critical claims of federal officials in Pretti shooting - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMiqgFBVV95cUxOSEVoSE4zRkxieWxTdzd2eVF5dXc5VVJfZF8wZTdxYV9KVkYzM2NHLVQ2d256bEZjY2lRek9vUkk5QXJVeVVWeUpvOWlRVWE5dktQeGxTc3h6Wng2US13MUpXaVNoaW0yTE0zOGo5OVBFTVBMbFdNdG9WbzNHN3lzbmMzdFdWOHJ6R1E0NFg4M3BHOV8zc2ZhRUhvclBIdDVteFVQOEhibkt0Zw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635054+00:00"
+    },
+    {
+      "id": "news--355254495986731390",
+      "title": "INTEL: Investigation of Alex Pretti shooting would rely on evidence...",
+      "lat": 44.98839305284412,
+      "lng": -93.25466346641302,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Investigation of Alex Pretti shooting would rely on evidence beyond videos, experts say - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMikgFBVV95cUxOUHRLR3VWYzRIdlRhdUxHa21kSWpmazVjUmZNelI1d2hHSWYyOVVHeTBkaHBZNEM0cDA3RVJOZnZhWkZlMi1PbFJFZzFrZ0VCRmZSbDZpTmRBNnVJdkg4TENXX2V6aHVKc2pLLUdvT1kxajkxbVRTT09UeDFjQ3BtWmxkVEh5WjdLYmE4U2RPc3k2QQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635061+00:00"
+    },
+    {
+      "id": "news-6139438012050285487",
+      "title": "INTEL: Federal agents are heavily deploying chemical irritants. Wha...",
+      "lat": 44.99542744561137,
+      "lng": -93.27383666363485,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Federal agents are heavily deploying chemical irritants. What are the health consequences? - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMi5gFBVV95cUxPYkp6cEdSR0pyMXl0bnNJWUlLWThzak9IWThGTU9SSFJoNXdDajN5c1JkSXFPakNOQkg4NTRfdFhuR2xpd1l4OFZoM0xaeTJldUx3OExfWmt6Mm5WYnk1b1ozeGdfd1UxbGktVmx0cXBsVkxJUThVVFRRWVN5TUVVTFg1SkFIc2pLR180TFFTLWZzcjNkOTQzQUJYYWMyMEtfODhZbmI5S1lKTE5TYWNhWFZqVm02aW9tcmU4YXMyVF8yMEVUdXRGRHhjaGVVRktHUU1MUHNYeTRYMnZ6RWtkNExBTlVnUQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635067+00:00"
+    },
+    {
+      "id": "news-8835936887937282564",
+      "title": "INTEL: Wife says ICE chase led to crash that sent St. Paul man to h...",
+      "lat": 44.98437451236663,
+      "lng": -93.2731499876731,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Wife says ICE chase led to crash that sent St. Paul man to hospital - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMizAFBVV95cUxPNmRTWG01X0xTaW9CTF9iVk5nSTJfYzJLZDBQQUJpSnkxNFI0enBjYTJkcEZPZ2lXaWxDNkMzaE9VTmxhT19LR3V2Z2ZHMzB3Y1NsRUhaWGlKOGhFMWM0X2ZHMEpoeDV5MDBqTTNMNkd2TDFfNEFxSUhTZmhFTUxEcDlKdUxpR1JQeTBkQ0EweThjNTVhUzRUbGNGY1ZlNkt0NmZNNmJacUNqUzhOdXRWTTNndTBTakRFX0FqUklvMk1YY0FrUkdTRW1fazE?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635073+00:00"
+    },
+    {
+      "id": "news-6318347027426873338",
+      "title": "INTEL: Federal agents shoot, kill man in Minneapolis; Gov. Walz say...",
+      "lat": 44.95914314097676,
+      "lng": -93.11328916300687,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Federal agents shoot, kill man in Minneapolis; Gov. Walz says 'Minnesota has had it' - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMihwJBVV95cUxQa0lNckExc1pNNXRxRGotZ0ZJUUZjWjhqekZBNElSQ05JcVZkZllJWjlQTFJ1TlNVcURlRkhmamtfYTdVQzE0OVloWkdRR0stUm1MZXRmdFhNM19HcTI2RnNWVzgtcExza3ZzSWRONnZ3OVh0eThOLWRaaGF3LU8tVGtPUnBKNWFnRjRSMndCblpiUC1FWjFFSXQ5ZUZ5aVNSRl9qQnJ5NGZrWTJRWEdWSnk4OHNJM1BFdmJoclNVVzZDZWVnbkh1eTVlb0lPUk5sNnZGYkZpQkpyZXQ0dFZsS0w2SWc5ME4wQmVBcE1qdDRYWE13eHQ3VmZjVGpZb2M5YlpCWGp3RQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635078+00:00"
+    },
+    {
+      "id": "news--4490638854619933584",
+      "title": "INTEL: Despite having warrant, BCA denied access to scene where fed...",
+      "lat": 44.99556003891759,
+      "lng": -93.26465982863155,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Despite having warrant, BCA denied access to scene where federal agents shot, killed man in south Minneapolis - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMiiAJBVV95cUxNZU9wSF9abFJWRzI1SGdZVFh3cVk5Wl8zdkpmQk9lcXlfQnFlSlBwSzlWZWlmb3lrbWVjV2w3NVVNTHAwd2xUa3p2TlVxbUVmUC04bVFVQzZJOE9WbjRCVVYzSFlPZzN6NVg4dDQzOXdOMXllMXBDaHY5SFV0dnNIcldzUFJLR1ZjWDB6ejBqbVNRcUk3TjNmV2F6VUVPV3NXSTVLOWdNeVZoTVlfZmNBX3lDU3M0UWw4UEVJUk14WWRHZWhKX2IzYmcwb3FaYTV2SnNLWTQyUUtNeFJRMkZfZXhuN0c4RUduYVpfcUVsd1Y4MTRzOWJfYzFpS3ZkX0pDLUZLaS1lRFg?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635084+00:00"
+    },
+    {
+      "id": "news--6627300567351637442",
+      "title": "INTEL: Judge hears arguments to halt immigration enforcement activi...",
+      "lat": 44.996649096164326,
+      "lng": -93.27311754691526,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Judge hears arguments to halt immigration enforcement activity in Minnesota - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiwgFBVV95cUxOWVh0U0RfbmxSX1VYLWtHTEdQWHFESXltN3VENlAtSzBfS3gwLVBESHFxamtrY0NkWHRPLVdJby00ZFBjbTIzLXJjMXN5dzgwR3picURobUlNTjdTNzg5c2lsQXhLQURIY2xPY2lrQ3hFRldiRTZlTl82aHFyMGRZbXhkLVVscGFUTjV5QW1qNjQ5YUIySERFZWJkT3drV05NUWtFLUF4Qmo2Mm5mWXdpODBmNm82VjUxbEVRdWJaZzBBQQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635091+00:00"
+    },
+    {
+      "id": "news--7480148592317935321",
+      "title": "INTEL: Minnesota law enforcement officials call for White House mee...",
+      "lat": 44.9905728031512,
+      "lng": -93.28459532412926,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Minnesota law enforcement officials call for White House meeting, emergency summit - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMivwFBVV95cUxPY1FPbHNWYkRIOHkzVTJtREhiQk41c0kxa3ZiYlhMcllaZEtvSGpjbkg1c1BDenFUXzB2d000b0VveDFIRi0wdVlVZ29FNmJHVU4zQUFpMENJekk4dTJlcTY5QWRRMWtGdmxMbkZzRTRIR01GbEZNSjBtb1JfYzJMcTdpdk1vb3dwcmxvM09Gbl9TNlloRTVrMHdUZWx5LVpzTnJGbkdFNTVzVFNzaTNfMms5d0hKUFZoOEJoZzN3QQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635097+00:00"
+    },
+    {
+      "id": "news--5451731491650151684",
+      "title": "INTEL: Chris Madel ends GOP bid for governor, says he can\u2019t support...",
+      "lat": 44.96746776224693,
+      "lng": -93.10083443310056,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Chris Madel ends GOP bid for governor, says he can\u2019t support federal \u2018retribution\u2019 against Minnesota - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMizwFBVV95cUxPc0dhUWFpcGpoZGVGSVc3TzMtdjVhaERQU2VhWkF3aHZwYW4wT0IzNTVLdlVZZjNjcXoyU0NmU0JvT2V6N3h3bDVobXdoTmltWnE1MlByX2hyMXdtUFB2NXgxekx0Z1A1dDJlX2xmeWdSZFNJZ2s0WHFFRTRLYWgwMUhYWmd1SHpLTkRHb0ZCem8zbDVyYm1vMGFCREVWdzRkRjRQSDRMbnU5bUloUzhlU19oV1dIUGtuNWNuaVBqdEk0REpCNk9uQVpZTERzclE?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635103+00:00"
+    },
+    {
+      "id": "news--4202103730579890278",
+      "title": "INTEL: Judge grants order barring feds from altering or destroying ...",
+      "lat": 44.97200334335647,
+      "lng": -93.26016182998345,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Judge grants order barring feds from altering or destroying evidence in Pretti shooting - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiswFBVV95cUxQMnl4N0RnZUYzT2J3YWYtZ2hTM2tRR2NDOFR1Q1dfUTNMUnZEdExkc3FvRFhtMGZmeEZXNVhGSDE1X1ZDYU5XSlIwUVVDZ3dfdmdOMTVCeHVyamNFV3NNYU1NeTFRekRHYWczQ1BoRHJ3U0ZGTTJ0dWpFTGdmRW92MVhVVUs5REZscXlYYTd5OHUyd2FFQXdvd1M0S081YklzVVUybnJPRDlSTUlxbkFmellsVQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635110+00:00"
+    },
+    {
+      "id": "news--8734946478940832475",
+      "title": "INTEL: Walz and Trump speak by phone as White House appears to soft...",
+      "lat": 44.96038420792175,
+      "lng": -93.26358064231096,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Walz and Trump speak by phone as White House appears to soften tone on ICE crackdown - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMivwFBVV95cUxORXR0YXRRWi1fZHFiclhaOXliMTFTOG9Eb3ZaNVhqZ01KcnhTNlBockgydUx2dGpzajZxT2t5WTVhZEk5TzVHdEd6dWpUOEFrOWJWVk03N1NaQ2JuSFJCVzV2QV9FTHJ2T0t4WDlvOXpYeUlNTWpCczV6dGlZYW5Hc01sLWJOSUF5d0pqSWFkV0J2cEx6b0tDSWJlYk1nUHZvN0ZMN2JzSzhHWVlWUjBfQjYzRGgwWEtuc2oyNXFacw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635119+00:00"
+    },
+    {
+      "id": "news--3514542268566946796",
+      "title": "INTEL: Minnesota public perception taking a toll after recent news ...",
+      "lat": 44.97090646524342,
+      "lng": -93.25132883988766,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Minnesota public perception taking a toll after recent news events - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMipgFBVV95cUxOeUtjcWVzU1NaeFAtS3ZHeEtRQmYxeU1Ld01WaVBTWnNXNFM1MmtwNFNqeEV3eXZSbEFnNjB5enpLcHA0cVBDRGhMcjAtb3g5aHkybXBBOWlTSGZLdDA1R3lIQ0IyQkVudVJkOGZoOE1zdG5ESEdvZ0JFWUlpbVZybzJVM2pUaHFCMWdLY0cxcTJQTWkwb0dWUG90SDNoYUtqQ2t5QzNR?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635125+00:00"
+    },
+    {
+      "id": "news-8684859915558772369",
+      "title": "INTEL: 'Progress being made' | Walz, Frey speak with President Trum...",
+      "lat": 44.96394393857282,
+      "lng": -93.2484208296316,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>'Progress being made' | Walz, Frey speak with President Trump - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi-AFBVV95cUxPbG4zU2hFZWlMSl9kMEJwZUNKaTh3Q0FmU1J0YVlQc3FHZnRmdFNIWUFmSkZ2UmFZQUtlMWdsZmI5UXB6dG1mTm1KQlRkcTVOWjhBeGc5N19yVlM2Y1IwOE5vdzh3XzhvVVJmMGdUdTVVOHg5RFZ4Zm9iTFpoWE5QUzJteUhoQmJNX1VGZENjVmFka0EwclNlSmp5QUNtUlBOMGFwbUNJbEZLeDdOYXZ2cjBOQlFnT2wwRlk2VU1uWms5MWxzMzN5OGlaaW85ellkS3FHenYxU1g3c3dtb1ZEX2VVSFZGT3J1STFHU0FfeEE0X0pkQ0hZSw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635136+00:00"
+    },
+    {
+      "id": "news-1990152971599133674",
+      "title": "INTEL: Minnesota attorney Chris Madel ends campaign for governor, c...",
+      "lat": 44.95697273770068,
+      "lng": -93.10031491063232,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Minnesota attorney Chris Madel ends campaign for governor, calls ICE operation an 'unmitigated disaster' - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMi1AFBVV95cUxON0ZBd083X0NvTnF3TDlpMzE3ZWVaYWY2V09oUmQzMjVrYjcyUm8zY3RZTm1Cbk1IMzIzWWo5UHh0V0hxYjdSa3oyOURwRTdkYUFUbDVURzRRVm0yN3dqQkZaMzlhVzlCOUxpNlR1N1RzMjBIS3VQUDFtNzNNYU9pY21LNUF6QXlsSTJDdXFJQTBxSlAxUlBrWWd1cVZNeElDMEc3ZjIzeURDYW5SUDZUTlJrUm1kSWI1YW15dEYzbjZJUUFUTW1JVG5fUVJMLVQ4bTFkTQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635140+00:00"
+    },
+    {
+      "id": "news-3600679272771353291",
+      "title": "INTEL: Border Patrol avoids question about whether or not Alex Pret...",
+      "lat": 44.98770426018823,
+      "lng": -93.28306829450143,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Border Patrol avoids question about whether or not Alex Pretti was armed when federal officers fatally shot him - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMiqwJBVV95cUxQZ3haNnlfRnJ1NXJsNjhuX0hCRzFsWkJSenVkVms0Sk9MbFVWVU5fNU5sd0l4V3pqS044aE5xX1ZOREVlbTAtSmRCVGRySWxRZEVEbW05RkFTcTlFRWJrTFY4SzhvdEFNVDlzSDBISzROTEt6ek44WTBpWjlzTGNGVWtaYzBMMkQ2QXJTTjZNbVA4X194ck5ENDJkRkVKWWVxX2E4TndJdEZwaWtTZEUzZ2tjaHZJWXZLRWRFTEIyMUtIX2NqU1l5anRIdnJlQ3M1eWNybS1fUFE2TGR5RkluM1FUY21KYlNRWnNhQ0dzOHZrN3NLLU9GTlpOTThmd0VaQTF4T25sWWlMdEMzLWFMV1QxbWtGaURldmRId0h0NjZTZWVJaVdoUVpPNA?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635148+00:00"
+    },
+    {
+      "id": "news--9021402665170075904",
+      "title": "INTEL: Opinion | No one in Minnesota asked for this - Star Tribune...",
+      "lat": 44.97275899522104,
+      "lng": -93.2674427141755,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Opinion | No one in Minnesota asked for this - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMikgFBVV95cUxNUFpzM1NuMVJzUElZN25IS1dObWs0LVFKeksySjJ3alhnTFVCd1JSNjhFQ21Ub2ZPd2FTVmtQTHkxOG9yS19OeWhhc0JRLVozbHVxTGxhQ3JFdW55OXBiMWxkcS1NWXp2aU1lWUtnbE5pMXhGTGV3N1lhZy1MTmFOVHlOLVlWNC1uRURYUnBjU1N4dw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635155+00:00"
+    },
+    {
+      "id": "news--7684467116326424956",
+      "title": "INTEL: Over 60 Minnesota CEOs call for de-escalation and for local ...",
+      "lat": 44.98094003998051,
+      "lng": -93.24560772224241,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Over 60 Minnesota CEOs call for de-escalation and for local and federal leaders to work together - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMi0AFBVV95cUxNWG1xZEo3eVpIRzlyMVB5RldFdUd4RERzTEltRXpMVWFORGhBb1kxc3VlNER0emJ6ZFI5Y3c1S3JNclVQemoyak5QeGk2UGdsSVZKVVRkTjljVVVCbnctampJQmE1ckJYMmxPS2pVcGg5NmdPQXpzN1pkUTdkOHNSOEdTZVpFVWJ5emxFdTVGbmUyLTU0ajI1d20zd3NyVXVlNVVnRjcyUVdBUDlnaWVMVWd2X1JvWDZ5VUw4NkJZNm04RlF1bzVvX3BEY0hVcUR3?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635162+00:00"
+    },
+    {
+      "id": "news--3958536561992683951",
+      "title": "INTEL: As tensions rise after shooting, federal judge considering r...",
+      "lat": 44.963353481830765,
+      "lng": -93.24560070729056,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>As tensions rise after shooting, federal judge considering request to temporarily halt Operation Metro Surge - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMi3gFBVV95cUxNMW9SeEM3djR6ZUdOdG9Ldm9JR1hvZU9pMEdMVUVRUkpnTzdsUk1PcVBDcEJnaWx4blRsamNOeVNuR3hOelFmMjJYRzZ3VWdLdWtPU1NHU19LQmRmc0VIRkVYWUFfRHg1aTd5YXBJQnNuUkxuWjhOd1kxOWNROG9VNVZsQWxTSTVod1pHdTlRN1JXZW9ITHEzaWFwbVo1a2dtRXBoYm53U2ZXQ3JqejhkWlhHTFZOTnQ4a18zZFJ5Zms5aWg1Umhnd3FSSmVyd2cxam1Uc1FSaFhoUTJKZ3c?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635169+00:00"
+    },
+    {
+      "id": "news-2408761893569560345",
+      "title": "INTEL: Students, educators call for 'ICE Out' strike in protest of ...",
+      "lat": 44.95966336753597,
+      "lng": -93.26768741815731,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Students, educators call for 'ICE Out' strike in protest of federal agents at MN schools - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi-AFBVV95cUxPQVRmX3RhcG5XRG15cThPcHNrT0NiVkkzbVAyWTBXRk5PaFdoR01HZy1hWEhObTBQYzViRG5qWUhSbjRsTU1MeTVXYWZuLTA0UGw2TDdmSDhFREF5OXZoZURfR3VWWXZrc2xCMmxwQWRwVUUtandfN0I4NE56NDh1bGJCbF9ndEpITG1EMnhuTm9yVkZrMVdaSXMwdk5YLWI3UmNxVWdkb1VCclNmV2txbHh6U3dUa0l4XzVzZVI5QXpkM2xfQmFNUW41d2kwbzROSGdpUXROV1BOLVc4eUVrRlRrNXN3Y3lNcTVWSHFyeS10RlFmZHRnOQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635175+00:00"
+    },
+    {
+      "id": "news-1362056680657739931",
+      "title": "INTEL: Federal judges hear arguments on ICE surge in Minnesota, pre...",
+      "lat": 44.9957086146917,
+      "lng": -93.27562357408466,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Federal judges hear arguments on ICE surge in Minnesota, preservation of Pretti evidence - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMioAFBVV95cUxPXzdva21Sdmw4bl95cG1rZTRRZ2VLWnIteVh1SU9TVW1vcnU4M25nUW01YWhaaDM0YmFzaVR5Q3FhcHl1Wi1LejhPU1dXVUw2aEFLdTVhc210dUptVDdJMThjc3dmNHVKWFNzM2dEUDEtb0gycW42MkZMMnZLUjQwRkhlNUtmb2l1SHpweWxmdXVtVWRiVmUyS09hMnRaQUll?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635181+00:00"
+    },
+    {
+      "id": "news--291756033892405027",
+      "title": "INTEL: Bystander videos capture deadly shooting involving federal a...",
+      "lat": 44.97284634148212,
+      "lng": -93.27775964125043,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Bystander videos capture deadly shooting involving federal agents in south Minneapolis - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMijwJBVV95cUxNenNPNUF2TjJ5c2s4LWhfSWpLN1h6VmJnWXRIUk9oZjBxckVxSzU1RGVJLU5GX0VRSWg2eGVJTkdQdnBqNU1vaEdTRms1VWk3UDZ2T1p2TFR3U0g4d252U2ZUR3ZxcUpfS0sxUHB4aUNtbDVaWUkwVGZDc0ZKd2x4US0zVk9KZTc4U2xFdVpOaWUybmVxT0Rta1U3Zmd2OHBLQUdCMkNqM281Ump4SnlERDN2NmVnb1hfTDQ4azFkWnVLcUlOdmM5RHlKN3JFWkV3b245elBnMXZxRmFhMUFOWjZvOHBqck1XQWxHUXdTVDFFLWlRbVZUaDJseXBCdnJJcnJvZnZTbEd1UUJyMU1n?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635188+00:00"
+    },
+    {
+      "id": "news--1253856433339403436",
+      "title": "INTEL: GRAPHIC WARNING: Man doesn't appear to have weapon in hands ...",
+      "lat": 44.96565570517501,
+      "lng": -93.25835172066017,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>GRAPHIC WARNING: Man doesn't appear to have weapon in hands when shot, killed by ICE - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMihgJBVV95cUxQMkdYZVZWOEUtd3pIaUhlRER3cnlmMExMdTFiQTdvRDBlUVgtaVNtVzYzWjFyRkdoSzZHbEJ4SjQtNl9MSW15NmNJbnNZZEtxZlBxS1NTdkJkUVkxNGlpWDA2R3p0cHpSMUxzRzhvQ1R6YThwRkFvSDdyUHJqWWRLUFdWZTRGNDZXV3E4R05EVjFrQkNvTUhHOTRtamUyR2t5VS1Va01IbFJZNDV2UzBUMDQzTDBNZUZVSkliMlBkOU4xMG9xNVhkSHVXbGt4Q192UDlXa0lZclllck9OLU9pOEUwMHE1OGNKblpWUlNaMG1OZ3RoT2p1cC1JNXN6eFNtMmhTNzBn?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635194+00:00"
+    },
+    {
+      "id": "news-2614983315182122560",
+      "title": "INTEL: Fearing ICE, parents make plans for their children\u2019s care - ...",
+      "lat": 44.970261036586685,
+      "lng": -93.26381189202604,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Fearing ICE, parents make plans for their children\u2019s care - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMizgFBVV95cUxPdkprblBFamhWT01ZM1lFd0ZXTV9nY00tMDRBb25MYVFfS1dneDV2MHlZQVdIdTAxUkVYTG9mVDMwd0FYZ2kxX0FLM3IybVRMNHRydi1IajAxU0pwMXFIZnk2RXgxLWtESUg5TXNpSzVaN0g1MlhLWng3WW5MbGI4Q25fYnJ1Q3NDS3Y3UmY2VDlVMzhFQTF3dklLMHA2QTNiNm8xRUpPYlJzTlViU1BVUS1hSFlEZHFHTDZUUjhxOW85b0hJdzdvc1NqN040Zw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635206+00:00"
+    },
+    {
+      "id": "news-5175966540018579132",
+      "title": "INTEL: Bondi letter to Walz requests access to Minnesota voting and...",
+      "lat": 44.98024388621437,
+      "lng": -93.24594510157338,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Bondi letter to Walz requests access to Minnesota voting and welfare records, repeal of 'sanctuary' policies - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMi2AFBVV95cUxONnlDQ3lVMjdMdFptWGJKd0l2aEY2ckhwYndZNk85YUR6WFdnOG1BX1RUc3YxYVNkaE9YTGZtMlpSbm9abmJSaFZsc2QwWDIzeWF1SktwcG1tUjdnQWdMSHg4eWJKZUUxLUFOWUpfVkdJSmRMWFRUNF9FWjY3b3RSQWdDMWFwMXQ2aW5ORVVnd2J3RFAxYjBoWnU0X0hRTGY5VlZzekdHRGtvWTBwaTMxUlZndHVRanNtT3JiVzJyZWdabUtuaVlmSXpZMU1oMEZWMlc2WDZKWjk?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635213+00:00"
+    },
+    {
+      "id": "news--4435044003040037708",
+      "title": "INTEL: Walz signs executive order to add weapons screening at Minne...",
+      "lat": 44.96379758695057,
+      "lng": -93.10737985150207,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Walz signs executive order to add weapons screening at Minnesota Capitol - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMiigFBVV95cUxQdktpMGhYM2FObHBxZUdZYWw0OEZ2TlBlZWdnbDZ0Vzk4V1pkUHY1NloxVHdsRkxCWkMzRG43ZDNmOE10czdZLXlWNnlpdjBRdnVXRUVVZkN1ek9laUZ3NEZFRWNBZVhkR2dlZ1lwZV81Rm1ENWhnZF9RTUR6bXlwbjk3ZEdQaXhJYUE?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635217+00:00"
+    },
+    {
+      "id": "news--2486914808878334068",
+      "title": "INTEL: HCMC lays off 100 employees as its financial crisis deepens ...",
+      "lat": 44.99740409956135,
+      "lng": -93.27428228489411,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>HCMC lays off 100 employees as its financial crisis deepens - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMizwFBVV95cUxQdnY2NTBVNENVYmxFakxnTkR4QVhHQjR1QVJXRE5kZkRpel9GSS1lYkRwY1FMNzdwTy1yQWRIbU0zQmQ4MFRtWW5MMmFyX0F4Qm5aOWVHR1ZpRXUwTGNlRlFsVFEyUzVpVEJJNy1tdTZ3RXU5aWVyRmpWOFRZRDM2QkxfNm1LNnNfMS1hb2JKM0FQWERYcHd5SFpJM0xUN3lzVjZXVFhfQzJEUUVkV2EtTWhLZFNJbEU4eU96bTctdEswcVdxczdPQ3oyVlVxUTA?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635225+00:00"
+    },
+    {
+      "id": "news-4683055622159081798",
+      "title": "INTEL: KFAN\u2019s Paul Allen apologizes for on-air comments about \u2018paid...",
+      "lat": 44.989189857547274,
+      "lng": -93.2844181027939,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>KFAN\u2019s Paul Allen apologizes for on-air comments about \u2018paid protesters\u2019 - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMiqwFBVV95cUxOSndOeVd0eVM2YnpUZ3M5dXZtbTRWUThQWHlOLXd1akFYQlZZbmxxeFhPMXIwUC12dWROQ1R0X2VVTVU1LThvWEcxM2lpRWpHMHNOdlBSSTYycUM2VC1jaHRKWDZzOENHZWlSang3WHpZWnFFUFhZMWRKQ1gzTTkzNVhNa0YyYm0wOGpfZXpSQ2dfQXhLOHM2cGVtZkE1b0RjUjJVbXFBRnRFMUE?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635239+00:00"
+    },
+    {
+      "id": "news--61562293886415658",
+      "title": "INTEL: Minnesota DOC launches new website to 'address ongoing misin...",
+      "lat": 44.990787578472606,
+      "lng": -93.28103815715563,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Minnesota DOC launches new website to 'address ongoing misinformation by DHS' - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi6gFBVV95cUxNSFpHNjllM2RPeFkyeGdhQ1ZxWmtSM0M4NGp3am0wcnlPaWp1bmdFMXJXejdkNWF3Z1lvQy0zcXVnWEZ3Uy1HWkZ0d2ZOcDRPZi01WFhsWVM1Y2hOcmZoY3R1ZTF2NFRCZmx6R05OZWQ0NVhrejNNNWFleHF3U09GNk1PaVY1YlV2RDc1V3ZoLWhXdGxSQ3NLNl9uZUlXNmNXS1lRMVJOcVo1dGtvMEVXbm1FQlBPb2l4Z0hneDVsdzJpRy0wcnlBY280TDFLX2w5OVVGdnlBWVhvZ3ZUVDhPcHZHMkdFNUVGc3c?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635245+00:00"
+    },
+    {
+      "id": "news--7187124485445807489",
+      "title": "INTEL: Judge hears arguments over whether federal government will p...",
+      "lat": 44.94547802457075,
+      "lng": -93.08409641794368,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Judge hears arguments over whether federal government will preserve evidence in Pretti killing - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMizAFBVV95cUxObzdMWG5zRVM1eXhHTXFTOHRLbGRLaWk5X3lvaVd3MVF0MVhnR1gzeXBvRnl2SXVvWWpHcHFQNW1PRm81NGNQMExRMWxsTFgtclZYWmtENkZWTHdCdHRQbHBvaFQ0QVVmdGRVVWFBb2xyQ1h3TTB3SXR4ZDU5end5OWRlTGNzQlBrVUN4OHlJdl9XSlRWRE9JMWU3dWV6WUplNmFPVHU2cXVMalpKckxWLWliVnB2dzNzVWNsdGJyQmZsd000Q0hCQWVld3A?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635249+00:00"
+    },
+    {
+      "id": "news-423795452208195421",
+      "title": "INTEL: Border chief Bovino, some agents to leave Minnesota on Tuesd...",
+      "lat": 44.96596005719883,
+      "lng": -93.254809280368,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Border chief Bovino, some agents to leave Minnesota on Tuesday - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi8gFBVV95cUxOV25PS09yM0J6bTFnZGFSVGhqejVNbklBRWFnaHB0djAyUlEzZUliZHoyMEcyaXp4eEZqOS1JVGctc3JjaVNwYlRud09DV0VMa0wybDZXbmJVeGtlS01ubG83UklxQmplUm9yRl93SzlMZ0hkaW84UXFEcDRTSTc1ZlJjZEdwVEtoVzVYem9udjR1ejZKS2VPMlhlMTdNTklvZWgxS3R4bzdZRE5WWGJnamgzc012X2hJSFVjNTF0Njh2Ql9fWkc5cV8tbF9sRC1kNnZNczFNU1ZUbWJtaGFDbmJSZWlzalBtSlVSTDV2bHl1QQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635255+00:00"
+    },
+    {
+      "id": "news-6736889106429930524",
+      "title": "INTEL: Border Czar Tom Homan set to take over Minnesota immigration...",
+      "lat": 44.97773171072108,
+      "lng": -93.26964387575522,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Border Czar Tom Homan set to take over Minnesota immigration enforcement as Border Patrol Commander Gregory Bovino leaves the state - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMinwJBVV95cUxPWGFkT3JTN2RaVWdfTVZXVjJUWGFGUl9RRGdyMFF6bzhjRGJWWkVkNmtnYVI2a0l4a214dWNjVDZjZ1VWVk1fVS1MbmlLQXp3Y0Qtb2ljSDd1eVdDa21rdFhBTnRncFNkT0V5MzRwUDBXM1ZqUlpzWGx6dmg2TmFEV05Lb2Y0M0hPZkVuS1RoRTZIM21iV0VNckt3dTRDT3pYV2tMWU9pZy1qeHBFYUt4T0owZndPQmc1Sk1LV3BDTV9BNy1tdnlaVk5zdWZpbTdGNm5jWFB0YzA2Snp3WTh6R0hqV215a3NLZXZGRG43REQwMktxb2pzakxJdkViNHFUX2FGZHdvY056MENyTk9Sb0JVU0c0LTc0dTZtc1VMQQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635262+00:00"
+    },
+    {
+      "id": "news--8374997324765741233",
+      "title": "INTEL: Mayor Frey, President Trump speak over phone - kare11.com...",
+      "lat": 44.96293305667178,
+      "lng": -93.263672465386,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Mayor Frey, President Trump speak over phone - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi2gFBVV95cUxNWmZCZkt5d05GWW0xazFVLVFSWXlVWTh5ekhQYVptWXFMc0dNdW1NQ05sM2RMTDJ3cG9SdE9EZklkdS0tSTBFOW9Bb2ZDQVlULW1sMEZJYXlhOFNQdndySGxkZXJtV05nbHJIWU5OV1JLVVpyckJNRjhETS1tRTBBTnR4LVVFWTFGTC1aNmUyeVYxeFh3S0JjRXk2U1J3NFBSNkNTT2UxcFJMTlREcGNvSGxCTHV6ODZHWXdvZ1Bta0x3aGVGQmdseGVMY0Zid0JhREpUa3JZMnIyZw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635270+00:00"
+    },
+    {
+      "id": "news--504871175057395414",
+      "title": "INTEL: MN SOS Simon on DOJ's request for voter information: 'No' - ...",
+      "lat": 44.98290974382344,
+      "lng": -93.26108740942236,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>MN SOS Simon on DOJ's request for voter information: 'No' - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi3gFBVV95cUxQZ1RrNER3bEZMY2ZDWDNPMVFGS1NYQTZPQXBEZ1hFWU1IR0YyclVZZXN2Z0c4UVVRazZpa2Vxajlrakw3Q1VwdmhLWlgzcEtrMjkxby1CVENUN21Jc3AwaFBsYUwwdG1GbDlySGlLTzVQLWVCRkd2OHZXY2ExR2JFOEM2SnhXVU9nc1kwSTMwWkg1aW1pUUFIZF9fczN4V0p6dkJtYVNtelhBZ2d4b1VyUHdzbksxb05mMjBCbXNTMnZUb21CRHpwbEJ5dE5wdFBtRkFlbWRFNkxKMVdwLXc?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635276+00:00"
+    },
+    {
+      "id": "news-5521239660577591306",
+      "title": "INTEL: Gov. Walz orders weapons screening at State Capitol - kare11...",
+      "lat": 44.960833629632475,
+      "lng": -93.10779862853506,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Gov. Walz orders weapons screening at State Capitol - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMizAFBVV95cUxNLTFOOXRpMktNOGh0YzZDc3JESTFHY0RoM0UwelV1OE5oRFhTcDk2UV8xaHZFX2xSUjNpOVAwT0c1aTNXMUdrY3ZWbnNDeUtJMUJSelNmNGZWMFVTZTBHeDR0V015UGhfT3JrVEV5X1R2T0FQdXNVZWtqNzZ0WXJFaXdPMzE4ajE1al9MOXJrWnhwTnV3Yk1SYzRjQVk1akp1MHo5Y3Rva0tTdnA3a3VSRVVyUHRYbnJydEJ2QkdnemVJOFJvcjh6M1BtVHY?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635280+00:00"
+    },
+    {
+      "id": "news--7825432332043844588",
+      "title": "INTEL: Brooklyn Park police officer stopped by ICE agents while off...",
+      "lat": 44.97159513001684,
+      "lng": -93.25011659025812,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Brooklyn Park police officer stopped by ICE agents while off duty - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMipgFBVV95cUxNbWhRblNtLV9FbUMtOHFuUUZhc0dOQ0V5U3FNcFNtMDJLcWJWcHM3OFFSNVdPN1pvcEtMd1RFd3U4eG9KUXpYMWN2SDZOR1piVm5Hak9IMVhBdXRpaG1GZnpkaTZ1ZXB1dnRwWEptUGVWbmRmOTdIN3ZIdHdBclRLQzBjVEc1M04zT3U3ZFVjLWplZFphQi1wdzYtcTRxT2VsQUxVMFFB?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635287+00:00"
+    },
+    {
+      "id": "news--2191168577343656636",
+      "title": "INTEL: No announcement from Klobuchar yet, but Madel drops out of G...",
+      "lat": 44.974348150533785,
+      "lng": -93.25195609521923,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>No announcement from Klobuchar yet, but Madel drops out of GOP race - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMipgFBVV95cUxOLWsxXzQ1anhYZHpCZ25oSDg0THNWX0h0T3QwNWdnWEpldzNhTEpKbzR1NnRXWUpfYldTNlBTb2lNRW9QQlBFX3JVNlFya1dHQl90bDdWY01GMEVvSnQzUWxBQUpOeVpFd0k0dU5LQjluVV9mSW5GUm12RjVyS1FkZmF3eXdnTW1fZXpZMHdKVHhTQy1nYkltYWFtZ3ZNQ2xWR0RYcVR3?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635293+00:00"
+    },
+    {
+      "id": "news--1126036183293711123",
+      "title": "INTEL: Mitchell Hamline law campus evacuated after \u2018unsubstantiated...",
+      "lat": 44.96840158686991,
+      "lng": -93.24601898348203,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Mitchell Hamline law campus evacuated after \u2018unsubstantiated\u2019 threat - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMiqAFBVV95cUxNeGNVTUJIY29WbXBlWTJTNkpQTm95MXpDTWY3aTZRLTVSenVURXl3NG5yZm1LQzhaRXUwVmRFdWh0cmtOczlCMjVGWW5mbHV1ajhPSDhDcnM1Qi15WGxFRi1aTElhMENObzFRM1c3QkQ3VlkzYWt3UGtBWGdvOHBRbm1SVUVubTlGSDJDMm9zQ0hVdENsNTV3LUpLbGw4Ym5TZFNzajJzQUE?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635306+00:00"
+    },
+    {
+      "id": "news-2921585935730483585",
+      "title": "INTEL: St. Cloud city council to discuss two resolutions related to...",
+      "lat": 44.98610531222944,
+      "lng": -93.26236408784084,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>St. Cloud city council to discuss two resolutions related to law enforcement, community - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi6AFBVV95cUxOc19DOWlJWkZVdEVHUUkzaGdreDRLc3N5bVlBSlg5TlhXV1NlMk82VkpvZGJYaFJmRzhFQndaRl9RNmxmclJ4Z1JyVkdkU0E1ejRpTUpIWmljWElMQXlPSlpxdlZPSkZmX2gyeTZ6NW5zZGNIUGQ3SEJGT20tREd3MVNSVnJEOTlSbVhNcmxNSk52R2hMSmVfY3FESUtnLWlIdTRONjFzMmV4M2Y2Zkk3UG01MU1oYnhCV3Fkckk5Z1JhY01IdXpZVW81MnNfV0JWQm5Ha01QT3JEeEJTbktuMmRaSDhJZG15?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635312+00:00"
+    },
+    {
+      "id": "news-7544971200744949726",
+      "title": "INTEL: Slow Cooker Chicken Alfredo Rigatoni - kstp.com...",
+      "lat": 44.95924766623319,
+      "lng": -93.27262461804148,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Slow Cooker Chicken Alfredo Rigatoni - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMijgFBVV95cUxNMkRETWVNa3ViQ3UtYUhxZ0pWZ195Z3JIbF9aRGMyZWVvQTJrWTBvQzVJT1lrbWhacVZQTU1FNVVndHN0TGFWajdEbi1TWDNrajJxd1VVY245V2V0QVY1ZE1fNEZ0THp4bUhCNDhMdV9QY2pHY0dYUzFueldNeW1zS21QcGJNUk5BZlYwczV3?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635321+00:00"
+    },
+    {
+      "id": "news--3080519957219312192",
+      "title": "INTEL: What are snow fleas? Why tiny black bugs show up on snowy da...",
+      "lat": 44.961017376259626,
+      "lng": -93.26221080530848,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>What are snow fleas? Why tiny black bugs show up on snowy days - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMizwFBVV95cUxOSFFRdmlUU1M5MW0tV21ManVscVFHS1FmckdTT1gxTGNIQnpSQTIxLXBMVG1BYjZEdlczaHhtM0w0RUFJal95XzFnVWh5RllMOGt5ZUd1eTkzTG5mWlpOZTlpMnB0VkJGWXBueTNqanV6dFpDbEVIRUtmSThzYjBSNUxMTVZ6OEZobkY0OWI5bThKdEZmUWZPd3h4QkVDLUFRMDZFNVctd0RyNVJnUXdvSml0RjdrZldZam5rU2JFMWhfekg2cUZwLXV3R2NHbkk?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635341+00:00"
+    },
+    {
+      "id": "news-381923894249695911",
+      "title": "INTEL: Army orders military police to get ready for a possible Minn...",
+      "lat": 44.99584093803141,
+      "lng": -93.25854597717391,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Army orders military police to get ready for a possible Minneapolis deployment, AP source says - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMiowJBVV95cUxOWWdBaE5Sc3pJYlpubXpDM3kyRURwV3o2RVZZRlUtLVRXNklnZ1ZFMnN6M0oyQmVOTFh3YkdKQXFCcV9sVERVZ3d5aV9abnJqdnhEV1BPWUJJRHJ1R1B6ZFd1SzhkZ1IyMnh5VmxpTExoSEhTVVdCQjVyNTBNY3h1eTdxX2o2WWpKRTJ5UlU4T2VOZzJJMVNGUURnN2hBR2NRRWNicU9lbXJKUk1nZUpYbmJSU2NZUzU2cDN0d3l6ZDRGMWIyT25UQTEwZm5Ld1NlZDR2V3hVZ3ZUcjJwcWsxM2liSGx1M0EzUGppZ01lZm1RSnM4Xy1KS19uZ1ZtSkNYREFXeEtMY01hbUM4aVV3MHJiNkRxYktqaTNYbU1BcnJxd2M?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635348+00:00"
+    },
+    {
+      "id": "news-2301124087225712351",
+      "title": "INTEL: City: 30 arrests, some damage caused during raucous ICE prot...",
+      "lat": 44.976527594704024,
+      "lng": -93.27652314544876,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>City: 30 arrests, some damage caused during raucous ICE protest in downtown Minneapolis - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMiowFBVV95cUxQVWhBTThmTVpUeFpIVGFDZThxdXg5WEpFV0h4WjNFdDJqMUhBMS13QTAyN3JVX0liVDYyWmlseFZZcmdpYUNsYVdPLVRPQloyVXRvWGU3QVZyZXh2d1UzY2FwY2piTXhYM0RnWkkwU241U0JlNVRBODIyV3ZhSXBNS2JKVC1VV2VaaVQ3QVlqRV9ERnlidnp5ZGd1X2Q0MmtWRGJn?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635353+00:00"
+    },
+    {
+      "id": "news--3853936082949816665",
+      "title": "INTEL: Anti-ICE protesters gather in Powderhorn Park in Minneapolis...",
+      "lat": 44.95917556971552,
+      "lng": -93.26364211292523,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Anti-ICE protesters gather in Powderhorn Park in Minneapolis - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiywFBVV95cUxQX0gtclJHUTcxWk91b1cwTDB3cTFCV3lrZVdDTjFKWHp6UHUxZTVFcVA0YW1YMWlGbmxhN3JnRXJfeHFZY1hYa2JrTU0xQmtZeVhPOWdrajdxa2ZKNEVqMDd3aUpXOFNnNkE0ejBxYXphMm1HckNDVGV1VGVSQmo0dEtxMTlIZVNOeTNFSzV3VUFxN3dwcHhPVEh0aFZURUl0TlhhQW9SRlVpc3lqT2RId2RUSDIxSlRoRXYwNWtIaDcwTnAyS2ZZQTgwNA?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635359+00:00"
+    },
+    {
+      "id": "news--7927316806675235169",
+      "title": "INTEL: Health care providers at Mayo Clinic walk out in protest of ...",
+      "lat": 44.99598041685571,
+      "lng": -93.26069395033996,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Health care providers at Mayo Clinic walk out in protest of ICE, CBP operations - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiuwFBVV95cUxOOUFpNUV6cTA4QVcwOFNrdDhRS3JQdmw3eXNaZkxmdV8tQk1HTDMxMGpXMEMxZWVGNEN6Qkw2NWV1UHkyeUVfWXpaa3AzWXNqTTVjLUlBMmtDZ0dCNjlEZ2o4TnJXSDFWMmx2Zm92ekZoRkZ6bXFTQjJSZUF5YlhBbDIxdGYwd2o1b2dzZ09lRGtocU5yV1ZlYXNxVnFJRXpFckhqc3dZTTlzd0hWLS1xUlhkYy1Jcm1xZEQw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635365+00:00"
+    },
+    {
+      "id": "news--4631248104805129241",
+      "title": "INTEL: Mayor Frey encourages protestors to demonstrate peacefully a...",
+      "lat": 44.96447644660118,
+      "lng": -93.2664075436155,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Mayor Frey encourages protestors to demonstrate peacefully after multiple arrests on Friday - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMixwFBVV95cUxNYUppcGtCdnd2ZDdfdU5IUGQwQVozYUY4Wnh4Yy1oS1Y1NkFVZ2NLTzgzUmlQU0VuWHJ3ZV9TUXM1TDV0Y0xWUnRQaHYxWG9fZXcyMnJtRDlkYkRjbXl0cTRiUlBMSTdlUVdjcnBvNW1TYVVlcy1LWlQ5ZEQtbUwtVWNkd3RJNzNPVHpDMVRNSkpCVFd4al9wLXF6SjA3cVd3YjBPb3Atbk14aGhkU1BFZFhiQ1FoUXd1bG5wMXdZaVN4bUJoVlJn?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635371+00:00"
+    },
+    {
+      "id": "news--8108694131402816540",
+      "title": "INTEL: Hundreds march through Minneapolis to protest U.S. attack on...",
+      "lat": 44.99439858109786,
+      "lng": -93.24651033007028,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Hundreds march through Minneapolis to protest U.S. attack on Venezuela - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMipAFBVV95cUxNRHlYaXJrUzhTa3FaMFVIZVZLMUpNUXZtVDluM2U1T3hqcmYydHNWOFFQUUJrejh3c3ZnWGU3LUN3OThTU1pwZVVid1JscVlqRi13MVExWG9jaHJaQU5ocUVXQVM3QzJqVktoaHlDdnQxUDJwWXUxcGRoc05ZSFRXb0l6V0xBSG8wMmVPRk9fblVxa2dPX0VkcWlnRHBiWkNMbC16Uw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635377+00:00"
+    },
+    {
+      "id": "news-2282859542841082564",
+      "title": "INTEL: Police and protesters clash in violent weekend across the U....",
+      "lat": 44.958130143888205,
+      "lng": -93.25672828522481,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Police and protesters clash in violent weekend across the U.S. - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMioAFBVV95cUxPWm9oY2pQX2VjY2lmcmdmOE8wWTNpZmlyZl9LaHU3ZGphQk5yT1R6Qk05YUY4dW1pdzRzVGN0M3p3R2RaTnJBQWFZZmVEMEN5MlEzU3FuUVRzSFpza0E4UXdCd25vb096Nmo0d3hJZzA1YVZpczdrX2dJMjFKN014bmtIczgzcXYxZUNMQmN6Zi00UVJ3aEROVDdfbnlpZHFU?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635383+00:00"
+    },
+    {
+      "id": "news-7064585894834286563",
+      "title": "INTEL: After fatal police shooting, protest erupts in Charlotte, NC...",
+      "lat": 44.95857107260501,
+      "lng": -93.25706878840424,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>After fatal police shooting, protest erupts in Charlotte, NC - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMihwFBVV95cUxNbUdMTjNiN29uYW1qcmRjTndQaGF0SWl1UzItSkpieGM0QS1USld1c2RmN0RyM2JIbFg0ZU1vR1hMX0t5ZjM1Y3Y2Y2pRb2dmemRXT0NpT2pSaTI0WnhLS3hOWndEREdyWW1EbXJTS2hBX254YkpaUHh5ZWppa3BpM0NjMTVBOG8?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635389+00:00"
+    },
+    {
+      "id": "news--4138618288606840919",
+      "title": "INTEL: Thousands join anti-ICE march, rally for immigrants in Minne...",
+      "lat": 44.9893216381713,
+      "lng": -93.25874464578435,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Thousands join anti-ICE march, rally for immigrants in Minneapolis - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMikgFBVV95cUxORTJkc2JfU19rUkhKa1ZUTUE0UDRNZkswQk1TRnNlTVF3SXlNT1FfZ2U0aVZNcWlfT09OV2hySkZpdHFBc0U5LUtNa1o4U05EQVNiX2VkSXdSQ3MtRS13N1I1d2piRHZhUzc1azJVdlBKc1diNzZGMnpuTXI2eWRlUk5nZWwxVWIwSG1GZXJLMzBndw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635395+00:00"
+    },
+    {
+      "id": "news--2693920301996783410",
+      "title": "INTEL: Thousands brave subzero temps in Minneapolis to demand ICE o...",
+      "lat": 44.95867679594782,
+      "lng": -93.25280826147396,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Thousands brave subzero temps in Minneapolis to demand ICE out of Minnesota - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiowFBVV95cUxNWDJQUkxLTGNsRjlxQmlLbHVvaDNpejl1UnBCREdSVTI4eVVQMXk4UFA0Z1FrWVBEbmRuWFlYSUNHSGtwOUhJUlQwTlItVU5TWExuLU1GODdGQXUtblVzbjZmYTFBbTJBWWlZSDR0dDlDRnJ1UkcyQzBJQUZUVzNmQV82aTlOTTRWYlV0eUt0VWRpOFgycmllamZRcVY5Qm5jSW1V?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635401+00:00"
+    },
+    {
+      "id": "news-1237045209974066609",
+      "title": "INTEL: Man arrested after spray painting multiple businesses along ...",
+      "lat": 44.982627586194646,
+      "lng": -93.27138148324019,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Man arrested after spray painting multiple businesses along Minneapolis's Lake Street - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMioAFBVV95cUxOVWpBbEpqaWdhNnpqMUNLRkZPcnNsTUl6YlRCclhqMXRULTVSaUVJdlBxcjlEWVMxWW5WcFpnZkJaY2czZUtYZklZLVZLUk9QR0RSeFdBM2JESHlvM0d6eWhXcklBR3hpQnlqc3p1U1hOSVBWdndkbF85dXU2UTFBRXNuaHltM3A5RmVBMUF4VEx5NmM2bGpuR3pOWk5KbmlY?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635407+00:00"
+    },
+    {
+      "id": "news--2530739965898356500",
+      "title": "INTEL: Police launch tear gas as Hong Kong protest turns violent - ...",
+      "lat": 44.958159263412036,
+      "lng": -93.26465978950748,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Police launch tear gas as Hong Kong protest turns violent - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMijwFBVV95cUxOT3hRNkdYbDhCaEMteW1rR3JpTm5Ob2NBbWZ4VkdaekYzV2s3Z2djenpnX0xObTVRbVFGa1d5WUxqRVhuUFJsT3czOFlGVTVqam9iSUJ1dHFQWkJQVjVHcjBWTkg1WnFRZVdzV3ZVNjlkU1AzZmlKajdvQ3RRLXMwLWkyb0M3cDc3SERSTVhzMA?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635415+00:00"
+    },
+    {
+      "id": "news-2053461958046523855",
+      "title": "INTEL: 'It could have been me,' witnesses to Sunday crash at protes...",
+      "lat": 44.98053701244813,
+      "lng": -93.26178746910851,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>'It could have been me,' witnesses to Sunday crash at protest site say - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMirwFBVV95cUxNNjJ3ME1NVDhabzR0alVoNUpLeDgtTHBpNGI4YXhJODJpX2NJcEpEUEhSZjFYc2lBU1VQZXpWUlBJMXVDRUJWdXVLS094NEtCbGpuRUFMSjBHWDc1aExJM0FSN2VPc3Q1aGJoYVdfYW5Pb1Q0RFpKdVVkdHlFSXpDQkxhZWcyMmtyOFhwdExKTUdZMkdBOXloemx5QWIwOWZyMjhYNFlmYTlsbWtQZjlR?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635423+00:00"
+    },
+    {
+      "id": "news--3732288786459329186",
+      "title": "INTEL: City leaders address overnight protests in downtown Minneapo...",
+      "lat": 44.98522355069631,
+      "lng": -93.27313265069768,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>City leaders address overnight protests in downtown Minneapolis - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi0gFBVV95cUxQUUgxS1EzQmlhZ19FMS1mdmljZDRCTFdSZk1ZT0I1ZXhMeXpTSi1xcWVzakFvWU5zdDZJQkI5MnVFa3hKM2hNUkl2VlV1a1hFaHpBV0h3XzQ4dVpHN3FLY1lZLUtpd0pwdXA1MV85SXlveTJpeEdOUUJzSmtURkw1U0dZNWlHNm5SRDdhS0tsZHh5aDMzS21naUYzN3N3OFZETXlINjF5MmprdV85RUZHbVotLWRiLWlVXzNiZUkySHptcUh6WG5PUlFJbEtweHR6eFE?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635428+00:00"
+    },
+    {
+      "id": "news-3610702766233914922",
+      "title": "INTEL: Police use tear gas as 10 arrested in clashes - mprnews.org...",
+      "lat": 44.97588228484326,
+      "lng": -93.28035862200481,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Police use tear gas as 10 arrested in clashes - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMijwFBVV95cUxQTlR6YlBBcjFpQkpFZXRkT3M5LUFXZGVnN19iaXBDOU9yYVVBMkQxYVo0V0JBQ2ptaXc3WVdOUy1RVXlUTzFzNWlQaFItYW9KSEkyaVNucTRkdzRhbmJHMWRmSEpHNFhZUzVNSFNiMnMwVGRLQVVLZDNNX1FwcGRPOHE4Vnd4QWdlZFdvTkpSRQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635433+00:00"
+    },
+    {
+      "id": "news-6737314310907474272",
+      "title": "INTEL: Protestors march on Minneapolis\u2019s Lake Street in opposition ...",
+      "lat": 44.965901955226556,
+      "lng": -93.2707305996065,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Protestors march on Minneapolis\u2019s Lake Street in opposition to ICE activities in the state - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMixAFBVV95cUxNZi1TVldxeVA4ajNvZXo2T2toWjdnVXIyVnB5REJmSFRKaUtuSEJwRFVwMDQ3RTFIaF9sdVRUNndBUVVjSVdPemNpTEZUVHhsZXdiT3lTb0NRNVN5Mjl0RUw3NHJvd1pXNGpEZ2lFaXFiNExhZGgyQ1NsSC1wc3BuY1VPM1NkSEo3QjVLLUZjOTJldlp1YzRob3BDSFBYUmFDN1FvZUNUVGJRUUNmTHRfczQ1SmJ3Tzk0S0k0MG1qYnB1MzBy?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635449+00:00"
+    },
+    {
+      "id": "news-1347012251968681919",
+      "title": "INTEL: Beyond pink hats: Minnesota People\u2019s March seeks to change a...",
+      "lat": 44.96007575630598,
+      "lng": -93.27924082142792,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Beyond pink hats: Minnesota People\u2019s March seeks to change approach to protests - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiowFBVV95cUxQakhlQVpVZjZhOHhJSGtxcVVGYmlwY2dVcFNDY3FaMUxEWGNOZFlIVUV0MWFfQkE2b1IzMHdVQWNXTHVadFhHYktYQ2Zady1uT25lQUxfZElBWkx3eTVXZTBUb0tDZW5oMUI3NWZIY1dSektiV0tKbjd4OHdtOXlWVVEtamhxQjNfODB5aDJMZl81dzY0VlFfVTRiVGM5NVkySkg4?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635462+00:00"
+    },
+    {
+      "id": "news-5679606333043369276",
+      "title": "INTEL: Use of force criticized in protests about police brutality -...",
+      "lat": 44.976795840024515,
+      "lng": -93.28017332326728,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Use of force criticized in protests about police brutality - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMioAFBVV95cUxQRTFzZVpGUnZfSzUzQnhPZVM1djFueU1VdGtjUDdBT1ZuT3I5QUdmOTRrMmdkWFJoR1dsVzBsUGM0dmxUZzF6R21USEl1ZmxQQW1KSXFkRjY1QzF2ODFGU0lGOUxTZXVyeTZUSFVYckhVNUVLRDZNN3RrQVltSTlpVVVZNTJTNGgzQ2doUjFJZ2w1ajJpQVJyd3VGYjlqa1JN?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635468+00:00"
+    },
+    {
+      "id": "news--4322929594003010861",
+      "title": "INTEL: Police arrest pro-Palestinian protesters blocking University...",
+      "lat": 44.970613628946374,
+      "lng": -93.27140982856403,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Police arrest pro-Palestinian protesters blocking University of Minnesota administrative offices - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMizAFBVV95cUxOZ2hEaXV2REt0dFFiMmt3alVJcDFkRDBWVy1tUUZTMVlVam5hMmVCaEFOVkpnTnZNeXQtY1hISlNwVkdlWDRpaG5BcklXT1BqNnNFeWFETGJ3cWJ4YXFCNEE4cHZJMy1WQWVtbVBMTVRzcm9Bc1lkdnFUUTNTaTQ2S0Q1WFZLSjd1aWFEMmk3NllVTHNoazhBZzBiVGV3eDZDU1J3Y3Rqd1I4UXZxMS1fMEE5Z0JYZk52WnM4ZUZ5SmdMcmNoSWJWUnkzMl8?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635475+00:00"
+    },
+    {
+      "id": "news-5806450391421031895",
+      "title": "INTEL: Russian police arrest more than 1,000 in Moscow protest - mp...",
+      "lat": 44.95904397312439,
+      "lng": -93.26403806461572,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Russian police arrest more than 1,000 in Moscow protest - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMimwFBVV95cUxQVzdFZWRROUV2MUhUODJHT0dqdWFnNDVmRzZQNXlzWkF3d0oyZDhkVHBKZmpXZ0c5TGRZRlVaZ3BRbjVTaHljbkZSTzJzd21hUkFhU3JCLXRDc1haVFRtWDAwa2JLQmVma3oxaHdUTXNyQlljT0tZMHFJTTdKSXJYM2tqUUM5c1dzQXZOd1c4Y0ZwXzE2T0xrN21Cdw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635483+00:00"
+    },
+    {
+      "id": "news--152287075680963788",
+      "title": "INTEL: Protesters demanding police reform to hit the streets again ...",
+      "lat": 44.97553088629628,
+      "lng": -93.24799217737393,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Protesters demanding police reform to hit the streets again in Fargo - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMirgFBVV95cUxQV05FaWtFR0lNMmYzdXlQOExDRkxZM3dXeE51a3F5ZVp3aVdhZlhuX2N2Z29XUHFaNkRLby04dnlmZS0wOWFPUGZJTlEySHdzQ3lGS0xFTHBYS2QtMFBXN0dXaTlJeUZWaUtyZjFFS0tjc1lQeWJEQ3A4QWdPQ014Z205RkhoVVc1YXY2LW1oc0JSTEY0OW9WZ2p5NGtzUWcwSWZ1ZEQzYW9Ib011dGc?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635490+00:00"
+    },
+    {
+      "id": "news--7413548979547685241",
+      "title": "INTEL: Minneapolis police, protesters clash almost 24 hours after G...",
+      "lat": 44.97206591004043,
+      "lng": -93.28345283163975,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Minneapolis police, protesters clash almost 24 hours after George Floyd\u2019s death in custody - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMixgFBVV95cUxOWWJqWVNWTHN5TzVCRElLRG9scmprTEhTS1RDWlVPdlJSVkhkcXVYYlRmd2xxQmRYSFByYmFSSG1qZWFtTml3bVg0T0tQM3R5WkdlZ0JLbzJWeVBMdXl0YTJVT0plV2JEN2ZnOHMyZEFHcXo1Uy1SaFV4cFhxVDExcFdHRFBPbmwtTjRCZWw1NnJqOTFqUld1MW9HM3JnMnQ1bmt4Q1VibVZPcWowUW9UOGZxVDA2QVFFRWJCRmlhNFFpWklTVWc?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635505+00:00"
+    },
+    {
+      "id": "news-5360530854476365363",
+      "title": "INTEL: Pro-Palestinian protestors march in downtown Minneapolis, ma...",
+      "lat": 44.96288228281144,
+      "lng": -93.28797716968444,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Pro-Palestinian protestors march in downtown Minneapolis, marking one-year of Israel-Hamas war - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiywFBVV95cUxPNlpBNDZMazNWUTYxcGZoUzhxTlR3SzJ6OXVUaUpfTnotREZvbExzNGFBNHBqcEQ4aE1OaWtob3FJMFo2V1JXNU1pSkRVYXFISkRieUlzMUxCYWhCcWhBU0gxa25kZHZuLXJBZnNkY3JiU3l1ejRCM1diVGxSMUtuVDdadmtPRXRJSzBMSlRycXJuR2VYQ1VoeHZILWpYdXZSRXhJRld1aDB5REZtaDR5VV9sU2NmOFI1cF8yclFOOFBvV1pHN2pPdDBIdw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635510+00:00"
+    },
+    {
+      "id": "news-197141852396539419",
+      "title": "INTEL: Nearly 300 arrested on convention's first day, nine injured ...",
+      "lat": 44.97108601154424,
+      "lng": -93.26422865669947,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Nearly 300 arrested on convention's first day, nine injured - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMinwFBVV95cUxPQ0p2Q1pPenUtcUhza3NOLVJlRndDd1VBT1FMaUJFbHdSSldCblQtTWpISkI5Vms4NVEwc18wdFpxM0Z5SXo2cmdaZjlPWW5ia3RiT0pJeUJQUFdtOElScC1qNU1KRWo3OVdLckJtcGs3d3IxQWh4UzdoU0xlWWJaVFBsQ1FUT1JBOHg3XzVVdllrNzB1U3MyeFg3NkdTMEk?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635516+00:00"
+    },
+    {
+      "id": "news--5716638939632360356",
+      "title": "INTEL: Hong Kong police fire tear gas, clear protesters by force - ...",
+      "lat": 44.9888450565687,
+      "lng": -93.25000188576885,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Hong Kong police fire tear gas, clear protesters by force - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMingFBVV95cUxNbHlwUWFiVDFrOEhPN0xOWEZOWlR6RlE3SHNabTZ6N0FBYkR5NnNmVkdCRE1hdzE1QU5LOEpsOVRWZTFBY1daMm90emt5eWhRN0E1VHNXWTBFanFROURjZHJQYlp3MW4zTU1tYTRYcGxDUkk4YmpvVHJGbUtscS1OUmEtSy03Z1A4OUNMdmhMREQwWDFvMGFlMHZtTFBSdw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635525+00:00"
+    },
+    {
+      "id": "news--27315868561202400",
+      "title": "INTEL: Listen: Before George Floyd, a Minneapolis legacy of protest...",
+      "lat": 44.98712071995894,
+      "lng": -93.2550813003282,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Listen: Before George Floyd, a Minneapolis legacy of protest, policing and the long road to change - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiywFBVV95cUxObFEwNmN2SWRxTGJIY1VZdzk1NFlQdm5aZXZiRnJCOF9kdTVDT3dwQUxEOWpubWxJVmsxVzRHWDYxTW9SSllwVkJ3QkFaVWdZelJtRzBTVGhqRTlZYVI0d1ZQQVgzeG9IVHN6VE9kdVM1dnJ1X3ROTXFoNE5rTlRweVNYd0t2cDVmWlNqU0hGN3RfZlFtTmRvZ2YyZzh0TW9kU25uWFhiYzhnMzZfZFJQX0t4QVM4dVhjSWpyUTAxUE1PQThYR05HZmFlNA?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635533+00:00"
+    },
+    {
+      "id": "news-1192891485331314730",
+      "title": "INTEL: Minneapolis City Council approves $700K in settlements over ...",
+      "lat": 44.98182137203488,
+      "lng": -93.24759108991398,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Minneapolis City Council approves $700K in settlements over police actions during protests - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiygFBVV95cUxNMkRKd3ZORDdQd011Wng4LUIzZGJUNlQ4bGo3Y1BYbUQ4OE56ZWZ1LXpiRWRHS2FrNjhKSm5TWVdBU0FIOHVOdzluWkZlb3NUaTJOYW92bm80REgyNGZkSU9Pdkswa3k5VHRMLTZFMnZmMVhEMjZBNGJwQkRYTkJ1aXJJeGdXcTNhcE94TExmUzdwdGQ4Tmp1SmpNZEtJZUdDdHpsbk5Sd2RnR0RnbXJCeFg3YnRSd2pIWXMwWlVOZ2UyLWlUcTdTeWFn?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635541+00:00"
+    },
+    {
+      "id": "news--960761200318929257",
+      "title": "INTEL: London police arrest 365 people as pro-Palestinian protester...",
+      "lat": 44.99266432156245,
+      "lng": -93.25655671850814,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>London police arrest 365 people as pro-Palestinian protesters defy new law - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMitAFBVV95cUxPcDVuWjJQaVdiTXd3YWxhUDdNTjBuODZnbmI5Z2Fxbi1KVjQ0aDkzRjJycWFIYmpfeFl3ZXRoLS1aR05pS0Z3WmJUWnFfQ25qbEdicGZiOWdOa0F5UWZRZHNFNGVfUEdjTExrNmlNc04wVF9rakpiUTB1d2dicHdTMnZwNW92QUh3cVRqNTlHbW5xYjNSY1FBSjVCRG5oZWtsb2VVZ0FNNnpXVzI5Q3FoZF9Wd3Q?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635547+00:00"
+    },
+    {
+      "id": "news-4397687789415498031",
+      "title": "INTEL: St. Paul Police use of force during ICE protests raises pres...",
+      "lat": 44.9937220887198,
+      "lng": -93.26655557827002,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>St. Paul Police use of force during ICE protests raises press freedom concerns - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMiugFBVV95cUxNelNmdzFGZ2FSLTVFa0FlNlQ1Tjk1N1U0YjVNTzE5TDR0Y3E5dkx6UVpsb0tvYThpSDZtOGNKOG9KZ3U3UFcwdjJiNE9UMTZoUXlyUHFhZmxQaDZYcjhFeVZHeTVvR09maVczWFhyN3F4ZWVnZjlvMkMtY3ZMTWRhTGtzNTJkU3RnZnJsU05OcGROWFhqNTRhZ0w5bFhuSnA1NTNnWER0QS1ncUN6VlhFSFR1RXA3RjhsaGc?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635553+00:00"
+    },
+    {
+      "id": "news--254282972169261302",
+      "title": "INTEL: Police consider assault charge after U-Haul drives into Iran...",
+      "lat": 44.984383384945424,
+      "lng": -93.25708572727633,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Police consider assault charge after U-Haul drives into Iran protest in Los Angeles - kstp.com<br><br><a href='https://news.google.com/rss/articles/CBMiswFBVV95cUxQbWRBejdKNjVJam1zWldPeTZZd2VycEM3el9Db29EZWliTFVwTkhRaGphMEZBY3M0VFFja01JSWhLOFRWUDBoTmVlOU13QmNjWHNvZjEzYUU2eE5UZy1XTFFwUGN0V1ExalZxaGwxWEFsem1zYUZSbndqQ1g1Yko5Nk81bzNIZW1EN05HZ1hUZldhNU0xWG1UTG5qLTdMUzRVME1FYl9fSmVuRWhpbUhTVjVIVQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635560+00:00"
+    },
+    {
+      "id": "news--4982445345750528196",
+      "title": "INTEL: 'Occupy Wall Street' goes global, Rome police battle rioters...",
+      "lat": 44.96429281924872,
+      "lng": -93.26782930164607,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>'Occupy Wall Street' goes global, Rome police battle rioters - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMidEFVX3lxTE83S3VONnJzdTRka2JvVjZLQzZPYXp0SS1tR2hSaUlyMFMxSVZPc1dVN2tsRlRna1NmX2p2VTFmRDZTazRDS2d1SlcwaWNscjRvSE9wRWJtNW93NDVrOEtyaHI1a3d4dnE1NXJmYi1pZXlCZGg5?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635572+00:00"
+    },
+    {
+      "id": "news-4089710910368365531",
+      "title": "INTEL: Roosevelt High School students walk out of class Monday in p...",
+      "lat": 44.96027418341891,
+      "lng": -93.26293797630979,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Roosevelt High School students walk out of class Monday in protest of federal immigration activity in Minnesota - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMijgJBVV95cUxNa1ZsSkZ0ZTg2YkZKdjcyUEREYkRxeFhyZEpfUFI3NG1STkZYem1EalRmQzRvSnlDdmZCdG5Wc3pEbFJma0JwcGdNMlBlTEl4dnZPNERtbjZvZVh0c0d0X1VZSm5TaFE2UTIxeEFXbHlhb0N1MTNnT2toU05BckJtZWJ3ZEJWSXBLYmJabkJxb21BWmJiOE1SQUVJU0pORVNYRXB2WVNfMDBmNXFOZUc5NUp2UzVUZW5lM3F4WGF4R0QwOE83QU1KSHFuVmZTWEJCSDd3T1BTTmVpdnJ0bjU0b1ZQN3gtQzdxTFhhd1Jqd052ai1kZFNVRjROeGl3bkFQcTNMOWYtOUUzbDQyUUE?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635580+00:00"
+    },
+    {
+      "id": "news--7264578522709330052",
+      "title": "INTEL: Police union official critical of 'disgusting' chant at Blac...",
+      "lat": 44.99087494274265,
+      "lng": -93.26980193843697,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Police union official critical of 'disgusting' chant at Black Lives Matter march - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMitwFBVV95cUxQOE1jUkRWTmlBeHAtejNuV1MtRGc3bWhpXzhub3dGMnNnZ3UzSnZCYm44WlRFTzE4bGE4ZERYR2dNM1FYVjBFM1RJUVBRY0lfMVdtbzVyeTE5NXp5WlBldVVpVFEycGNOc3E5TTRXc0hRWXkxWV9ubXBxcTJZSG4xS3gxOVBRek1TSmEzMTFBaHNuandranVXd2EyNDZtTjRuRlVvWlF5cGRUcEplaHNJN0gwV0Ffa2s?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635586+00:00"
+    },
+    {
+      "id": "news-740042346182745923",
+      "title": "INTEL: Hundreds of St. Paul students walk out, march to Capitol in ...",
+      "lat": 44.93940926677522,
+      "lng": -93.08467217729066,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Hundreds of St. Paul students walk out, march to Capitol in protest of ICE - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi4AFBVV95cUxPZVZyVlR1Sk9fRmVGRnJiT1Ftbk1weFk2LXpLa2pkVVpqcVoyLUdpTm80ZFNQX1lfRk82Y2t2UjFuQjRYc2otMzJsUHZFeTlWQl9Ya3paRnBZX3V4eUlmaFh6V3htcjlhZGpFN0VEa1djb2NfcnE1aXhFbTQ4bUU1OEZVakdHVUtSc0tQbWdWbjM0Q1VVV041TE9MYUtKSDVNdXdyUE9PbmpUb0FvblBjRUdndTFoMk93WURtWjNQVWJrYTFIV1Z3YllDTDRKRU8xT2RhUGozUlRMNDR4ci1jRQ?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635590+00:00"
+    },
+    {
+      "id": "news-7908719838418984934",
+      "title": "INTEL: Hong Kong police draw guns in latest protest violence - mprn...",
+      "lat": 44.97954402681388,
+      "lng": -93.2835579685625,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Hong Kong police draw guns in latest protest violence - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMimgFBVV95cUxNdjVDVVFwc2hESVF1U2tNTkFxTnBuQngxVnBwS0VzQ2pWUUpUNU02dFVBeUdGdHZNN1lDTW1DX1l5T2dqa3c3Q1I5YlpmaTBhWmRiSzhRT0NIZ29WUXllYS01ZXhDZ3dFX0hKYUJja3dENEIxenBodU4wWVRkWU9rWGJDVGw3MEF6S3B0UWtBTW0zUlJ4cXEtWjR3?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635596+00:00"
+    },
+    {
+      "id": "news--2177865184300415223",
+      "title": "INTEL: Social media rumors fuel protest after St. Cloud police offi...",
+      "lat": 44.96957528486584,
+      "lng": -93.24944061462229,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Social media rumors fuel protest after St. Cloud police officer shot in hand - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMitwFBVV95cUxPdzktUnFJRk5nQlhSMWFJY3BxNzJVZG1DbjlXNnFGRWZFekZON2F3WV9OZkhwbEZPeUFlSXJyRVRKdV93c2UzX3l6ZnFNbC1xZUEyd1pybF9leFhleGtoLV9Rc2M0c2RROXZwckZac2RmUTlLSndhSGVPMTBQWVJOeVBvZkZPQWhTLUVpcDZDWmxVanRuWTlYWll3UUxzQktyVXkxTlFiNTlYdzZrTVZadGx4VU1Rems?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635602+00:00"
+    },
+    {
+      "id": "news--988931305229515373",
+      "title": "INTEL: Police won't boot protesters from Wis. Capitol - mprnews.org...",
+      "lat": 44.93994644407818,
+      "lng": -93.10807591148588,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Police won't boot protesters from Wis. Capitol - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMidEFVX3lxTFBJRUtlRk94amZCR0tsSXJPRm90aG95WVkwU1FKSGVQeEtfa3lGS2c3WlNxNnEyYmsyWWozZjYtZHJVWWtqS081Nnd0QWQxazdvd250eDVXRDFvd3pkRmZXaE1mOHBfdVJmRUVURjJSUGgzSnFw?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635606+00:00"
+    },
+    {
+      "id": "news-2776277874180976349",
+      "title": "INTEL: Apple Valley High School students walk out in protest of ICE...",
+      "lat": 44.96953147007911,
+      "lng": -93.25474995347336,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>Apple Valley High School students walk out in protest of ICE activity in Minnesota - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi6wFBVV95cUxQWUE5RVAyTjF3OWFVb2lIWGNIbDF4d213NTd4SGtmcjd1b3FpaHE5SUxtMlBGdy1zQmJ4MHJHRWxkVHdOUElPSG9EUkVMTUdCdmlDOFd2UVhKcFVsU1Fzd3BkT1FfYklFUTkzM1lqNjVtNmxHOWtEZkdOMXpKeWU0a29YZUYtU0JER1BPWV9sbnM1bEF3Sjg4UGxPMEhqcVlWSTA2YTJTZjZQcHRzaldkVDBqbkZ0QjktV2o5UVoxcGxyRERXaTlhY01aN2xmVnB4TFh1cmVwRmpTQl8yNnpENDN3RTIzUlNXekI0?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635614+00:00"
+    },
+    {
+      "id": "news--5856994171850310731",
+      "title": "INTEL: Minnesota Gov. Tim Walz: 'This is about chaos' as new fires,...",
+      "lat": 44.93683965468115,
+      "lng": -93.113540997964,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Minnesota Gov. Tim Walz: 'This is about chaos' as new fires, looting hit Minneapolis - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMiuAFBVV95cUxPTktnMGVhOGx2SzBJSzBrZlRxWGtTVEd0ZUk5N2NBM0haVlRWSng0R1c3N1dNNDRIOHB3Y3V3bVdXX18xdkdkZEladWpWZkZTdTUxMGxzOTMtak05dDl0LXZ2MzVyYW9ZRk4tejAyRXhiTEFCT3RFYktub1RoVlVGOFBxVHZJczd2RTFOUFJ2eFpEMU10S0lEb0JJdGVNeFB4YXBTd0otbXEwZHBhQWVQb0NQNEN6NkFi?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635618+00:00"
+    },
+    {
+      "id": "news--3523721886010921819",
+      "title": "INTEL: Pro-Palestinian activists march in Minneapolis on eve of Oct...",
+      "lat": 44.97781713356969,
+      "lng": -93.25794997823965,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Pro-Palestinian activists march in Minneapolis on eve of Oct. 7 anniversary - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMisgFBVV95cUxQSUk5dDVELUVRbmJYcW5yVTNCbEZ5djlULXExQUJxRjdIOE1McEJfLVU5U1JPcjBzUGRSOWIwVko2Qnh4Q05aT0JJQ1NMQ0RBVTZ2MFQ5VkRJRUdEdkgwUlE2NWhfZWh4ZnRBUUpYRkZ1NmNSWG9GRnJzMUZpem9LUGVsanIyMXVBT0dOcDZZUTJTR1ZaZkI5cV92S05famE2ODVQOW9WSTF1SEZHZzBVcTh3?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635624+00:00"
+    },
+    {
+      "id": "news-3873901406462467266",
+      "title": "INTEL: Line 3 demonstrations taper off after peaceful standoff with...",
+      "lat": 44.99245043912203,
+      "lng": -93.25061310558571,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>Line 3 demonstrations taper off after peaceful standoff with State Patrol - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMisAFBVV95cUxNcExWUDh3VVVFN1JCc3FfeDVZRWxIOU5mRmN5aDU5RTFYV2RUQXhPRWdHRmU3M1BFRmZhODcyN0t1MjAzZThZNGlhTEZuRkpaTWxzWjNQRE5VMmZFUXZCeWxPLTRSdkpRaGRIOGdVYVBzTXJTN3hveGNrVHNKendpVDFkNDhaSmVxNGh2Mi10NGFPUGUwTnF5Z3IzSGJPV2xhRlRBLXdwcFVkdThfMEVINA?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635630+00:00"
+    },
+    {
+      "id": "news--2975783999206335708",
+      "title": "INTEL: A year in the life of the city that killed George Floyd - St...",
+      "lat": 44.970583637787115,
+      "lng": -93.25483020568974,
+      "type": "protest",
+      "desc": "<b>SOURCE: Star Tribune</b><br>A year in the life of the city that killed George Floyd - Star Tribune<br><br><a href='https://news.google.com/rss/articles/CBMimAFBVV95cUxPWHRFcFlGVUt2WFRCWno1T0toTDZ0RHJiYXdTREp2TW55cmc4NlZTQXJITXc1Qko5bUNybVlrX29aLWs1d2tWX25vcndJNWpJZi1YejlDYTR4OUtkSHZsdGh4ZnppaGJGMl90N3Z0WGx4cEpFZTd5V1dTaGk5OGJYdThMYlZxY0xETWFYakY1aUEyejlyaEpDSA?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635637+00:00"
+    },
+    {
+      "id": "news--7621457533938667725",
+      "title": "INTEL: 'We held a lot of good ground': Line 3 protest and prayer ca...",
+      "lat": 44.9615757892075,
+      "lng": -93.24680625777275,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>'We held a lot of good ground': Line 3 protest and prayer camp disbands near Mississippi River crossing - mprnews.org<br><br><a href='https://news.google.com/rss/articles/CBMisgFBVV95cUxPT3lsaDJyaW43RUFSS05Ua3JQWXZLVnptNEdNTl9CMjJmNWowalZEYUQ1QjhObnlGc0xIQ2lULXB2elFtTXQzRGk2RUljRlJBeDJqWVJnSVl4bnBkOUw3U0ZIVnp6c3dnWTQzNWQ4SkJBVVJhQ21TSHVubEZRdFpubmdRTDVyMWN0RW9ZcEU4cXppajFoejdTU09xUHJCS1Q4Q0x0SmttZlNIQ3hEUlhxcjl3?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635644+00:00"
+    },
+    {
+      "id": "news--4816827491794877884",
+      "title": "INTEL: St. Paul ICE raid enforcement raises concerns for those invo...",
+      "lat": 44.99762891419453,
+      "lng": -93.27404428297157,
+      "type": "protest",
+      "desc": "<b>SOURCE: Unknown</b><br>St. Paul ICE raid enforcement raises concerns for those involved - kare11.com<br><br><a href='https://news.google.com/rss/articles/CBMi8wFBVV95cUxNVFIzMjBTUzBWNkFLdGNOc2t0R3BDUmpLY0Q5dVZ0X2kxQnhNVG9RVURFZkJzdHZGZmVJNzh6cW56WENnZ2tDTmFLMFFMazZBbmk5MldfQW9KRnZMMEdzYUo5X3ljRWFWeS10NXFuWXdpYkZWRmtNZm8xSENHOHlFQkhRWFJLQkNFSElvYnkxS0VpR0ZCaEZKcHJOakRCOE83MkxLRlBkWHRKY1F6N0lxQjQ2TU1WRFdCdHlvcTR5cEhPLVlmZzNHcXI4TVIyaDZvbDBycnlNUmh6VmJRdU5FemoxeU9tVVhFTlUybDNkWDVGaVk?oc=5' target='_blank' style='color:#ff5555'>OPEN SOURCE LINK</a>",
+      "timestamp": "2026-01-27T05:59:55.635650+00:00"
     }
   ]
 }
