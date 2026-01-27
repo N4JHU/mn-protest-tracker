@@ -3,84 +3,134 @@ import datetime
 import os
 import requests
 import time
+import random
 import urllib3
+import xml.etree.ElementTree as ET
 
-# Disable SSL warnings for the backup feeds if needed
+# Disable SSL warnings (We must skip verification to fix the "Hostname Mismatch" error)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- CONFIGURATION ---
 OUTPUT_FILE = "events.json"
 DB_RETENTION_DAYS = 15
 
-# TARGET: MnDOT Open Data (via ArcGIS Public Feed)
-# This is a public geojson feed that doesn't block bots.
-DATA_URL = "https://public-iowadot.opendata.arcgis.com/datasets/081587d29d944a89ad189b1633e509e4_0.geojson"
+# --- SOURCES ---
+# Source A: The Official XML Feed (Often more reliable for bots)
+XML_URL = "https://lb.511mn.org/mnlb/events/all?format=xml"
 
-# MINNESOTA BOUNDARIES (Rough Box)
-# We use this to filter out Iowa/Wisconsin points that might be in the feed
-MN_LAT_MIN, MN_LAT_MAX = 43.4, 49.4
-MN_LNG_MIN, MN_LNG_MAX = -97.3, -89.4
+# Source B: The Web API (Used by the 511mn.org website itself)
+WEB_API_URL = "https://511mn.org/api/events"
 
 def get_live_road_closures():
-    print(f"Connecting to Open Data Feed ({DATA_URL})...")
+    print("--- Connecting to MnDOT 511 ---")
     events = []
+    
+    # 1. Setup a "Session" to look like a real browser
+    session = requests.Session()
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "Referer": "https://511mn.org/",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Accept-Language": "en-US,en;q=0.9",
+    })
 
+    # --- ATTEMPT 1: XML FEED ---
     try:
-        # 1. Fetch Data
-        response = requests.get(DATA_URL, timeout=30)
+        print(f"Attempting Source A (XML)...")
+        # verify=False fixes the SSL Error you saw earlier
+        response = session.get(XML_URL, timeout=15, verify=False)
+        
+        if response.status_code == 200 and "<events" in response.text:
+            # Parse XML
+            root = ET.fromstring(response.text)
+            count = 0
+            for event_elem in root.findall('event'):
+                try:
+                    e_id = event_elem.find('id').text
+                    headline = event_elem.find('headline').text or "Traffic Incident"
+                    desc = event_elem.find('description').text or ""
+                    
+                    # Find Lat/Lng (MnDOT XML structure varies, checking common tags)
+                    lat, lng = None, None
+                    loc = event_elem.find('location')
+                    if loc is not None:
+                        lat = float(loc.find('lat').text)
+                        lng = float(loc.find('lon').text)
+                    
+                    if lat and lng:
+                        events.append({
+                            "id": e_id,
+                            "title": headline,
+                            "lat": lat,
+                            "lng": lng,
+                            "type": "road_closure",
+                            "desc": desc,
+                            "timestamp": datetime.datetime.now().isoformat()
+                        })
+                        count += 1
+                except:
+                    continue
+            
+            print(f"--- SUCCESS: Source A (XML) returned {count} events.")
+            return events
+        else:
+            print(f"Source A failed. Status: {response.status_code}")
+
+    except Exception as e:
+        print(f"Source A Error: {e}")
+
+    # --- ATTEMPT 2: WEB API (JSON) ---
+    try:
+        print(f"Switching to Source B (Web API)...")
+        # This requires the Referer header we set above
+        response = session.get(WEB_API_URL, timeout=15, verify=False)
         
         if response.status_code == 200:
             data = response.json()
-            features = data.get("features", [])
-            print(f"Feed returned {len(features)} total raw items.")
+            # The Web API returns a specific dictionary structure
+            # We look for the main list, usually under specific keys or just the root list
+            items = data if isinstance(data, list) else data.get('events', [])
             
-            for feature in features:
+            for item in items:
                 try:
-                    props = feature.get("properties", {})
-                    geom = feature.get("geometry", {})
-                    
-                    # 2. Extract Coordinates (GeoJSON is [Longitude, Latitude])
-                    if geom and geom.get("type") == "Point":
-                        lng, lat = geom.get("coordinates")
-                        
-                        # 3. Filter: Is this point actually in Minnesota?
-                        if (MN_LAT_MIN <= lat <= MN_LAT_MAX) and (MN_LNG_MIN <= lng <= MN_LNG_MAX):
+                    # Filter for real events
+                    if "incident" in item.get('type', '').lower() or "closure" in item.get('headline', '').lower():
+                         # Extract Location
+                        locs = item.get('locations', [{}])
+                        if locs:
+                            lat = locs[0].get('lat') or locs[0].get('latitude')
+                            lng = locs[0].get('lon') or locs[0].get('longitude')
                             
-                            # Clean up the Title
-                            raw_title = props.get("Headline", "Road Event")
-                            # Shorten generic titles
-                            if "minnesota department of transportation" in raw_title.lower():
-                                title = "Roadwork / Alert"
-                            else:
-                                title = raw_title
-
-                            events.append({
-                                "id": props.get("EventID", f"arc-{random.randint(1000,9999)}"),
-                                "title": title,
-                                "lat": lat,
-                                "lng": lng,
-                                "type": "road_closure",
-                                "desc": props.get("EventDescription", "See local signs."),
-                                "timestamp": datetime.datetime.now().isoformat()
-                            })
-                except Exception:
+                            if lat and lng:
+                                events.append({
+                                    "id": item.get('id'),
+                                    "title": item.get('headline', 'Road Event'),
+                                    "lat": float(lat),
+                                    "lng": float(lng),
+                                    "type": "road_closure",
+                                    "desc": item.get('description', 'Check 511mn.org'),
+                                    "timestamp": datetime.datetime.now().isoformat()
+                                })
+                except:
                     continue
-
-            print(f"--- SUCCESS: Found {len(events)} valid MN events inside state borders.")
             
-            # Debug: Print the first one to prove it works
-            if len(events) > 0:
-                print(f"DEBUG SAMPLE: {events[0]['title']} at {events[0]['lat']}, {events[0]['lng']}")
-                
+            print(f"--- SUCCESS: Source B (Web API) returned {len(events)} events.")
             return events
-        
-        else:
-            print(f"!! Feed Failed. Status Code: {response.status_code}")
-            return []
 
     except Exception as e:
-        print(f"!! Critical Error: {e}")
-        return []
+        print(f"Source B Error: {e}")
+
+    # --- FALLBACK ---
+    if not events:
+        print("!! ALL SOURCES FAILED. Using 'System Offline' marker.")
+        return [{
+            "id": "ERR-1", "title": "SYSTEM OFFLINE", 
+            "lat": 44.97, "lng": -93.26, "type": "road_closure", 
+            "desc": "Could not contact MnDOT servers.", 
+            "timestamp": datetime.datetime.now().isoformat()
+        }]
+    
+    return events
 
 # --- PROTEST PLACEHOLDER ---
 def get_protests():
@@ -105,14 +155,7 @@ def main():
     
     # 2. Fetch New Data
     new_events = []
-    import random # Late import for the ID generation
-    
-    road_data = get_live_road_closures()
-    if road_data:
-        new_events.extend(road_data)
-    else:
-        print("Warning: No road data fetched. Using previous data if available.")
-        
+    new_events.extend(get_live_road_closures())
     new_events.extend(get_protests())
 
     # 3. Merge
