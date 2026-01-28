@@ -18,7 +18,7 @@ NEWS_RSS_URL = f"https://news.google.com/rss/search?q={requests.utils.quote(NEWS
 ARCGIS_URL = "https://www.arcgis.com/sharing/rest/content/items/081587d29d944a89ad189b1633e509e4?f=json"
 
 # WAZE CONFIG (Minneapolis Bounding Box)
-WAZE_URL = "https://www.waze.com/row-rtserver/web/TGeoRSS"
+WAZE_URL = "https://na-georss.waze.com/rtserver/web/TGeoRSS"
 WAZE_PARAMS = {
     "bottom": 44.890, "top": 45.050,  
     "left": -93.350, "right": -93.190, 
