@@ -17,23 +17,23 @@
         
         .hud-panel { position: absolute; background: rgba(0,0,0,0.9); border: 1px solid #444; color: #ddd; padding: 8px; border-radius: 4px; z-index: 1000; font-size: 11px; }
         
-        /* 25% COMPACT MODE */
+        /* COMPACT HUD */
         .top-left { top: 10px; left: 10px; width: 135px; font-size: 9px; padding: 6px; }
         .top-left h2 { font-size: 0.6rem; margin-bottom: 3px; }
         .top-right { top: 10px; right: 10px; width: 160px; max-height: 40vh; overflow-y: auto; text-align: right; }
         
-        /* TIMELINE SLIDER BAR */
+        /* SLIDER */
         .bottom-bar { bottom: 20px; left: 10px; right: 10px; background: rgba(0,0,0,0.9); border: 1px solid #444; padding: 10px; border-radius: 8px; z-index: 1000; display: flex; flex-direction: column; }
         .slider-container { display: flex; align-items: center; gap: 10px; }
         input[type=range] { flex-grow: 1; accent-color: #ff5555; }
         
         h2 { margin: 0 0 5px 0; font-size: 0.75rem; color: #ff5555; border-bottom: 1px solid #ff5555; }
         
-        /* CLICKABLE ROWS */
+        /* CLICKABLE LAYERS */
         .info-row { display: flex; justify-content: space-between; margin-bottom: 2px; align-items: center; }
         .layer-toggle { cursor: pointer; transition: opacity 0.2s; }
         .layer-toggle:hover { background: rgba(255,255,255,0.1); }
-        .dimmed { opacity: 0.3; } /* Style for hidden layers */
+        .dimmed { opacity: 0.3; }
 
         /* COLORS */
         .red { color: #ff3333; } .blue { color: #0088ff; } .orange { color: #ffaa00; } .purple { color: #d400ff; } .grey { color: #888; }
@@ -43,7 +43,7 @@
         .type-protest { background: #ff3333; box-shadow: 0 0 10px #ff3333; }
         .type-police { background: #0088ff; }
         .type-road_closure { background: #ffaa00; }
-        .type-report { background: #d400ff; }
+        .type-report { background: #d400ff; box-shadow: 0 0 8px #d400ff; } /* Purple Glow */
         .type-intel { background: #888; }
         .type-user { background: #00ccff; }
         .pulse { animation: pulse 2s infinite; }
@@ -69,6 +69,9 @@
             </div>
             <div class="info-row layer-toggle" id="row-police" onclick="toggleLayer('police')">
                 <span>POLICE:</span> <span class="blue" id="c-police">0</span>
+            </div>
+            <div class="info-row layer-toggle" id="row-report" onclick="toggleLayer('report')">
+                <span>REPORTS:</span> <span class="purple" id="c-report">0</span>
             </div>
             <div class="info-row layer-toggle" id="row-road_closure" onclick="toggleLayer('road_closure')">
                 <span>TRAFFIC:</span> <span class="orange" id="c-road">0</span>
@@ -98,13 +101,18 @@
 
     <div id="report-modal">
         <h2 style="color:#d400ff">FIELD REPORT</h2>
-        <input id="geo-input" class="form-input" placeholder="Location...">
-        <button class="btn" style="width:100%; margin-bottom:10px" onclick="geoSearch()">FIND</button>
-        <select id="rpt-type"><option value="Protest">Threat/Protest</option><option value="Police">Police</option></select>
+        <input id="geo-input" class="form-input" placeholder="Location (e.g. Lake & Nicollet)">
+        <button class="btn" style="width:100%; margin-bottom:10px" onclick="geoSearch()">FIND LOCATION</button>
+        <select id="rpt-type">
+            <option value="Protest">Threat / Protest</option>
+            <option value="Police">Police Activity</option>
+            <option value="Traffic">Road Block / Traffic</option>
+            <option value="Other">Other Intel</option>
+        </select>
         <input id="rpt-desc" class="form-input" placeholder="Description...">
         <div style="display:flex; justify-content:space-between">
             <button class="btn" onclick="closeModal()">CANCEL</button>
-            <button class="btn" onclick="submitReport()">SUBMIT</button>
+            <button class="btn" style="border-color:#d400ff; color:#d400ff" onclick="submitReport()">SUBMIT</button>
         </div>
     </div>
 
@@ -112,15 +120,7 @@
         const DB = window.supabase.createClient('https://mymlbldoignrhvkfqcnz.supabase.co', 'sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh');
         let map, markers=[], allData=[], userMarker, watchId;
         
-        // LAYER STATE (Default: All ON)
-        let visibleLayers = {
-            protest: true,
-            police: true,
-            road_closure: true,
-            intel: true,
-            report: true,
-            user: true
-        };
+        let visibleLayers = { protest: true, police: true, road_closure: true, intel: true, report: true, user: true };
 
         function init() {
             map = L.map('map', {zoomControl:false}).setView([44.9778, -93.2650], 11);
@@ -137,18 +137,9 @@
         }
 
         function toggleLayer(type) {
-            // Flip State
             visibleLayers[type] = !visibleLayers[type];
-            
-            // Update UI (Dim/Brighten)
             const row = document.getElementById(`row-${type}`);
-            if(visibleLayers[type]) {
-                row.classList.remove('dimmed');
-            } else {
-                row.classList.add('dimmed');
-            }
-            
-            // Re-render map immediately
+            if(visibleLayers[type]) row.classList.remove('dimmed'); else row.classList.add('dimmed');
             render(currentSubset || allData);
         }
 
@@ -157,14 +148,12 @@
             const { data } = await DB.from('events').select('*').gt('timestamp', new Date(Date.now()-172800000).toISOString());
             if(data) {
                 allData = data.filter(e => !e.title.includes("TRAFFIC: None"));
-                if(document.getElementById('time-slider').value == 100) {
-                    render(allData);
-                }
+                if(document.getElementById('time-slider').value == 100) render(allData);
                 status("SECURE", "#0f0");
             }
         }
         
-        let currentSubset = null; // Store filtered data for toggling
+        let currentSubset = null;
 
         function filterByTime(val) {
             if(val == 100) {
@@ -176,7 +165,6 @@
             const hoursBack = 48 - (val * 0.48);
             const cutoff = new Date(Date.now() - (hoursBack * 3600000));
             document.getElementById('time-label').innerText = cutoff.toLocaleTimeString([], {weekday:'short', hour:'2-digit', minute:'2-digit'});
-            
             currentSubset = allData.filter(e => new Date(e.timestamp) <= cutoff && new Date(e.timestamp) > new Date(cutoff - 86400000));
             render(currentSubset);
         }
@@ -185,17 +173,12 @@
             markers.forEach(m => map.removeLayer(m));
             markers = [];
             document.getElementById('feed').innerHTML = "";
-            
-            // Reset Counts
-            let counts = { protest:0, police:0, road_closure:0, intel:0 };
+            let counts = { protest:0, police:0, road_closure:0, intel:0, report:0 };
 
             dataset.sort((a,b) => getPriority(b.type) - getPriority(a.type));
             
             dataset.forEach(e => {
-                // UPDATE COUNTS (Always count them, even if hidden, so you know what you are missing)
                 if(counts[e.type] !== undefined) counts[e.type]++;
-
-                // CHECK VISIBILITY
                 if(visibleLayers[e.type]) {
                     const z = getPriority(e.type);
                     const icon = L.divIcon({className:'', html:`<div class="pulse-marker type-${e.type} pulse"></div>`});
@@ -203,7 +186,6 @@
                         .bindPopup(`<b style="color:${getColorClass(e.type)}">${e.title}</b><br>${e.desc}`);
                     markers.push(m);
                     
-                    // Add to feed only if visible
                     const d = document.createElement('div');
                     d.style.marginBottom = "5px"; d.style.borderBottom="1px solid #333";
                     d.innerHTML = `<span class="${getColorClass(e.type)}" style="font-weight:bold">${e.title}</span><br><span style="color:#aaa">${e.desc.substring(0,60)}...</span>`;
@@ -211,22 +193,58 @@
                 }
             });
 
-            // Update HUD Numbers
             document.getElementById('c-protest').innerText = counts.protest;
             document.getElementById('c-police').innerText = counts.police;
             document.getElementById('c-road').innerText = counts.road_closure;
             document.getElementById('c-intel').innerText = counts.intel;
+            document.getElementById('c-report').innerText = counts.report;
         }
 
-        function getPriority(t) { return t==='protest'?1000 : t==='police'?800 : t==='road_closure'?500 : 100; }
-        function getColorClass(t) { return t==='protest'?'red':t==='police'?'blue':t==='road_closure'?'orange':'grey'; }
+        function getPriority(t) { return t==='protest'?1000 : t==='report'?900 : t==='police'?800 : t==='road_closure'?500 : 100; }
+        function getColorClass(t) { return t==='protest'?'red':t==='police'?'blue':t==='report'?'purple':t==='road_closure'?'orange':'grey'; }
         
-        // ... (Standard Helpers) ...
         function status(m,c) { const e=document.getElementById('status'); e.innerText=m; e.style.color=c; }
         function openModal(){document.getElementById('report-modal').style.display='block'}
         function closeModal(){document.getElementById('report-modal').style.display='none'}
-        async function submitReport() { closeModal(); }
-        function geoSearch() { }
+        
+        async function submitReport() {
+            const t=document.getElementById('rpt-type').value;
+            const d=document.getElementById('rpt-desc').value;
+            if(!d) return alert("Description required");
+            
+            // If user searched for location, use it. Otherwise use map center.
+            const loc = foundLocation || map.getCenter();
+            
+            // 1. Direct Upload to Supabase (No GitHub)
+            await DB.from('events').insert([{
+                id:`usr-${Date.now()}`, 
+                title:`RPT: ${t}`, 
+                desc:d, 
+                type:'report', // This triggers the Purple Color
+                lat:loc.lat, 
+                lng:loc.lng, 
+                timestamp:new Date().toISOString()
+            }]);
+            
+            // 2. Refresh immediately to show the new dot
+            loadData();
+            closeModal();
+            foundLocation = null; // Reset search
+        }
+        
+        let foundLocation = null;
+        function geoSearch() {
+            const q = document.getElementById('geo-input').value;
+            if(!q) return;
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${q} Minnesota`).then(r=>r.json()).then(d=>{
+                if(d[0]) {
+                    foundLocation = {lat: parseFloat(d[0].lat), lng: parseFloat(d[0].lon)};
+                    map.setView([foundLocation.lat, foundLocation.lng], 15);
+                    status("LOC FOUND", "#d400ff");
+                }
+            });
+        }
+
         function setupGPS() { 
             document.getElementById('gps-toggle').addEventListener('change', function() {
                 if(this.checked && navigator.geolocation) {
