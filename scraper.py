@@ -20,14 +20,20 @@ ARCGIS_URL = "https://www.arcgis.com/sharing/rest/content/items/081587d29d944a89
 # WAZE CONFIG (Minneapolis Bounding Box)
 WAZE_URL = "https://www.waze.com/row-rtserver/web/TGeoRSS"
 WAZE_PARAMS = {
-    "bottom": 44.890, "top": 45.050,  # Latitude Range (South to North)
-    "left": -93.350, "right": -93.190, # Longitude Range (West to East)
-    "ma": "600", "mj": "100", "mu": "100", # Max Alerts, Jams, Users
+    "bottom": 44.890, "top": 45.050,  
+    "left": -93.350, "right": -93.190, 
+    "ma": "600", "mj": "100", "mu": "100", 
     "types": "alerts,traffic"
 }
+# NEW: Stealth Headers to mimic a real Mac user
 WAZE_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-    "Referer": "https://www.waze.com/live-map/"
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Referer": "https://www.waze.com/live-map/",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "sec-ch-ua": '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"macOS"'
 }
 
 LOCATIONS = {
@@ -53,42 +59,39 @@ def single_scan():
     # 1. WAZE (Real-Time User Reports)
     try:
         resp = requests.get(WAZE_URL, params=WAZE_PARAMS, headers=WAZE_HEADERS, timeout=10)
-        data = resp.json()
         
-        # Waze Alerts (Police, Hazards)
-        if 'alerts' in data:
-            for alert in data['alerts']:
-                w_type = alert.get('type', '')
-                lat = alert['location']['y']
-                lng = alert['location']['x']
-                desc = alert.get('reportDescription', '')
-                
-                # Filter Waze Types
-                final_type = "road_closure" # Default
-                title = f"WAZE: {w_type}"
-                
-                if w_type == 'POLICE':
-                    final_type = "police"
-                    title = "WAZE: POLICE REPORTED"
-                elif w_type == 'JAM':
+        # DEBUG CHECK: Did they block us?
+        if resp.status_code != 200:
+            print(f"!! Waze Blocked Us: Status {resp.status_code}")
+        else:
+            data = resp.json()
+            if 'alerts' in data:
+                count = 0
+                for alert in data['alerts']:
+                    w_type = alert.get('type', '')
+                    lat = alert['location']['y']
+                    lng = alert['location']['x']
+                    desc = alert.get('reportDescription', '')
+                    
                     final_type = "road_closure"
-                    title = "WAZE: HEAVY TRAFFIC"
-                elif w_type == 'ACCIDENT':
-                    final_type = "road_closure"
-                    title = "WAZE: ACCIDENT"
-                elif w_type == 'ROAD_CLOSED':
-                    final_type = "road_closure"
-                    title = "WAZE: ROAD CLOSED"
-                
-                # Add to Intel
-                events.append({
-                    "id": f"waze-{alert.get('uuid', random.randint(1000,9999))}",
-                    "title": title,
-                    "lat": lat, "lng": lng,
-                    "type": final_type,
-                    "desc": desc if desc else f"User report near {alert.get('street', 'Minneapolis')}",
-                    "timestamp": get_utc_now()
-                })
+                    title = f"WAZE: {w_type}"
+                    
+                    if w_type == 'POLICE':
+                        final_type = "police"
+                        title = "WAZE: POLICE REPORTED"
+                    elif w_type == 'JAM': continue # Skip simple traffic jams to save clutter
+                    elif w_type == 'ACCIDENT':
+                        final_type = "road_closure"
+                        title = "WAZE: ACCIDENT"
+                    
+                    events.append({
+                        "id": f"waze-{alert.get('uuid', random.randint(1000,9999))}",
+                        "title": title, "lat": lat, "lng": lng, "type": final_type,
+                        "desc": desc if desc else f"User report near {alert.get('street', 'Minneapolis')}",
+                        "timestamp": get_utc_now()
+                    })
+                    count += 1
+                print(f" > Waze Alerts Found: {count}")
                 
     except Exception as e: print(f"Waze Err: {e}")
 
@@ -141,13 +144,11 @@ def single_scan():
         try:
             existing = supabase.table('events').select('id, first_seen').in_('id', ids).execute().data
             exist_map = {r['id']: r['first_seen'] for r in existing}
-            
             final = []
             for item in unique:
                 if item['id'] in exist_map: item['first_seen'] = exist_map[item['id']]
                 else: item['first_seen'] = item['timestamp']
                 final.append(item)
-                
             supabase.table('events').upsert(final).execute()
             print(f"Uploaded {len(final)} items (Waze/News/DOT).")
         except Exception as e: print(f"Upload Err: {e}")
