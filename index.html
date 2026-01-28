@@ -315,7 +315,19 @@
             });
         }
 
-        if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+       if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').then(reg => {
+                reg.onupdatefound = () => {
+                    const newWorker = reg.installing;
+                    newWorker.onstatechange = () => {
+                        // If a new update is installed, reload automatically
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            window.location.reload();
+                        }
+                    };
+                };
+            });
+        }
         init();
     </script>
 </body>
