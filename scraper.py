@@ -3,6 +3,7 @@ import time
 import requests
 import datetime
 import random
+import json
 import xml.etree.ElementTree as ET
 from supabase import create_client, Client
 
@@ -11,15 +12,31 @@ SUPABASE_URL = "https://mymlbldoignrhvkfqcnz.supabase.co"
 SUPABASE_KEY = "sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
+# --- SOURCES ---
 NEWS_QUERY = "(protest OR riot OR police OR ICE OR whipple OR standoff OR crash OR arrest) AND (site:startribune.com OR site:wcco.com OR site:kstp.com OR site:mprnews.org) when:12h"
 NEWS_RSS_URL = f"https://news.google.com/rss/search?q={requests.utils.quote(NEWS_QUERY)}&ceid=US:en&hl=en-US&gl=US"
 ARCGIS_URL = "https://www.arcgis.com/sharing/rest/content/items/081587d29d944a89ad189b1633e509e4?f=json"
+
+# WAZE CONFIG (Minneapolis Bounding Box)
+WAZE_URL = "https://www.waze.com/row-rtserver/web/TGeoRSS"
+WAZE_PARAMS = {
+    "bottom": 44.890, "top": 45.050,  # Latitude Range (South to North)
+    "left": -93.350, "right": -93.190, # Longitude Range (West to East)
+    "ma": "600", "mj": "100", "mu": "100", # Max Alerts, Jams, Users
+    "types": "alerts,traffic"
+}
+WAZE_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Referer": "https://www.waze.com/live-map/"
+}
 
 LOCATIONS = {
     "whipple": (44.8940, -93.1760), "downtown": (44.9765, -93.2761),
     "uptown": (44.9497, -93.2933), "capitol": (44.9543, -93.1022),
     "minneapolis": (44.9778, -93.2650), "st paul": (44.9537, -93.0900)
 }
+
+def get_utc_now(): return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 def analyze_intel(text):
     text = text.lower()
@@ -29,13 +46,53 @@ def analyze_intel(text):
     if any(x in text for x in ["crash", "accident", "closed", "closure", "blocked", "traffic", "detour"]): return "road_closure"
     return "intel"
 
-def get_utc_now(): return datetime.datetime.now(datetime.timezone.utc).isoformat()
-
 def single_scan():
-    print(">>> SCANNING SOURCES...")
+    print(">>> SCANNING ALL SOURCES (NEWS + WAZE + DOT)...")
     events = []
     
-    # NEWS
+    # 1. WAZE (Real-Time User Reports)
+    try:
+        resp = requests.get(WAZE_URL, params=WAZE_PARAMS, headers=WAZE_HEADERS, timeout=10)
+        data = resp.json()
+        
+        # Waze Alerts (Police, Hazards)
+        if 'alerts' in data:
+            for alert in data['alerts']:
+                w_type = alert.get('type', '')
+                lat = alert['location']['y']
+                lng = alert['location']['x']
+                desc = alert.get('reportDescription', '')
+                
+                # Filter Waze Types
+                final_type = "road_closure" # Default
+                title = f"WAZE: {w_type}"
+                
+                if w_type == 'POLICE':
+                    final_type = "police"
+                    title = "WAZE: POLICE REPORTED"
+                elif w_type == 'JAM':
+                    final_type = "road_closure"
+                    title = "WAZE: HEAVY TRAFFIC"
+                elif w_type == 'ACCIDENT':
+                    final_type = "road_closure"
+                    title = "WAZE: ACCIDENT"
+                elif w_type == 'ROAD_CLOSED':
+                    final_type = "road_closure"
+                    title = "WAZE: ROAD CLOSED"
+                
+                # Add to Intel
+                events.append({
+                    "id": f"waze-{alert.get('uuid', random.randint(1000,9999))}",
+                    "title": title,
+                    "lat": lat, "lng": lng,
+                    "type": final_type,
+                    "desc": desc if desc else f"User report near {alert.get('street', 'Minneapolis')}",
+                    "timestamp": get_utc_now()
+                })
+                
+    except Exception as e: print(f"Waze Err: {e}")
+
+    # 2. NEWS RSS
     try:
         resp = requests.get(NEWS_RSS_URL, timeout=10)
         root = ET.fromstring(resp.content)
@@ -57,7 +114,7 @@ def single_scan():
             })
     except Exception as e: print(f"News Err: {e}")
 
-    # TRAFFIC
+    # 3. DOT / ARCGIS
     try:
         meta = requests.get(ARCGIS_URL, timeout=10).json()
         if 'url' in meta:
@@ -65,20 +122,19 @@ def single_scan():
             for f in features:
                 if 'y' in f.get('geometry', {}):
                     attr = f.get('attributes', {})
-                    # FIX: Handle empty titles to prevent "TRAFFIC: None"
                     raw_title = attr.get('Headline') or attr.get('EventType')
                     if not raw_title: continue 
                     
                     events.append({
                         "id": f"road-{attr.get('EventID', random.randint(10000,99999))}",
-                        "title": f"TRAFFIC: {raw_title}",
+                        "title": f"DOT: {raw_title}",
                         "lat": f['geometry']['y'], "lng": f['geometry']['x'],
                         "type": "road_closure", "desc": attr.get('EventDescription',''),
                         "timestamp": get_utc_now()
                     })
     except Exception as e: print(f"Road Err: {e}")
 
-    # UPLOAD (With History Preservation)
+    # UPLOAD
     if events:
         unique = {e['id']: e for e in events}.values()
         ids = [e['id'] for e in unique]
@@ -93,7 +149,7 @@ def single_scan():
                 final.append(item)
                 
             supabase.table('events').upsert(final).execute()
-            print(f"Uploaded {len(final)} items.")
+            print(f"Uploaded {len(final)} items (Waze/News/DOT).")
         except Exception as e: print(f"Upload Err: {e}")
 
 if __name__ == "__main__":
