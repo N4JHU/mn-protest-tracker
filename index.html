@@ -43,16 +43,21 @@
         .type-protest { background: #ff3333; box-shadow: 0 0 10px #ff3333; }
         .type-police { background: #0088ff; }
         .type-road_closure { background: #ffaa00; }
-        .type-report { background: #d400ff; box-shadow: 0 0 8px #d400ff; } /* Purple Glow */
+        .type-report { background: #d400ff; box-shadow: 0 0 8px #d400ff; }
         .type-intel { background: #888; }
         .type-user { background: #00ccff; }
+        
+        /* DRAFT MARKER (The Draggable One) */
+        .draft-marker { width: 16px; height: 16px; background: rgba(212, 0, 255, 0.5); border: 2px solid #d400ff; border-radius: 50%; box-shadow: 0 0 15px #d400ff; cursor: crosshair; }
+        
         .pulse { animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); } 70% { box-shadow: 0 0 0 10px rgba(0,0,0,0); } }
 
         /* MODAL */
-        #report-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 300px; background: #111; border: 1px solid #d400ff; z-index: 2000; padding: 15px; }
-        .form-input, select { width: 100%; background: #222; color: #fff; border: 1px solid #444; padding: 5px; margin-bottom: 10px; }
-        .btn { background: #222; border: 1px solid #555; color: #ccc; padding: 4px 8px; font-size: 10px; cursor: pointer; }
+        #report-modal { display: none; position: fixed; top: 10%; left: 50%; transform: translateX(-50%); width: 85%; max-width: 320px; background: rgba(0,0,0,0.95); border: 1px solid #d400ff; z-index: 2000; padding: 15px; border-radius: 8px; }
+        .form-input, select { width: 100%; background: #222; color: #fff; border: 1px solid #444; padding: 8px; margin-bottom: 10px; border-radius: 4px; }
+        .btn { background: #222; border: 1px solid #555; color: #ccc; padding: 8px 12px; font-size: 11px; cursor: pointer; border-radius: 4px; }
+        .instruction { color: #d400ff; font-size: 10px; margin-bottom: 10px; text-align: center; font-style: italic; }
     </style>
 </head>
 <body>
@@ -80,7 +85,6 @@
                 <span>INTEL:</span> <span class="grey" id="c-intel">0</span>
             </div>
         </div>
-        
         <div id="status" style="text-align:right; color:#555; margin-top:5px">...</div>
     </div>
 
@@ -100,25 +104,34 @@
     </div>
 
     <div id="report-modal">
-        <h2 style="color:#d400ff">FIELD REPORT</h2>
-        <input id="geo-input" class="form-input" placeholder="Location (e.g. Lake & Nicollet)">
-        <button class="btn" style="width:100%; margin-bottom:10px" onclick="geoSearch()">FIND LOCATION</button>
+        <h2 style="color:#d400ff; text-align:center;">NEW REPORT</h2>
+        <div class="instruction">DRAG PURPLE DOT OR USE GPS</div>
+        
+        <div style="display:flex; gap:5px; margin-bottom:10px;">
+            <button class="btn" style="flex:1; border-color:#00ccff; color:#00ccff;" onclick="useMyLoc()">USE MY GPS</button>
+            <button class="btn" style="flex:1" onclick="geoSearch()">SEARCH ADDR</button>
+        </div>
+        
+        <input id="geo-input" class="form-input" placeholder="Address (Optional)...">
+        
         <select id="rpt-type">
             <option value="Protest">Threat / Protest</option>
             <option value="Police">Police Activity</option>
             <option value="Traffic">Road Block / Traffic</option>
             <option value="Other">Other Intel</option>
         </select>
-        <input id="rpt-desc" class="form-input" placeholder="Description...">
-        <div style="display:flex; justify-content:space-between">
-            <button class="btn" onclick="closeModal()">CANCEL</button>
-            <button class="btn" style="border-color:#d400ff; color:#d400ff" onclick="submitReport()">SUBMIT</button>
+        <textarea id="rpt-desc" class="form-input" rows="3" placeholder="Description..."></textarea>
+        
+        <div style="display:flex; justify-content:space-between; gap:10px;">
+            <button class="btn" style="flex:1" onclick="closeModal()">CANCEL</button>
+            <button class="btn" style="flex:1; background:#d400ff; color:black; font-weight:bold;" onclick="submitReport()">SUBMIT</button>
         </div>
     </div>
 
     <script>
         const DB = window.supabase.createClient('https://mymlbldoignrhvkfqcnz.supabase.co', 'sb_publishable_Yce1uZCUK7isWfD7t8c5iA_Yi9OhtVh');
         let map, markers=[], allData=[], userMarker, watchId;
+        let draftMarker = null; // The ghost marker for reporting
         
         let visibleLayers = { protest: true, police: true, road_closure: true, intel: true, report: true, user: true };
 
@@ -202,44 +215,85 @@
 
         function getPriority(t) { return t==='protest'?1000 : t==='report'?900 : t==='police'?800 : t==='road_closure'?500 : 100; }
         function getColorClass(t) { return t==='protest'?'red':t==='police'?'blue':t==='report'?'purple':t==='road_closure'?'orange':'grey'; }
-        
         function status(m,c) { const e=document.getElementById('status'); e.innerText=m; e.style.color=c; }
-        function openModal(){document.getElementById('report-modal').style.display='block'}
-        function closeModal(){document.getElementById('report-modal').style.display='none'}
+        
+        // --- NEW REPORTING LOGIC ---
+        
+        function openModal() {
+            document.getElementById('report-modal').style.display='block';
+            
+            // Create a Purple Draggable Marker at center screen
+            const center = map.getCenter();
+            const icon = L.divIcon({className:'', html:'<div class="draft-marker"></div>', iconSize:[16,16], iconAnchor:[8,8]});
+            
+            if(draftMarker) map.removeLayer(draftMarker);
+            draftMarker = L.marker(center, {draggable: true, icon: icon, zIndexOffset: 2000}).addTo(map);
+            
+            // Pan map slightly so pin isn't hidden by modal
+            map.panTo([center.lat + 0.005, center.lng]);
+        }
+
+        function closeModal() {
+            document.getElementById('report-modal').style.display='none';
+            if(draftMarker) {
+                map.removeLayer(draftMarker);
+                draftMarker = null;
+            }
+        }
+        
+        function useMyLoc() {
+            if(!navigator.geolocation) return alert("GPS not supported");
+            status("LOCATING...", "#ea0");
+            navigator.geolocation.getCurrentPosition(pos => {
+                const lat = pos.coords.latitude;
+                const lng = pos.coords.longitude;
+                
+                if(draftMarker) {
+                    draftMarker.setLatLng([lat, lng]);
+                    map.setView([lat, lng], 16); // Zoom in on user
+                    status("GPS LOCKED", "#d400ff");
+                }
+            }, err => {
+                alert("Could not get GPS location");
+                status("GPS ERROR", "red");
+            }, {enableHighAccuracy: true});
+        }
         
         async function submitReport() {
             const t=document.getElementById('rpt-type').value;
             const d=document.getElementById('rpt-desc').value;
+            
             if(!d) return alert("Description required");
+            if(!draftMarker) return alert("Error: No location pin set");
             
-            // If user searched for location, use it. Otherwise use map center.
-            const loc = foundLocation || map.getCenter();
+            const loc = draftMarker.getLatLng(); // GET EXACT PIN LOCATION
             
-            // 1. Direct Upload to Supabase (No GitHub)
             await DB.from('events').insert([{
                 id:`usr-${Date.now()}`, 
                 title:`RPT: ${t}`, 
                 desc:d, 
-                type:'report', // This triggers the Purple Color
+                type:'report', 
                 lat:loc.lat, 
                 lng:loc.lng, 
                 timestamp:new Date().toISOString()
             }]);
             
-            // 2. Refresh immediately to show the new dot
             loadData();
             closeModal();
-            foundLocation = null; // Reset search
         }
         
-        let foundLocation = null;
         function geoSearch() {
             const q = document.getElementById('geo-input').value;
             if(!q) return;
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${q} Minnesota`).then(r=>r.json()).then(d=>{
                 if(d[0]) {
-                    foundLocation = {lat: parseFloat(d[0].lat), lng: parseFloat(d[0].lon)};
-                    map.setView([foundLocation.lat, foundLocation.lng], 15);
+                    const lat = parseFloat(d[0].lat);
+                    const lng = parseFloat(d[0].lon);
+                    
+                    if(draftMarker) {
+                        draftMarker.setLatLng([lat, lng]);
+                        map.setView([lat, lng], 15);
+                    }
                     status("LOC FOUND", "#d400ff");
                 }
             });
